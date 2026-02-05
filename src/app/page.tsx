@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ProblemSolution from "@/components/ProblemSolution";
 import UnifiedHealthRecords from "@/components/UnifiedHealthRecords";
+import HealthVitalsBento from "@/components/HealthVitalsBento";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero />
       <ProblemSolution />
       <UnifiedHealthRecords />
+      <HealthVitalsBento />
     </div>
   );
 }
