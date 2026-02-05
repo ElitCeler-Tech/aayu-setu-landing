@@ -111,7 +111,7 @@ const HealthVitalsBento = () => {
           </div>
           <div className="h-[2px] w-24 bg-gradient-to-l from-transparent to-[#3A8177]/50 rounded-full" />
         </div>
-        <h2 className="text-4xl md:text-5xl font-heading font-medium text-[#4DA599] mb-4">
+        <h2 className="text-4xl md:text-5xl font-heading font-medium bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent mb-4">
           Track Key Health Vitals and watch Trends
         </h2>
         <p className="text-gray-600 text-lg">

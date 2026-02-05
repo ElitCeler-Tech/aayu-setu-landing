@@ -35,7 +35,7 @@ import {
 } from "lucide-react";
 import { motion, useScroll, useMotionValueEvent } from "motion/react";
 
-const MedicationScreen = () => (
+export const MedicationScreen = () => (
   <div className="h-full w-full bg-[#f8f9fa] flex flex-col pt-12 px-6 font-sans">
     {/* Status Bar Replacement/Space */}
     <div className="flex items-center justify-between mb-6">
@@ -167,7 +167,7 @@ const MedicationScreen = () => (
   </div>
 );
 
-const AIAyuScreen = () => (
+export const AIAyuScreen = () => (
   <div className="h-full w-full bg-[#f8f9fa] flex flex-col font-sans relative">
     {/* Header */}
     <div className="pt-12 px-6 pb-4">
@@ -230,7 +230,7 @@ const AIAyuScreen = () => (
   </div>
 );
 
-const HealthInsightsScreen = () => (
+export const HealthInsightsScreen = () => (
   <div className="h-full w-full bg-[#f8f9fa] flex flex-col font-sans relative overflow-y-auto pb-24 no-scrollbar">
     {/* Header */}
     <div className="pt-12 px-6 flex items-center justify-between mb-4">
@@ -420,7 +420,7 @@ const HealthInsightsScreen = () => (
   </div>
 );
 
-const DoctorConsultationScreen = () => (
+export const DoctorConsultationScreen = () => (
   <div className="h-full w-full bg-[#f8f9fa] flex flex-col font-sans relative overflow-y-auto pb-24 no-scrollbar">
     {/* Header */}
     <div className="pt-12 px-6 flex items-center justify-between mb-4">
@@ -445,171 +445,219 @@ const DoctorConsultationScreen = () => (
       </div>
     </div>
 
-     {/* Search */}
-     <div className="px-6 mb-6">
-         <div className="bg-white rounded-xl px-4 py-3 flex items-center gap-2 shadow-sm border border-gray-100">
-            <Search size={16} className="text-gray-400" />
-            <span className="text-gray-400 text-sm">Search</span>
-            <div className="ml-auto text-[#3A8177]">
-                 <Filter size={18} />
-            </div>
-         </div>
+    {/* Search */}
+    <div className="px-6 mb-6">
+      <div className="bg-white rounded-xl px-4 py-3 flex items-center gap-2 shadow-sm border border-gray-100">
+        <Search size={16} className="text-gray-400" />
+        <span className="text-gray-400 text-sm">Search</span>
+        <div className="ml-auto text-[#3A8177]">
+          <Filter size={18} />
+        </div>
       </div>
+    </div>
 
-      {/* Today's Appointments */}
-      <div className="px-6 mb-2">
-         <h3 className="text-xs font-semibold text-gray-500 mb-3">Today , May 25 2025</h3>
-         <div className="space-y-3">
-             {/* Card 1 */}
-             <div className="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-3">
-                <div className="w-12 h-12 bg-blue-50 rounded-xl overflow-hidden shrink-0">
-                    <img src="/doctor-1.png" alt="Dr" className="w-full h-full object-cover opacity-90" />
-                </div>
-                <div className="flex-1">
-                    <div className="flex justify-between items-start">
-                        <div>
-                             <h4 className="font-bold text-sm text-gray-900">Dr. Shreeya Singh</h4>
-                             <p className="text-[10px] text-gray-400">General & Family care</p>
-                        </div>
-                        <div className="w-8 h-8 rounded-full bg-[#3A8177] flex items-center justify-center text-white">
-                            <Phone size={14} />
-                        </div>
-                    </div>
-                    <div className="mt-2 flex items-center gap-3">
-                        <div className="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-md">
-                            <Watch size={10} className="text-[#3A8177]" />
-                            <span className="text-[9px] font-medium text-gray-600">May 25 - 12:00 PM</span>
-                        </div>
-                         <div className="flex items-center gap-1">
-                            <span className="text-[9px] text-gray-400 font-medium">Voice Call</span>
-                        </div>
-                    </div>
-                </div>
-             </div>
-
-             {/* Card 2 */}
-             <div className="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-3">
-                <div className="w-12 h-12 bg-blue-50 rounded-xl overflow-hidden shrink-0">
-                     <img src="/doctor-2.png" alt="Dr" className="w-full h-full object-cover opacity-90" />
-                </div>
-                <div className="flex-1">
-                    <div className="flex justify-between items-start">
-                        <div>
-                             <h4 className="font-bold text-sm text-gray-900">Dr. Adarsh Shah</h4>
-                             <p className="text-[10px] text-gray-400">General & Family care</p>
-                        </div>
-                        <div className="w-8 h-8 rounded-full bg-[#3A8177] flex items-center justify-center text-white">
-                            <Video size={14} />
-                        </div>
-                    </div>
-                    <div className="mt-2 flex items-center gap-3">
-                        <div className="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-md">
-                            <Watch size={10} className="text-[#3A8177]" />
-                            <span className="text-[9px] font-medium text-gray-600">May 25 - 01:00 PM</span>
-                        </div>
-                         <div className="flex items-center gap-1">
-                            <span className="text-[9px] text-gray-400 font-medium">Video Call</span>
-                        </div>
-                    </div>
-                </div>
-             </div>
-         </div>
-      </div>
-
-       {/* Tomorrow's Appointments */}
-      <div className="px-6 mt-4">
-         <h3 className="text-xs font-semibold text-gray-500 mb-3">Tommorow , May 26 2025</h3>
-         <div className="space-y-3 mb-24">
-             {/* Card 3 */}
-             <div className="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-3">
-                <div className="w-12 h-12 bg-blue-50 rounded-xl overflow-hidden shrink-0">
-                     <img src="/doctor-3.png" alt="Dr" className="w-full h-full object-cover opacity-90" />
-                </div>
-                <div className="flex-1">
-                    <div className="flex justify-between items-start">
-                        <div>
-                             <h4 className="font-bold text-sm text-gray-900">Dr. Sahil Sharma</h4>
-                             <p className="text-[10px] text-gray-400">General & Family care</p>
-                        </div>
-                        <div className="w-8 h-8 rounded-full bg-[#3A8177] flex items-center justify-center text-white">
-                             <UserPlus size={14} />
-                        </div>
-                    </div>
-                    <div className="mt-2 flex items-center gap-3">
-                        <div className="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-md">
-                            <Watch size={10} className="text-[#3A8177]" />
-                            <span className="text-[9px] font-medium text-gray-600">May 26 - 01:00 PM</span>
-                        </div>
-                         <div className="flex items-center gap-1">
-                            <span className="text-[9px] text-gray-400 font-medium whitespace-nowrap">Clinic Appointment</span>
-                        </div>
-                    </div>
-                </div>
-             </div>
-         </div>
-      </div>
-
-      {/* Bottom Nav */}
-      <div className="absolute bottom-0 left-0 right-0 bg-[#35615E] h-20 rounded-t-[2.5rem] px-8 flex items-center justify-between z-10">
-          <Home size={24} className="text-gray-300 opacity-60" />
-          <FileText size={24} className="text-gray-300 opacity-60" />
-          <div className="w-14 h-14 bg-[#FF8437] rounded-full -mt-8 flex items-center justify-center border-[4px] border-[#f8f9fa] shadow-lg">
-             <Sparkles size={24} className="text-white" />
+    {/* Today's Appointments */}
+    <div className="px-6 mb-2">
+      <h3 className="text-xs font-semibold text-gray-500 mb-3">
+        Today , May 25 2025
+      </h3>
+      <div className="space-y-3">
+        {/* Card 1 */}
+        <div className="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-3">
+          <div className="w-12 h-12 bg-blue-50 rounded-xl overflow-hidden shrink-0">
+            <img
+              src="/doctor-1.png"
+              alt="Dr"
+              className="w-full h-full object-cover opacity-90"
+            />
           </div>
-          <User size={24} className="text-gray-300 opacity-60" />
-          <Pill size={24} className="text-gray-300 opacity-60" />
+          <div className="flex-1">
+            <div className="flex justify-between items-start">
+              <div>
+                <h4 className="font-bold text-sm text-gray-900">
+                  Dr. Shreeya Singh
+                </h4>
+                <p className="text-[10px] text-gray-400">
+                  General & Family care
+                </p>
+              </div>
+              <div className="w-8 h-8 rounded-full bg-[#3A8177] flex items-center justify-center text-white">
+                <Phone size={14} />
+              </div>
+            </div>
+            <div className="mt-2 flex items-center gap-3">
+              <div className="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-md">
+                <Watch size={10} className="text-[#3A8177]" />
+                <span className="text-[9px] font-medium text-gray-600">
+                  May 25 - 12:00 PM
+                </span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-[9px] text-gray-400 font-medium">
+                  Voice Call
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Card 2 */}
+        <div className="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-3">
+          <div className="w-12 h-12 bg-blue-50 rounded-xl overflow-hidden shrink-0">
+            <img
+              src="/doctor-2.png"
+              alt="Dr"
+              className="w-full h-full object-cover opacity-90"
+            />
+          </div>
+          <div className="flex-1">
+            <div className="flex justify-between items-start">
+              <div>
+                <h4 className="font-bold text-sm text-gray-900">
+                  Dr. Adarsh Shah
+                </h4>
+                <p className="text-[10px] text-gray-400">
+                  General & Family care
+                </p>
+              </div>
+              <div className="w-8 h-8 rounded-full bg-[#3A8177] flex items-center justify-center text-white">
+                <Video size={14} />
+              </div>
+            </div>
+            <div className="mt-2 flex items-center gap-3">
+              <div className="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-md">
+                <Watch size={10} className="text-[#3A8177]" />
+                <span className="text-[9px] font-medium text-gray-600">
+                  May 25 - 01:00 PM
+                </span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-[9px] text-gray-400 font-medium">
+                  Video Call
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+
+    {/* Tomorrow's Appointments */}
+    <div className="px-6 mt-4">
+      <h3 className="text-xs font-semibold text-gray-500 mb-3">
+        Tommorow , May 26 2025
+      </h3>
+      <div className="space-y-3 mb-24">
+        {/* Card 3 */}
+        <div className="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-3">
+          <div className="w-12 h-12 bg-blue-50 rounded-xl overflow-hidden shrink-0">
+            <img
+              src="/doctor-3.png"
+              alt="Dr"
+              className="w-full h-full object-cover opacity-90"
+            />
+          </div>
+          <div className="flex-1">
+            <div className="flex justify-between items-start">
+              <div>
+                <h4 className="font-bold text-sm text-gray-900">
+                  Dr. Sahil Sharma
+                </h4>
+                <p className="text-[10px] text-gray-400">
+                  General & Family care
+                </p>
+              </div>
+              <div className="w-8 h-8 rounded-full bg-[#3A8177] flex items-center justify-center text-white">
+                <UserPlus size={14} />
+              </div>
+            </div>
+            <div className="mt-2 flex items-center gap-3">
+              <div className="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-md">
+                <Watch size={10} className="text-[#3A8177]" />
+                <span className="text-[9px] font-medium text-gray-600">
+                  May 26 - 01:00 PM
+                </span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-[9px] text-gray-400 font-medium whitespace-nowrap">
+                  Clinic Appointment
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Bottom Nav */}
+    <div className="absolute bottom-0 left-0 right-0 bg-[#35615E] h-20 rounded-t-[2.5rem] px-8 flex items-center justify-between z-10">
+      <Home size={24} className="text-gray-300 opacity-60" />
+      <FileText size={24} className="text-gray-300 opacity-60" />
+      <div className="w-14 h-14 bg-[#FF8437] rounded-full -mt-8 flex items-center justify-center border-[4px] border-[#f8f9fa] shadow-lg">
+        <Sparkles size={24} className="text-white" />
+      </div>
+      <User size={24} className="text-gray-300 opacity-60" />
+      <Pill size={24} className="text-gray-300 opacity-60" />
+    </div>
   </div>
 );
 
-const FamilyHealthScreen = () => (
+export const FamilyHealthScreen = () => (
   <div className="h-full w-full bg-[#f8f9fa] flex flex-col font-sans relative">
-     {/* Header */}
-     <div className="pt-12 px-6 flex items-center gap-2 mb-6">
-        <ChevronLeft size={24} className="text-gray-900" />
-        <h1 className="text-xl font-bold text-gray-900">Track Health Together</h1>
-     </div>
+    {/* Header */}
+    <div className="pt-12 px-6 flex items-center gap-2 mb-6">
+      <ChevronLeft size={24} className="text-gray-900" />
+      <h1 className="text-xl font-bold text-gray-900">Track Health Together</h1>
+    </div>
 
-     {/* Main Content */}
-     <div className="px-6 flex flex-col items-center text-center mt-4">
-        <p className="text-xs text-gray-500 mb-8 leading-relaxed max-w-[80%]">
-          Create a Group or Circle to add caregivers or caretakers who can help you manage health and well-being.
-        </p>
+    {/* Main Content */}
+    <div className="px-6 flex flex-col items-center text-center mt-4">
+      <p className="text-xs text-gray-500 mb-8 leading-relaxed max-w-[80%]">
+        Create a Group or Circle to add caregivers or caretakers who can help
+        you manage health and well-being.
+      </p>
 
-        {/* Illustration Placeholder */}
-        <div className="w-48 h-48 rounded-full bg-white mb-8 flex items-center justify-center relative overflow-hidden shadow-sm p-4">
-           {/* Placeholder for the illustration */}
-           <div className="w-full h-full bg-gray-50 rounded-full flex items-center justify-center">
-              <Users size={64} className="text-gray-200" />
-           </div>
-           <img src="/family-group.png" alt="Family" className="absolute inset-0 w-full h-full object-cover opacity-0 sm:opacity-100" onError={(e) => (e.currentTarget.style.opacity = '0')} />
+      {/* Illustration Placeholder */}
+      <div className="w-48 h-48 rounded-full bg-white mb-8 flex items-center justify-center relative overflow-hidden shadow-sm p-4">
+        {/* Placeholder for the illustration */}
+        <div className="w-full h-full bg-gray-50 rounded-full flex items-center justify-center">
+          <Users size={64} className="text-gray-200" />
         </div>
-
-        {/* Buttons */}
-        <div className="w-full space-y-4">
-            <button className="w-full bg-[#3A8177] text-white py-3 rounded-xl font-medium text-sm shadow-lg shadow-[#3A8177]/20">
-               Create a group
-            </button>
-             <div className="relative flex items-center justify-center">
-                 <div className="h-[1px] bg-gray-200 w-full absolute"></div>
-                 <span className="bg-[#f8f9fa] px-2 text-xs text-gray-400 relative z-10">Or</span>
-             </div>
-            <button className="w-full bg-white border border-[#3A8177] text-[#3A8177] py-3 rounded-xl font-medium text-sm">
-               Join Group
-            </button>
-        </div>
-     </div>
-
-     {/* Bottom Nav */}
-      <div className="absolute bottom-0 left-0 right-0 bg-[#35615E] h-20 rounded-t-[2.5rem] px-8 flex items-center justify-between z-10">
-          <Home size={24} className="text-gray-300 opacity-60" />
-          <FileText size={24} className="text-gray-300 opacity-60" />
-          <div className="w-14 h-14 bg-[#FF8437] rounded-full -mt-8 flex items-center justify-center border-[4px] border-[#f8f9fa] shadow-lg">
-             <Sparkles size={24} className="text-white" />
-          </div>
-          <User size={24} className="text-gray-300 opacity-60"  />
-          <Pill size={24} className="text-gray-300 opacity-60" />
+        <img
+          src="/family-group.png"
+          alt="Family"
+          className="absolute inset-0 w-full h-full object-cover opacity-0 sm:opacity-100"
+          onError={(e) => (e.currentTarget.style.opacity = "0")}
+        />
       </div>
+
+      {/* Buttons */}
+      <div className="w-full space-y-4">
+        <button className="w-full bg-[#3A8177] text-white py-3 rounded-xl font-medium text-sm shadow-lg shadow-[#3A8177]/20">
+          Create a group
+        </button>
+        <div className="relative flex items-center justify-center">
+          <div className="h-[1px] bg-gray-200 w-full absolute"></div>
+          <span className="bg-[#f8f9fa] px-2 text-xs text-gray-400 relative z-10">
+            Or
+          </span>
+        </div>
+        <button className="w-full bg-white border border-[#3A8177] text-[#3A8177] py-3 rounded-xl font-medium text-sm">
+          Join Group
+        </button>
+      </div>
+    </div>
+
+    {/* Bottom Nav */}
+    <div className="absolute bottom-0 left-0 right-0 bg-[#35615E] h-20 rounded-t-[2.5rem] px-8 flex items-center justify-between z-10">
+      <Home size={24} className="text-gray-300 opacity-60" />
+      <FileText size={24} className="text-gray-300 opacity-60" />
+      <div className="w-14 h-14 bg-[#FF8437] rounded-full -mt-8 flex items-center justify-center border-[4px] border-[#f8f9fa] shadow-lg">
+        <Sparkles size={24} className="text-white" />
+      </div>
+      <User size={24} className="text-gray-300 opacity-60" />
+      <Pill size={24} className="text-gray-300 opacity-60" />
+    </div>
   </div>
 );
 
@@ -922,39 +970,45 @@ const features = [
       desc: "Book and manage appointments effortlessly.",
     },
     bottomCard: (
-       <div className="bg-[#034942] rounded-[2rem] p-6 lg:p-8 shadow-xl text-white h-full relative overflow-hidden flex flex-col">
-          <div className="mb-4">
-               <h3 className="text-xl font-medium mb-1">Consult and make appointment with Ease</h3>
-              <p className="text-sm opacity-80">Seamless appointment flow</p>
+      <div className="bg-[#034942] rounded-[2rem] p-6 lg:p-8 shadow-xl text-white h-full relative overflow-hidden flex flex-col">
+        <div className="mb-4">
+          <h3 className="text-xl font-medium mb-1">
+            Consult and make appointment with Ease
+          </h3>
+          <p className="text-sm opacity-80">Seamless appointment flow</p>
+        </div>
+
+        <div className="flex-1 bg-[#4A7A75] rounded-2xl relative overflow-hidden shadow-inner flex flex-col items-center justify-center">
+          {/* Call Screen Simulation */}
+          <div className="relative text-center">
+            <div className="w-20 h-20 rounded-full border-2 border-white/20 p-1 mb-3 mx-auto relative">
+              <div className="w-full h-full rounded-full overflow-hidden bg-gray-300 relative">
+                <img
+                  src="/doctor-call.png"
+                  alt="Dr"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="absolute inset-0 rounded-full border border-white opacity-50 animate-ping"></div>
+            </div>
+            <h4 className="font-medium text-sm">Dr.Lata Singh</h4>
+            <p className="text-[10px] opacity-70 mt-1">Ringing...</p>
           </div>
 
-          <div className="flex-1 bg-[#4A7A75] rounded-2xl relative overflow-hidden shadow-inner flex flex-col items-center justify-center">
-             {/* Call Screen Simulation */}
-             <div className="relative text-center">
-                 <div className="w-20 h-20 rounded-full border-2 border-white/20 p-1 mb-3 mx-auto relative">
-                     <div className="w-full h-full rounded-full overflow-hidden bg-gray-300 relative">
-                        <img src="/doctor-call.png" alt="Dr" className="w-full h-full object-cover" />
-                     </div>
-                     <div className="absolute inset-0 rounded-full border border-white opacity-50 animate-ping"></div>
-                 </div>
-                 <h4 className="font-medium text-sm">Dr.Lata Singh</h4>
-                 <p className="text-[10px] opacity-70 mt-1">Ringing...</p>
-             </div>
-
-             <div className="flex items-center gap-6 mt-8">
-                 <div className="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center shadow-lg cursor-pointer hover:scale-105 transition-transform">
-                     <X size={16} />
-                 </div>
-                 <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg border-2 border-red-100 cursor-pointer hover:scale-105 transition-transform">
-                     <div className="w-3 h-3 bg-red-500 rounded-sm"></div>
-                 </div>
-                 <div className="w-10 h-10 rounded-full bg-[#3A8177] flex items-center justify-center shadow-lg cursor-pointer hover:scale-105 transition-transform">
-                     <Phone size={16} />
-                 </div>
-             </div>
+          <div className="flex items-center gap-6 mt-8">
+            <div className="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center shadow-lg cursor-pointer hover:scale-105 transition-transform">
+              <X size={16} />
+            </div>
+            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg border-2 border-red-100 cursor-pointer hover:scale-105 transition-transform">
+              <div className="w-3 h-3 bg-red-500 rounded-sm"></div>
+            </div>
+            <div className="w-10 h-10 rounded-full bg-[#3A8177] flex items-center justify-center shadow-lg cursor-pointer hover:scale-105 transition-transform">
+              <Phone size={16} />
+            </div>
           </div>
-       </div>
-    )
+        </div>
+      </div>
+    ),
   },
   {
     id: 5,
@@ -969,42 +1023,50 @@ const features = [
       desc: "Share data securely and safely with Family and healthcare providers ( HIPPA ).",
     },
     bottomCard: (
-       <div className="bg-[#034942] rounded-[2rem] p-6 lg:p-8 shadow-xl text-white h-full relative overflow-hidden flex flex-col">
-          <div className="mb-6">
-               <h3 className="text-xl font-medium mb-1">Notify Family on Missed Meds</h3>
-              <p className="text-sm opacity-80">Seamless experience for Family health management</p>
-          </div>
+      <div className="bg-[#034942] rounded-[2rem] p-6 lg:p-8 shadow-xl text-white h-full relative overflow-hidden flex flex-col">
+        <div className="mb-6">
+          <h3 className="text-xl font-medium mb-1">
+            Notify Family on Missed Meds
+          </h3>
+          <p className="text-sm opacity-80">
+            Seamless experience for Family health management
+          </p>
+        </div>
 
-          <div className="bg-[#4A7A75] rounded-2xl p-4 md:p-6 relative overflow-hidden shadow-inner flex flex-col justify-center flex-1">
-               {/* Notification Card */}
-               <div className="bg-[#5D8B86] rounded-xl p-4 shadow-lg backdrop-blur-sm border border-white/10">
-                   <div className="flex items-center gap-3 mb-3">
-                       <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#3A8177] font-bold text-xs">
-                           R
-                       </div>
-                       <div className="flex-1">
-                           <div className="text-sm font-medium">Dad Missed a dose of medication</div>
-                       </div>
-                   </div>
-                   
-                   <p className="text-xs opacity-90 mb-4 pl-[44px]">Dad wants to share a Report</p>
-                   
-                   <div className="flex gap-3 pl-[44px]">
-                       <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/30 text-xs hover:bg-white/10 transition-colors">
-                           <Eye size={12} /> View
-                       </button>
-                       <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-[#3A8177] text-xs font-medium hover:bg-gray-100 transition-colors">
-                           <Download size={12} /> Download
-                       </button>
-                   </div>
-               </div>
-               <div className="absolute bottom-2 right-4 text-[10px] opacity-60">
-                   10:00 AM
-               </div>
+        <div className="bg-[#4A7A75] rounded-2xl p-4 md:p-6 relative overflow-hidden shadow-inner flex flex-col justify-center flex-1">
+          {/* Notification Card */}
+          <div className="bg-[#5D8B86] rounded-xl p-4 shadow-lg backdrop-blur-sm border border-white/10">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#3A8177] font-bold text-xs">
+                R
+              </div>
+              <div className="flex-1">
+                <div className="text-sm font-medium">
+                  Dad Missed a dose of medication
+                </div>
+              </div>
+            </div>
+
+            <p className="text-xs opacity-90 mb-4 pl-[44px]">
+              Dad wants to share a Report
+            </p>
+
+            <div className="flex gap-3 pl-[44px]">
+              <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/30 text-xs hover:bg-white/10 transition-colors">
+                <Eye size={12} /> View
+              </button>
+              <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-[#3A8177] text-xs font-medium hover:bg-gray-100 transition-colors">
+                <Download size={12} /> Download
+              </button>
+            </div>
           </div>
-       </div>
-    )
-  }
+          <div className="absolute bottom-2 right-4 text-[10px] opacity-60">
+            10:00 AM
+          </div>
+        </div>
+      </div>
+    ),
+  },
 ];
 
 const UnifiedHealthRecords = () => {
@@ -1026,7 +1088,7 @@ const UnifiedHealthRecords = () => {
       setActiveFeature(2);
     } else if (latest < 0.64) {
       setActiveFeature(3);
-    } else if (latest < 0.80) {
+    } else if (latest < 0.8) {
       setActiveFeature(4);
     } else {
       setActiveFeature(5);
@@ -1053,7 +1115,7 @@ const UnifiedHealthRecords = () => {
             </div>
 
             <div className="space-y-4">
-              <h2 className="text-4xl md:text-5xl font-heading font-medium text-[#4DA599]">
+              <h2 className="text-4xl md:text-5xl font-heading font-medium bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent">
                 {features[activeFeature].title}
               </h2>
               <p className="text-gray-600 text-lg">

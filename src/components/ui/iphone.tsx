@@ -3,13 +3,12 @@ import Image from "next/image";
 
 const PHONE_WIDTH = 433;
 const PHONE_HEIGHT = 882;
-const SCREEN_X = 21.25;
-const SCREEN_Y = 19.25;
-const SCREEN_WIDTH = 389.5;
-const SCREEN_HEIGHT = 843.5;
+const SCREEN_X = 14;
+const SCREEN_Y = 14;
+const SCREEN_WIDTH = 405;
+const SCREEN_HEIGHT = 854;
 const SCREEN_RADIUS = 55.75;
 
-// Calculated percentages
 const LEFT_PCT = (SCREEN_X / PHONE_WIDTH) * 100;
 const TOP_PCT = (SCREEN_Y / PHONE_HEIGHT) * 100;
 const WIDTH_PCT = (SCREEN_WIDTH / PHONE_WIDTH) * 100;
@@ -143,7 +142,27 @@ export function Iphone({
         />
 
         <path
-          d={`M${SCREEN_X} 75C${SCREEN_X} 44.2101 46.2101 ${SCREEN_Y} 77 ${SCREEN_Y}H355C385.79 ${SCREEN_Y} 410.75 44.2101 410.75 75V807C410.75 837.79 385.79 862.75 355 862.75H77C46.2101 862.75 ${SCREEN_X} 837.79 ${SCREEN_X} 807V75Z`}
+          d={`M${SCREEN_X} ${SCREEN_Y + SCREEN_RADIUS}C${SCREEN_X} ${
+            SCREEN_Y + 24.96
+          } ${SCREEN_X + 24.96} ${SCREEN_Y} ${
+            SCREEN_X + SCREEN_RADIUS
+          } ${SCREEN_Y}H${SCREEN_X + SCREEN_WIDTH - SCREEN_RADIUS}C${
+            SCREEN_X + SCREEN_WIDTH - 24.96
+          } ${SCREEN_Y} ${SCREEN_X + SCREEN_WIDTH} ${SCREEN_Y + 24.96} ${
+            SCREEN_X + SCREEN_WIDTH
+          } ${SCREEN_Y + SCREEN_RADIUS}V${
+            SCREEN_Y + SCREEN_HEIGHT - SCREEN_RADIUS
+          }C${SCREEN_X + SCREEN_WIDTH} ${
+            SCREEN_Y + SCREEN_HEIGHT - 24.96
+          } ${SCREEN_X + SCREEN_WIDTH - 24.96} ${
+            SCREEN_Y + SCREEN_HEIGHT
+          } ${SCREEN_X + SCREEN_WIDTH - SCREEN_RADIUS} ${
+            SCREEN_Y + SCREEN_HEIGHT
+          }H${SCREEN_X + SCREEN_RADIUS}C${SCREEN_X + 24.96} ${
+            SCREEN_Y + SCREEN_HEIGHT
+          } ${SCREEN_X} ${SCREEN_Y + SCREEN_HEIGHT - 24.96} ${SCREEN_X} ${
+            SCREEN_Y + SCREEN_HEIGHT - SCREEN_RADIUS
+          }V${SCREEN_Y + SCREEN_RADIUS}Z`}
           className="fill-[#E5E5E5] stroke-[#E5E5E5] stroke-[0.5] dark:fill-[#404040] dark:stroke-[#404040]"
           mask={hasMedia ? "url(#screenPunch)" : undefined}
         />

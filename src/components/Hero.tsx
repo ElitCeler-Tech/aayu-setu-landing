@@ -26,7 +26,7 @@ const Hero = () => {
           An AI-Driven Healthcare Assistant
         </div>
 
-        <h1 className="text-5xl font-medium font-heading text-gray-900 leading-[1.1] mb-6">
+        <h1 className="text-5xl font-medium font-heading bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent leading-[1.1] mb-6">
           Predict Health Risks. <br />
           Prevent Disease. <br />
           Live Better.

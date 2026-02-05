@@ -5,7 +5,7 @@ const ProblemSolution = () => {
     <section className="max-w-7xl mx-auto px-6 py-16 lg:py-24 space-y-24">
       {/* The Problem Section */}
       <div className="flex flex-col items-center gap-8">
-        <h2 className="text-3xl md:text-4xl font-heading font-medium text-[#4DA599]">
+        <h2 className="text-3xl md:text-4xl font-heading font-medium bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent">
           The Problem
         </h2>
 
@@ -22,7 +22,7 @@ const ProblemSolution = () => {
 
       {/* Ayus Setu Solution Section */}
       <div className="flex flex-col items-center gap-8">
-        <h2 className="text-3xl md:text-4xl font-heading font-medium text-[#4DA599]">
+        <h2 className="text-3xl md:text-4xl font-heading font-medium bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent">
           Ayus Setu Solution
         </h2>
 
