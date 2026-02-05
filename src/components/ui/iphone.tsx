@@ -20,6 +20,7 @@ const RADIUS_V = (SCREEN_RADIUS / SCREEN_HEIGHT) * 100;
 export interface IphoneProps extends HTMLAttributes<HTMLDivElement> {
   src?: string;
   videoSrc?: string;
+  children?: React.ReactNode;
 }
 
 export function Iphone({
@@ -27,6 +28,7 @@ export function Iphone({
   videoSrc,
   className,
   style,
+  children,
   ...props
 }: IphoneProps) {
   const hasVideo = !!videoSrc;
@@ -82,6 +84,21 @@ export function Iphone({
             width={PHONE_WIDTH}
             height={PHONE_HEIGHT}
           />
+        </div>
+      )}
+
+      {children && (
+        <div
+          className="absolute z-0 overflow-hidden bg-white"
+          style={{
+            left: `${LEFT_PCT}%`,
+            top: `${TOP_PCT}%`,
+            width: `${WIDTH_PCT}%`,
+            height: `${HEIGHT_PCT}%`,
+            borderRadius: `${RADIUS_H}% / ${RADIUS_V}%`,
+          }}
+        >
+          {children}
         </div>
       )}
 
