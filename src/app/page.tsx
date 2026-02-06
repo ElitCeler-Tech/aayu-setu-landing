@@ -8,6 +8,9 @@ import ForPatients from "@/components/ForPatients";
 import ForDoctorsClinics from "@/components/ForDoctorsClinics";
 import ForInsurersEmployers from "@/components/ForInsurersEmployers";
 import ForGovernmentPublicHealth from "@/components/ForGovernmentPublicHealth";
+import Testimonials from "@/components/Testimonials";
+import Team from "@/components/Team";
+import Blogs from "@/components/Blogs";
 
 export default function Home() {
   return (
@@ -22,6 +25,9 @@ export default function Home() {
       <ForDoctorsClinics />
       <ForInsurersEmployers />
       <ForGovernmentPublicHealth />
+      <Testimonials />
+      <Team />
+      <Blogs />
     </div>
   );
 }
