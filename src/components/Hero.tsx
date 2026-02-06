@@ -1,21 +1,22 @@
 import { Iphone } from "./ui/iphone";
+import { Icon } from "@iconify/react";
 
 const Hero = () => {
   return (
-    <main className="max-w-7xl mx-auto px-6 pt-16 pb-24 lg:pt-24 lg:pb-32 flex flex-col lg:flex-row items-center justify-between gap-12 relative isolate">
+    <main className="max-w-7xl mx-auto px-6 pt-16 pb-24 lg:pt-24 lg:pb-32 flex flex-col lg:flex-row items-center justify-between gap-12 relative isolate bg-[#F0F8F7]/50 lg:bg-transparent">
       {/* Top Left Gradient Circle */}
-      <div className="absolute w-[457px] h-[457px] rounded-full opacity-50 pointer-events-none -z-10 bg-gradient-to-b from-[rgba(0,111,104,0.1)] to-[#3A8177] blur-[100px] top-[-0.07px] left-[-198px]" />
+      <div className="absolute w-[457px] h-[457px] rounded-full opacity-50 pointer-events-none -z-10 bg-gradient-to-b from-[rgba(0,111,104,0.1)] to-[#7fcfc5] blur-[100px] top-[-0.07px] left-[-198px]" />
 
       {/* Left Content */}
       <div className="flex-1 max-w-2xl text-center lg:text-left">
-        <div className="inline-flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full text-sm font-medium text-gray-700 mb-8">
+        <div className="inline-flex items-center gap-2 bg-[linear-gradient(90deg,rgba(127,127,127,0.14)_0%,rgba(229,229,229,0.14)_100%)] px-4 py-2 rounded-full text-sm font-medium text-[#35615E] mb-8">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4 text-[#346E6A]"
+            className="w-4 h-4"
           >
             <path
               strokeLinecap="round"
@@ -26,23 +27,27 @@ const Hero = () => {
           An AI-Driven Healthcare Assistant
         </div>
 
-        <h1 className="text-5xl font-medium font-heading bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent leading-[1.1] mb-6">
-          Predict Health Risks. <br />
-          Prevent Disease. <br />
+        <h1 className="text-4xl font-semibold font-heading text-gray-900 leading-[1.15] mb-6">
+          Digitalize Health records. <br />
+          Predict Health Risks*. <br />
+          Prevent Disease*. <br />
           Live Better.
         </h1>
 
-        <p className="text-base text-gray-600 mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+        <p className="text-gray-600 mb-6 max-w-lg mx-auto lg:mx-0 leading-relaxed">
           AyusSetu brings fragmented paper and digital health records together
           and uses AI to predict future health risks—enabling early,
           personalized preventive care.
         </p>
 
+        <p className="text-xs text-gray-400 mb-10 italic">
+          *AI-powered insights to support preventive health actions. Not a
+          diagnostic or treatment tool
+        </p>
+
         <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-          <button className="flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-lg border border-black hover:bg-gray-900 transition-colors">
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.7 8.5c-.6-1.5-1.9-2.2-3.2-2.3-1.4-.1-2.9.8-3.6.8-.8 0-2.1-.8-3.4-.8-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.6 1.3 10.1.9 1.3 1.9 2.7 3.3 2.7 1.3 0 1.8-.8 3.4-.8 1.6 0 2.1.8 3.4.8 1.4 0 2.4-1.3 3.3-2.6 1-1.5 1.5-3 1.5-3s-1.2-.5-1.2-2.9c0-2.2 1.9-3.3 1.9-3.3zM12.9 6.3c.7-.9 1.2-2.1 1.1-3.3-1.1 0-2.4.7-3.2 1.6-.7.8-1.2 2-1.1 3.2 1.2.1 2.5-.6 3.2-1.5z" />
-            </svg>
+          <button className="flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-lg border border-black hover:bg-gray-900 transition-colors cursor-pointer">
+            <Icon icon="mdi:apple" className="w-8 h-8" />
             <div className="text-left">
               <div className="text-[10px] leading-tight opacity-80">
                 Download on the
@@ -50,25 +55,8 @@ const Hero = () => {
               <div className="text-sm font-bold leading-tight">App Store</div>
             </div>
           </button>
-          <button className="flex items-center gap-2 bg-white text-gray-900 px-5 py-2.5 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors">
-            <svg className="w-6 h-6" viewBox="0 0 24 24">
-              <path
-                fill="#EA4335"
-                d="M11.66 12L3.29 2.18A.41.41 0 0 0 3 2.43v19.14a.42.42 0 0 0 .29.25l8.37-9.82z"
-              />
-              <path
-                fill="#FBBC04"
-                d="M17.73 15.6l-6.07-3.6 6.07-3.6a.43.43 0 0 1 .53.07L22 12l-3.74 3.53a.43.43 0 0 1-.53.07z"
-              />
-              <path
-                fill="#4285F4"
-                d="M18.26 8.4L11.66 12 3.29 2.18A.38.38 0 0 1 4 2l14.26 6.4z"
-              />
-              <path
-                fill="#34A853"
-                d="M18.26 15.6L4 22a.38.38 0 0 0-.71-.18L11.66 12l6.6 3.6z"
-              />
-            </svg>
+          <button className="flex items-center gap-2 bg-white text-gray-900 px-5 py-2.5 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors cursor-pointer">
+            <Icon icon="logos:google-play-icon" className="w-7 h-7" />
             <div className="text-left">
               <div className="text-[10px] leading-tight opacity-80">
                 GET IT ON
