@@ -11,6 +11,7 @@ import ForGovernmentPublicHealth from "@/components/ForGovernmentPublicHealth";
 import Testimonials from "@/components/Testimonials";
 import Team from "@/components/Team";
 import Blogs from "@/components/Blogs";
+import FAQ from "@/components/FAQ";
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
       <Testimonials />
       <Team />
       <Blogs />
+      <FAQ />
     </div>
   );
 }
