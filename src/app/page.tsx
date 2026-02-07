@@ -16,6 +16,7 @@ import DataSecurity from "@/components/DataSecurity";
 import ABHAIntegration from "@/components/ABHAIntegration";
 import ContactUs from "@/components/ContactUs";
 import DownloadApp from "@/components/DownloadApp";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -38,6 +39,7 @@ export default function Home() {
       <ABHAIntegration />
       <ContactUs />
       <DownloadApp />
+      <Footer />
     </div>
   );
 }
