@@ -40,11 +40,11 @@ const FAQ = () => {
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-16">
           <div className="flex items-center gap-4 w-full justify-center mb-6">
-            <div className="h-[2px] w-20 md:w-32 bg-linear-to-r from-transparent to-[#35615E] opacity-50"></div>
+            <div className="h-[3px] w-20 md:w-32 bg-[linear-gradient(90deg,rgba(65,116,111,0.89)_0%,rgba(117,227,214,0.89)_100%)] opacity-50"></div>
             <div className="px-6 py-2 rounded-full bg-[#E8F3F1] text-[#35615E] text-sm font-medium shadow-sm">
               Track your health
             </div>
-            <div className="h-[2px] w-20 md:w-32 bg-linear-to-l from-transparent to-[#35615E] opacity-50"></div>
+            <div className="h-[3px] w-20 md:w-32 bg-[linear-gradient(90deg,rgba(132,255,239,0.89)_0%,rgba(45,100,93,0.89)_100%)] opacity-50"></div>
           </div>
 
           <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-gray-900">

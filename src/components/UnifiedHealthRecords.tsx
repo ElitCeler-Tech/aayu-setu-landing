@@ -674,7 +674,13 @@ const features = [
       desc: "Upload and scan all your documents",
     },
     bottomCard: (
-      <div className="bg-[#034942] rounded-[2rem] p-8 shadow-xl text-white space-y-6 h-full">
+      <div
+        className="rounded-[2rem] p-8 shadow-xl text-white space-y-6 h-full"
+        style={{
+          background:
+            "linear-gradient(140.58deg, #006C61 22.56%, #000000 101.65%)",
+        }}
+      >
         <h3 className="text-xl font-medium">
           All your heath records at one place
         </h3>
@@ -715,7 +721,13 @@ const features = [
       desc: "Stay on track with timely reminders and and get information on Medication.",
     },
     bottomCard: (
-      <div className="bg-[#034942] rounded-[2rem] p-6 lg:p-8 shadow-xl text-white h-full flex flex-col justify-between">
+      <div
+        className="rounded-[2rem] p-6 lg:p-8 shadow-xl text-white h-full flex flex-col justify-between"
+        style={{
+          background:
+            "linear-gradient(140.58deg, #006C61 22.56%, #000000 101.65%)",
+        }}
+      >
         <div className="mb-6">
           <h3 className="text-xl font-medium">Medication Reminders & Logs</h3>
           <p className="text-sm opacity-80 mt-1">
@@ -827,7 +839,13 @@ const features = [
       desc: "Ask Questions about your health and get Personalized recommendations",
     },
     bottomCard: (
-      <div className="bg-[#034942] rounded-[2rem] p-6 lg:p-8 shadow-xl text-white h-full relative overflow-hidden">
+      <div
+        className="rounded-[2rem] p-6 lg:p-8 shadow-xl text-white h-full relative overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(140.58deg, #006C61 22.56%, #000000 101.65%)",
+        }}
+      >
         <div className="mb-6 z-10 relative">
           <div className="flex items-center gap-2 mb-2">
             <h3 className="text-xl font-medium">Chat with AI - Ayu</h3>
@@ -837,7 +855,7 @@ const features = [
           </p>
         </div>
 
-        <div className="bg-[#5F8D88] md:bg-[#5F8D88]/50 rounded-2xl p-4 h-[320px] relative overflow-hidden flex flex-col justify-end pb-16">
+        <div className="bg-[#5F8D88] md:bg-[#5F8D88]/50 rounded-2xl p-4 h-[220px] relative overflow-hidden flex flex-col justify-end pb-16">
           {/* Messages */}
           <div className="space-y-4 w-full">
             {/* User Message */}
@@ -906,7 +924,13 @@ const features = [
       desc: "Get Personalized health Insights",
     },
     bottomCard: (
-      <div className="bg-[#034942] rounded-[2rem] p-6 lg:p-8 shadow-xl text-white h-full relative flex flex-col justify-between">
+      <div
+        className="rounded-[2rem] p-6 lg:p-8 shadow-xl text-white h-full relative flex flex-col justify-between"
+        style={{
+          background:
+            "linear-gradient(140.58deg, #006C61 22.56%, #000000 101.65%)",
+        }}
+      >
         <div>
           <h3 className="text-xl font-medium mb-1">Ai summarized reports</h3>
           <p className="text-sm opacity-80 mb-6">
@@ -970,7 +994,13 @@ const features = [
       desc: "Book and manage appointments effortlessly.",
     },
     bottomCard: (
-      <div className="bg-[#034942] rounded-[2rem] p-6 lg:p-8 shadow-xl text-white h-full relative overflow-hidden flex flex-col">
+      <div
+        className="rounded-[2rem] p-6 lg:p-8 shadow-xl text-white h-full relative overflow-hidden flex flex-col"
+        style={{
+          background:
+            "linear-gradient(140.58deg, #006C61 22.56%, #000000 101.65%)",
+        }}
+      >
         <div className="mb-4">
           <h3 className="text-xl font-medium mb-1">
             Consult and make appointment with Ease
@@ -1023,7 +1053,13 @@ const features = [
       desc: "Share data securely and safely with Family and healthcare providers ( HIPPA ).",
     },
     bottomCard: (
-      <div className="bg-[#034942] rounded-[2rem] p-6 lg:p-8 shadow-xl text-white h-full relative overflow-hidden flex flex-col">
+      <div
+        className="rounded-[2rem] p-6 lg:p-8 shadow-xl text-white h-full relative overflow-hidden flex flex-col"
+        style={{
+          background:
+            "linear-gradient(140.58deg, #006C61 22.56%, #000000 101.65%)",
+        }}
+      >
         <div className="mb-6">
           <h3 className="text-xl font-medium mb-1">
             Notify Family on Missed Meds
@@ -1101,17 +1137,17 @@ const UnifiedHealthRecords = () => {
         <div className="max-w-7xl mx-auto px-6 w-full">
           <motion.div
             key={`header-${activeFeature}`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.3 }}
             className="flex flex-col items-center justify-center text-center mb-12 lg:mb-16 space-y-6"
           >
             <div className="flex items-center gap-4 w-full max-w-lg justify-center opacity-80">
-              <div className="h-[2px] w-full bg-gradient-to-r from-transparent to-[#3A8177]/50 rounded-full" />
+              <div className="h-[3px] w-full bg-[linear-gradient(90deg,rgba(65,116,111,0.89)_0%,rgba(117,227,214,0.89)_100%)] opacity-50 rounded-full" />
               <div className="shrink-0 px-6 py-1.5 rounded-full border border-[#3A8177]/30 text-[#3A8177] text-sm font-medium bg-[#ECF6F5]">
                 {features[activeFeature].pill}
               </div>
-              <div className="h-[2px] w-full bg-gradient-to-l from-transparent to-[#3A8177]/50 rounded-full" />
+              <div className="h-[3px] w-full bg-[linear-gradient(90deg,rgba(132,255,239,0.89)_0%,rgba(45,100,93,0.89)_100%)] opacity-50 rounded-full" />
             </div>
 
             <div className="space-y-4">
@@ -1125,12 +1161,12 @@ const UnifiedHealthRecords = () => {
           </motion.div>
 
           <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24">
-            <div className="flex-1 flex justify-center lg:justify-start w-full">
-              <div className="w-[280px] sm:w-[320px]">
+            <div className="flex-1 flex justify-center w-full">
+              <div className="w-[220px] sm:w-[250px]">
                 <motion.div
                   key={`phone-${activeFeature}`}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                   transition={{ duration: 0.5 }}
                 >
                   <Iphone
@@ -1146,8 +1182,8 @@ const UnifiedHealthRecords = () => {
             <div className="flex-1 w-full space-y-8 max-w-lg lg:max-w-xl">
               <motion.div
                 key={`right-content-${activeFeature}`}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, x: 50, filter: "blur(10px)" }}
+                animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="space-y-8"
               >
