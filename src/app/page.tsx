@@ -12,6 +12,8 @@ import Testimonials from "@/components/Testimonials";
 import Team from "@/components/Team";
 import Blogs from "@/components/Blogs";
 import FAQ from "@/components/FAQ";
+import DataSecurity from "@/components/DataSecurity";
+import ABHAIntegration from "@/components/ABHAIntegration";
 
 export default function Home() {
   return (
@@ -30,6 +32,8 @@ export default function Home() {
       <Team />
       <Blogs />
       <FAQ />
+      <DataSecurity />
+      <ABHAIntegration />
     </div>
   );
 }
