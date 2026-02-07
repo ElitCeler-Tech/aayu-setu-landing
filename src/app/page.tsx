@@ -14,6 +14,8 @@ import Blogs from "@/components/Blogs";
 import FAQ from "@/components/FAQ";
 import DataSecurity from "@/components/DataSecurity";
 import ABHAIntegration from "@/components/ABHAIntegration";
+import ContactUs from "@/components/ContactUs";
+import DownloadApp from "@/components/DownloadApp";
 
 export default function Home() {
   return (
@@ -34,6 +36,8 @@ export default function Home() {
       <FAQ />
       <DataSecurity />
       <ABHAIntegration />
+      <ContactUs />
+      <DownloadApp />
     </div>
   );
 }
