@@ -2,17 +2,17 @@
 
 import React from "react";
 import BlurFade from "./ui/blur-fade";
-import BlurFadeText from "./ui/blur-fade-text";
 
 const ProblemSolution = () => {
   return (
     <section className="max-w-7xl mx-auto px-6 py-16 lg:py-24 space-y-24">
       {/* The Problem Section */}
       <div className="flex flex-col items-center gap-8">
-        <BlurFadeText
-          className="text-3xl md:text-4xl font-heading font-semibold bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent"
-          text="The Problem"
-        />
+        <BlurFade>
+          <h2 className="text-3xl md:text-4xl font-heading font-semibold bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent">
+            The Problem
+          </h2>
+        </BlurFade>
 
         <BlurFade delay={0.2} className="w-full">
           <div className="w-full bg-[#ECF6F5] rounded-[2rem] p-8 md:p-12 lg:p-16">
@@ -30,10 +30,11 @@ const ProblemSolution = () => {
 
       {/* Ayus Setu Solution Section */}
       <div className="flex flex-col items-center gap-8">
-        <BlurFadeText
-          className="text-3xl md:text-4xl font-heading font-semibold bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent"
-          text="Ayus Setu Solution"
-        />
+        <BlurFade>
+          <h2 className="text-3xl md:text-4xl font-heading font-semibold bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent">
+            Ayus Setu Solution
+          </h2>
+        </BlurFade>
 
         <BlurFade delay={0.2} className="w-full">
           <div className="w-full bg-linear-to-r from-[#2D645D] to-[#3A8177] rounded-[2rem] p-8 md:p-12 lg:p-16 shadow-xl">
