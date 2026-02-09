@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 const ForPatients = () => {
   return (
@@ -13,8 +14,15 @@ const ForPatients = () => {
           Take control of your health—early.
         </p>
 
-        <div className="w-full h-80 bg-gray-200 rounded-3xl mb-12 flex items-center justify-center">
-          <span className="text-gray-400 font-medium">Image Placeholder</span>
+        <div className="w-full mb-12 flex items-center justify-center">
+          <Image
+            src="/for-patients.png"
+            alt="For Patients"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="h-96 w-auto object-contain"
+          />
         </div>
 
         <p className="text-gray-700 text-xl leading-relaxed max-w-5xl mx-auto">

@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 const ForGovernmentPublicHealth = () => {
   return (
@@ -15,8 +16,15 @@ const ForGovernmentPublicHealth = () => {
         </p>
 
         {/* Image Placeholder */}
-        <div className="w-full h-80 bg-gray-200 rounded-3xl mb-12 flex items-center justify-center">
-          <span className="text-gray-400 font-medium">Image Placeholder</span>
+        <div className="w-full mb-12 flex items-center justify-center">
+          <Image
+            src="/for-government.png"
+            alt="For Government"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="h-96 w-auto object-contain"
+          />
         </div>
 
         {/* Paragraph Text */}
