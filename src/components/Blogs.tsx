@@ -3,6 +3,8 @@
 import React from "react";
 import { ArrowLeft, ArrowRight, Calendar } from "lucide-react";
 import Image from "next/image";
+import BlurFade from "./ui/blur-fade";
+import BlurFadeText from "./ui/blur-fade-text";
 
 const Blogs = () => {
   const blogPosts = [
@@ -38,64 +40,66 @@ const Blogs = () => {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
           <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
-              Health & Wellness <span className="opacity-50">Blog</span>
-            </h2>
-            <p className="text-white/80 text-lg">
-              Expert tips, insights, and guides to help you stay healthier every
-              day.
-            </p>
+            <BlurFadeText
+              className="text-4xl md:text-5xl font-heading font-bold mb-4"
+              text="Health & Wellness Blog"
+            />
+            <BlurFade delay={0.2}>
+              <p className="text-white/80 text-lg">
+                Expert tips, insights, and guides to help you stay healthier
+                every day.
+              </p>
+            </BlurFade>
           </div>
 
-          <div className="flex gap-4">
+          <BlurFade delay={0.3} className="flex gap-4">
             <button className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors backdrop-blur-sm border border-white/10">
               <ArrowLeft size={24} />
             </button>
             <button className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors backdrop-blur-sm border border-white/10">
               <ArrowRight size={24} />
             </button>
-          </div>
+          </BlurFade>
         </div>
 
         {/* Blog Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {blogPosts.map((post) => (
-            <div
-              key={post.id}
-              className="group relative h-[550px] rounded-[2rem] overflow-hidden cursor-pointer"
-            >
-              <Image
-                src={post.image}
-                alt={post.title}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
+          {blogPosts.map((post, index) => (
+            <BlurFade key={post.id} delay={0.4 + index * 0.1}>
+              <div className="group relative h-[550px] rounded-[2rem] overflow-hidden cursor-pointer">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
 
-              {/* Overlay Gradient */}
-              <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
+                {/* Overlay Gradient */}
+                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
 
-              {/* Content */}
-              <div className="absolute bottom-0 left-0 right-0 p-8 flex flex-col justify-end h-full">
-                <div className="flex items-center gap-4 mb-4">
-                  <span className="px-3 py-1 rounded-full bg-[#F59E0B] text-black text-xs font-bold tracking-wider">
-                    {post.category}
-                  </span>
-                  <div className="flex items-center gap-2 text-white/80 text-sm">
-                    <Calendar size={14} />
-                    <span>{post.date}</span>
+                {/* Content */}
+                <div className="absolute bottom-0 left-0 right-0 p-8 flex flex-col justify-end h-full">
+                  <div className="flex items-center gap-4 mb-4">
+                    <span className="px-3 py-1 rounded-full bg-[#F59E0B] text-black text-xs font-bold tracking-wider">
+                      {post.category}
+                    </span>
+                    <div className="flex items-center gap-2 text-white/80 text-sm">
+                      <Calendar size={14} />
+                      <span>{post.date}</span>
+                    </div>
+                  </div>
+
+                  <h3 className="text-2xl font-bold mb-6 leading-tight group-hover:text-[#F59E0B] transition-colors">
+                    {post.title}
+                  </h3>
+
+                  <div className="flex items-center gap-2 text-white/90 font-medium group-hover:translate-x-2 transition-transform duration-300">
+                    <span>Read More</span>
+                    <ArrowRight size={18} />
                   </div>
                 </div>
-
-                <h3 className="text-2xl font-bold mb-6 leading-tight group-hover:text-[#F59E0B] transition-colors">
-                  {post.title}
-                </h3>
-
-                <div className="flex items-center gap-2 text-white/90 font-medium group-hover:translate-x-2 transition-transform duration-300">
-                  <span>Read More</span>
-                  <ArrowRight size={18} />
-                </div>
               </div>
-            </div>
+            </BlurFade>
           ))}
         </div>
       </div>

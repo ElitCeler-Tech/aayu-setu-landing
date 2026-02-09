@@ -2,6 +2,8 @@
 
 import React from "react";
 import { Icon } from "@iconify/react";
+import Image from "next/image";
+import BlurFade from "./ui/blur-fade";
 
 const Footer = () => {
   return (
@@ -14,43 +16,20 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Logo Section */}
-          <div className="col-span-1">
+          <BlurFade className="col-span-1">
             <div className="flex items-center gap-2 mb-2">
-              <div className="w-10 h-10 bg-transparent flex items-center justify-center text-orange-500">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-8 h-8"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3 13h18"
-                    className="text-green-600"
-                  />
-                </svg>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xl font-bold tracking-widest font-heading uppercase text-white leading-none">
-                  AYUS SETU
-                </span>
-                <span className="text-[10px] text-gray-300 tracking-wide">
-                  Connecting Care for Better Health
-                </span>
-              </div>
+              <Image
+                src="/white-logo.png"
+                alt="Ayus Setu Logo"
+                width={200}
+                height={200}
+                className=" object-contain"
+              />
             </div>
-          </div>
+          </BlurFade>
 
           {/* Links Column 1 */}
-          <div className="col-span-1">
+          <BlurFade delay={0.2} className="col-span-1">
             <h3 className="font-bold text-sm mb-6 tracking-wide uppercase">
               Home
             </h3>
@@ -91,10 +70,10 @@ const Footer = () => {
                 </a>
               </li>
             </ul>
-          </div>
+          </BlurFade>
 
           {/* Links Column 2 */}
-          <div className="col-span-1">
+          <BlurFade delay={0.3} className="col-span-1">
             <div className="flex items-center gap-2 mb-6 cursor-pointer group">
               <h3 className="font-bold text-sm tracking-wide uppercase group-hover:text-gray-200 transition-colors">
                 Disclaimer
@@ -143,10 +122,10 @@ const Footer = () => {
                 </a>
               </li>
             </ul>
-          </div>
+          </BlurFade>
 
           {/* Address & Socials Column */}
-          <div className="col-span-1">
+          <BlurFade delay={0.4} className="col-span-1">
             <div className="mb-8">
               <h3 className="font-bold text-sm mb-4 tracking-wide uppercase text-gray-300/80">
                 Terms of Use
@@ -193,24 +172,26 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </BlurFade>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-300">
-          <div>&copy; 2025 Ayus Setu. All rights reserved.</div>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Disclaimers
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Terms and Conditions
-            </a>
+        <BlurFade delay={0.6}>
+          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-300">
+            <div>&copy; 2025 Ayus Setu. All rights reserved.</div>
+            <div className="flex gap-6">
+              <a href="#" className="hover:text-white transition-colors">
+                Privacy Policy
+              </a>
+              <a href="#" className="hover:text-white transition-colors">
+                Disclaimers
+              </a>
+              <a href="#" className="hover:text-white transition-colors">
+                Terms and Conditions
+              </a>
+            </div>
           </div>
-        </div>
+        </BlurFade>
       </div>
     </footer>
   );

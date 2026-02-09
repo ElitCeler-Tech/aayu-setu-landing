@@ -1,6 +1,17 @@
 "use client";
 
 import React from "react";
+import BlurFade from "./ui/blur-fade";
+import BlurFadeText from "./ui/blur-fade-text";
+
+// ... existing helper components RangeBar, WaveChartPrimary, etc
+// I will not replace them here to save tokens, assuming they remain unchanged.
+// The replace_file_content tool will only replace the targeted section if I target specific lines or if I provide enough context.
+// BUT since I need to add imports, I should probably do a multi_replace or careful replace.
+// Given the tool constraints and previous token limit error, I will target the imports and the specific section separately if possible.
+// Wait, I can only call one tool per turn properly if I want to be safe with tokens? No, I can stream multiple.
+// Let's use `multi_replace_file_content` for HealthVitalsBento to be efficient? No, the user prompt showed a history of single replaces.
+// I will just replace the top part of HealthVitalsBento here including imports and the header section.
 
 const RangeBar = ({
   // status prop removed as it was unused
@@ -248,7 +259,7 @@ const HealthVitalsBento = () => {
   return (
     <section className="py-24 bg-white relative overflow-hidden">
       {/* Top Header */}
-      <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
+      <div className="max-w-7xl mx-auto px-6 mb-16 text-center flex flex-col items-center">
         <div className="flex items-center gap-4 w-full justify-center opacity-80 mb-6">
           <div className="h-[3px] w-24 bg-[linear-gradient(90deg,rgba(65,116,111,0.89)_0%,rgba(117,227,214,0.89)_100%)] opacity-50 rounded-full" />
           <div className="shrink-0 px-6 py-1.5 rounded-full border border-[#3A8177]/30 text-[#3A8177] text-sm font-medium bg-[#ECF6F5]">
@@ -256,185 +267,201 @@ const HealthVitalsBento = () => {
           </div>
           <div className="h-[3px] w-24 bg-[linear-gradient(90deg,rgba(132,255,239,0.89)_0%,rgba(45,100,93,0.89)_100%)] opacity-50 rounded-full" />
         </div>
-        <h2 className="text-4xl md:text-5xl font-heading font-medium bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent mb-4">
-          Track Key Health Vitals and watch Trends
-        </h2>
-        <p className="text-gray-600 text-lg">
-          Get Information and manage health with personal insights
-        </p>
+        <BlurFade delay={0}>
+          <h2 className="text-4xl md:text-5xl font-heading font-medium bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent mb-4">
+            Track Key Health Vitals and watch Trends
+          </h2>
+        </BlurFade>
+
+        <BlurFade delay={0.2}>
+          <p className="text-gray-600 text-lg">
+            Get Information and manage health with personal insights
+          </p>
+        </BlurFade>
       </div>
 
       {/* Main Container */}
       <div className="max-w-7xl mx-auto px-6">
-        <div className="bg-white rounded-[2.5rem] shadow-2xl border border-gray-100 p-8 md:p-12 relative">
-          <div className="mb-10">
-            <h3 className="text-2xl font-bold text-gray-900">
-              Key Health Markers Overview
-            </h3>
-            <p className="text-gray-500 mt-1">
-              Track your core health indicators.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
-            {/* 1. LDL Cholestrol */}
-            <div className="bg-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-100 hover:shadow-lg transition-shadow lg:col-span-2">
-              <div className="flex justify-between items-start mb-2">
-                <h4 className="font-bold text-gray-900 text-lg">
-                  LDL Cholestrol
-                </h4>
-                <span className="bg-orange-500 text-white text-[10px] px-2 py-1 rounded-full font-medium">
-                  Borderline
-                </span>
-              </div>
-              <div className="text-3xl font-bold text-gray-900 mb-1">
-                135{" "}
-                <span className="text-sm font-normal text-gray-500">mg/dl</span>
-              </div>
-              <div className="text-xs text-gray-400">
-                Healthy range 50-100 mg/dl
-              </div>
-
-              <RangeBar markerPosition={55} />
-
-              <div className="mt-6">
-                <WaveChartPrimary />
-                <div className="flex justify-between text-[10px] text-gray-300 mt-2">
-                  <span>April 2023</span>
-                  <span>Mar 2025</span>
-                </div>
-              </div>
-            </div>
-
-            {/* 2. HbA1c */}
-            <div className="bg-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-100 hover:shadow-lg transition-shadow relative lg:col-span-2">
-              <div className="flex justify-between items-start mb-2">
-                <h4 className="font-bold text-gray-900 text-lg">HbA1c</h4>
-                <span className="bg-[#EA580C] text-white text-[10px] px-2 py-1 rounded-full font-medium">
-                  Needs attention
-                </span>
-              </div>
-              <div className="text-3xl font-bold text-gray-900 mb-1">5.9 %</div>
-              <div className="text-xs text-gray-400">Healthy range 40-50%</div>
-
-              <RangeBar
-                status="risk"
-                markerPosition={85}
-                colors={["bg-[#4DA599]", "bg-[#F59E0B]", "bg-[#EA580C]"]}
-              />
-
-              <div className="mt-6">
-                <WaveChartPrimary />
-                <div className="flex justify-between text-[10px] text-gray-300 mt-2">
-                  <span>April 2023</span>
-                  <span>Mar 2025</span>
-                </div>
-              </div>
-            </div>
-
-            {/* 3. Fasting Glucose */}
-            <div className="bg-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-100 hover:shadow-lg transition-shadow lg:col-span-2">
-              <div className="flex justify-between items-start mb-2">
-                <h4 className="font-bold text-gray-900 text-lg">
-                  Fasting Glucose
-                </h4>
-                <span className="bg-[#35615E] text-white text-[10px] px-2 py-1 rounded-full font-medium">
-                  Normal
-                </span>
-              </div>
-
-              <div className="text-4xl font-bold text-gray-900 mb-1 mt-2">
-                90{" "}
-                <span className="text-xl font-normal text-gray-500">mg/dl</span>
-              </div>
-              <div className="text-xs text-gray-400 mb-4">
-                Healthy range 70-100 mg/dl
-              </div>
-
-              <GaugeChart />
-
-              <div className="mt-2">
-                <WaveChartSecondary />
-                <div className="flex justify-between text-[10px] text-gray-300 mt-2">
-                  <span>April 2023</span>
-                  <span>Mar 2025</span>
-                </div>
-              </div>
-            </div>
-
-            {/* 4. Creatinine + eGFR */}
-            <div className="bg-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-100 hover:shadow-lg transition-shadow lg:col-span-3">
-              <div className="flex justify-between items-center mb-6">
-                <h4 className="font-bold text-gray-900 text-lg">
-                  Creatinine + eGFR
-                </h4>
-                <span className="bg-[#35615E] text-white text-[10px] px-2 py-1 rounded-full font-medium">
-                  Normal
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                  <div className="flex justify-between items-end mb-2">
-                    <span className="text-sm font-medium text-gray-700">
-                      Creatinine
-                    </span>
-                    <span className="text-xs text-gray-400">
-                      &lt; 1.3 mg/dl
-                    </span>
-                  </div>
-                  <RangeBar markerPosition={30} />
-                </div>
-                <div>
-                  <div className="flex justify-between items-end mb-2">
-                    <span className="text-sm font-medium text-gray-700">
-                      eGFR
-                    </span>
-                    <span className="text-xs text-gray-400">
-                      &gt; 92 ml/min
-                    </span>
-                  </div>
-                  <RangeBar markerPosition={75} />
-                </div>
-              </div>
-
-              <div className="mt-4">
-                <ChartBackground />
-                <div className="flex justify-between text-[10px] text-gray-300 mt-2">
-                  <span>April 2023</span>
-                  <span>Mar 2025</span>
-                </div>
-              </div>
-            </div>
-
-            {/* 5. Info Card */}
-            <div
-              className="rounded-3xl p-8 shadow-xl text-white flex flex-col justify-center relative lg:col-span-3"
-              style={{
-                background: "linear-gradient(180deg, #2D645D 0%, #388B7F 100%)",
-              }}
-            >
-              {/* Triangle Pointing Up */}
-              <div className="absolute -top-3 left-12 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-b-[12px] border-b-[#2D645D] hidden lg:block"></div>
-
-              <p className="text- leading-relaxed opacity-90">
-                <span className="font-bold text-white">
-                  HbA1c is a blood test
-                </span>{" "}
-                that shows your average blood sugar over the last 2&ndash;3
-                months. A value below{" "}
-                <span className="font-bold text-white">5.7%</span> is normal,{" "}
-                <span className="font-bold text-white">5.7&ndash;6.4%</span>{" "}
-                means higher risk (prediabetes), and{" "}
-                <span className="font-bold text-white">6.5%</span> or above
-                usually means diabetes. Higher HbA1c means blood sugar has been
-                high for a long time, which can damage the heart, kidneys, eyes,
-                and nerves. Keeping it in range helps prevent future health
-                problems&rdquo;
+        <BlurFade delay={0.4}>
+          <div className="bg-white rounded-[2.5rem] shadow-2xl border border-gray-100 p-8 md:p-12 relative">
+            <div className="mb-10">
+              <h3 className="text-2xl font-bold text-gray-900">
+                Key Health Markers Overview
+              </h3>
+              <p className="text-gray-500 mt-1">
+                Track your core health indicators.
               </p>
             </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
+              {/* 1. LDL Cholestrol */}
+              <div className="bg-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-100 hover:shadow-lg transition-shadow lg:col-span-2">
+                <div className="flex justify-between items-start mb-2">
+                  <h4 className="font-bold text-gray-900 text-lg">
+                    LDL Cholestrol
+                  </h4>
+                  <span className="bg-orange-500 text-white text-[10px] px-2 py-1 rounded-full font-medium">
+                    Borderline
+                  </span>
+                </div>
+                <div className="text-3xl font-bold text-gray-900 mb-1">
+                  135{" "}
+                  <span className="text-sm font-normal text-gray-500">
+                    mg/dl
+                  </span>
+                </div>
+                <div className="text-xs text-gray-400">
+                  Healthy range 50-100 mg/dl
+                </div>
+
+                <RangeBar markerPosition={55} />
+
+                <div className="mt-6">
+                  <WaveChartPrimary />
+                  <div className="flex justify-between text-[10px] text-gray-300 mt-2">
+                    <span>April 2023</span>
+                    <span>Mar 2025</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 2. HbA1c */}
+              <div className="bg-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-100 hover:shadow-lg transition-shadow relative lg:col-span-2">
+                <div className="flex justify-between items-start mb-2">
+                  <h4 className="font-bold text-gray-900 text-lg">HbA1c</h4>
+                  <span className="bg-[#EA580C] text-white text-[10px] px-2 py-1 rounded-full font-medium">
+                    Needs attention
+                  </span>
+                </div>
+                <div className="text-3xl font-bold text-gray-900 mb-1">
+                  5.9 %
+                </div>
+                <div className="text-xs text-gray-400">
+                  Healthy range 40-50%
+                </div>
+
+                <RangeBar
+                  status="risk"
+                  markerPosition={85}
+                  colors={["bg-[#4DA599]", "bg-[#F59E0B]", "bg-[#EA580C]"]}
+                />
+
+                <div className="mt-6">
+                  <WaveChartPrimary />
+                  <div className="flex justify-between text-[10px] text-gray-300 mt-2">
+                    <span>April 2023</span>
+                    <span>Mar 2025</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Fasting Glucose */}
+              <div className="bg-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-100 hover:shadow-lg transition-shadow lg:col-span-2">
+                <div className="flex justify-between items-start mb-2">
+                  <h4 className="font-bold text-gray-900 text-lg">
+                    Fasting Glucose
+                  </h4>
+                  <span className="bg-[#35615E] text-white text-[10px] px-2 py-1 rounded-full font-medium">
+                    Normal
+                  </span>
+                </div>
+
+                <div className="text-4xl font-bold text-gray-900 mb-1 mt-2">
+                  90{" "}
+                  <span className="text-xl font-normal text-gray-500">
+                    mg/dl
+                  </span>
+                </div>
+                <div className="text-xs text-gray-400 mb-4">
+                  Healthy range 70-100 mg/dl
+                </div>
+
+                <GaugeChart />
+
+                <div className="mt-2">
+                  <WaveChartSecondary />
+                  <div className="flex justify-between text-[10px] text-gray-300 mt-2">
+                    <span>April 2023</span>
+                    <span>Mar 2025</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 4. Creatinine + eGFR */}
+              <div className="bg-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-100 hover:shadow-lg transition-shadow lg:col-span-3">
+                <div className="flex justify-between items-center mb-6">
+                  <h4 className="font-bold text-gray-900 text-lg">
+                    Creatinine + eGFR
+                  </h4>
+                  <span className="bg-[#35615E] text-white text-[10px] px-2 py-1 rounded-full font-medium">
+                    Normal
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div>
+                    <div className="flex justify-between items-end mb-2">
+                      <span className="text-sm font-medium text-gray-700">
+                        Creatinine
+                      </span>
+                      <span className="text-xs text-gray-400">
+                        &lt; 1.3 mg/dl
+                      </span>
+                    </div>
+                    <RangeBar markerPosition={30} />
+                  </div>
+                  <div>
+                    <div className="flex justify-between items-end mb-2">
+                      <span className="text-sm font-medium text-gray-700">
+                        eGFR
+                      </span>
+                      <span className="text-xs text-gray-400">
+                        &gt; 92 ml/min
+                      </span>
+                    </div>
+                    <RangeBar markerPosition={75} />
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <ChartBackground />
+                  <div className="flex justify-between text-[10px] text-gray-300 mt-2">
+                    <span>April 2023</span>
+                    <span>Mar 2025</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 5. Info Card */}
+              <div
+                className="rounded-3xl p-8 shadow-xl text-white flex flex-col justify-center relative lg:col-span-3"
+                style={{
+                  background:
+                    "linear-gradient(180deg, #2D645D 0%, #388B7F 100%)",
+                }}
+              >
+                {/* Triangle Pointing Up */}
+                <div className="absolute -top-3 left-12 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-b-[12px] border-b-[#2D645D] hidden lg:block"></div>
+
+                <p className="text- leading-relaxed opacity-90">
+                  <span className="font-bold text-white">
+                    HbA1c is a blood test
+                  </span>{" "}
+                  that shows your average blood sugar over the last 2&ndash;3
+                  months. A value below{" "}
+                  <span className="font-bold text-white">5.7%</span> is normal,{" "}
+                  <span className="font-bold text-white">5.7&ndash;6.4%</span>{" "}
+                  means higher risk (prediabetes), and{" "}
+                  <span className="font-bold text-white">6.5%</span> or above
+                  usually means diabetes. Higher HbA1c means blood sugar has
+                  been high for a long time, which can damage the heart,
+                  kidneys, eyes, and nerves. Keeping it in range helps prevent
+                  future health problems&rdquo;
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
+        </BlurFade>
       </div>
     </section>
   );
