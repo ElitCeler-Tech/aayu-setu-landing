@@ -9,15 +9,13 @@ const Team = () => {
     {
       name: "Sandeep Konda",
       role: "Founder & CEO - Ayussetu",
-      image:
-        "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800", // Placeholder for Sandeep
+      image: "/team/sandeep.png",
       linkedin: "#",
     },
     {
       name: "Preeti Kotha",
       role: "Advisor - Ayussetu",
-      image:
-        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800", // Placeholder for Preeti
+      image: "/team/preeti.png",
       linkedin: "#",
     },
   ];

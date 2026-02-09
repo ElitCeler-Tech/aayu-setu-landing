@@ -11,8 +11,7 @@ const Blogs = () => {
       title: "5 Tips to Track Your Vitals Effectively",
       category: "HEALTH",
       date: "15 Sep, 2021",
-      image:
-        "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800",
+      image: "/blog/1.png",
       link: "#",
     },
     {
@@ -20,8 +19,7 @@ const Blogs = () => {
       title: "The Importance of Medication Adherence",
       category: "HEALTH",
       date: "15 Sep, 2021",
-      image:
-        "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=800",
+      image: "/blog/2.png",
       link: "#",
     },
     {
@@ -29,8 +27,7 @@ const Blogs = () => {
       title: "How AI is Changing Personal Healthcare",
       category: "HEALTH",
       date: "15 Sep, 2021",
-      image:
-        "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800",
+      image: "/blog/3.png",
       link: "#",
     },
   ];
@@ -65,7 +62,7 @@ const Blogs = () => {
           {blogPosts.map((post) => (
             <div
               key={post.id}
-              className="group relative h-[400px] rounded-[2rem] overflow-hidden cursor-pointer"
+              className="group relative h-[550px] rounded-[2rem] overflow-hidden cursor-pointer"
             >
               <Image
                 src={post.image}
