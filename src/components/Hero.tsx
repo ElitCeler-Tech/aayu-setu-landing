@@ -75,7 +75,7 @@ const Hero = () => {
         {/* Phone 1 - Left */}
         <div className="absolute left-1/2 top-1/2 w-[180px] sm:w-[210px] lg:w-[230px] -translate-x-[110%] -translate-y-1/2 z-10 transition-transform duration-500 hover:scale-105 hover:z-30">
           <Iphone
-            src="/left-phone.png"
+            src="/hero/hero-left.png"
             className="w-full h-auto drop-shadow-2xl -rotate-7"
           />
         </div>
@@ -83,7 +83,7 @@ const Hero = () => {
         {/* Phone 2 - Right */}
         <div className="absolute left-1/2 top-1/2 w-[180px] sm:w-[210px] lg:w-[230px] translate-x-[10%] -translate-y-1/2 z-20 transition-transform duration-500 hover:scale-105 hover:z-30">
           <Iphone
-            src="/right-phone.png"
+            src="/hero/hero-right.png"
             className="w-full h-auto drop-shadow-2xl rotate-7"
           />
         </div>

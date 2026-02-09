@@ -667,7 +667,7 @@ const features = [
     pill: "Track your health",
     title: "Unified Health Records",
     subtitle: "Bring all your Health Records at one place",
-    image: "/left-phone.png",
+    image: "/uified/unified-health.png",
     topCard: {
       icon: <Upload size={20} />,
       title: "Digitalize and store all your records here",
@@ -713,8 +713,8 @@ const features = [
     title: "Smart Medication Management",
     subtitle: "Never miss medicines or follow-ups with intelligent reminders.",
     // We render custom component for this feature, image is fallback or unused if we modify the renderer
-    image: undefined,
-    screenContent: <MedicationScreen />,
+    image: "/uified/smart-medication.png",
+    screenContent: undefined,
     topCard: {
       icon: <Bell size={20} />,
       title: "Reminders and Notifications",
@@ -831,8 +831,8 @@ const features = [
     pill: "Track your health",
     title: "Smart AI Assistance- AI Ayu",
     subtitle: "Clear, AI-powered summaries for faster decisions",
-    image: undefined,
-    screenContent: <AIAyuScreen />,
+    image: "/hero/hero-right.png",
+    screenContent: undefined,
     topCard: {
       icon: <Bot size={20} />,
       title: "Chat with AI",
@@ -916,8 +916,8 @@ const features = [
     pill: "Track your health",
     title: "Health Insights & Recommendations",
     subtitle: "Understand trends, improvements, and warning signals clearly.",
-    image: undefined,
-    screenContent: <HealthInsightsScreen />,
+    image: "/hero/hero-left.png",
+    screenContent: undefined,
     topCard: {
       icon: <Target size={20} />,
       title: "AI summary Reports and Health insights",
@@ -986,8 +986,8 @@ const features = [
     pill: "Track your health",
     title: "Doctor Consultations",
     subtitle: "Book online (call/video) or offline consultations seamlessly.",
-    image: undefined,
-    screenContent: <DoctorConsultationScreen />,
+    image: "/uified/doctor-consultations.png",
+    screenContent: undefined,
     topCard: {
       icon: <Stethoscope size={20} />,
       title: "Doctor Consultations",
@@ -1045,8 +1045,8 @@ const features = [
     pill: "Track your health",
     title: "Family Health Tracking",
     subtitle: "Manage health for parents, children, and dependents together.",
-    image: undefined,
-    screenContent: <FamilyHealthScreen />,
+    image: "/uified/family-health.png",
+    screenContent: undefined,
     topCard: {
       icon: <Users size={20} />,
       title: "Family & Doctor Sharing Mode",
