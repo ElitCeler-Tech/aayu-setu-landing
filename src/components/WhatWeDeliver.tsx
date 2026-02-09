@@ -2,11 +2,6 @@
 
 import React from "react";
 import { Iphone } from "./ui/iphone";
-import {
-  HealthInsightsScreen,
-  AIAyuScreen,
-  FamilyHealthScreen,
-} from "./UnifiedHealthRecords";
 
 const WhatWeDeliver = () => {
   return (
@@ -28,21 +23,24 @@ const WhatWeDeliver = () => {
             {/* Background Circle */}
             <div className="absolute top-[25%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] sm:w-[450px] sm:h-[450px] rounded-full z-0 bg-gradient-to-b from-[#346E6A] to-[#2D645D]"></div>
             <div className="absolute left-[10%] top-[55%] -translate-y-1/2 w-[160px] sm:w-[200px] -rotate-[5deg] z-10 ">
-              <Iphone className="w-full h-auto shadow-2xl transition-all rounded-[2.5rem] bg-gray-800">
-                <HealthInsightsScreen />
-              </Iphone>
+              <Iphone
+                src="/hero/hero-left.png"
+                className="w-full h-auto shadow-2xl transition-all rounded-[2.5rem] bg-gray-800"
+              />
             </div>
 
             <div className="absolute left-[35%] top-1/2 -translate-y-1/2 w-[180px] sm:w-[220px] z-20 hover:scale-105 transition-transform duration-300">
-              <Iphone className="w-full h-auto drop-shadow-2xl rounded-[2.5rem] bg-gray-800">
-                <AIAyuScreen />
-              </Iphone>
+              <Iphone
+                src="/hero/hero-right.png"
+                className="w-full h-auto drop-shadow-2xl rounded-[2.5rem] bg-gray-800"
+              />
             </div>
 
             <div className="absolute left-[60%] top-[55%] -translate-y-1/2 w-[160px] sm:w-[200px] rotate-[5deg] z-10">
-              <Iphone className="w-full h-auto shadow-2xl transition-all rounded-[2.5rem] bg-gray-800">
-                <FamilyHealthScreen />
-              </Iphone>
+              <Iphone
+                src="/uified/family-health.png"
+                className="w-full h-auto shadow-2xl transition-all rounded-[2.5rem] bg-gray-800"
+              />
             </div>
           </div>
 
