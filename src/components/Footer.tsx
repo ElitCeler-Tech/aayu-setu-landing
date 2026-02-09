@@ -85,27 +85,42 @@ const Footer = () => {
             </div>
             <ul className="space-y-3 text-sm text-gray-300 font-light">
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a
+                  href="/medical-disclaimer"
+                  className="hover:text-white transition-colors"
+                >
                   Medical Disclaimer
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a
+                  href="/ai-use-disclaimer"
+                  className="hover:text-white transition-colors"
+                >
                   AI Use Disclaimer
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a
+                  href="/health-records-disclaimer"
+                  className="hover:text-white transition-colors"
+                >
                   Health Records Disclaimer
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a
+                  href="/patient-use-disclaimer"
+                  className="hover:text-white transition-colors"
+                >
                   Patient Use Disclaimer
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a
+                  href="/clinical-use-disclaimer"
+                  className="hover:text-white transition-colors"
+                >
                   Clinical Use Disclaimer
                 </a>
               </li>
