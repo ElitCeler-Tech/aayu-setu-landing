@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import BlurFade from "./ui/blur-fade";
 
 const Navbar = () => {
@@ -25,27 +26,27 @@ const Navbar = () => {
         delay={0.1}
         className="hidden lg:flex items-center gap-8 text-gray-600 font-medium"
       >
-        <a href="#" className="hover:text-[#346E6A]">
+        <Link href="/#home" className="hover:text-[#346E6A]">
           Home
-        </a>
-        <a href="#" className="hover:text-[#346E6A]">
+        </Link>
+        <Link href="/#features" className="hover:text-[#346E6A]">
           Features
-        </a>
-        <a href="#" className="hover:text-[#346E6A]">
+        </Link>
+        <Link href="/#how-it-works" className="hover:text-[#346E6A]">
           How it works
-        </a>
-        <a href="#" className="hover:text-[#346E6A]">
+        </Link>
+        <Link href="/#testimonials" className="hover:text-[#346E6A]">
           Testimonials
-        </a>
-        <a href="#" className="hover:text-[#346E6A]">
+        </Link>
+        <Link href="/#faq" className="hover:text-[#346E6A]">
           FAQs
-        </a>
-        <a href="#" className="hover:text-[#346E6A]">
+        </Link>
+        <Link href="/#blogs" className="hover:text-[#346E6A]">
           Blogs
-        </a>
-        <a href="#" className="hover:text-[#346E6A]">
+        </Link>
+        <Link href="/#contact" className="hover:text-[#346E6A]">
           Contact Us
-        </a>
+        </Link>
       </BlurFade>
 
       <BlurFade delay={0.2} className="flex items-center gap-4">

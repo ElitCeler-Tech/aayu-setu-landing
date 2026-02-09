@@ -22,22 +22,36 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white text-gray-900 font-body">
       <Navbar />
-      <Hero />
-      <ProblemSolution />
-      <UnifiedHealthRecords />
-      <HealthVitalsBento />
-      <WhatWeDeliver />
+      <section id="home">
+        <Hero />
+      </section>
+      <section id="how-it-works">
+        <ProblemSolution />
+      </section>
+      <section id="features">
+        <UnifiedHealthRecords />
+        <HealthVitalsBento />
+        <WhatWeDeliver />
+      </section>
       <ForPatients />
       <ForDoctorsClinics />
       <ForInsurersEmployers />
       <ForGovernmentPublicHealth />
-      <Testimonials />
+      <section id="testimonials">
+        <Testimonials />
+      </section>
       <Team />
-      <Blogs />
-      <FAQ />
+      <section id="blogs">
+        <Blogs />
+      </section>
+      <section id="faq">
+        <FAQ />
+      </section>
       <DataSecurity />
       <ABHAIntegration />
-      <ContactUs />
+      <section id="contact">
+        <ContactUs />
+      </section>
       <DownloadApp />
       <Footer />
     </div>
