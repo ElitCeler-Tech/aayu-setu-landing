@@ -154,15 +154,24 @@ const Footer = () => {
           {/* Address & Socials Column */}
           <BlurFade delay={0.4} className="col-span-1">
             <div className="mb-8">
-              <h3 className="font-bold text-sm mb-4 tracking-wide uppercase text-gray-300/80">
+              <a
+                href="#"
+                className="block font-bold text-sm mb-4 tracking-wide uppercase text-gray-300/80 hover:text-white transition-colors"
+              >
                 Terms of Use
-              </h3>
-              <h3 className="font-bold text-sm mb-4 tracking-wide uppercase text-gray-300/80">
+              </a>
+              <a
+                href="/privacy-policy"
+                className="block font-bold text-sm mb-4 tracking-wide uppercase text-gray-300/80 hover:text-white transition-colors"
+              >
                 Privacy Policy
-              </h3>
-              <h3 className="font-bold text-sm mb-4 tracking-wide uppercase text-gray-300/80">
+              </a>
+              <a
+                href="#"
+                className="block font-bold text-sm mb-4 tracking-wide uppercase text-gray-300/80 hover:text-white transition-colors"
+              >
                 Data & AI Use
-              </h3>
+              </a>
             </div>
 
             <div>
@@ -207,7 +216,10 @@ const Footer = () => {
           <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-300">
             <div>&copy; 2025 Ayus Setu. All rights reserved.</div>
             <div className="flex gap-6">
-              <a href="#" className="hover:text-white transition-colors">
+              <a
+                href="/privacy-policy"
+                className="hover:text-white transition-colors"
+              >
                 Privacy Policy
               </a>
               <a href="#" className="hover:text-white transition-colors">

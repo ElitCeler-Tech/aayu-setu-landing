@@ -4,7 +4,7 @@ import BlurFade from "./ui/blur-fade";
 
 const Navbar = () => {
   return (
-    <nav className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+    <nav className="flex items-center justify-between px-20 py-4 container mx-auto">
       <BlurFade delay={0} className="flex items-center gap-2">
         {/* Logo Placeholder */}
         <div className="flex items-center gap-2">
