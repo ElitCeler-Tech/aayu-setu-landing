@@ -50,7 +50,10 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a
+                  href="/founders"
+                  className="hover:text-white transition-colors"
+                >
                   Teams
                 </a>
               </li>

@@ -3,6 +3,7 @@
 import React from "react";
 import { ArrowRight, Linkedin } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import BlurFade from "./ui/blur-fade";
 
 const Team = () => {
@@ -12,12 +13,14 @@ const Team = () => {
       role: "Founder & CEO - Ayussetu",
       image: "/team/sandeep.png",
       linkedin: "#",
+      path: "#",
     },
     {
       name: "Preeti Kotha",
       role: "Advisor - Ayussetu",
       image: "/team/preeti.png",
       linkedin: "#",
+      path: "/founders",
     },
   ];
 
@@ -57,8 +60,15 @@ const Team = () => {
                 {/* Overlay Gradient */}
                 <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-80" />
 
+                {/* Link Overlay */}
+                <Link href={member.path} className="absolute inset-0 z-10">
+                  <span className="sr-only">
+                    View {member.name}&apos;s profile
+                  </span>
+                </Link>
+
                 {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-8 flex items-end justify-between">
+                <div className="absolute bottom-0 left-0 right-0 p-8 flex items-end justify-between pointer-events-none">
                   <div>
                     <h3 className="text-white text-2xl font-bold mb-1">
                       {member.name}
@@ -68,7 +78,7 @@ const Team = () => {
                     </p>
                   </div>
 
-                  <div className="flex gap-3">
+                  <div className="flex gap-3 relative z-20 pointer-events-auto">
                     <a
                       href={member.linkedin}
                       target="_blank"
@@ -77,9 +87,9 @@ const Team = () => {
                     >
                       <Linkedin size={20} />
                     </a>
-                    <button className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-900 hover:bg-gray-100 transition-colors">
+                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-900 group-hover:bg-gray-100 transition-colors">
                       <ArrowRight size={20} />
-                    </button>
+                    </div>
                   </div>
                 </div>
               </div>
