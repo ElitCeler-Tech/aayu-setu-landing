@@ -13,7 +13,7 @@ const Team = () => {
       role: "Founder & CEO - Ayussetu",
       image: "/team/sandeep.png",
       linkedin: "#",
-      path: "#",
+      path: "/founders/sandeep-konda",
     },
     {
       name: "Preeti Kotha",
