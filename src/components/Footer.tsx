@@ -125,17 +125,26 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a
+                  href="/outcomes-disclaimer"
+                  className="hover:text-white transition-colors"
+                >
                   Outcomes Disclaimer
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a
+                  href="/third-party-data-disclaimer"
+                  className="hover:text-white transition-colors"
+                >
                   Third-Party Data Disclaimer
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a
+                  href="/regulatory-disclaimer"
+                  className="hover:text-white transition-colors"
+                >
                   Regulatory Disclaimer
                 </a>
               </li>

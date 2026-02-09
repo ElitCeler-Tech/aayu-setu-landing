@@ -43,9 +43,6 @@ const Navbar = () => {
         <a href="#" className="hover:text-[#346E6A]">
           Blogs
         </a>
-        <a href="/founders" className="hover:text-[#346E6A]">
-          About Founder
-        </a>
         <a href="#" className="hover:text-[#346E6A]">
           Contact Us
         </a>
