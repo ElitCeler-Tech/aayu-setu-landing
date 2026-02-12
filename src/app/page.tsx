@@ -12,7 +12,7 @@ import Testimonials from "@/components/Testimonials";
 import Team from "@/components/Team";
 import Blogs from "@/components/Blogs";
 import FAQ from "@/components/FAQ";
-
+import DataSecurity from "@/components/DataSecurity";
 import ABHAIntegration from "@/components/ABHAIntegration";
 import ContactUs from "@/components/ContactUs";
 import DownloadApp from "@/components/DownloadApp";
@@ -49,7 +49,7 @@ export default function Home() {
       <section id="faq">
         <FAQ />
       </section>
-
+      <DataSecurity />
       <ABHAIntegration />
       <section id="contact">
         <ContactUs />
