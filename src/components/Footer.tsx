@@ -7,6 +7,8 @@ import Link from "next/link";
 import BlurFade from "./ui/blur-fade";
 
 const Footer = () => {
+  const [isDisclaimerOpen, setIsDisclaimerOpen] = React.useState(false);
+
   return (
     <footer
       className="text-white py-16"
@@ -22,9 +24,9 @@ const Footer = () => {
               <Image
                 src="/white-logo.png"
                 alt="Ayus Setu Logo"
-                width={200}
-                height={200}
-                className=" object-contain"
+                width={300}
+                height={300}
+                className="object-contain"
               />
             </div>
           </BlurFade>
@@ -36,17 +38,26 @@ const Footer = () => {
             </h3>
             <ul className="space-y-3 text-sm text-gray-300">
               <li>
-                <Link href="/#features" className="hover:text-white transition-colors">
+                <Link
+                  href="/#features"
+                  className="hover:text-white transition-colors"
+                >
                   Features
                 </Link>
               </li>
               <li>
-                <Link href="/#how-it-works" className="hover:text-white transition-colors">
+                <Link
+                  href="/#how-it-works"
+                  className="hover:text-white transition-colors"
+                >
                   How It Works
                 </Link>
               </li>
               <li>
-                <Link href="/#blogs" className="hover:text-white transition-colors">
+                <Link
+                  href="/#blogs"
+                  className="hover:text-white transition-colors"
+                >
                   Blog
                 </Link>
               </li>
@@ -59,17 +70,26 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/#testimonials" className="hover:text-white transition-colors">
+                <Link
+                  href="/#testimonials"
+                  className="hover:text-white transition-colors"
+                >
                   Testimonials
                 </Link>
               </li>
               <li>
-                <Link href="/#faq" className="hover:text-white transition-colors">
+                <Link
+                  href="/#faq"
+                  className="hover:text-white transition-colors"
+                >
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/#contact" className="hover:text-white transition-colors">
+                <Link
+                  href="/#contact"
+                  className="hover:text-white transition-colors"
+                >
                   Contact
                 </Link>
               </li>
@@ -78,78 +98,89 @@ const Footer = () => {
 
           {/* Links Column 2 */}
           <BlurFade delay={0.3} className="col-span-1">
-            <div className="flex items-center gap-2 mb-6 cursor-pointer group">
+            <div
+              className="flex items-center gap-2 mb-6 cursor-pointer group"
+              onClick={() => setIsDisclaimerOpen(!isDisclaimerOpen)}
+            >
               <h3 className="font-bold text-sm tracking-wide uppercase group-hover:text-gray-200 transition-colors">
                 Disclaimer
               </h3>
-              <Icon icon="mdi:chevron-up" className="w-4 h-4" />
+              <Icon
+                icon="mdi:chevron-up"
+                className={`w-4 h-4 transition-transform duration-300 ${isDisclaimerOpen ? "rotate-180" : ""}`}
+              />
             </div>
-            <ul className="space-y-3 text-sm text-gray-300 font-light">
-              <li>
-                <a
-                  href="/medical-disclaimer"
-                  className="hover:text-white transition-colors"
-                >
-                  Medical Disclaimer
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/ai-use-disclaimer"
-                  className="hover:text-white transition-colors"
-                >
-                  AI Use Disclaimer
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/health-records-disclaimer"
-                  className="hover:text-white transition-colors"
-                >
-                  Health Records Disclaimer
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/patient-use-disclaimer"
-                  className="hover:text-white transition-colors"
-                >
-                  Patient Use Disclaimer
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/clinical-use-disclaimer"
-                  className="hover:text-white transition-colors"
-                >
-                  Clinical Use Disclaimer
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/outcomes-disclaimer"
-                  className="hover:text-white transition-colors"
-                >
-                  Outcomes Disclaimer
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/third-party-data-disclaimer"
-                  className="hover:text-white transition-colors"
-                >
-                  Third-Party Data Disclaimer
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/regulatory-disclaimer"
-                  className="hover:text-white transition-colors"
-                >
-                  Regulatory Disclaimer
-                </a>
-              </li>
-            </ul>
+
+            <div
+              className={`overflow-hidden transition-all duration-300 ${isDisclaimerOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}
+            >
+              <ul className="space-y-3 text-sm text-gray-300 font-light pb-4">
+                <li>
+                  <a
+                    href="/medical-disclaimer"
+                    className="hover:text-white transition-colors"
+                  >
+                    Medical Disclaimer
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/ai-use-disclaimer"
+                    className="hover:text-white transition-colors"
+                  >
+                    AI Use Disclaimer
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/health-records-disclaimer"
+                    className="hover:text-white transition-colors"
+                  >
+                    Health Records Disclaimer
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/patient-use-disclaimer"
+                    className="hover:text-white transition-colors"
+                  >
+                    Patient Use Disclaimer
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/clinical-use-disclaimer"
+                    className="hover:text-white transition-colors"
+                  >
+                    Clinical Use Disclaimer
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/outcomes-disclaimer"
+                    className="hover:text-white transition-colors"
+                  >
+                    Outcomes Disclaimer
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/third-party-data-disclaimer"
+                    className="hover:text-white transition-colors"
+                  >
+                    Third-Party Data Disclaimer
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/regulatory-disclaimer"
+                    className="hover:text-white transition-colors"
+                  >
+                    Regulatory Disclaimer
+                  </a>
+                </li>
+              </ul>
+            </div>
           </BlurFade>
 
           {/* Address & Socials Column */}

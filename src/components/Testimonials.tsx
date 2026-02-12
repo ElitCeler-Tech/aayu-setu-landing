@@ -9,7 +9,7 @@ const testimonials = [
     id: 1,
     text: "This app has completely changed how I manage my health. I never miss a medication, and the AI chat gives instant answers to all my questions!",
     name: "Ria Singh",
-    role: "Founder at Zenith",
+    role: "Founder",
     image: "/user-ria.jpg", // Placeholder
     rating: 5,
   },
@@ -114,7 +114,7 @@ const Testimonials = () => {
             {/* Next Button */}
             <button
               onClick={nextTestimonial}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-14 h-14 bg-white rounded-full flex items-center justify-center text-[#35615E] shadow-lg hover:scale-105 transition-transform z-20 hidden md:flex"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-14 h-14 bg-white rounded-full items-center justify-center text-[#35615E] shadow-lg hover:scale-105 transition-transform z-20 hidden md:flex"
             >
               <ArrowRight size={24} />
             </button>
