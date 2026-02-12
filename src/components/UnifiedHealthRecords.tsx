@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React from "react";
+import BlurFade from "./ui/blur-fade";
 import { Iphone } from "./ui/iphone";
 import {
   FileText,
@@ -33,7 +34,6 @@ import {
   Eye,
   Download,
 } from "lucide-react";
-import { motion, useScroll, useMotionValueEvent } from "motion/react";
 
 export const MedicationScreen = () => (
   <div className="h-full w-full bg-[#f8f9fa] flex flex-col pt-12 px-6 font-sans">
@@ -1106,108 +1106,71 @@ const features = [
 ];
 
 const UnifiedHealthRecords = () => {
-  const containerRef = useRef<HTMLElement>(null);
-  const [activeFeature, setActiveFeature] = useState(0);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    // Breakpoints for switching content
-    if (latest < 0.16) {
-      setActiveFeature(0);
-    } else if (latest < 0.32) {
-      setActiveFeature(1);
-    } else if (latest < 0.48) {
-      setActiveFeature(2);
-    } else if (latest < 0.64) {
-      setActiveFeature(3);
-    } else if (latest < 0.8) {
-      setActiveFeature(4);
-    } else {
-      setActiveFeature(5);
-    }
-  });
-
   return (
-    <section ref={containerRef} className="h-[600vh] relative">
-      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 w-full">
-          <motion.div
-            key={`header-${activeFeature}`}
-            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.3 }}
-            className="flex flex-col items-center justify-center text-center mb-12 lg:mb-16 space-y-6"
-          >
-            <div className="flex items-center gap-4 w-full max-w-lg justify-center opacity-80">
-              <div className="h-[3px] w-full bg-[linear-gradient(90deg,rgba(65,116,111,0.89)_0%,rgba(117,227,214,0.89)_100%)] opacity-50 rounded-full" />
-              <div className="shrink-0 px-6 py-1.5 rounded-full border border-[#3A8177]/30 text-[#3A8177] text-sm font-medium bg-[#ECF6F5]">
-                {features[activeFeature].pill}
+    <section className="relative">
+      {features.map((feature, index) => (
+        <div
+          key={feature.id}
+          className={`py-24 ${index % 2 === 0 ? "bg-white" : "bg-[#f9fafb]"}`}
+        >
+          <div className="max-w-7xl mx-auto px-6 w-full">
+            {/* Header */}
+            <BlurFade delay={0}>
+              <div className="flex flex-col items-center justify-center text-center mb-12 lg:mb-16 space-y-6">
+                <div className="flex items-center gap-4 w-full max-w-lg justify-center opacity-80">
+                  <div className="h-[3px] w-full bg-[linear-gradient(90deg,rgba(65,116,111,0.89)_0%,rgba(117,227,214,0.89)_100%)] opacity-50 rounded-full" />
+                  <div className="shrink-0 px-6 py-1.5 rounded-full border border-[#3A8177]/30 text-[#3A8177] text-sm font-medium bg-[#ECF6F5]">
+                    {feature.pill}
+                  </div>
+                  <div className="h-[3px] w-full bg-[linear-gradient(90deg,rgba(132,255,239,0.89)_0%,rgba(45,100,93,0.89)_100%)] opacity-50 rounded-full" />
+                </div>
+
+                <div className="space-y-4">
+                  <h2 className="text-4xl md:text-5xl font-heading font-medium bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent">
+                    {feature.title}
+                  </h2>
+                  <p className="text-gray-600 text-lg">{feature.subtitle}</p>
+                </div>
               </div>
-              <div className="h-[3px] w-full bg-[linear-gradient(90deg,rgba(132,255,239,0.89)_0%,rgba(45,100,93,0.89)_100%)] opacity-50 rounded-full" />
-            </div>
+            </BlurFade>
 
-            <div className="space-y-4">
-              <h2 className="text-4xl md:text-5xl font-heading font-medium bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent">
-                {features[activeFeature].title}
-              </h2>
-              <p className="text-gray-600 text-lg">
-                {features[activeFeature].subtitle}
-              </p>
-            </div>
-          </motion.div>
-
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24">
-            <div className="flex-1 flex justify-center w-full">
-              <div className="w-[220px] sm:w-[250px]">
-                <motion.div
-                  key={`phone-${activeFeature}`}
-                  initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
-                  animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                  transition={{ duration: 0.5 }}
-                >
+            {/* Content */}
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24">
+              <BlurFade delay={0.1} className="flex-1 flex justify-center w-full">
+                <div className="w-[220px] sm:w-[250px]">
                   <Iphone
-                    src={features[activeFeature].image}
+                    src={feature.image}
                     className="w-full h-auto drop-shadow-2xl"
                   >
-                    {features[activeFeature].screenContent}
+                    {feature.screenContent}
                   </Iphone>
-                </motion.div>
-              </div>
-            </div>
-
-            <div className="flex-1 w-full space-y-8 max-w-lg lg:max-w-xl">
-              <motion.div
-                key={`right-content-${activeFeature}`}
-                initial={{ opacity: 0, x: 50, filter: "blur(10px)" }}
-                animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="space-y-8"
-              >
-                <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100">
-                  <div className="flex flex-col gap-3">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 bg-[#3A8177] rounded-full text-white">
-                        {features[activeFeature].topCard.icon}
-                      </div>
-                      <h3 className="text-xl font-medium text-gray-900">
-                        {features[activeFeature].topCard.title}
-                      </h3>
-                    </div>
-                    <p className="text-gray-500 pl-[52px]">
-                      {features[activeFeature].topCard.desc}
-                    </p>
-                  </div>
                 </div>
-                {features[activeFeature].bottomCard}
-              </motion.div>
+              </BlurFade>
+
+              <BlurFade delay={0.2} className="flex-1 w-full space-y-8 max-w-lg lg:max-w-xl">
+                <div className="space-y-8">
+                  <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100">
+                    <div className="flex flex-col gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 bg-[#3A8177] rounded-full text-white">
+                          {feature.topCard.icon}
+                        </div>
+                        <h3 className="text-xl font-medium text-gray-900">
+                          {feature.topCard.title}
+                        </h3>
+                      </div>
+                      <p className="text-gray-500 pl-[52px]">
+                        {feature.topCard.desc}
+                      </p>
+                    </div>
+                  </div>
+                  {feature.bottomCard}
+                </div>
+              </BlurFade>
             </div>
           </div>
         </div>
-      </div>
+      ))}
     </section>
   );
 };

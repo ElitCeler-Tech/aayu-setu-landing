@@ -14,8 +14,8 @@ const Navbar = () => {
             <Image
               src="/logo.png"
               alt="Ayus Setu Logo"
-              width={200}
-              height={200}
+              width={300}
+              height={300}
               className="w-full h-full object-contain"
             />
           </div>
