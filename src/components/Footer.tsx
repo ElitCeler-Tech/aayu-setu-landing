@@ -3,6 +3,7 @@
 import React from "react";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
+import Link from "next/link";
 import BlurFade from "./ui/blur-fade";
 
 const Footer = () => {
@@ -35,42 +36,42 @@ const Footer = () => {
             </h3>
             <ul className="space-y-3 text-sm text-gray-300">
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <Link href="/#features" className="hover:text-white transition-colors">
                   Features
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <Link href="/#how-it-works" className="hover:text-white transition-colors">
                   How It Works
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <Link href="/#blogs" className="hover:text-white transition-colors">
                   Blog
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/founders"
+                <Link
+                  href="/#team"
                   className="hover:text-white transition-colors"
                 >
                   Teams
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <Link href="/#testimonials" className="hover:text-white transition-colors">
                   Testimonials
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <Link href="/#faq" className="hover:text-white transition-colors">
                   FAQ
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <Link href="/#contact" className="hover:text-white transition-colors">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </BlurFade>

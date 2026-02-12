@@ -12,14 +12,14 @@ const Team = () => {
       name: "Sandeep Konda",
       role: "Founder & CEO - Ayussetu",
       image: "/team/sandeep.png",
-      linkedin: "#",
+      linkedin: "https://www.linkedin.com/in/sandeepkonda/",
       path: "/founders/sandeep-konda",
     },
     {
       name: "Preeti Kotha",
       role: "Advisor - Ayussetu",
       image: "/team/preeti.png",
-      linkedin: "#",
+      linkedin: "https://www.linkedin.com/in/preeti-kotha-pharmd-app-75b95085/",
       path: "/founders",
     },
   ];
@@ -87,9 +87,12 @@ const Team = () => {
                     >
                       <Linkedin size={20} />
                     </a>
-                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-900 group-hover:bg-gray-100 transition-colors">
+                    <Link
+                      href={member.path}
+                      className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-900 group-hover:bg-gray-100 transition-colors"
+                    >
                       <ArrowRight size={20} />
-                    </div>
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -40,7 +40,9 @@ export default function Home() {
       <section id="testimonials">
         <Testimonials />
       </section>
-      <Team />
+      <section id="team">
+        <Team />
+      </section>
       <section id="blogs">
         <Blogs />
       </section>
