@@ -2,25 +2,11 @@
 
 import React from "react";
 import BlurFade from "./ui/blur-fade";
-import { Orbitron } from "next/font/google";
-
-const orbitron = Orbitron({ subsets: ["latin"] });
 
 const DataSecurity = () => {
   return (
     <section className="py-24 bg-[#f5f5f5]">
       <div className="max-w-6xl mx-auto px-6">
-        {/* Top Badge */}
-        <BlurFade delay={0}>
-          <div className="flex items-center justify-center gap-4 mb-12 opacity-80">
-            <div className="h-[3px] w-24 bg-[linear-gradient(90deg,rgba(65,116,111,0.89)_0%,rgba(117,227,214,0.89)_100%)] opacity-50 rounded-full" />
-            <div className="shrink-0 px-6 py-1.5 rounded-full border border-[#3A8177]/30 text-[#3A8177] text-sm font-medium bg-[#ECF6F5]">
-              Coming Soon
-            </div>
-            <div className="h-[3px] w-24 bg-[linear-gradient(90deg,rgba(132,255,239,0.89)_0%,rgba(45,100,93,0.89)_100%)] opacity-50 rounded-full" />
-          </div>
-        </BlurFade>
-
         {/* Header */}
         <BlurFade delay={0.1}>
           <div className="text-center mb-16">
@@ -39,7 +25,7 @@ const DataSecurity = () => {
         </BlurFade>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-2 gap-8 mb-24">
+        <div className="grid md:grid-cols-2 gap-8">
           {/* Card 1 */}
           <BlurFade delay={0.2}>
             <div className="bg-white p-10 rounded-[2rem] shadow-sm border border-gray-100 text-left hover:shadow-md transition-shadow">
@@ -144,66 +130,9 @@ const DataSecurity = () => {
             </div>
           </BlurFade>
         </div>
-
-        {/* Bottom Section */}
-        <BlurFade delay={0.4}>
-          <div className="text-center">
-            <h3 className="text-3xl font-bold text-[#326a62] mb-10">
-              Coming Soon
-            </h3>
-
-            <div className="flex flex-wrap justify-center gap-8 md:gap-16 mb-16">
-              {/* Days */}
-              <div className="flex flex-col items-center">
-                <div className="flex gap-3">
-                  <TimeBox value="2" />
-                  <TimeBox value="0" />
-                </div>
-                <span className="text-xs font-bold text-gray-500 mt-4 tracking-widest">
-                  DAYS
-                </span>
-              </div>
-
-              {/* Hours */}
-              <div className="flex flex-col items-center">
-                <div className="flex gap-3">
-                  <TimeBox value="2" />
-                  <TimeBox value="2" />
-                </div>
-                <span className="text-xs font-bold text-gray-500 mt-4 tracking-widest">
-                  HOURS
-                </span>
-              </div>
-
-              {/* Minutes */}
-              <div className="flex flex-col items-center">
-                <div className="flex gap-3">
-                  <TimeBox value="5" />
-                  <TimeBox value="6" />
-                </div>
-                <span className="text-xs font-bold text-gray-500 mt-4 tracking-widest">
-                  MINUTES
-                </span>
-              </div>
-            </div>
-
-            <p className="text-gray-900 font-medium text-lg">
-              This feature is currently under development and will be available
-              in an upcoming release
-            </p>
-          </div>
-        </BlurFade>
       </div>
     </section>
   );
 };
-
-const TimeBox = ({ value }: { value: string }) => (
-  <div
-    className={`w-12 h-16 md:w-16 md:h-24 bg-[#DEEBE9] rounded-xl flex items-center justify-center text-3xl md:text-5xl text-[#2D645D] shadow-inner font-light border border-[#D1E2E0] ${orbitron.className}`}
-  >
-    {value}
-  </div>
-);
 
 export default DataSecurity;
