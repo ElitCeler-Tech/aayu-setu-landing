@@ -10,12 +10,12 @@ const Navbar = () => {
         {/* Logo Placeholder */}
         <div className="flex items-center gap-2">
           {/* Use a simple placeholder logo if image not available, or text */}
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center w-[200px] h-16">
             <Image
               src="/logo.png"
               alt="Ayus Setu Logo"
-              width={300}
-              height={300}
+              width={500}
+              height={500}
               className="w-full h-full object-contain"
             />
           </div>
