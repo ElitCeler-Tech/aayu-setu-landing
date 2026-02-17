@@ -5,7 +5,7 @@ import BlurFade from "./ui/blur-fade";
 
 const Hero = () => {
   return (
-    <main className="max-w-7xl mx-auto px-6 pt-16 pb-24 lg:pt-24 lg:pb-32 flex flex-col lg:flex-row items-center justify-between gap-12 relative isolate bg-[#F0F8F7]/50 lg:bg-transparent">
+    <main className="max-w-7xl mx-auto px-6 pt-16 pb-24 lg:pt-24 lg:pb-32 flex flex-col lg:flex-row items-center justify-between gap-12 relative isolate bg-[#F0F8F7]/50 lg:bg-transparent overflow-hidden">
       {/* Top Left Gradient Circle */}
       <div className="absolute w-[457px] h-[457px] rounded-full opacity-50 pointer-events-none -z-10 bg-linear-to-b from-[rgba(0,111,104,0.1)] to-[#7fcfc5] blur-[100px] top-[-0.07px] left-[-198px]" />
 
@@ -96,13 +96,13 @@ const Hero = () => {
       {/* Right Content - Phone Images */}
       <BlurFade
         delay={0.2}
-        className="flex-1 relative w-full h-[400px] lg:h-[600px] flex justify-center items-center mt-12 lg:mt-0"
+        className="flex-1 relative w-full h-[320px] lg:h-[600px] flex justify-center items-center mt-12 lg:mt-0"
       >
         {/* Gradient Circle */}
         <div className="absolute w-[600px] h-[600px] rounded-full opacity-50 pointer-events-none -z-10 bg-linear-to-b from-[rgba(0,111,104,0.1)] to-[#3A8177] blur-[100px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 
         {/* Phone 1 - Left */}
-        <div className="absolute left-1/2 top-1/2 w-[180px] sm:w-[210px] lg:w-[230px] -translate-x-[110%] -translate-y-1/2 z-10 transition-transform duration-500 hover:scale-105 hover:z-30">
+        <div className="absolute left-1/2 top-1/2 w-[140px] sm:w-[210px] lg:w-[230px] -translate-x-[110%] -translate-y-1/2 z-10 transition-transform duration-500 hover:scale-105 hover:z-30">
           <Iphone
             src="/hero/hero-left.png"
             className="w-full h-auto drop-shadow-2xl -rotate-7"
@@ -110,7 +110,7 @@ const Hero = () => {
         </div>
 
         {/* Phone 2 - Right */}
-        <div className="absolute left-1/2 top-1/2 w-[180px] sm:w-[210px] lg:w-[230px] translate-x-[10%] -translate-y-1/2 z-20 transition-transform duration-500 hover:scale-105 hover:z-30">
+        <div className="absolute left-1/2 top-1/2 w-[140px] sm:w-[210px] lg:w-[230px] translate-x-[10%] -translate-y-1/2 z-20 transition-transform duration-500 hover:scale-105 hover:z-30">
           <Iphone
             src="/hero/hero-right.png"
             className="w-full h-auto drop-shadow-2xl rotate-7"

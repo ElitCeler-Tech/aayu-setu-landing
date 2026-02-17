@@ -26,29 +26,29 @@ const WhatWeDeliver = () => {
 
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
           <BlurFade
-            className="flex-1 w-full relative flex justify-center items-center h-[400px]"
+            className="flex-1 w-full relative flex justify-center items-center h-[300px] lg:h-[400px]"
             delay={0.2}
           >
             {/* Background Circle */}
-            <div className="absolute top-[25%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] sm:w-[450px] sm:h-[450px] rounded-full z-0 bg-linear-to-b from-[#346E6A] to-[#2D645D]"></div>
-            <div className="absolute left-[10%] top-[55%] -translate-y-1/2 w-[160px] sm:w-[200px] -rotate-[5deg] z-10 ">
+            <div className="absolute top-[25%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] sm:w-[450px] sm:h-[450px] rounded-full z-0 bg-linear-to-b from-[#346E6A] to-[#2D645D]"></div>
+            <div className="absolute left-[5%] top-[55%] -translate-y-1/2 w-[90px] sm:w-[200px] -rotate-[5deg] z-10 ">
               <Iphone
                 src="/hero/hero-left.png"
-                className="w-full h-auto shadow-2xl transition-all rounded-[2.5rem] bg-gray-800"
+                className="w-full h-auto shadow-2xl transition-all rounded-[1.5rem] sm:rounded-[2.5rem] bg-gray-800"
               />
             </div>
 
-            <div className="absolute left-[35%] top-1/2 -translate-y-1/2 w-[180px] sm:w-[220px] z-20 hover:scale-105 transition-transform duration-300">
+            <div className="absolute left-[35%] top-1/2 -translate-y-1/2 w-[110px] sm:w-[220px] z-20 hover:scale-105 transition-transform duration-300">
               <Iphone
                 src="/hero/hero-right.png"
-                className="w-full h-auto drop-shadow-2xl rounded-[2.5rem] bg-gray-800"
+                className="w-full h-auto drop-shadow-2xl rounded-[1.5rem] sm:rounded-[2.5rem] bg-gray-800"
               />
             </div>
 
-            <div className="absolute left-[60%] top-[55%] -translate-y-1/2 w-[160px] sm:w-[200px] rotate-[5deg] z-10">
+            <div className="absolute left-[65%] top-[55%] -translate-y-1/2 w-[90px] sm:w-[200px] rotate-[5deg] z-10">
               <Iphone
                 src="/uified/family-health.png"
-                className="w-full h-auto shadow-2xl transition-all rounded-[2.5rem] bg-gray-800"
+                className="w-full h-auto shadow-2xl transition-all rounded-[1.5rem] sm:rounded-[2.5rem] bg-gray-800"
               />
             </div>
           </BlurFade>
