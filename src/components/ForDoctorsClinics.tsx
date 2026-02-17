@@ -7,7 +7,7 @@ import BlurFadeText from "./ui/blur-fade-text";
 
 const ForDoctorsClinics = () => {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-12 md:py-24 bg-white">
       <div className="max-w-6xl mx-auto px-6 text-center">
         {/* Header content */}
         <BlurFade delay={0}>
@@ -17,7 +17,7 @@ const ForDoctorsClinics = () => {
         </BlurFade>
 
         <BlurFade delay={0.2}>
-          <p className="text-gray-800 text-base md:text-lg mb-12">
+          <p className="text-gray-800 text-base md:text-lg mb-8 md:mb-12">
             Smarter care with less effort.
           </p>
         </BlurFade>
@@ -25,7 +25,7 @@ const ForDoctorsClinics = () => {
         {/* Image Placeholder */}
         <BlurFade
           delay={0.4}
-          className="w-full mb-12 flex items-center justify-center"
+          className="w-full mb-8 md:mb-12 flex items-center justify-center"
         >
           <Image
             src="/for-doctors.png"
@@ -33,7 +33,7 @@ const ForDoctorsClinics = () => {
             width={0}
             height={0}
             sizes="100vw"
-            className="h-96 w-auto object-contain"
+            className="h-48 md:h-96 w-auto object-contain"
           />
         </BlurFade>
 

@@ -36,11 +36,11 @@ const FAQ = () => {
   };
 
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section className="py-12 md:py-24 bg-white relative overflow-hidden">
       <div className="max-w-4xl mx-auto px-6">
         {/* Header */}
         <BlurFade delay={0}>
-          <div className="flex flex-col items-center text-center mb-16">
+          <div className="flex flex-col items-center text-center mb-12 md:mb-16">
             <div className="flex items-center gap-4 w-full justify-center mb-6">
               <div className="h-[3px] w-20 md:w-32 bg-[linear-gradient(90deg,rgba(65,116,111,0.89)_0%,rgba(117,227,214,0.89)_100%)] opacity-50"></div>
               <div className="px-6 py-2 rounded-full bg-[#E8F3F1] text-[#35615E] text-sm font-medium shadow-sm">
@@ -49,10 +49,10 @@ const FAQ = () => {
               <div className="h-[3px] w-20 md:w-32 bg-[linear-gradient(90deg,rgba(132,255,239,0.89)_0%,rgba(45,100,93,0.89)_100%)] opacity-50"></div>
             </div>
 
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-gray-900">
+            <h2 className="text-2xl md:text-5xl font-heading font-bold mb-4 text-gray-900">
               Frequently Asked Questions
             </h2>
-            <p className="text-gray-500 text-lg">
+            <p className="text-gray-500 text-base md:text-lg">
               Get to know more about the AyuSetu Team
             </p>
           </div>

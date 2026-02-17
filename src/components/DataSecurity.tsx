@@ -5,7 +5,7 @@ import BlurFade from "./ui/blur-fade";
 
 const DataSecurity = () => {
   return (
-    <section className="py-24 bg-[#f5f5f5]">
+    <section className="py-12 md:py-24 bg-[#f5f5f5]">
       <div className="max-w-6xl mx-auto px-6">
         {/* Top Badge */}
         <BlurFade delay={0}>

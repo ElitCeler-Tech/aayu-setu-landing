@@ -39,20 +39,20 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-24 bg-[#35615E] text-white overflow-hidden relative">
+    <section className="py-12 md:py-24 bg-[#35615E] text-white overflow-hidden relative">
       {/* Background Glow Effect */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-white/5 blur-[100px] rounded-full pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
-        <div className="flex flex-col items-center text-center mb-16">
+        <div className="flex flex-col items-center text-center mb-12 md:mb-16">
           <div className="inline-block px-6 py-2 rounded-full border border-white/20 bg-white/5 text-sm font-medium mb-6 backdrop-blur-sm shadow-sm">
             Track your health
           </div>
-          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
+          <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">
             What Our Users Say
           </h2>
-          <p className="text-white/80 text-lg max-w-2xl">
+          <p className="text-white/80 text-base md:text-lg max-w-2xl">
             Real experiences from people staying healthier and happier with our
             app.
           </p>
@@ -62,7 +62,7 @@ const Testimonials = () => {
         <div className="max-w-6xl mx-auto relative">
           <div className="relative">
             {/* Glass Card */}
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-[2.5rem] p-8 md:p-16 text-center shadow-2xl min-h-[300px] flex flex-col items-center justify-center">
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-[2.5rem] p-6 md:p-16 text-center shadow-2xl min-h-[300px] flex flex-col items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeIndex}
@@ -86,7 +86,7 @@ const Testimonials = () => {
                   </div>
 
                   {/* Quote */}
-                  <p className="text-xl md:text-2xl font-light leading-relaxed mb-10 max-w-3xl">
+                  <p className="text-lg md:text-2xl font-light leading-relaxed mb-10 max-w-3xl">
                     {testimonials[activeIndex].text}
                   </p>
 

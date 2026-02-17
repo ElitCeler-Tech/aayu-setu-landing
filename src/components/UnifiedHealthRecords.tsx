@@ -1111,7 +1111,7 @@ const UnifiedHealthRecords = () => {
       {features.map((feature, index) => (
         <div
           key={feature.id}
-          className={`py-24 ${index % 2 === 0 ? "bg-white" : "bg-[#f9fafb]"}`}
+          className={`py-12 md:py-24 ${index % 2 === 0 ? "bg-white" : "bg-[#f9fafb]"}`}
         >
           <div className="max-w-7xl mx-auto px-6 w-full">
             {/* Header */}

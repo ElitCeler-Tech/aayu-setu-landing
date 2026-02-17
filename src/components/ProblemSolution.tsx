@@ -5,7 +5,7 @@ import BlurFade from "./ui/blur-fade";
 
 const ProblemSolution = () => {
   return (
-    <section className="max-w-7xl mx-auto px-6 py-16 lg:py-24 space-y-24">
+    <section className="max-w-7xl mx-auto px-6 py-12 lg:py-24 space-y-12 lg:space-y-24">
       {/* The Problem Section */}
       <div className="flex flex-col items-center gap-8">
         <BlurFade>

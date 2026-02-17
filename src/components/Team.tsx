@@ -37,7 +37,7 @@ const Team = () => {
             <div className="h-[3px] w-20 md:w-32 bg-[linear-gradient(90deg,rgba(132,255,239,0.89)_0%,rgba(45,100,93,0.89)_100%)] opacity-50"></div>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-gray-900">
+          <h2 className="text-2xl md:text-5xl font-heading font-bold mb-4 text-gray-900">
             About the Founder
           </h2>
           <p className="text-gray-500 text-lg">
