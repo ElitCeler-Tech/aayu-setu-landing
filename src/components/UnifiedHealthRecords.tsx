@@ -1061,42 +1061,42 @@ const features = [
         }}
       >
         <div className="mb-6">
-          <h3 className="text-xl font-medium mb-1">
+          <h3 className="text-lg md:text-xl font-medium mb-1">
             Notify Family on Missed Meds
           </h3>
-          <p className="text-sm opacity-80">
+          <p className="text-xs md:text-sm opacity-80">
             Seamless experience for Family health management
           </p>
         </div>
 
         <div className="bg-[#4A7A75] rounded-2xl p-4 md:p-6 relative overflow-hidden shadow-inner flex flex-col justify-center flex-1">
           {/* Notification Card */}
-          <div className="bg-[#5D8B86] rounded-xl p-4 shadow-lg backdrop-blur-sm border border-white/10">
-            <div className="flex items-center gap-3 mb-3">
+          <div className="bg-[#5D8B86] rounded-xl p-3 md:p-4 shadow-lg backdrop-blur-sm border border-white/10">
+            <div className="flex items-center gap-3 mb-2 md:mb-3">
               <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#3A8177] font-bold text-xs">
                 R
               </div>
               <div className="flex-1">
-                <div className="text-sm font-medium">
+                <div className="text-xs md:text-sm font-medium leading-tight">
                   Dad Missed a dose of medication
                 </div>
               </div>
             </div>
 
-            <p className="text-xs opacity-90 mb-4 pl-[44px]">
+            <p className="text-[10px] md:text-xs opacity-90 mb-3 pl-[44px]">
               Dad wants to share a Report
             </p>
 
-            <div className="flex gap-3 pl-[44px]">
-              <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/30 text-xs hover:bg-white/10 transition-colors">
+            <div className="flex gap-2 pl-[44px]">
+              <button className="flex items-center gap-1.5 px-2 md:px-3 py-1 md:py-1.5 rounded-lg border border-white/30 text-[10px] md:text-xs hover:bg-white/10 transition-colors">
                 <Eye size={12} /> View
               </button>
-              <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-[#3A8177] text-xs font-medium hover:bg-gray-100 transition-colors">
+              <button className="flex items-center gap-1.5 px-2 md:px-3 py-1 md:py-1.5 rounded-lg bg-white text-[#3A8177] text-[10px] md:text-xs font-medium hover:bg-gray-100 transition-colors">
                 <Download size={12} /> Download
               </button>
             </div>
           </div>
-          <div className="absolute bottom-2 right-4 text-[10px] opacity-60">
+          <div className="absolute bottom-2 right-4 text-[9px] md:text-[10px] opacity-60">
             10:00 AM
           </div>
         </div>
@@ -1126,17 +1126,22 @@ const UnifiedHealthRecords = () => {
                 </div>
 
                 <div className="space-y-4">
-                  <h2 className="text-4xl md:text-5xl font-heading font-medium bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent">
+                  <h2 className="text-3xl md:text-5xl font-heading font-medium bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent">
                     {feature.title}
                   </h2>
-                  <p className="text-gray-600 text-lg">{feature.subtitle}</p>
+                  <p className="text-gray-600 text-base md:text-lg">
+                    {feature.subtitle}
+                  </p>
                 </div>
               </div>
             </BlurFade>
 
             {/* Content */}
             <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24">
-              <BlurFade delay={0.1} className="flex-1 flex justify-center w-full">
+              <BlurFade
+                delay={0.1}
+                className="flex-1 flex justify-center w-full"
+              >
                 <div className="w-[220px] sm:w-[250px]">
                   <Iphone
                     src={feature.image}
@@ -1147,7 +1152,10 @@ const UnifiedHealthRecords = () => {
                 </div>
               </BlurFade>
 
-              <BlurFade delay={0.2} className="flex-1 w-full space-y-8 max-w-lg lg:max-w-xl">
+              <BlurFade
+                delay={0.2}
+                className="flex-1 w-full space-y-8 max-w-lg lg:max-w-xl"
+              >
                 <div className="space-y-8">
                   <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100">
                     <div className="flex flex-col gap-3">
@@ -1155,11 +1163,11 @@ const UnifiedHealthRecords = () => {
                         <div className="p-2 bg-[#3A8177] rounded-full text-white">
                           {feature.topCard.icon}
                         </div>
-                        <h3 className="text-xl font-medium text-gray-900">
+                        <h3 className="text-lg md:text-xl font-medium text-gray-900">
                           {feature.topCard.title}
                         </h3>
                       </div>
-                      <p className="text-gray-500 pl-[52px]">
+                      <p className="text-gray-500 text-sm md:text-base pl-[52px]">
                         {feature.topCard.desc}
                       </p>
                     </div>

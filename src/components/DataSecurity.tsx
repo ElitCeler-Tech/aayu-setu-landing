@@ -21,13 +21,13 @@ const DataSecurity = () => {
         {/* Header */}
         <BlurFade delay={0.1}>
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent mb-6 tracking-tight pb-2">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent mb-6 tracking-tight pb-2">
               Data Security & Privacy
             </h2>
-            <p className="text-gray-800 font-medium text-lg mb-6">
+            <p className="text-gray-800 font-medium text-base md:text-lg mb-6">
               Your Health Data. Fully Protected. Always Yours.
             </p>
-            <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
+            <p className="text-gray-600 max-w-3xl mx-auto text-sm md:text-lg leading-relaxed text-center">
               AyusSetu is built with privacy-first architecture to ensure your
               personal and medical data stays secure, confidential, and under
               your control.
@@ -72,11 +72,11 @@ const DataSecurity = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900">
+                <h3 className="text-lg md:text-xl font-bold text-gray-900">
                   End-to-End Data Encryption
                 </h3>
               </div>
-              <p className="text-gray-600 leading-relaxed text-lg">
+              <p className="text-gray-600 leading-relaxed text-sm md:text-lg">
                 All health records, reports, and personal details are encrypted
                 both in transit and at rest.
               </p>
@@ -130,11 +130,11 @@ const DataSecurity = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900">
+                <h3 className="text-lg md:text-xl font-bold text-gray-900">
                   Privacy by Design
                 </h3>
               </div>
-              <p className="text-gray-600 leading-relaxed text-lg">
+              <p className="text-gray-600 leading-relaxed text-sm md:text-lg">
                 We follow privacy-by-design principles, collecting only
                 what&apos;s essential
               </p>

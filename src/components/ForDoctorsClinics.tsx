@@ -11,13 +11,13 @@ const ForDoctorsClinics = () => {
       <div className="max-w-6xl mx-auto px-6 text-center">
         {/* Header content */}
         <BlurFade delay={0}>
-          <h2 className="text-3xl md:text-5xl font-heading font-medium bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent mb-4">
+          <h2 className="text-2xl md:text-5xl font-heading font-medium bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent mb-4">
             FOR DOCTORS & CLINICS
           </h2>
         </BlurFade>
 
         <BlurFade delay={0.2}>
-          <p className="text-gray-800 text-lg mb-12">
+          <p className="text-gray-800 text-base md:text-lg mb-12">
             Smarter care with less effort.
           </p>
         </BlurFade>
@@ -39,7 +39,7 @@ const ForDoctorsClinics = () => {
 
         {/* Paragraph Text */}
         <BlurFade delay={0.6}>
-          <p className="text-gray-700 text-xl leading-relaxed max-w-5xl mx-auto">
+          <p className="text-gray-700 text-sm md:text-xl leading-relaxed max-w-5xl mx-auto">
             Get AI-powered risk summaries and decision support that reduce
             follow-up burden, improve chronic care outcomes, and help you focus
             on patients who need attention most.
