@@ -21,9 +21,14 @@ const ABHAIntegration = () => {
         {/* Header */}
         <BlurFade delay={0.1}>
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent mb-6 tracking-tight pb-2">
+            <h2 className="text-4xl md:text-5xl font-bold bg-[linear-gradient(90.52deg,#2D645D_4.83%,#5BCABC_98.02%)] bg-clip-text text-transparent mb-3 tracking-tight pb-2">
               ABHA Integration
             </h2>
+            <div className="mb-6">
+              <span className="inline-block px-6 py-2 rounded-full bg-[#3A8177]/10 text-[#3A8177] text-lg font-semibold border border-[#3A8177]/20">
+                Coming Soon
+              </span>
+            </div>
             <p className="text-gray-800 font-medium text-lg mb-6">
               ABHA Integration &mdash; Track your health
             </p>
