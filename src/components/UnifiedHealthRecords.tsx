@@ -116,7 +116,7 @@ export const MedicationScreen = () => (
         </div>
         <div className="text-right">
           <p className="text-[10px] text-orange-500 font-medium">Used For</p>
-          <p className="text-[11px] text-gray-700 font-medium">Diabetes</p>
+          <p className="text-[11px] text-gray-700 font-medium">Type 2 Diabetes</p>
         </div>
       </div>
     </div>
@@ -817,7 +817,7 @@ const features = [
                 </div>
                 <div className="text-right ml-2">
                   <div className="text-[8px] text-orange-500">Used For</div>
-                  <div className="text-[9px] font-medium">Diabetes</div>
+                  <div className="text-[9px] font-medium">Type 2 Diabetes</div>
                 </div>
               </div>
             </div>
@@ -850,8 +850,11 @@ const features = [
           <div className="flex items-center gap-2 mb-2">
             <h3 className="text-xl font-medium">Chat with AI - Ayu</h3>
           </div>
-          <p className="text-sm opacity-80">
+          <p className="text-sm opacity-80 mb-2">
             Ask Questions about your health and get Personalized recommendations about your health
+          </p>
+          <p className="text-[11px] text-yellow-300 opacity-90 font-medium">
+            Disclaimer: AI can make mistakes. Always consult a healthcare professional.
           </p>
         </div>
 
@@ -1099,9 +1102,15 @@ const UnifiedHealthRecords = () => {
       {features.map((feature, index) => (
         <div
           key={feature.id}
-          className={`py-12 md:py-24 ${index % 2 === 0 ? "bg-white" : "bg-[#f9fafb]"}`}
+          className={`py-12 md:py-24 relative overflow-hidden ${index % 2 === 0 ? "bg-white" : "bg-[#f9fafb]"}`}
         >
-          <div className="max-w-7xl mx-auto px-6 w-full">
+          {index % 2 !== 0 && (
+            <div
+              className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none bg-[url('/logo.png')] bg-center bg-no-repeat bg-fixed object-cover"
+              style={{ backgroundSize: "40%" }}
+            />
+          )}
+          <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
             {/* Header */}
             <BlurFade delay={0}>
               <div className="flex flex-col items-center justify-center text-center mb-12 lg:mb-16 space-y-6">

@@ -157,15 +157,7 @@ const ABHAIntegration = () => {
           </BlurFade>
         </div>
 
-        {/* Bottom Section */}
-        <BlurFade delay={0.4}>
-          <div className="text-center">
-            <p className="text-gray-900 font-medium text-lg">
-              This feature is currently under development and will be available
-              in an upcoming release
-            </p>
-          </div>
-        </BlurFade>
+
       </div>
     </section>
   );
