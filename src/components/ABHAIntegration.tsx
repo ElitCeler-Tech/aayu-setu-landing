@@ -98,7 +98,6 @@ const ABHAIntegration = () => {
             </div>
           </BlurFade>
 
-          {/* Card 2 */}
           <BlurFade delay={0.3}>
             <div className="bg-white p-10 rounded-[2rem] shadow-sm border border-gray-100 text-left hover:shadow-md transition-shadow">
               <div className="flex items-center gap-4 mb-4">
