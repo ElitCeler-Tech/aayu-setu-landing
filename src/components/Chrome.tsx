@@ -2,10 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 
 const nav = [
-  { label: "For patients", href: "#patients" },
-  { label: "For doctors", href: "#doctors" },
+  { label: "Patients", href: "#patients" },
+  { label: "Doctors", href: "#doctors" },
+  { label: "Clinics", href: "#clinics" },
   { label: "How it works", href: "#how" },
-  { label: "Questions", href: "#faq" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export function Header() {
@@ -13,7 +14,7 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-line/70 bg-paper/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-8 px-5 sm:px-8">
         <Link href="/" className="flex items-center gap-2.5">
-          <Image src="/logo.png" alt="" width={34} height={28} priority />
+          <Image src="/ayussetu-mark.png" alt="" width={38} height={31} priority />
           <span className="font-display text-[1.3rem] font-semibold tracking-tight text-navy">
             Ayussetu
           </span>
@@ -47,7 +48,7 @@ export function Footer() {
         <div className="flex flex-col gap-10 md:flex-row md:justify-between">
           <div className="max-w-xs">
             <div className="flex items-center gap-2.5">
-              <Image src="/logo.png" alt="" width={32} height={26} />
+              <Image src="/ayussetu-mark.png" alt="" width={36} height={29} />
               <span className="font-display text-[1.2rem] font-semibold text-navy">
                 Ayussetu
               </span>
@@ -66,6 +67,7 @@ export function Footer() {
               <ul className="mt-3 space-y-2 text-slate">
                 <li><a className="hover:text-navy" href="#patients">For patients</a></li>
                 <li><a className="hover:text-navy" href="#doctors">For doctors</a></li>
+                <li><a className="hover:text-navy" href="#clinics">For clinics</a></li>
                 <li><a className="hover:text-navy" href="#download">Download</a></li>
               </ul>
             </div>
@@ -75,8 +77,9 @@ export function Footer() {
               </h3>
               <ul className="mt-3 space-y-2 text-slate">
                 <li><a className="hover:text-navy" href="#how">How it works</a></li>
+                <li><a className="hover:text-navy" href="#security">Security</a></li>
                 <li><a className="hover:text-navy" href="#faq">Questions</a></li>
-                <li><a className="hover:text-navy" href="mailto:support@ayussetu.com">Contact</a></li>
+                <li><a className="hover:text-navy" href="#contact">Contact us</a></li>
               </ul>
             </div>
             <div>
