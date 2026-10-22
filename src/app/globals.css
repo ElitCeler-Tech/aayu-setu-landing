@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/* The palette is the product's, not a website's: the navy is the one the
+   apps draw every card in, and the amber is the one they spend on a
+   single call to action per screen. The discipline here is the same -
+   amber appears on one button and a handful of marks, never as a wash. */
+@theme {
+  --color-ink: #16233D;
+  --color-navy: #1F3050;
+  --color-slate: #46556F;
+  --color-mute: #76829A;
+  --color-faint: #A4AFC2;
+  --color-amber: #FF8B0B;
+  --color-amber-deep: #C96A00;
+  --color-amber-wash: #FFF4E6;
+  --color-sage: #2F7D63;
+  --color-sage-wash: #E9F3EF;
+  --color-paper: #FBFBFC;
+  --color-mist: #F1F3F7;
+  --color-line: #E3E7EF;
+
+  --font-display: var(--font-serif), Georgia, serif;
+  --font-sans: var(--font-poppins), system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-paper);
+  color: var(--color-navy);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--color-amber); color: #fff; }
+
+:focus-visible { outline: 2px solid var(--color-amber); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* A slow drift behind the hero's phone, so the section has life without
+   anything moving that the reader is trying to read. */
+@keyframes drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.drift { animation: drift 7s ease-in-out infinite; }
