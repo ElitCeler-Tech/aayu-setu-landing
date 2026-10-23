@@ -37,7 +37,7 @@ export function PhoneShowcase() {
 
   return (
     <div className="relative mx-auto w-[clamp(15rem,34vw,19.5rem)]">
-      <div className="pointer-events-none absolute -inset-10 -z-10 rounded-[4rem] bg-amber/10 blur-3xl" />
+      <div className="pointer-events-none absolute -inset-10 -z-10 rounded-[4rem] bg-navy/[0.07] blur-3xl" />
 
       {/* Lifted off the phone, drifting out of phase. */}
       <div className="float-a pointer-events-none absolute -left-[8.5rem] top-20 z-20 hidden w-[10.5rem] xl:block rounded-2xl border border-line bg-white/95 p-3 shadow-[0_22px_45px_-24px_rgba(22,35,61,0.55)] backdrop-blur">
@@ -132,9 +132,9 @@ export function PhoneShowcase() {
    buy. Swap these two files for photographs of actual clinicians, with
    their consent, whenever we have them. */
 const FACES = {
-  doctor: "/people/doctor.jpg",
-  "doctor-avatar": "/people/doctor-avatar.jpg",
-  patient: "/people/patient.jpg",
+  doctor: "/people/doctor-call.jpg",
+  "doctor-avatar": "/people/doctor-ring.jpg",
+  patient: "/people/patient-call.jpg",
 } as const;
 
 function VideoFace({
@@ -333,10 +333,12 @@ function Ringing() {
 function InCall() {
   return (
     <div className="flex h-full flex-col bg-ink p-3">
-      <div className="relative flex-1 overflow-hidden rounded-2xl">
-        <VideoFace kind="doctor" className="absolute inset-0 h-full w-full object-top" />
+      {/* The feed is letterboxed, the way a phone shows a remote camera, so
+          the picture is never cropped to a close up of somebody's face. */}
+      <div className="relative mt-1 aspect-[4/5] w-full overflow-hidden rounded-2xl">
+        <VideoFace kind="doctor" className="absolute inset-0 h-full w-full" />
 
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 to-transparent px-3 pb-3 pt-10">
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 to-transparent px-3 pb-2.5 pt-10">
           <p className="text-[0.82rem] font-semibold text-white">Dr S. Rao</p>
           <p className="mt-0.5 flex items-center gap-1.5 text-[0.6rem] text-white/65">
             <span className="h-1.5 w-1.5 rounded-full bg-sage" />
@@ -346,14 +348,23 @@ function InCall() {
 
         {/* The patient's own tile, where every video app puts it. */}
         <div className="absolute right-2 top-2 w-[3.9rem] overflow-hidden rounded-lg border border-white/25 shadow-lg">
-          <VideoFace kind="patient" className="h-[2.9rem] w-full object-top" />
+          <VideoFace kind="patient" className="h-[2.9rem] w-full" />
           <span className="absolute bottom-0.5 left-0.5 rounded bg-ink/70 px-1 text-[0.44rem] font-medium text-white/85">
             You
           </span>
         </div>
       </div>
 
-      <div className="flex items-center justify-center gap-3.5 pt-4 pb-1">
+      <div className="mt-4 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5">
+        <p className="text-[0.56rem] font-semibold uppercase tracking-[0.14em] text-white/40">
+          Open beside the call
+        </p>
+        <p className="mt-1 text-[0.68rem] leading-snug text-white/70">
+          Lipid profile, 14 Oct · LDL 164 mg/dL
+        </p>
+      </div>
+
+      <div className="mt-auto flex items-center justify-center gap-3.5 pb-1 pt-4">
         {[
           { l: "Mute", on: false },
           { l: "Voice only", on: true },

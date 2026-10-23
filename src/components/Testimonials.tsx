@@ -97,7 +97,7 @@ function Row({
 
 export function Testimonials() {
   return (
-    <section id="testimonials" className="border-b border-line bg-mist py-18 md:py-24">
+    <section id="testimonials" className="border-b border-line bg-white py-18 md:py-24">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="max-w-2xl">
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">

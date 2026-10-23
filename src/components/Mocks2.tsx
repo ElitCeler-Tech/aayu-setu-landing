@@ -2,14 +2,14 @@
 
 export function AyuMock() {
   return (
-    <div className="rounded-2xl border border-line bg-mist/60 p-3 shadow-[0_18px_40px_-28px_rgba(22,35,61,0.5)]">
+    <div className="rounded-2xl border border-line bg-white p-3 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)]">
       <div className="space-y-2">
         <div className="ml-auto max-w-[78%] rounded-2xl rounded-br-md bg-navy px-3 py-2">
           <p className="text-[0.68rem] leading-snug text-white">
             My LDL went up. Should I worry?
           </p>
         </div>
-        <div className="max-w-[88%] rounded-2xl rounded-bl-md border border-line bg-white px-3 py-2.5">
+        <div className="max-w-[88%] rounded-2xl rounded-bl-md border border-line bg-paper px-3 py-2.5">
           <p className="text-[0.66rem] leading-relaxed text-slate">
             Your LDL moved from 138 to 164 mg/dL since July, and your HDL is
             low at 38. Both are worth discussing with your doctor.
@@ -32,10 +32,10 @@ export function RecordsMock() {
     { n: "Discharge summary", d: "04 Aug", t: "Hospital" },
   ];
   return (
-    <div className="rounded-2xl border border-line bg-mist/60 p-3 shadow-[0_18px_40px_-28px_rgba(22,35,61,0.5)]">
+    <div className="rounded-2xl border border-line bg-white p-3 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)]">
       <div className="mb-2 flex items-center justify-between">
         <p className="text-[0.66rem] font-semibold text-navy">Your records</p>
-        <span className="rounded-md bg-white px-1.5 py-0.5 text-[0.55rem] font-semibold text-mute">
+        <span className="rounded-md bg-mist px-1.5 py-0.5 text-[0.55rem] font-semibold text-mute">
           34 files
         </span>
       </div>
@@ -43,7 +43,7 @@ export function RecordsMock() {
         {rows.map((r) => (
           <div
             key={r.n}
-            className="flex items-center gap-2.5 rounded-xl border border-line bg-white px-2.5 py-2"
+            className="flex items-center gap-2.5 rounded-xl border border-line bg-paper px-2.5 py-2"
           >
             <span className="flex h-6 w-6 items-center justify-center rounded-md bg-mist">
               <span className="h-2.5 w-2 rounded-[2px] border border-faint" />
@@ -70,7 +70,7 @@ export function RiskMock() {
     { n: "Liver", v: 22, s: "Clear" },
   ];
   return (
-    <div className="rounded-2xl border border-line bg-mist/60 p-3.5 shadow-[0_18px_40px_-28px_rgba(22,35,61,0.5)]">
+    <div className="rounded-2xl border border-line bg-white p-3.5 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)]">
       <p className="text-[0.56rem] font-bold uppercase tracking-[0.12em] text-mute">
         Where the risk is
       </p>
@@ -81,7 +81,7 @@ export function RiskMock() {
               <p className="text-[0.68rem] font-semibold text-navy">{r.n}</p>
               <p className="text-[0.58rem] text-mute">{r.s}</p>
             </div>
-            <div className="mt-1 h-1.5 rounded-full bg-white">
+            <div className="mt-1 h-1.5 rounded-full bg-mist">
               <div
                 className={`h-1.5 rounded-full ${
                   r.v > 60 ? "bg-amber" : r.v > 40 ? "bg-amber/50" : "bg-sage"
@@ -101,8 +101,8 @@ export function RiskMock() {
 
 export function ConsultMock() {
   return (
-    <div className="rounded-2xl border border-line bg-mist/60 p-3 shadow-[0_18px_40px_-28px_rgba(22,35,61,0.5)]">
-      <div className="rounded-xl border border-line bg-white p-3">
+    <div className="rounded-2xl border border-line bg-white p-3 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)]">
+      <div className="rounded-xl border border-line bg-paper p-3">
         <div className="flex items-center gap-2.5">
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-navy text-[0.62rem] font-semibold text-white">
             SR
@@ -139,7 +139,7 @@ export function ConsultMock() {
             className={`flex-1 rounded-lg border px-1 py-1.5 text-center text-[0.55rem] font-semibold ${
               i === 1
                 ? "border-navy bg-navy text-white"
-                : "border-line bg-white text-slate"
+                : "border-line bg-paper text-slate"
             }`}
           >
             {t}

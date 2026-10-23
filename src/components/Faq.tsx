@@ -39,7 +39,7 @@ export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="border-t border-line bg-mist">
+    <section id="faq" className="border-t border-line bg-white">
       <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8 md:py-28">
         <div className="grid gap-12 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
           <div>

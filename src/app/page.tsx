@@ -12,7 +12,6 @@ import {
   Audiences,
   Practice,
   Abha,
-  Team,
   Security,
   Download,
 } from "@/components/Sections";
@@ -32,7 +31,6 @@ export default function Home() {
         <Practice />
         <Testimonials />
         <Abha />
-        <Team />
         <Security />
         <Download />
         <Contact />

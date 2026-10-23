@@ -7,6 +7,7 @@ const nav = [
   { label: "How it works", href: "#how" },
   { label: "FAQs", href: "#faq" },
   { label: "For doctors", href: "/for-doctors" },
+  { label: "About us", href: "/about" },
 ];
 
 /* The mark in a rounded square, exactly as it sits on a home screen.
@@ -85,7 +86,7 @@ const footerCols = [
   {
     h: "Company",
     links: [
-      ["Team", "#team"],
+      ["About us", "/about"],
       ["Testimonials", "#testimonials"],
       ["FAQs", "#faq"],
       ["Contact us", "#contact"],

@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
-/* The palette is the product's, not a website's: the navy is the one the
-   apps draw every card in, and the amber is the one they spend on a
-   single call to action per screen. The discipline here is the same -
-   amber appears on one button and a handful of marks, never as a wash. */
+/* Two grounds only: white, and the navy the apps draw every card in.
+   Nothing else is a background. Amber is kept for the one call to action
+   and the handful of marks that carry state, never as a wash, and the
+   neutrals below exist for borders and chips inside a card. */
 @theme {
   --color-ink: #16233D;
   --color-navy: #1F3050;
@@ -15,8 +15,8 @@
   --color-amber-wash: #FFF4E6;
   --color-sage: #2F7D63;
   --color-sage-wash: #E9F3EF;
-  --color-paper: #FBFBFC;
-  --color-mist: #F1F3F7;
+  --color-paper: #FFFFFF;
+  --color-mist: #F3F5F9;
   --color-line: #E3E7EF;
 
   --font-display: var(--font-poppins), system-ui, sans-serif;

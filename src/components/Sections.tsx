@@ -1,18 +1,17 @@
 import { PhoneShowcase } from "./PhoneShowcase";
 import {
   DoseMock,
-  VitalsMock,
   ReportMock,
   PrescriptionMock,
   EarningsMock,
-  GroupMock,
 } from "./Mocks";
-import { AyuMock, RecordsMock, RiskMock, ConsultMock } from "./Mocks2";
+import { AyuMock, ConsultMock } from "./Mocks2";
 import Link from "next/link";
 import Image from "next/image";
 import { team } from "@/data/team";
 import { Reveal, Parallax } from "./Motion";
 import { StoreButtons } from "./StoreButtons";
+import { AudienceLens } from "./Lens";
 
 /* ------------------------------- hero -------------------------------- */
 
@@ -21,12 +20,9 @@ const promise = ["Digitalise records", "Predict risk", "Prevent disease", "Live 
 export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-line">
-      {/* A quiet grid, and one warm bloom behind the phone. Enough to
-          stop the section being a white rectangle, far short of the
-          purple gradient every health startup opens with. */}
-      <div className="grid-ground grid-fade pointer-events-none absolute inset-0" />
-      <div className="pointer-events-none absolute right-[-18%] top-[-22%] h-[44rem] w-[44rem] rounded-full bg-amber/[0.07] blur-[140px]" />
-      <div className="pointer-events-none absolute bottom-[-30%] left-[-15%] h-[34rem] w-[34rem] rounded-full bg-sage/[0.05] blur-[130px]" />
+      {/* White, and one cool wash behind the phone. Nothing else: the
+          product is the only colour this section needs. */}
+      <div className="pointer-events-none absolute right-[-16%] top-[-24%] h-[46rem] w-[46rem] rounded-full bg-navy/[0.05] blur-[150px]" />
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 py-20 sm:px-8 md:grid-cols-[1.1fr_0.9fr] md:py-28 xl:gap-20">
         <div>
@@ -149,7 +145,7 @@ const counts = [
 export function Counts() {
   return (
     <section className="relative overflow-hidden border-b border-line bg-ink">
-      <span className="pointer-events-none absolute left-1/2 top-0 h-64 w-[48rem] -translate-x-1/2 rounded-full bg-amber/10 blur-[120px]" />
+      <span className="pointer-events-none absolute left-1/2 top-0 h-64 w-[48rem] -translate-x-1/2 rounded-full bg-white/[0.06] blur-[120px]" />
       <div className="relative mx-auto max-w-6xl px-5 py-14 sm:px-8 md:py-16">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {counts.map((c, i) => (
@@ -248,7 +244,7 @@ function Scattered() {
       {bits.map((b) => (
         <span
           key={b.t}
-          className="absolute rounded-lg border border-line bg-paper px-2.5 py-1.5 text-[0.62rem] font-medium text-slate shadow-[0_6px_14px_-10px_rgba(22,35,61,0.6)]"
+          className="absolute rounded-lg border border-line bg-mist px-2.5 py-1.5 text-[0.62rem] font-medium text-slate shadow-[0_6px_14px_-10px_rgba(22,35,61,0.6)]"
           style={{ left: b.x, top: b.y, transform: `rotate(${b.r})` }}
         >
           {b.t}
@@ -264,7 +260,7 @@ function Stacked() {
       {[2, 1].map((i) => (
         <span
           key={i}
-          className="absolute left-1/2 w-[78%] -translate-x-1/2 rounded-xl border border-line bg-paper"
+          className="absolute left-1/2 w-[78%] -translate-x-1/2 rounded-xl border border-line bg-mist"
           style={{
             top: `${i * 7}px`,
             bottom: `${-i * 7}px`,
@@ -272,7 +268,7 @@ function Stacked() {
           }}
         />
       ))}
-      <div className="absolute inset-x-[11%] inset-y-0 flex flex-col justify-between rounded-xl border border-line bg-paper p-3">
+      <div className="absolute inset-x-[11%] inset-y-0 flex flex-col justify-between rounded-xl border border-line bg-mist p-3">
         {[
           ["LDL", "164 mg/dL"],
           ["HbA1c", "6.1 %"],
@@ -364,8 +360,8 @@ const thesisArt = [<Scattered key="a" />, <Stacked key="b" />, <Trend key="c" />
 
 export function Thesis() {
   return (
-    <section className="relative overflow-hidden border-b border-line bg-paper">
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[30rem] w-[60rem] -translate-x-1/2 rounded-full bg-amber/[0.05] blur-[130px]" />
+    <section className="relative border-b border-line bg-white">
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[30rem] w-[60rem] -translate-x-1/2 rounded-full bg-navy/[0.04] blur-[130px]" />
       <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <Reveal>
           <div className="max-w-2xl">
@@ -422,8 +418,7 @@ const features = [
       "Prescriptions, lab reports and hospital documents in one folder",
     ],
     mock: <ReportMock />,
-  },
-  {
+  },  {
     eyebrow: "Smart medication management",
     title: "Doses you actually take, and the ones you did not",
     body: "Add a medicine once and the rest works itself out: how many days the quantity covers, which days it is taken on, what time each dose falls. Reminders arrive at the hour, with Take, Skip and Snooze. A dose missed yesterday is still answerable this morning.",
@@ -433,8 +428,7 @@ const features = [
       "Refills, course history and interaction cautions",
     ],
     mock: <DoseMock />,
-  },
-  {
+  },  {
     eyebrow: "Ayu, the AI assistant",
     title: "Answers drawn from your record, not from the internet",
     body: "Ask about a medicine, a reading or a report and Ayu answers against what Ayussetu already knows about you: the markers in your last lab, the medicines you are on, the appointment you have on Tuesday. Clear summaries for faster decisions.",
@@ -444,19 +438,7 @@ const features = [
       "Says plainly that it can be wrong, and to ask your doctor",
     ],
     mock: <AyuMock />,
-  },
-  {
-    eyebrow: "Vitals tracking",
-    title: "Ten readings, logged in one sitting",
-    body: "Blood pressure, pulse, sugar, SpO2, temperature, respiratory rate, weight, BMI, sleep and steps. Scored into a health score with its own confidence figure, and flagged the day a reading falls out of range, not a week later.",
-    points: [
-      "One form for several readings at a time",
-      "Readings outside their range flagged the same day",
-      "Trends read against your own history",
-    ],
-    mock: <VitalsMock />,
-  },
-  {
+  },  {
     eyebrow: "Doctor consultations",
     title: "Book in person, on video or by voice",
     body: "Find a doctor by department, see the slots they actually have, and book the kind of consultation that suits. Join the call from the app, and keep the prescription that comes out of it, with your doses scheduled from it automatically.",
@@ -467,32 +449,20 @@ const features = [
     ],
     mock: <ConsultMock />,
   },
-  {
-    eyebrow: "Family health tracking",
-    title: "See how a parent's week went without ringing to ask",
-    body: "A care group shares exactly what each person chooses to share: their score, their readings, how much of their medication they took. Privacy by design: every member controls their own sharing, and can stop it.",
-    points: [
-      "Join with a code, share by choice",
-      "Adherence and readings by day, week, month or year",
-      "Shared with family or a clinician, on the patient's terms",
-    ],
-    mock: <GroupMock />,
-  },
 ];
 
 export function Features() {
   return (
-    <section id="features" className="relative overflow-hidden border-b border-line bg-mist">
-      <div className="grid-ground pointer-events-none absolute inset-0 opacity-60 [mask-image:linear-gradient(to_bottom,black,transparent_55%)]" />
+    <section id="features" className="relative border-b border-line bg-ink text-white">
       <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <div className="max-w-2xl">
-          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
+          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber">
             For patients, in the app
           </p>
-          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-ink text-balance">
+          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-balance">
             Everything a hospital asks you to remember, remembered for you
           </h2>
-          <p className="mt-4 text-[0.95rem] leading-relaxed text-slate">
+          <p className="mt-4 text-[0.95rem] leading-relaxed text-white/60">
             This is the patient app: what somebody gets on their own phone,
             free, from the moment they add the first medicine.
           </p>
@@ -507,18 +477,18 @@ export function Features() {
               }`}
             >
               <Reveal>
-                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-mute">
+                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-white/45">
                   {b.eyebrow}
                 </p>
-                <h3 className="mt-2 font-display text-[clamp(1.3rem,2.6vw,1.75rem)] leading-snug text-navy text-balance">
+                <h3 className="mt-2 font-display text-[clamp(1.3rem,2.6vw,1.75rem)] leading-snug text-balance">
                   {b.title}
                 </h3>
-                <p className="mt-3 text-[0.92rem] leading-relaxed text-slate">
+                <p className="mt-3 text-[0.92rem] leading-relaxed text-white/60">
                   {b.body}
                 </p>
                 <ul className="mt-5 space-y-2">
                   {b.points.map((p) => (
-                    <li key={p} className="flex gap-2.5 text-[0.86rem] text-navy">
+                    <li key={p} className="flex gap-2.5 text-[0.86rem] text-white/85">
                       <span className="mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full bg-amber" />
                       {p}
                     </li>
@@ -536,130 +506,86 @@ export function Features() {
 
 /* ----------------------------- markers ------------------------------- */
 
-const markers = [
-  {
-    k: "LDL cholesterol",
-    tag: "Heart",
-    w: "The cholesterol that collects in artery walls, watched over years rather than weeks because the damage is cumulative and quiet.",
-    reading: "164 mg/dL", status: "High",
-    lo: 0, hi: 45, at: 74, range: "Under 100 mg/dL",
-    lowLabel: "Lower is better", highLabel: "Raised",
-  },
-  {
-    k: "HbA1c",
-    tag: "Sugar",
-    w: "Your average blood sugar over about three months. A single fasting reading can be a bad morning; this one cannot be.",
-    reading: "6.1 %", status: "Raised",
-    lo: 10, hi: 48, at: 58, range: "Under 5.7 %",
-    lowLabel: "Normal", highLabel: "Diabetes range",
-  },
-  {
-    k: "Fasting glucose",
-    tag: "Sugar",
-    w: "Sugar after a night without food. Read alongside HbA1c, it separates one high morning from a pattern worth acting on.",
-    reading: "92 mg/dL", status: "In range",
-    lo: 14, hi: 50, at: 32, range: "70 to 99 mg/dL",
-    lowLabel: "Low", highLabel: "High",
-  },
-  {
-    k: "Creatinine and eGFR",
-    tag: "Kidney",
-    w: "How well the kidneys are clearing waste. It moves slowly and silently, which is exactly why it is worth watching over time.",
-    reading: "eGFR 78", status: "Watch",
-    lo: 40, hi: 95, at: 62, range: "Above 90",
-    lowLabel: "Reduced", highLabel: "Healthy",
-  },
-];
-
-/* A reading is either in its range or it is not, and the card should
-   say which in a word. A dot on a line leaves the reader to work it
-   out, which is the thing this section exists to stop. */
-const statusTone: Record<string, string> = {
-  "In range": "bg-sage-wash text-sage",
-  Watch: "bg-amber-wash text-amber-deep",
-  Raised: "bg-amber-wash text-amber-deep",
-  High: "bg-amber-wash text-amber-deep",
-  Low: "bg-amber-wash text-amber-deep",
+const marker = {
+  k: "LDL cholesterol",
+  tag: "Heart",
+  w: "The cholesterol that collects in artery walls. It is watched over years rather than weeks, because the damage is cumulative and quiet.",
+  reading: "164 mg/dL",
+  status: "High",
+  range: "Under 100 mg/dL",
+  lo: 0,
+  hi: 45,
+  at: 74,
+  lowLabel: "Lower is better",
+  highLabel: "Raised",
 };
+
+
 
 export function Markers() {
   return (
-    <section className="border-b border-line bg-paper">
+    <section className="border-b border-line bg-white">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <Reveal>
-          <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
-            <div>
-              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
-                Understanding your numbers
-              </p>
-              <h2 className="mt-3 max-w-xl font-display text-[clamp(1.9rem,4.4vw,2.6rem)] leading-tight text-ink text-balance">
-                A marker is only useful if you know what it is for
-              </h2>
-            </div>
-            <p className="max-w-sm text-[0.9rem] leading-relaxed text-slate">
-              Ayussetu explains each one in plain language where it appears, so
-              a number on a report stops being somebody else&rsquo;s
-              vocabulary.
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-mute">
+              Understanding your numbers
+            </p>
+            <h2 className="mt-3 font-display text-[clamp(1.9rem,4.4vw,2.6rem)] leading-tight text-ink text-balance">
+              A marker is only useful if you know what it is for
+            </h2>
+            <p className="mt-4 text-[0.95rem] leading-relaxed text-slate">
+              Every marker Ayussetu reads is explained where it appears, in
+              plain language, with your own reading against its range.
             </p>
           </div>
         </Reveal>
 
-        <div className="mt-14 grid gap-4 sm:grid-cols-2">
-          {markers.map((m, i) => (
-            <Reveal key={m.k} delay={i * 90}>
-              <article className="group h-full rounded-3xl border border-line bg-white p-6 transition duration-500 hover:border-amber/45 hover:shadow-[0_26px_60px_-44px_rgba(22,35,61,0.75)]">
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className="font-display text-[1.18rem] text-navy">
-                    {m.k}
-                  </h3>
-                  <span className="shrink-0 rounded-full bg-mist px-2.5 py-1 text-[0.62rem] font-semibold text-mute">
-                    {m.tag}
-                  </span>
-                </div>
-                <p className="mt-2.5 min-h-[3.4rem] text-[0.9rem] leading-relaxed text-slate">
-                  {m.w}
-                </p>
+        <Reveal delay={90}>
+          <article className="mx-auto mt-12 max-w-3xl rounded-[1.75rem] border border-line bg-white p-7 shadow-[0_40px_90px_-65px_rgba(22,35,61,0.6)] md:p-10">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h3 className="font-display text-[1.4rem] text-navy">
+                {marker.k}
+              </h3>
+              <span className="rounded-full bg-mist px-3 py-1 text-[0.66rem] font-semibold text-mute">
+                {marker.tag}
+              </span>
+            </div>
+            <p className="mt-3 max-w-xl text-[0.95rem] leading-relaxed text-slate">
+              {marker.w}
+            </p>
 
-                {/* the last reading, and whether it is where it should be */}
-                <div className="mt-auto pt-5">
-                  <div className="flex items-baseline justify-between">
-                    <span className="text-[0.7rem] text-mute">Last reading</span>
-                    <span className="flex items-center gap-2">
-                      <span className="text-[0.95rem] font-semibold tabular-nums text-navy">
-                        {m.reading}
-                      </span>
-                      <span
-                        className={`rounded-full px-2 py-0.5 text-[0.62rem] font-semibold ${statusTone[m.status]}`}
-                      >
-                        {m.status}
-                      </span>
-                    </span>
-                  </div>
+            <div className="mt-8 flex items-baseline justify-between">
+              <span className="text-[0.74rem] text-mute">Your last reading</span>
+              <span className="flex items-baseline gap-3">
+                <span className="font-display text-[1.5rem] tabular-nums text-navy">
+                  {marker.reading}
+                </span>
+                <span className="rounded-full bg-amber-wash px-2.5 py-1 text-[0.66rem] font-semibold text-amber-deep">
+                  {marker.status}
+                </span>
+              </span>
+            </div>
 
-                  <div className="relative mt-3 h-1.5 rounded-full bg-mist">
-                    <span
-                      className="absolute inset-y-0 rounded-full bg-sage/40"
-                      style={{ left: `${m.lo}%`, right: `${100 - m.hi}%` }}
-                    />
-                    <span
-                      className={`absolute top-1/2 h-3.5 w-3.5 -translate-y-1/2 rounded-full border-2 border-white shadow ${
-                        m.status === "In range" ? "bg-sage" : "bg-amber"
-                      }`}
-                      style={{ left: `calc(${m.at}% - 0.4375rem)` }}
-                    />
-                  </div>
-                  <div className="mt-2 flex justify-between text-[0.66rem] text-mute">
-                    <span>{m.lowLabel}</span>
-                    <span className="font-semibold text-navy">
-                      Healthy: {m.range}
-                    </span>
-                    <span>{m.highLabel}</span>
-                  </div>
-                </div>
-              </article>
-            </Reveal>
-          ))}
-        </div>
+            <div className="relative mt-4 h-2 rounded-full bg-mist">
+              <span
+                className="absolute inset-y-0 rounded-full bg-sage/35"
+                style={{ left: `${marker.lo}%`, right: `${100 - marker.hi}%` }}
+              />
+              <span
+                className="absolute top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border-2 border-white bg-amber shadow"
+                style={{ left: `calc(${marker.at}% - 0.5rem)` }}
+              />
+            </div>
+            <div className="mt-3 flex justify-between text-[0.7rem] text-mute">
+              <span>{marker.lowLabel}</span>
+              <span className="font-semibold text-navy">
+                Healthy: {marker.range}
+              </span>
+              <span>{marker.highLabel}</span>
+            </div>
+          </article>
+        </Reveal>
       </div>
     </section>
   );
@@ -667,55 +593,22 @@ export function Markers() {
 
 /* ---------------------------- audiences ------------------------------ */
 
-const audiences = [
-  {
-    who: "For patients",
-    line: "Take control of your health early",
-    body: "Understand what your reports are saying, see where risk is building, and act on it before it becomes a diagnosis. Your record travels with you to whichever doctor you choose.",
-    points: [
-      "One record, every clinic",
-      "Reminders that keep a course on track",
-      "Risk explained in plain language",
-    ],
-  },
-  {
-    who: "For doctors",
-    line: "The patient's history, before the consultation",
-    body: "Ask for access and read their own readings and reports before they sit down. Write the prescription into the record, sign it with a finger, and their doses schedule themselves from it.",
-    points: [
-      "Record access, with consent",
-      "A prescription written in a minute",
-      "Earnings, referrals and the day's list",
-    ],
-  },
-  {
-    who: "For clinicians and clinics",
-    line: "The whole practice, in one console",
-    body: "Departments and the doctors who sit in them, the day's appointments across all of them, the patient list, every prescription written on your roster, and what has been billed.",
-    points: [
-      "Departments, doctors and staff",
-      "The clinic's book for the day",
-      "Prescriptions and billing in one place",
-    ],
-  },
-];
 
 export function Audiences() {
   return (
-    <section id="audiences" className="relative overflow-hidden border-b border-line bg-ink">
-      <span className="pointer-events-none absolute -left-40 top-0 h-[32rem] w-[32rem] rounded-full bg-amber/10 blur-[140px]" />
+    <section id="audiences" className="relative border-b border-line bg-white">
       <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <Reveal>
           <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
             <div>
-              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber">
+              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
                 Who it is for
               </p>
-              <h2 className="mt-3 max-w-xl font-display text-[clamp(1.9rem,4.4vw,2.7rem)] leading-tight text-white text-balance">
+              <h2 className="mt-3 max-w-xl font-display text-[clamp(1.9rem,4.4vw,2.7rem)] leading-tight text-ink text-balance">
                 One record, read three different ways
               </h2>
             </div>
-            <p className="max-w-sm text-[0.9rem] leading-relaxed text-white/55">
+            <p className="max-w-sm text-[0.9rem] leading-relaxed text-slate">
               The same history serves the person it belongs to, the doctor
               treating them and the clinic they walk into. Nobody is asked to
               keep a second copy.
@@ -723,38 +616,8 @@ export function Audiences() {
           </div>
         </Reveal>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-3">
-          {audiences.map((a, i) => (
-            <Reveal key={a.who} delay={i * 110}>
-              <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white p-7 transition duration-500 hover:border-amber/50 hover:shadow-[0_26px_60px_-42px_rgba(22,35,61,0.7)]">
-                <span className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-amber/0 blur-2xl transition duration-500 group-hover:bg-amber/15" />
-
-                <span className="font-display text-[0.8rem] tracking-[0.14em] text-amber-deep">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="mt-5 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-mute">
-                  {a.who}
-                </p>
-                <h3 className="mt-2 font-display text-[1.28rem] leading-snug text-navy text-balance">
-                  {a.line}
-                </h3>
-                <p className="mt-3 text-[0.88rem] leading-relaxed text-slate">
-                  {a.body}
-                </p>
-
-                <ul className="mt-6 space-y-2.5 border-t border-line pt-5">
-                  {a.points.map((pt) => (
-                    <li key={pt} className="flex gap-2.5 text-[0.84rem] text-navy">
-                      <svg width="13" height="13" viewBox="0 0 16 16" className="mt-[0.2rem] shrink-0 text-amber" aria-hidden="true">
-                        <path d="M6.2 11.3 3.4 8.5l1-1 1.8 1.8 5-5 1 1z" fill="currentColor" />
-                      </svg>
-                      {pt}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            </Reveal>
-          ))}
+        <div className="mt-12">
+          <AudienceLens />
         </div>
       </div>
     </section>
@@ -789,9 +652,7 @@ const doctorBlocks = [
 
 export function Practice() {
   return (
-    <section id="doctors" className="relative overflow-hidden border-b border-line bg-ink text-white">
-      <span className="pointer-events-none absolute -right-32 top-10 h-[34rem] w-[34rem] rounded-full bg-amber/10 blur-[140px]" />
-      <span className="pointer-events-none absolute -left-40 bottom-0 h-[30rem] w-[30rem] rounded-full bg-sage/10 blur-[140px]" />
+    <section id="doctors" className="relative border-b border-line bg-ink text-white">
       <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <div className="max-w-2xl">
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber">
@@ -841,7 +702,7 @@ export function Practice() {
 
 export function Testimonial() {
   return (
-    <section id="testimonials" className="border-b border-line bg-mist">
+    <section id="testimonials" className="border-b border-line bg-white">
       <div className="mx-auto max-w-4xl px-5 py-16 text-center sm:px-8 md:py-20">
         <blockquote className="font-display text-[clamp(1.3rem,3vw,1.9rem)] font-medium leading-snug text-ink text-balance">
           &ldquo;This app has completely changed how I manage my health. I
@@ -859,72 +720,122 @@ export function Testimonial() {
 /* ------------------------------- ABHA -------------------------------- */
 
 export function Abha() {
+  const steps = [
+    { n: "01", t: "A hospital asks", d: "A request arrives against your ABHA" },
+    { n: "02", t: "You approve", d: "You choose what, and for how long" },
+    { n: "03", t: "Records travel", d: "Only the records you picked are sent" },
+    { n: "04", t: "You withdraw", d: "Access ends the moment you say so" },
+  ];
+
   return (
-    <section id="abha" className="border-b border-line bg-paper">
+    <section id="abha" className="border-b border-line bg-white">
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 md:py-20">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[2rem] border border-line bg-ink px-7 py-12 text-white md:px-14 md:py-16">
-            <span className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-amber/15 blur-3xl" />
-            <span className="pointer-events-none absolute -bottom-28 -left-20 h-72 w-72 rounded-full bg-sage/15 blur-3xl" />
+          <div className="relative overflow-hidden rounded-[2rem] border border-line bg-ink px-6 py-11 text-white sm:px-9 md:px-14 md:py-16">
+            <span className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/[0.07] blur-3xl" />
 
-            <div className="relative grid gap-10 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+            <div className="relative grid gap-12 md:grid-cols-[1.05fr_0.95fr] md:items-center md:gap-14">
               <div>
-                <p className="inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-amber">
-                  <span className="h-1.5 w-1.5 rounded-full bg-amber" />
-                  Coming soon
+                <p className="inline-flex items-center gap-2 rounded-full border border-amber/30 bg-amber/10 px-3 py-1.5 text-[0.66rem] font-semibold uppercase tracking-[0.12em] text-amber">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber/70" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber" />
+                  </span>
+                  Planned, not yet live
                 </p>
                 <h2 className="mt-5 font-display text-[clamp(1.7rem,3.6vw,2.4rem)] leading-tight text-balance">
                   One health ID, all your records
                 </h2>
                 <p className="mt-4 max-w-xl text-[0.94rem] leading-relaxed text-white/65">
                   Ayussetu is being readied for the Ayushman Bharat Digital
-                  Mission, so your records can be linked to your ABHA and read
-                  by any hospital on the national network, with your consent
-                  each time.
+                  Mission, so the records you keep here can sit behind your
+                  ABHA and be read by any hospital on the national network,
+                  against a consent you approve each time.
                 </p>
+
+                <ol className="mt-9 grid gap-x-6 gap-y-5 sm:grid-cols-2">
+                  {steps.map((st) => (
+                    <li key={st.n} className="relative pl-9">
+                      <span className="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full border border-white/15 bg-white/[0.06] text-[0.56rem] font-bold tabular-nums text-amber">
+                        {st.n}
+                      </span>
+                      <p className="text-[0.86rem] font-semibold leading-snug text-white">
+                        {st.t}
+                      </p>
+                      <p className="mt-0.5 text-[0.76rem] leading-snug text-white/50">
+                        {st.d}
+                      </p>
+                    </li>
+                  ))}
+                </ol>
               </div>
 
-              {/* The thing itself, rather than three words in pills. */}
-              <div className="rounded-2xl border border-white/15 bg-gradient-to-br from-white/[0.12] to-white/[0.04] p-5 shadow-[0_24px_50px_-30px_rgba(0,0,0,0.9)]">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <p className="text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-white/40">
-                      Ayushman Bharat Health Account
-                    </p>
-                    <p className="mt-2 font-display text-[1.35rem] tabular-nums tracking-[0.12em] text-white">
-                      12 3456 7890 1234
-                    </p>
-                    <p className="mt-1 text-[0.82rem] text-white/55">
-                      lakshmi@abdm
-                    </p>
+              {/* The account itself, drawn the way the card is laid out. */}
+              <div className="relative mx-auto w-full max-w-sm">
+                <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-navy/60 bg-gradient-to-br from-white/[0.14] via-white/[0.07] to-white/[0.03] p-5 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.95)]">
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -left-10 top-0 h-full w-24 rotate-12 bg-white/[0.07] blur-xl"
+                  />
+                  <div className="relative flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-white/40">
+                        Ayushman Bharat Health Account
+                      </p>
+                      <p className="mt-3 font-display text-[1.3rem] tabular-nums tracking-[0.14em] text-white">
+                        12 3456 7890 1234
+                      </p>
+                      <p className="mt-1 text-[0.82rem] text-white/55">
+                        lakshmi@abdm
+                      </p>
+                    </div>
+                    <span className="shrink-0 rounded-lg bg-white/10 p-2">
+                      <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true">
+                        {[0, 1, 2].map((r) =>
+                          [0, 1, 2].map((c) => (
+                            <rect
+                              key={`${r}-${c}`}
+                              x={3 + c * 6.5}
+                              y={3 + r * 6.5}
+                              width="5"
+                              height="5"
+                              rx="1"
+                              fill="#fff"
+                              opacity={(r + c) % 2 === 0 ? 0.85 : 0.3}
+                            />
+                          )),
+                        )}
+                      </svg>
+                    </span>
                   </div>
-                  <span className="rounded-lg bg-white/10 p-2">
-                    <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true">
-                      {[0, 1, 2].map((r) =>
-                        [0, 1, 2].map((c) => (
-                          <rect
-                            key={`${r}-${c}`}
-                            x={3 + c * 6.5}
-                            y={3 + r * 6.5}
-                            width="5"
-                            height="5"
-                            rx="1"
-                            fill="#fff"
-                            opacity={(r + c) % 2 === 0 ? 0.85 : 0.3}
-                          />
-                        )),
-                      )}
-                    </svg>
-                  </span>
+
+                  <div className="relative mt-5 grid grid-cols-2 gap-4 border-t border-white/10 pt-4">
+                    <div>
+                      <p className="text-[0.54rem] font-semibold uppercase tracking-[0.14em] text-white/35">
+                        Records linked
+                      </p>
+                      <p className="mt-1 text-[0.84rem] font-medium tabular-nums text-white">
+                        34 files
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-[0.54rem] font-semibold uppercase tracking-[0.14em] text-white/35">
+                        Consents open
+                      </p>
+                      <p className="mt-1 text-[0.84rem] font-medium tabular-nums text-sage">
+                        1 of 1
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
-                <ul className="mt-5 space-y-2.5 border-t border-white/10 pt-4">
+                <ul className="mt-5 space-y-2.5">
                   {[
                     "Linked to the records you already keep here",
                     "Shared only against a consent you approve",
                     "Readable by any hospital on the network",
                   ].map((t) => (
-                    <li key={t} className="flex gap-2.5 text-[0.82rem] text-white/75">
+                    <li key={t} className="flex gap-2.5 text-[0.82rem] text-white/70">
                       <svg width="13" height="13" viewBox="0 0 16 16" className="mt-[0.2rem] shrink-0 text-sage" aria-hidden="true">
                         <path d="M6.2 11.3 3.4 8.5l1-1 1.8 1.8 5-5 1 1z" fill="currentColor" />
                       </svg>
@@ -932,6 +843,10 @@ export function Abha() {
                     </li>
                   ))}
                 </ul>
+                <p className="mt-5 text-[0.68rem] leading-relaxed text-white/35">
+                  Illustration of the planned account. Ayussetu is not yet
+                  certified on the ABDM network.
+                </p>
               </div>
             </div>
           </div>
@@ -940,11 +855,12 @@ export function Abha() {
     </section>
   );
 }
+
 /* -------------------------------- team ------------------------------- */
 
 export function Team() {
   return (
-    <section id="team" className="border-b border-line bg-mist">
+    <section id="team" className="border-b border-line bg-white">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <Reveal>
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
@@ -1023,7 +939,7 @@ const security = [
 
 export function Security() {
   return (
-    <section id="security" className="border-b border-line bg-paper">
+    <section id="security" className="border-b border-line bg-white">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <Reveal>
           <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
@@ -1204,7 +1120,7 @@ export function Security() {
 
 export function Download() {
   return (
-    <section id="download" className="border-b border-line bg-mist">
+    <section id="download" className="border-b border-line bg-white">
       <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
         <div className="overflow-hidden rounded-3xl bg-navy px-6 py-12 text-center sm:px-14">
           <h2 className="mx-auto max-w-2xl font-display text-[clamp(1.8rem,4vw,2.4rem)] leading-tight text-white text-balance">

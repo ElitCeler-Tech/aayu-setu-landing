@@ -114,7 +114,7 @@ export default function ForDoctors() {
 
         {/* Two products, explained one after the other, because a
             doctor and a clinic manager want different answers. */}
-        <section className="border-b border-line bg-mist">
+        <section className="border-b border-line bg-white">
           <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
             <Reveal>
               <p className="text-[0.7rem] font-semibold uppercase tracking-[0.13em] text-amber-deep">
