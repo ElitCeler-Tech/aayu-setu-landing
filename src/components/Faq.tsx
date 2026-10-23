@@ -11,27 +11,23 @@ import { useState } from "react";
 const faqs = [
   {
     q: "How does Ayussetu track my vitals?",
-    a: "Log them in the app in one sitting: blood pressure, pulse, sugar, SpO2, temperature, respiratory rate, weight, BMI, sleep and steps. A connected smartwatch fills in what it can. Each reading is scored and compared with your own history rather than a textbook average.",
+    a: "Ten readings in one sitting, from blood pressure to sleep, with a connected smartwatch filling in what it can. Each one is scored against your own history, not a textbook average.",
   },
   {
     q: "How does it read my lab report?",
-    a: "Photograph or upload it and the markers are pulled out, placed against their reference ranges and scored. The next report is compared with the last, so you see the direction of travel. Anything it cannot read stays as the document you uploaded, so nothing is lost.",
+    a: "Photograph it. The markers are pulled out, ranged and compared with your last report, so you see the direction of travel. Anything unreadable stays as the document you uploaded.",
   },
   {
     q: "Can I book appointments online as well as in person?",
-    a: "Yes. Find a doctor by department, see the slots they actually have, and book in person, by video or by voice. You join the call from the app, and the prescription that comes out of it lands in your records with your doses scheduled from it.",
+    a: "Yes, in person, by video or by voice. You join the call from the app, and the prescription lands in your records with the doses scheduled from it.",
   },
   {
     q: "Who can see my records?",
-    a: "You, and any doctor you grant access to. Access is asked for per doctor, you are told each time, and it can be withdrawn afterwards. A care group shares only what each member chooses to share.",
-  },
-  {
-    q: "Is my data secure?",
-    a: "Records are encrypted in transit and at rest. Nothing is shared without a consent you gave, and health data is never sold. Every grant of access is recorded, so you can see who asked and when.",
+    a: "You, and any doctor you grant access to. Access is per doctor, and it can be withdrawn afterwards.",
   },
   {
     q: "Do I need an ABHA to use it?",
-    a: "No. Ayussetu works on its own today. ABHA linking is being built so your records can travel with you to any hospital on the national network, with your consent each time.",
+    a: "No. Ayussetu works on its own today, and ABHA linking is being built.",
   },
 ];
 

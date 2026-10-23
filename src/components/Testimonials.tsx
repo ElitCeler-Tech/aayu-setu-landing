@@ -7,42 +7,37 @@
 
 const quotes = [
   {
-    q: "This app has completely changed how I manage my health. I never miss a medication, and the AI chat gives instant answers to all my questions.",
-    n: "Ria Singh",
-    r: "Patient, Hyderabad",
-  },
-  {
-    q: "I photographed four years of lab reports in an evening. Seeing my cholesterol move across all of them was the first time any of it made sense.",
+    q: "I photographed four years of lab reports in an evening, and saw my cholesterol move across all of them.",
     n: "Mahesh Reddy",
     r: "Patient, Warangal",
   },
   {
-    q: "My mother is in another city. I can see she took her tablets this week without ringing to check, and she still decides what I get to see.",
+    q: "My mother is in another city. I can see she took her tablets, and she still decides what I get to see.",
     n: "Anitha Rao",
     r: "Daughter and carer",
   },
   {
-    q: "The prescription takes a minute and the patient has it before they leave the room. Their doses are already scheduled from what I wrote.",
+    q: "The prescription takes a minute, and the patient has it before they leave the room.",
     n: "Dr S. Prasad",
     r: "General physician",
   },
   {
-    q: "Having the patient's own readings in front of me before the consultation changes what I ask them. I am no longer starting from nothing.",
+    q: "Reading their own numbers before the consultation changes what I ask them.",
     n: "Dr Kavitha M.",
     r: "Diabetologist",
   },
   {
-    q: "The missed dose list is the honest one. I can log that I took it late instead of pretending I took it on time.",
+    q: "The missed dose list is the honest one. I can log that I took it late.",
     n: "Imran Qureshi",
     r: "Patient, Hyderabad",
   },
   {
-    q: "Our front desk runs the whole day from the console. Departments, doctors, who is waiting, what has been billed.",
+    q: "Our front desk runs the whole day from the console.",
     n: "Lakshmi Prasad",
     r: "Clinic manager",
   },
   {
-    q: "I asked Ayu what my creatinine meant and got a straight answer, with a note to check it with my doctor. That is the right amount of help.",
+    q: "Ayu told me what my creatinine meant, and to check it with my doctor.",
     n: "Venkat Rao",
     r: "Patient, Karimnagar",
   },
@@ -109,9 +104,8 @@ export function Testimonials() {
         </div>
       </div>
 
-      <div className="mt-12 space-y-4 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
-        <Row items={quotes.slice(0, 4)} />
-        <Row items={quotes.slice(4)} reverse />
+      <div className="mt-12 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+        <Row items={quotes} />
       </div>
     </section>
   );

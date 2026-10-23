@@ -15,8 +15,6 @@ import { AudienceLens } from "./Lens";
 
 /* ------------------------------- hero -------------------------------- */
 
-const promise = ["Digitalise records", "Predict risk", "Prevent disease", "Live better"];
-
 export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-line">
@@ -53,19 +51,10 @@ export function Hero() {
           </h1>
 
           <p className="rise mt-6 max-w-xl text-[1.05rem] leading-relaxed text-slate [animation-delay:250ms]">
-            Ayussetu brings scattered paper and digital records into one place
-            and uses AI to show where your risk is building, so something
-            can be done about it early rather than explained afterwards.
+            Your records in one place, read together, so where your risk is
+            building shows up early.
           </p>
 
-          <ul className="rise mt-6 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[0.86rem] font-medium text-navy [animation-delay:330ms]">
-            {promise.map((p, i) => (
-              <li key={p} className="flex items-center gap-3">
-                {i > 0 && <span className="h-1 w-1 rounded-full bg-faint" />}
-                {p}
-              </li>
-            ))}
-          </ul>
 
           <div className="rise mt-9 flex flex-wrap items-center gap-3 [animation-delay:410ms]">
             <a
@@ -193,17 +182,17 @@ const thesis = [
   {
     n: "The problem",
     t: "Your health is written down in a dozen places",
-    b: "A lab in one clinic, a prescription in a drawer, a discharge summary on a phone, a reading nobody wrote down. Not one of them is wrong, and together they are unreadable.",
+    b: "A lab in one clinic, a prescription in a drawer, a reading nobody wrote down. None of them wrong, and together unreadable.",
   },
   {
     n: "What we do",
     t: "Read them as one record",
-    b: "Upload what you have. Ayussetu reads the markers out of it, places each against its range, and files it beside the medicines you take and the readings you log.",
+    b: "Upload what you have. Ayussetu reads the markers out, ranges each one, and files it beside your medicines and readings.",
   },
   {
     n: "Why it matters",
     t: "Risk shows up in the trend, not the test",
-    b: "One LDL means little. LDL climbing across three reports while HDL falls is a direction, and a direction is something you can still act on.",
+    b: "One LDL means little. LDL climbing across three reports is a direction, and a direction you can still act on.",
   },
 ];
 
@@ -411,42 +400,22 @@ const features = [
   {
     eyebrow: "Unified health records",
     title: "Every report in one place, and read, not just stored",
-    body: "Photograph a lab report and Ayussetu pulls the markers out of it, places each against its reference range and scores the set. The next report is compared with the last, so what you see is the direction of travel rather than a page of numbers to interpret alone.",
-    points: [
-      "Markers extracted and ranged automatically",
-      "This report against the previous one",
-      "Prescriptions, lab reports and hospital documents in one folder",
-    ],
+    body: "Photograph a lab report. Ayussetu pulls the markers out, places each against its range, and compares it with the last one.",
     mock: <ReportMock />,
   },  {
     eyebrow: "Smart medication management",
     title: "Doses you actually take, and the ones you did not",
-    body: "Add a medicine once and the rest works itself out: how many days the quantity covers, which days it is taken on, what time each dose falls. Reminders arrive at the hour, with Take, Skip and Snooze. A dose missed yesterday is still answerable this morning.",
-    points: [
-      "End date calculated from the quantity prescribed",
-      "Missed doses logged late, as taken or skipped",
-      "Refills, course history and interaction cautions",
-    ],
+    body: "Add a medicine once and the schedule works itself out. A dose missed yesterday is still answerable this morning.",
     mock: <DoseMock />,
   },  {
     eyebrow: "Ayu, the AI assistant",
     title: "Answers drawn from your record, not from the internet",
-    body: "Ask about a medicine, a reading or a report and Ayu answers against what Ayussetu already knows about you: the markers in your last lab, the medicines you are on, the appointment you have on Tuesday. Clear summaries for faster decisions.",
-    points: [
-      "Reads your own reports, medicines and readings",
-      "Plain language summaries of what a marker means",
-      "Says plainly that it can be wrong, and to ask your doctor",
-    ],
+    body: "Ask about a medicine, a reading or a report. Ayu answers from your own record, not from the internet.",
     mock: <AyuMock />,
   },  {
     eyebrow: "Doctor consultations",
     title: "Book in person, on video or by voice",
-    body: "Find a doctor by department, see the slots they actually have, and book the kind of consultation that suits. Join the call from the app, and keep the prescription that comes out of it, with your doses scheduled from it automatically.",
-    points: [
-      "Real slots, not a request form",
-      "Video and voice calls inside the app",
-      "The prescription lands in your records",
-    ],
+    body: "Find a doctor, see the slots they actually have, and take the call in the app. The prescription files itself.",
     mock: <ConsultMock />,
   },
 ];
@@ -463,8 +432,7 @@ export function Features() {
             Everything a hospital asks you to remember, remembered for you
           </h2>
           <p className="mt-4 text-[0.95rem] leading-relaxed text-white/60">
-            This is the patient app: what somebody gets on their own phone,
-            free, from the moment they add the first medicine.
+            Free, on their own phone, from the first medicine they add.
           </p>
         </div>
 
@@ -486,14 +454,6 @@ export function Features() {
                 <p className="mt-3 text-[0.92rem] leading-relaxed text-white/60">
                   {b.body}
                 </p>
-                <ul className="mt-5 space-y-2">
-                  {b.points.map((p) => (
-                    <li key={p} className="flex gap-2.5 text-[0.86rem] text-white/85">
-                      <span className="mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full bg-amber" />
-                      {p}
-                    </li>
-                  ))}
-                </ul>
               </Reveal>
               <Parallax speed={i % 2 === 0 ? 0.34 : 0.46}>{b.mock}</Parallax>
             </div>
@@ -535,8 +495,7 @@ export function Markers() {
               A marker is only useful if you know what it is for
             </h2>
             <p className="mt-4 text-[0.95rem] leading-relaxed text-slate">
-              Every marker Ayussetu reads is explained where it appears, in
-              plain language, with your own reading against its range.
+              Explained in plain language, with your own reading against its range.
             </p>
           </div>
         </Reveal>
@@ -609,9 +568,7 @@ export function Audiences() {
               </h2>
             </div>
             <p className="max-w-sm text-[0.9rem] leading-relaxed text-slate">
-              The same history serves the person it belongs to, the doctor
-              treating them and the clinic they walk into. Nobody is asked to
-              keep a second copy.
+              One history, three readings of it. Nobody keeps a second copy.
             </p>
           </div>
         </Reveal>
@@ -629,23 +586,13 @@ const doctorBlocks = [
   {
     eyebrow: "Consultation",
     title: "A prescription written in a minute, delivered in seconds",
-    body: "Medicine by name with its generic resolved as you type, strength, quantity, times of day and days of the week, and the end date worked out from the quantity. Around it sits the rest of the visit: complaint, diagnosis with ICD codes, vitals, history, tests, immunisations, advice and a follow-up that books itself.",
-    points: [
-      "Seventeen clinical fields, and a draft to come back to",
-      "Signed with a finger, delivered as a PDF",
-      "The patient's doses are created from what you prescribed",
-    ],
+    body: "Medicine, strength, quantity and schedule, with the end date worked out for you, and the rest of the visit around it: complaint, diagnosis, vitals, tests and a follow up that books itself.",
     mock: <PrescriptionMock />,
   },
   {
     eyebrow: "Practice",
     title: "What you earned, by the period you actually think in",
-    body: "Today, this week, this month, this quarter, this year, or dates you pick. Consultations split by how they were seen, what is paid and what is owed, and referral share alongside, with a summary sheet to hand to a lab or an accountant.",
-    points: [
-      "Paid and outstanding kept apart",
-      "Referral partners, percentages and a shareable summary",
-      "Patients today and all time, prescriptions still to write",
-    ],
+    body: "Today, this week, this month, this quarter, or dates you pick. Paid and outstanding kept apart, with referral share alongside.",
     mock: <EarningsMock />,
   },
 ];
@@ -680,14 +627,6 @@ export function Practice() {
                 <p className="mt-3 text-[0.92rem] leading-relaxed text-white/60">
                   {b.body}
                 </p>
-                <ul className="mt-5 space-y-2">
-                  {b.points.map((p) => (
-                    <li key={p} className="flex gap-2.5 text-[0.86rem] text-white/85">
-                      <span className="mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full bg-amber" />
-                      {p}
-                    </li>
-                  ))}
-                </ul>
               </Reveal>
               <Parallax speed={i % 2 === 0 ? 0.36 : 0.48}>{b.mock}</Parallax>
             </div>
@@ -747,10 +686,9 @@ export function Abha() {
                   One health ID, all your records
                 </h2>
                 <p className="mt-4 max-w-xl text-[0.94rem] leading-relaxed text-white/65">
-                  Ayussetu is being readied for the Ayushman Bharat Digital
-                  Mission, so the records you keep here can sit behind your
-                  ABHA and be read by any hospital on the national network,
-                  against a consent you approve each time.
+                  The records you keep here will sit behind your ABHA, readable by
+                  any hospital on the national network, against a consent you
+                  approve each time.
                 </p>
 
                 <ol className="mt-9 grid gap-x-6 gap-y-5 sm:grid-cols-2">
@@ -952,8 +890,7 @@ export function Security() {
               </h2>
             </div>
             <p className="max-w-sm text-[0.9rem] leading-relaxed text-slate">
-              Every claim below is something you can see happening in the app,
-              rather than a padlock drawn on a website.
+              Every claim below is something you can see happening in the app.
             </p>
           </div>
         </Reveal>
@@ -966,8 +903,7 @@ export function Security() {
                 A doctor has to ask
               </h3>
               <p className="mt-2 text-[0.88rem] leading-relaxed text-slate">
-                Nothing of yours is visible to a clinician until you approve
-                it, and the request names who is asking and why.
+                Nothing is visible to a clinician until you approve it.
               </p>
               <div className="mt-auto rounded-2xl border border-line bg-mist/60 p-3.5 pt-3 transition duration-500 group-hover:border-sage/30 group-hover:bg-sage-wash/70">
                 <p className="text-[0.56rem] font-bold uppercase tracking-[0.12em] text-mute">
@@ -998,8 +934,7 @@ export function Security() {
                 You choose what a group sees
               </h3>
               <p className="mt-2 text-[0.88rem] leading-relaxed text-slate">
-                A care group is not all or nothing. Each person decides what
-                travels to it, and can change their mind.
+                Each person decides what travels to a care group, and can change their mind.
               </p>
               <div className="mt-auto space-y-1.5 rounded-2xl border border-line bg-mist/60 p-3.5 transition duration-500 group-hover:border-sage/30 group-hover:bg-sage-wash/70">
                 {[
@@ -1034,8 +969,7 @@ export function Security() {
                 Access is logged, and withdrawable
               </h3>
               <p className="mt-2 text-[0.88rem] leading-relaxed text-slate">
-                Every grant is recorded with the date it was given, and you can
-                take it back without asking anybody.
+                Every grant is dated, and you can take it back without asking anybody.
               </p>
               <div className="mt-auto space-y-1.5 rounded-2xl border border-line bg-mist/60 p-3.5 transition duration-500 group-hover:border-sage/30 group-hover:bg-sage-wash/70">
                 {[
@@ -1067,49 +1001,27 @@ export function Security() {
         </div>
 
         <Reveal>
-          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-5 flex flex-wrap gap-x-7 gap-y-2.5 text-[0.86rem] text-slate">
             {[
-              ["Encrypted in transit and at rest", "Records move over TLS and are stored encrypted.", "M12 3 5 6v6c0 4.2 2.9 8.1 7 9 4.1-.9 7-4.8 7-9V6Z"],
-              ["Nothing sold on", "Health data is not a product here, and never will be.", "M4.5 4.5 19.5 19.5M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z"],
-              ["Private by design", "The architecture shares nothing by default.", "M6 10V7.4a6 6 0 0 1 12 0V10M5 10h14v10H5Z"],
-              ["Built towards ABDM", "Consent and interoperability are on the roadmap, not claimed today.", "M12 3v18M3 12h18"],
-            ].map(([t, b, d]) => (
-              <div
-                key={t}
-                className="group rounded-2xl border border-line bg-white p-5 transition duration-500 hover:border-navy/25 hover:bg-mist/50"
-              >
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-mist transition group-hover:bg-navy">
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.7"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-navy transition group-hover:text-white"
-                    aria-hidden="true"
-                  >
-                    <path d={d} />
-                  </svg>
-                </span>
-                <h4 className="mt-4 text-[0.88rem] font-semibold text-navy">
-                  {t}
-                </h4>
-                <p className="mt-1.5 text-[0.82rem] leading-relaxed text-slate">
-                  {b}
-                </p>
-              </div>
+              "Encrypted in transit and at rest",
+              "Never sold on",
+              "Shares nothing by default",
+              "Built towards ABDM, not claimed today",
+            ].map((t) => (
+              <li key={t} className="flex items-center gap-2">
+                <svg width="13" height="13" viewBox="0 0 16 16" className="shrink-0 text-sage" aria-hidden="true">
+                  <path d="M6.2 11.3 3.4 8.5l1-1 1.8 1.8 5-5 1 1z" fill="currentColor" />
+                </svg>
+                {t}
+              </li>
             ))}
-          </div>
+          </ul>
         </Reveal>
 
         <p className="mt-8 max-w-3xl text-[0.8rem] leading-relaxed text-mute">
-          Ayussetu provides AI powered insights to support preventive health
-          actions. It is not a diagnostic or treatment tool, and does not
-          replace the judgement of a qualified clinician. AI can make mistakes,
-          so always consult a healthcare professional.
+          Ayussetu supports preventive health actions. It is not a diagnostic
+          or treatment tool, and AI can make mistakes. Always consult a
+          qualified clinician.
         </p>
       </div>
     </section>
