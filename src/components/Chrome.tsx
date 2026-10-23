@@ -99,7 +99,7 @@ const policies = [
   "Patient use",
   "Clinical use",
   "Outcomes",
-  "Third-party data",
+  "Third party data",
   "Regulatory",
   "Terms of use",
   "Privacy policy",

@@ -67,7 +67,7 @@ export function Contact() {
             <p className="mt-4 text-[0.92rem] leading-relaxed text-slate">
               Whether you are a patient with a question, a doctor who wants to
               consult on Ayussetu, or a clinic weighing it up for a whole
-              practice &mdash; write to us and a person will answer.
+              practice, write to us and a person will answer.
             </p>
 
             <dl className="mt-8 space-y-4 text-[0.88rem]">
@@ -103,7 +103,7 @@ export function Contact() {
                   <span className="h-3 w-3 rounded-full bg-sage" />
                 </div>
                 <h3 className="mt-4 font-display text-[1.3rem] text-navy">
-                  Thank you &mdash; it reached us
+                  Thank you, it reached us
                 </h3>
                 <p className="mt-2 text-[0.9rem] leading-relaxed text-slate">
                   Somebody will write back to you. If it is urgent and about

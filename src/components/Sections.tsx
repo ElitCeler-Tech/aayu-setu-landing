@@ -1,4 +1,4 @@
-import { PhoneMock } from "./PhoneMock";
+import { PhoneShowcase } from "./PhoneShowcase";
 import {
   DoseMock,
   VitalsMock,
@@ -24,12 +24,26 @@ export function Hero() {
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 py-20 sm:px-8 md:grid-cols-[1.08fr_0.92fr] md:py-28">
         <div>
-          <p className="inline-flex items-center gap-2 rounded-full border border-line bg-white/80 px-3.5 py-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-slate backdrop-blur">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sage opacity-60" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-sage" />
-            </span>
-            An AI-driven healthcare assistant
+          {/* Not a status pill. A pulsing green dot is the convention
+              for "service is up", which is not what this sentence is
+              about - it is a claim, so it gets a mark that reads as AI.
+              The tracking is also eased off: at 0.1em the hyphen in
+              "AI-driven" opened into a dash and the line read as two. */}
+          <p className="inline-flex items-center gap-2 rounded-full border border-line bg-white/80 px-3.5 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.07em] text-slate backdrop-blur">
+            <svg
+              width="11"
+              height="11"
+              viewBox="0 0 12 12"
+              fill="none"
+              aria-hidden="true"
+              className="text-amber"
+            >
+              <path
+                d="M6 0.5 7.1 4.2 10.8 5.3 7.1 6.4 6 10.1 4.9 6.4 1.2 5.3 4.9 4.2Z"
+                fill="currentColor"
+              />
+            </svg>
+            Preventive health, powered by AI
           </p>
 
           <h1 className="font-display mt-6 max-w-[16ch] text-[clamp(2.2rem,5.2vw,3.5rem)] leading-[1.06] text-ink text-balance">
@@ -38,9 +52,8 @@ export function Hero() {
 
           <p className="mt-6 max-w-xl text-[1.05rem] leading-relaxed text-slate">
             Ayussetu brings scattered paper and digital records into one place
-            and uses AI to show where your risk is building &mdash; so
-            something can be done about it early, rather than explained
-            afterwards.
+            and uses AI to show where your risk is building, so something
+            can be done about it early rather than explained afterwards.
           </p>
 
           <ul className="mt-7 flex flex-wrap gap-2">
@@ -70,13 +83,28 @@ export function Hero() {
             </a>
           </div>
 
-          <p className="mt-6 max-w-md text-[0.76rem] leading-relaxed text-mute">
-            AI-powered insights to support preventive health actions. Not a
+          <ul className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-line pt-6 text-[0.8rem] text-slate">
+            {[
+              "Free for patients",
+              "Android and iPhone",
+              "Nothing shared without your consent",
+            ].map((t) => (
+              <li key={t} className="flex items-center gap-2">
+                <svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true" className="text-sage">
+                  <path d="M6.2 11.3 3.4 8.5l1-1 1.8 1.8 5-5 1 1z" fill="currentColor" />
+                </svg>
+                {t}
+              </li>
+            ))}
+          </ul>
+
+          <p className="mt-5 max-w-md text-[0.76rem] leading-relaxed text-mute">
+            AI powered insights to support preventive health actions. Not a
             diagnostic or treatment tool.
           </p>
         </div>
 
-        <PhoneMock />
+        <PhoneShowcase />
       </div>
     </section>
   );
@@ -87,7 +115,7 @@ export function Hero() {
 const counts = [
   { n: "10", l: "vitals tracked", s: "BP, pulse, sugar, SpO2, temperature, respiratory rate, weight, BMI, sleep, steps" },
   { n: "14", l: "lab markers read", s: "Cholesterol, LDL, HDL, triglycerides, glucose, HbA1c, liver, kidney, haemoglobin, platelets, WBC, sodium, potassium, vitamin D" },
-  { n: "17", l: "fields on a prescription", s: "From chief complaint and diagnosis codes to tests, immunisations and follow-up" },
+  { n: "17", l: "fields on a prescription", s: "From chief complaint and diagnosis codes to tests, immunisations and the follow up" },
   { n: "3", l: "ways to consult", s: "In person, video call or voice call, booked against the doctor's own slots" },
 ];
 
@@ -197,7 +225,7 @@ const features = [
     body: "Ask about a medicine, a reading or a report and Ayu answers against what Ayussetu already knows about you - the markers in your last lab, the medicines you are on, the appointment you have on Tuesday. Clear summaries for faster decisions.",
     points: [
       "Reads your own reports, medicines and readings",
-      "Plain-language summaries of what a marker means",
+      "Plain language summaries of what a marker means",
       "Says plainly that it can be wrong, and to ask your doctor",
     ],
     mock: <AyuMock />,
@@ -208,7 +236,7 @@ const features = [
     body: "Blood pressure, pulse, sugar, SpO2, temperature, respiratory rate, weight, BMI, sleep and steps. Scored into a health score with its own confidence figure, and flagged the day a reading falls out of range - not a week later.",
     points: [
       "One form for several readings at a time",
-      "Out-of-range flagged the same day",
+      "Readings outside their range flagged the same day",
       "Trends read against your own history",
     ],
     mock: <VitalsMock />,
@@ -350,25 +378,31 @@ const audiences = [
     who: "For patients",
     line: "Take control of your health early",
     body: "Understand what your reports are saying, see where risk is building, and act on it before it becomes a diagnosis. Your record travels with you to whichever doctor you choose.",
-    points: ["One record, every clinic", "Reminders that keep a course on track", "Risk explained in plain language"],
+    points: [
+      "One record, every clinic",
+      "Reminders that keep a course on track",
+      "Risk explained in plain language",
+    ],
   },
   {
-    who: "For doctors and clinics",
+    who: "For doctors",
     line: "The patient's history, before the consultation",
-    body: "AI-assisted risk summaries and decision support, with the patient's own readings and reports in front of you. Write the prescription into the record, and their doses schedule themselves.",
-    points: ["Record access, with consent", "Prescriptions in a minute", "A console for the whole clinic"],
+    body: "Ask for access and read their own readings and reports before they sit down. Write the prescription into the record, sign it with a finger, and their doses schedule themselves from it.",
+    points: [
+      "Record access, with consent",
+      "A prescription written in a minute",
+      "Earnings, referrals and the day's list",
+    ],
   },
   {
-    who: "For insurers and employers",
-    line: "Find the risk early, not at claim time",
-    body: "Population-level view of where risk is concentrating, so preventive programmes reach the members who need them - and claims that were avoidable are avoided.",
-    points: ["Cohort risk, not individual files", "Preventive outreach that lands", "Measured against outcomes"],
-  },
-  {
-    who: "For government and public health",
-    line: "Aligned with Ayushman Bharat Digital Mission",
-    body: "Built towards ABDM so records are interoperable and portable, and prevention can be planned at the level of a district rather than a clinic.",
-    points: ["ABHA-ready architecture", "Interoperable health records", "Prevention at population scale"],
+    who: "For clinicians and clinics",
+    line: "The whole practice, in one console",
+    body: "Departments and the doctors who sit in them, the day's appointments across all of them, the patient list, every prescription written on your roster, and what has been billed.",
+    points: [
+      "Departments, doctors and staff",
+      "The clinic's book for the day",
+      "Prescriptions and billing in one place",
+    ],
   },
 ];
 
@@ -381,10 +415,10 @@ export function Audiences() {
             Who it is for
           </p>
           <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-balance">
-            The same record, read four different ways
+            The same record, read three different ways
           </h2>
         </div>
-        <div className="mt-12 grid gap-px overflow-hidden rounded-2xl bg-white/10 md:grid-cols-2">
+        <div className="mt-12 grid gap-px overflow-hidden rounded-2xl bg-white/10 md:grid-cols-3">
           {audiences.map((a) => (
             <div key={a.who} className="bg-ink p-7">
               <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-white/45">
@@ -418,7 +452,7 @@ const doctorBlocks = [
   {
     eyebrow: "Consultation",
     title: "A prescription written in a minute, delivered in seconds",
-    body: "Medicine by name with its generic resolved as you type, strength, quantity, times of day and days of the week - with the end date worked out from the quantity. Around it sits the rest of the visit: complaint, diagnosis with ICD codes, vitals, history, tests, immunisations, advice and a follow-up that books itself.",
+    body: "Medicine by name with its generic resolved as you type, strength, quantity, times of day and days of the week, and the end date worked out from the quantity. Around it sits the rest of the visit: complaint, diagnosis with ICD codes, vitals, history, tests, immunisations, advice and a follow-up that books itself.",
     points: [
       "Seventeen clinical fields, and a draft to come back to",
       "Signed with a finger, delivered as a PDF",
@@ -570,8 +604,8 @@ export function Abha() {
             <p className="mt-3 max-w-xl text-[0.92rem] leading-relaxed text-slate">
               Ayussetu is being readied for the Ayushman Bharat Digital
               Mission, so your records can be linked to your ABHA and read by
-              any hospital on the national network &mdash; with your consent,
-              each time.
+              any hospital on the national network, with your consent each
+              time.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -677,7 +711,7 @@ export function Security() {
           Ayussetu provides AI-powered insights to support preventive health
           actions. It is not a diagnostic or treatment tool, and does not
           replace the judgement of a qualified clinician. AI can make
-          mistakes &mdash; always consult a healthcare professional.
+          mistakes, so always consult a healthcare professional.
         </p>
       </div>
     </section>
@@ -730,7 +764,7 @@ const faqs = [
     a: "Photograph or upload it and the markers are pulled out, placed against their reference ranges and scored. Anything it cannot read stays as the document you uploaded, so nothing is lost.",
   },
   {
-    q: "Can I book both online and in-person appointments?",
+    q: "Can I book appointments online as well as in person?",
     a: "Yes. Find a doctor by department, see the slots they actually have, and book in person, by video or by voice. Everything stays in sync with your record.",
   },
   {
@@ -739,7 +773,7 @@ const faqs = [
   },
   {
     q: "Is my data secure?",
-    a: "Records are encrypted in transit and at rest, and the architecture is privacy-by-design: nothing is shared without consent, and health data is never sold.",
+    a: "Records are encrypted in transit and at rest, and the architecture is private by design. Nothing is shared without consent, and health data is never sold.",
   },
   {
     q: "Do I need an ABHA to use it?",

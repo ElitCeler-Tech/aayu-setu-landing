@@ -12,8 +12,8 @@ export function AyuMock() {
         <div className="max-w-[88%] rounded-2xl rounded-bl-md border border-line bg-white px-3 py-2.5">
           <p className="text-[0.66rem] leading-relaxed text-slate">
             Your LDL moved from 138 to 164 mg/dL since July, and your HDL is
-            low at 38. Together those are worth discussing with your doctor
-            &mdash; your next appointment is on 2 Nov.
+            low at 38. Both are worth discussing with your doctor.
+            Your next appointment is on 2 Nov.
           </p>
           <p className="mt-2 border-t border-line pt-1.5 text-[0.56rem] text-faint">
             AI can make mistakes. Always consult a healthcare professional.

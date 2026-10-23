@@ -1,6 +1,6 @@
 /* Small pieces of the real product, drawn in CSS.
    Every one of these mirrors a screen that exists: the dose card with
-   Take and Skip, the vitals grid with its not-logged state, the marker
+   Take and Skip, the vitals grid with nothing logged yet, the marker
    rows a lab report is read into, the prescription form's sections, the
    earnings header. Drawn rather than screenshotted so they stay sharp
    and carry the layout instead of a simulator's test data. */
@@ -70,7 +70,7 @@ export function VitalsMock() {
     { k: "Sugar", v: "186", s: "high" },
     { k: "Sleep", v: "6h 10m", s: "watch" },
     { k: "Steps", v: "6,300", s: "ok" },
-    { k: "Weight", v: "—", s: "none" },
+    { k: "Weight", v: "Not logged", s: "none" },
   ];
   return (
     <Frame>
@@ -79,15 +79,21 @@ export function VitalsMock() {
           <div key={t.k} className="rounded-xl border border-line bg-white p-2">
             <p className="text-[0.55rem] font-medium text-mute">{t.k}</p>
             <p
-              className={`mt-0.5 text-[0.72rem] font-bold tabular-nums ${
-                t.s === "high" ? "text-amber-deep" : "text-navy"
+              className={`mt-0.5 font-bold tabular-nums ${
+                t.s === "none"
+                  ? "text-[0.56rem] font-medium text-faint"
+                  : t.s === "high"
+                    ? "text-[0.72rem] text-amber-deep"
+                    : "text-[0.72rem] text-navy"
               }`}
             >
               {t.v}
             </p>
-            <p className="mt-0.5 text-[0.5rem] text-faint">
-              {t.s === "none" ? "Not logged" : t.s === "ok" ? "Good" : "Watch"}
-            </p>
+            {t.s !== "none" && (
+              <p className="mt-0.5 text-[0.5rem] text-faint">
+                {t.s === "ok" ? "Good" : "Watch"}
+              </p>
+            )}
           </div>
         ))}
       </div>
