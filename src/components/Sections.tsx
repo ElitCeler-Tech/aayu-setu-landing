@@ -119,32 +119,69 @@ export function Hero() {
 /* ------------------------------ counts ------------------------------- */
 
 const counts = [
-  { n: "10", l: "vitals tracked", s: "From blood pressure to sleep" },
-  { n: "14", l: "lab markers read", s: "Lipids, sugar, liver, kidney, blood" },
-  { n: "17", l: "fields on a prescription", s: "Complaint to follow up" },
-  { n: "3", l: "ways to consult", s: "In person, video, voice", exact: true },
+  {
+    n: "10",
+    l: "vitals tracked",
+    s: "From blood pressure to sleep",
+    icon: "M3 12h3.5l2-5 3 10 2.5-5H21",
+  },
+  {
+    n: "14",
+    l: "lab markers read",
+    s: "Lipids, sugar, liver, kidney, blood",
+    icon: "M9 3v6.5L4.5 17A2.5 2.5 0 0 0 6.7 21h10.6a2.5 2.5 0 0 0 2.2-3.5L15 9.5V3M8 3h8M7.5 14h9",
+  },
+  {
+    n: "17",
+    l: "fields on a prescription",
+    s: "Complaint through to follow up",
+    icon: "M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2ZM9 8h6M9 12h6M9 16h3",
+  },
+  {
+    n: "3",
+    l: "ways to consult",
+    s: "In person, video, voice",
+    icon: "M4 6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Zm11 3 5-3v10l-5-3",
+    exact: true,
+  },
 ];
 
 export function Counts() {
   return (
-    <section className="border-b border-line bg-ink">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <div className="grid divide-y divide-white/10 md:grid-cols-4 md:divide-x md:divide-y-0">
+    <section className="relative overflow-hidden border-b border-line bg-ink">
+      <span className="pointer-events-none absolute left-1/2 top-0 h-64 w-[48rem] -translate-x-1/2 rounded-full bg-amber/10 blur-[120px]" />
+      <div className="relative mx-auto max-w-6xl px-5 py-14 sm:px-8 md:py-16">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {counts.map((c, i) => (
             <Reveal key={c.l} delay={i * 80}>
-              <div className="flex items-baseline gap-4 py-8 md:block md:px-7 md:py-10 md:first:pl-0 md:last:pr-0">
-                <p className="font-display text-[clamp(2.4rem,4.4vw,3rem)] leading-none tabular-nums text-white">
+              <div className="group h-full rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition duration-500 hover:border-amber/40 hover:bg-white/[0.07]">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 transition group-hover:bg-amber/20">
+                  <svg
+                    width="17"
+                    height="17"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.7"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-amber"
+                    aria-hidden="true"
+                  >
+                    <path d={c.icon} />
+                  </svg>
+                </span>
+
+                <p className="mt-5 font-display text-[2.4rem] leading-none tabular-nums text-white">
                   {c.n}
-                  {!("exact" in c) && (
-                    <span className="text-amber">+</span>
-                  )}
+                  {!("exact" in c) && <span className="text-amber">+</span>}
                 </p>
-                <div className="md:mt-4">
-                  <p className="text-[0.92rem] font-semibold text-white">
-                    {c.l}
-                  </p>
-                  <p className="mt-1 text-[0.8rem] text-white/45">{c.s}</p>
-                </div>
+                <p className="mt-2.5 text-[0.9rem] font-semibold text-white">
+                  {c.l}
+                </p>
+                <p className="mt-1 text-[0.8rem] leading-relaxed text-white/45">
+                  {c.s}
+                </p>
               </div>
             </Reveal>
           ))}
@@ -176,82 +213,105 @@ const thesis = [
 
 /* Each stage of the argument gets a picture, because "scattered",
    "together" and "a trend" are three shapes before they are three
-   sentences. */
+   sentences.
+
+   All three sit in the same frame: one white card, one label in the
+   same place, the same height. They were three different objects
+   before, which made the row read as three unrelated ideas. */
+function ArtFrame({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="rounded-2xl border border-line bg-white p-4">
+      <p className="text-[0.56rem] font-bold uppercase tracking-[0.12em] text-mute">
+        {label}
+      </p>
+      <div className="relative mt-3 h-[9.5rem]">{children}</div>
+    </div>
+  );
+}
+
 function Scattered() {
   const bits = [
-    { t: "Lab, March", x: "4%", y: "6%", r: "-7deg" },
-    { t: "Prescription", x: "52%", y: "0%", r: "5deg" },
-    { t: "Sugar, unwritten", x: "20%", y: "40%", r: "3deg" },
-    { t: "Discharge summary", x: "48%", y: "56%", r: "-4deg" },
-    { t: "Lab, August", x: "2%", y: "74%", r: "6deg" },
+    { t: "Lab, March", x: "0%", y: "4%", r: "-7deg" },
+    { t: "Prescription", x: "46%", y: "0%", r: "5deg" },
+    { t: "Sugar, unwritten", x: "14%", y: "38%", r: "3deg" },
+    { t: "Discharge summary", x: "40%", y: "60%", r: "-4deg" },
+    { t: "Lab, August", x: "0%", y: "76%", r: "6deg" },
   ];
   return (
-    <div className="relative h-[10.5rem]">
+    <ArtFrame label="Five places, one person">
       {bits.map((b) => (
         <span
           key={b.t}
-          className="absolute rounded-lg border border-line bg-white px-2.5 py-1.5 text-[0.62rem] font-medium text-slate shadow-[0_6px_14px_-10px_rgba(22,35,61,0.6)]"
+          className="absolute rounded-lg border border-line bg-paper px-2.5 py-1.5 text-[0.62rem] font-medium text-slate shadow-[0_6px_14px_-10px_rgba(22,35,61,0.6)]"
           style={{ left: b.x, top: b.y, transform: `rotate(${b.r})` }}
         >
           {b.t}
         </span>
       ))}
-    </div>
+    </ArtFrame>
   );
 }
 
 function Stacked() {
   return (
-    <div className="relative h-[10.5rem]">
-      {[0, 1, 2].map((i) => (
+    <ArtFrame label="One record">
+      {[2, 1].map((i) => (
         <span
           key={i}
-          className="absolute left-1/2 w-[70%] -translate-x-1/2 rounded-xl border border-line bg-white shadow-[0_8px_18px_-14px_rgba(22,35,61,0.6)]"
-          style={{ top: `${i * 10}px`, height: "6.5rem", zIndex: 3 - i, opacity: 1 - i * 0.22 }}
+          className="absolute left-1/2 w-[76%] -translate-x-1/2 rounded-xl border border-line bg-paper"
+          style={{ top: `${i * 9}px`, height: "7.6rem", opacity: 1 - i * 0.3 }}
         />
       ))}
-      <div className="absolute left-1/2 top-0 z-10 w-[70%] -translate-x-1/2 rounded-xl border border-line bg-white p-3">
-        <p className="text-[0.56rem] font-bold uppercase tracking-[0.12em] text-mute">
-          One record
-        </p>
-        {["LDL 164", "HbA1c 6.1", "Metformin 500mg"].map((t) => (
-          <p key={t} className="mt-1.5 text-[0.64rem] font-medium text-navy">
-            {t}
-          </p>
+      <div className="absolute left-1/2 top-0 w-[76%] -translate-x-1/2 rounded-xl border border-line bg-paper p-3">
+        {[
+          ["LDL", "164 mg/dL"],
+          ["HbA1c", "6.1 %"],
+          ["Metformin", "500mg, daily"],
+        ].map(([k, v]) => (
+          <div
+            key={k}
+            className="flex items-baseline justify-between border-b border-line py-1.5 last:border-0"
+          >
+            <span className="text-[0.64rem] font-medium text-navy">{k}</span>
+            <span className="text-[0.6rem] tabular-nums text-slate">{v}</span>
+          </div>
         ))}
       </div>
-    </div>
+    </ArtFrame>
   );
 }
 
 function Trend() {
   return (
-    <div className="relative h-[10.5rem] rounded-2xl border border-line bg-white p-3">
-      <p className="text-[0.56rem] font-bold uppercase tracking-[0.12em] text-mute">
-        LDL across three reports
-      </p>
-      <svg viewBox="0 0 200 86" className="mt-2 w-full" aria-hidden="true">
+    <ArtFrame label="LDL across three reports">
+      <svg viewBox="0 0 200 104" className="w-full" aria-hidden="true">
         <defs>
           <linearGradient id="trendfill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#FF8B0B" stopOpacity="0.22" />
+            <stop offset="0%" stopColor="#FF8B0B" stopOpacity="0.2" />
             <stop offset="100%" stopColor="#FF8B0B" stopOpacity="0" />
           </linearGradient>
         </defs>
-        {[20, 42, 64].map((y) => (
+        {[22, 50, 78].map((y) => (
           <line key={y} x1="0" x2="200" y1={y} y2={y} stroke="#EDF0F5" strokeWidth="1" />
         ))}
-        <path d="M8 66 L100 48 L192 16 L192 86 L8 86 Z" fill="url(#trendfill)" />
-        <path d="M8 66 L100 48 L192 16" stroke="#FF8B0B" strokeWidth="2.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-        {[[8, 66], [100, 48], [192, 16]].map(([x, y]) => (
-          <circle key={x} cx={x} cy={y} r="3.4" fill="#fff" stroke="#FF8B0B" strokeWidth="2" />
+        <path d="M10 78 L100 56 L190 20 L190 104 L10 104 Z" fill="url(#trendfill)" />
+        <path d="M10 78 L100 56 L190 20" stroke="#FF8B0B" strokeWidth="2.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        {[[10, 78], [100, 56], [190, 20]].map(([x, y]) => (
+          <circle key={x} cx={x} cy={y} r="3.6" fill="#fff" stroke="#FF8B0B" strokeWidth="2" />
         ))}
       </svg>
-      <div className="flex justify-between text-[0.56rem] text-mute">
+      <div className="absolute inset-x-0 bottom-0 flex justify-between text-[0.58rem] text-mute">
         <span>Mar 128</span>
         <span>Jun 146</span>
         <span className="font-semibold text-amber-deep">Oct 164</span>
       </div>
-    </div>
+    </ArtFrame>
   );
 }
 
@@ -278,9 +338,7 @@ export function Thesis() {
             <Reveal key={t.n} delay={i * 130}>
               <article className="relative flex h-full flex-col">
                 {/* the picture first: scattered, then stacked, then a line */}
-                <div className="rounded-3xl border border-line bg-mist/50 p-4">
-                  {thesisArt[i]}
-                </div>
+                {thesisArt[i]}
 
                 <div className="mt-6 flex items-center gap-3">
                   <span className="flex h-7 w-7 items-center justify-center rounded-full bg-navy font-display text-[0.7rem] text-white">
@@ -432,52 +490,93 @@ export function Features() {
 const markers = [
   {
     k: "LDL cholesterol",
+    tag: "Heart",
     w: "The cholesterol that collects in artery walls. Watched over years rather than weeks, because the damage is cumulative and quiet.",
+    lo: 0, hi: 45, at: 74,
+    lowLabel: "Lower is better", range: "Under 100 mg/dL", highLabel: "Raised",
   },
   {
     k: "HbA1c",
+    tag: "Sugar",
     w: "Your average blood sugar over about three months. One fasting reading can be a bad morning; this one cannot.",
+    lo: 10, hi: 48, at: 58,
+    lowLabel: "Normal", range: "Under 5.7 %", highLabel: "Diabetes range",
   },
   {
     k: "Fasting glucose",
+    tag: "Sugar",
     w: "Sugar after a night without food. Read alongside HbA1c, it separates a single high reading from a pattern.",
+    lo: 14, hi: 50, at: 44,
+    lowLabel: "Low", range: "70 to 99 mg/dL", highLabel: "High",
   },
   {
     k: "Creatinine and eGFR",
+    tag: "Kidney",
     w: "How well the kidneys are clearing waste. It moves slowly and silently, which is exactly why it is worth tracking.",
+    lo: 40, hi: 95, at: 66,
+    lowLabel: "Reduced", range: "eGFR above 90", highLabel: "Healthy",
   },
 ];
 
 export function Markers() {
   return (
     <section className="border-b border-line bg-paper">
-      <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
-        <div className="grid gap-12 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
-          <div>
-            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
-              Understanding your numbers
-            </p>
-            <h2 className="mt-3 font-display text-[clamp(1.7rem,3.6vw,2.3rem)] leading-tight text-ink text-balance">
-              A marker is only useful if you know what it is for
-            </h2>
-            <p className="mt-4 text-[0.92rem] leading-relaxed text-slate">
-              Ayussetu explains each one in plain language where it appears,
-              so a number on a report stops being somebody else&rsquo;s
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
+        <Reveal>
+          <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
+            <div>
+              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
+                Understanding your numbers
+              </p>
+              <h2 className="mt-3 max-w-xl font-display text-[clamp(1.9rem,4.4vw,2.6rem)] leading-tight text-ink text-balance">
+                A marker is only useful if you know what it is for
+              </h2>
+            </div>
+            <p className="max-w-sm text-[0.9rem] leading-relaxed text-slate">
+              Ayussetu explains each one in plain language where it appears, so
+              a number on a report stops being somebody else&rsquo;s
               vocabulary.
             </p>
           </div>
-          <dl className="divide-y divide-line border-y border-line">
-            {markers.map((m) => (
-              <div key={m.k} className="grid gap-1 py-5 sm:grid-cols-[13rem_1fr] sm:gap-6">
-                <dt className="text-[0.95rem] font-semibold text-navy">
-                  {m.k}
-                </dt>
-                <dd className="text-[0.88rem] leading-relaxed text-slate">
+        </Reveal>
+
+        <div className="mt-14 grid gap-4 sm:grid-cols-2">
+          {markers.map((m, i) => (
+            <Reveal key={m.k} delay={i * 90}>
+              <article className="group h-full rounded-3xl border border-line bg-white p-6 transition duration-500 hover:border-amber/45 hover:shadow-[0_26px_60px_-44px_rgba(22,35,61,0.75)]">
+                <div className="flex items-start justify-between gap-4">
+                  <h3 className="font-display text-[1.18rem] text-navy">
+                    {m.k}
+                  </h3>
+                  <span className="shrink-0 rounded-full bg-mist px-2.5 py-1 text-[0.62rem] font-semibold text-mute transition group-hover:bg-amber-wash group-hover:text-amber-deep">
+                    {m.tag}
+                  </span>
+                </div>
+                <p className="mt-2.5 text-[0.9rem] leading-relaxed text-slate">
                   {m.w}
-                </dd>
-              </div>
-            ))}
-          </dl>
+                </p>
+
+                {/* where a healthy reading sits, and where this one is */}
+                <div className="mt-5">
+                  <div className="relative h-1.5 rounded-full bg-mist">
+                    <span
+                      className="absolute inset-y-0 rounded-full bg-sage/35"
+                      style={{ left: `${m.lo}%`, right: `${100 - m.hi}%` }}
+                    />
+                    <span
+                      className="absolute top-1/2 h-3 w-3 -translate-y-1/2 rounded-full border-2 border-white bg-amber shadow"
+                      style={{ left: `calc(${m.at}% - 0.375rem)` }}
+                    />
+                  </div>
+                  <div className="mt-2 flex justify-between text-[0.66rem] text-mute">
+                    <span>{m.lowLabel}</span>
+                    <span className="font-semibold text-navy">{m.range}</span>
+                    <span>{m.highLabel}</span>
+                  </div>
+                </div>
+              </article>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
@@ -521,19 +620,20 @@ const audiences = [
 
 export function Audiences() {
   return (
-    <section id="audiences" className="border-b border-line bg-mist">
-      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
+    <section id="audiences" className="relative overflow-hidden border-b border-line bg-ink">
+      <span className="pointer-events-none absolute -left-40 top-0 h-[32rem] w-[32rem] rounded-full bg-amber/10 blur-[140px]" />
+      <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <Reveal>
           <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
             <div>
-              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
+              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber">
                 Who it is for
               </p>
-              <h2 className="mt-3 max-w-xl font-display text-[clamp(1.9rem,4.4vw,2.7rem)] leading-tight text-ink text-balance">
+              <h2 className="mt-3 max-w-xl font-display text-[clamp(1.9rem,4.4vw,2.7rem)] leading-tight text-white text-balance">
                 One record, read three different ways
               </h2>
             </div>
-            <p className="max-w-sm text-[0.9rem] leading-relaxed text-slate">
+            <p className="max-w-sm text-[0.9rem] leading-relaxed text-white/55">
               The same history serves the person it belongs to, the doctor
               treating them and the clinic they walk into. Nobody is asked to
               keep a second copy.
@@ -655,64 +755,6 @@ export function Practice() {
   );
 }
 
-/* ------------------------------- steps ------------------------------- */
-
-const steps = [
-  {
-    n: "01",
-    title: "Bring what you already have",
-    body: "Photograph the reports in the drawer and add the medicines you take. One sitting, and only once.",
-  },
-  {
-    n: "02",
-    title: "Let it keep up with you",
-    body: "Log a reading when you take one. Ayussetu reminds you about doses, reads each new report, and says when something is out of range.",
-  },
-  {
-    n: "03",
-    title: "Act on it with your doctor",
-    body: "Grant access at the consultation. The doctor reads the record, writes the prescription into it, and your doses update themselves.",
-  },
-];
-
-export function How() {
-  return (
-    <section id="how" className="border-b border-line bg-paper">
-      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
-        <Reveal>
-          <h2 className="max-w-xl font-display text-[clamp(1.9rem,4.4vw,2.7rem)] leading-tight text-ink text-balance">
-            Three steps, and then it looks after itself
-          </h2>
-        </Reveal>
-
-        <ol className="mt-16 grid gap-y-14 md:grid-cols-3 md:gap-x-8">
-          {steps.map((st, i) => (
-            <Reveal key={st.n} delay={i * 140}>
-              <li className="relative">
-                {/* The rule runs to the next step and stops at the last,
-                    so the row reads as a sequence rather than as three
-                    boxes that happen to be beside each other. */}
-                {i < steps.length - 1 && (
-                  <span className="absolute left-14 top-6 hidden h-px w-[calc(100%-2rem)] bg-gradient-to-r from-line to-transparent md:block" />
-                )}
-                <span className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-navy font-display text-[1rem] text-white">
-                  {st.n}
-                  <span className="absolute inset-0 animate-pulse rounded-2xl bg-amber/0" />
-                </span>
-                <h3 className="mt-5 font-display text-[1.2rem] text-navy">
-                  {st.title}
-                </h3>
-                <p className="mt-2 max-w-sm text-[0.92rem] leading-relaxed text-slate">
-                  {st.body}
-                </p>
-              </li>
-            </Reveal>
-          ))}
-        </ol>
-      </div>
-    </section>
-  );
-}
 /* ---------------------------- testimonial ---------------------------- */
 
 export function Testimonial() {
@@ -761,14 +803,38 @@ export function Abha() {
               </div>
 
               {/* The thing itself, rather than three words in pills. */}
-              <div className="rounded-2xl border border-white/12 bg-white/[0.05] p-5">
-                <p className="text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-white/40">
-                  Your ABHA
-                </p>
-                <p className="mt-2 font-display text-[1.3rem] tabular-nums tracking-[0.08em] text-white">
-                  12 3456 7890 1234
-                </p>
-                <p className="mt-1 text-[0.8rem] text-white/50">lakshmi@abdm</p>
+              <div className="rounded-2xl border border-white/15 bg-gradient-to-br from-white/[0.12] to-white/[0.04] p-5 shadow-[0_24px_50px_-30px_rgba(0,0,0,0.9)]">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <p className="text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-white/40">
+                      Ayushman Bharat Health Account
+                    </p>
+                    <p className="mt-2 font-display text-[1.35rem] tabular-nums tracking-[0.12em] text-white">
+                      12 3456 7890 1234
+                    </p>
+                    <p className="mt-1 text-[0.82rem] text-white/55">
+                      lakshmi@abdm
+                    </p>
+                  </div>
+                  <span className="rounded-lg bg-white/10 p-2">
+                    <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true">
+                      {[0, 1, 2].map((r) =>
+                        [0, 1, 2].map((c) => (
+                          <rect
+                            key={`${r}-${c}`}
+                            x={3 + c * 6.5}
+                            y={3 + r * 6.5}
+                            width="5"
+                            height="5"
+                            rx="1"
+                            fill="#fff"
+                            opacity={(r + c) % 2 === 0 ? 0.85 : 0.3}
+                          />
+                        )),
+                      )}
+                    </svg>
+                  </span>
+                </div>
 
                 <ul className="mt-5 space-y-2.5 border-t border-white/10 pt-4">
                   {[
@@ -797,46 +863,48 @@ export function Abha() {
 export function Team() {
   return (
     <section id="team" className="border-b border-line bg-mist">
-      <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <Reveal>
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
             About the founder
           </p>
-          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.4rem)] leading-tight text-ink text-balance">
+          <h2 className="mt-3 font-display text-[clamp(1.9rem,4.4vw,2.6rem)] leading-tight text-ink text-balance">
             Get to know the Ayussetu team
           </h2>
         </Reveal>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
+        <div className="mt-14 grid gap-6 md:grid-cols-2">
           {team.map((m, i) => (
-            <Reveal key={m.slug} delay={i * 110}>
+            <Reveal key={m.slug} delay={i * 120}>
               <Link
                 href={`/founders/${m.slug}`}
-                className="group flex h-full gap-6 rounded-3xl border border-line bg-white p-6 transition hover:border-navy/25 hover:shadow-[0_24px_55px_-38px_rgba(22,35,61,0.65)] sm:p-7"
+                className="group block overflow-hidden rounded-3xl border border-line bg-white transition hover:border-navy/25 hover:shadow-[0_30px_70px_-45px_rgba(22,35,61,0.8)]"
               >
-                <span className="relative h-[8.5rem] w-[7.4rem] shrink-0 overflow-hidden rounded-2xl bg-mist">
+                <span className="relative block aspect-[16/11] w-full overflow-hidden bg-mist">
                   <Image
                     src={m.photo}
-                    alt=""
+                    alt={m.name}
                     fill
-                    sizes="120px"
-                    className="object-cover object-top transition duration-500 group-hover:scale-[1.03]"
+                    sizes="(min-width: 768px) 32rem, 100vw"
+                    className="object-cover object-[center_22%] transition duration-700 group-hover:scale-[1.04]"
                   />
+                  <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/30 to-transparent p-5 pt-16">
+                    <span className="block font-display text-[1.45rem] leading-snug text-white">
+                      {m.name}
+                    </span>
+                    <span className="mt-0.5 block text-[0.84rem] font-medium text-amber">
+                      {m.role}
+                    </span>
+                  </span>
                 </span>
 
-                <span className="flex min-w-0 flex-col">
-                  <span className="font-display text-[1.2rem] leading-snug text-navy">
-                    {m.name}
-                  </span>
-                  <span className="mt-0.5 text-[0.82rem] font-medium text-amber-deep">
-                    {m.role}
-                  </span>
-                  <span className="mt-3 text-[0.86rem] leading-relaxed text-slate">
+                <span className="block p-6">
+                  <span className="block text-[0.9rem] leading-relaxed text-slate">
                     {m.lede}
                   </span>
-                  <span className="mt-auto pt-4 text-[0.8rem] font-semibold text-navy">
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-[0.82rem] font-semibold text-navy">
                     Read more
-                    <span className="ml-1.5 inline-block transition group-hover:translate-x-0.5">
+                    <span className="transition group-hover:translate-x-0.5">
                       &rarr;
                     </span>
                   </span>
@@ -895,7 +963,7 @@ export function Security() {
         <div className="mt-14 grid gap-5 md:grid-cols-3">
           {/* 1. consent, shown as the request itself */}
           <Reveal>
-            <article className="flex h-full flex-col rounded-3xl border border-line bg-white p-6">
+            <article className="group flex h-full flex-col rounded-3xl border border-line bg-white p-6 transition duration-500 hover:-translate-y-1 hover:border-sage/50 hover:shadow-[0_28px_60px_-44px_rgba(47,125,99,0.85)]">
               <h3 className="text-[1.02rem] font-semibold text-navy">
                 A doctor has to ask
               </h3>
@@ -903,7 +971,7 @@ export function Security() {
                 Nothing of yours is visible to a clinician until you approve
                 it, and the request names who is asking and why.
               </p>
-              <div className="mt-auto rounded-2xl border border-line bg-mist/60 p-3.5 pt-3">
+              <div className="mt-auto rounded-2xl border border-line bg-mist/60 p-3.5 pt-3 transition duration-500 group-hover:border-sage/30 group-hover:bg-sage-wash/70">
                 <p className="text-[0.56rem] font-bold uppercase tracking-[0.12em] text-mute">
                   Access request
                 </p>
@@ -927,7 +995,7 @@ export function Security() {
 
           {/* 2. sharing, shown as the switches */}
           <Reveal delay={110}>
-            <article className="flex h-full flex-col rounded-3xl border border-line bg-white p-6">
+            <article className="group flex h-full flex-col rounded-3xl border border-line bg-white p-6 transition duration-500 hover:-translate-y-1 hover:border-sage/50 hover:shadow-[0_28px_60px_-44px_rgba(47,125,99,0.85)]">
               <h3 className="text-[1.02rem] font-semibold text-navy">
                 You choose what a group sees
               </h3>
@@ -935,7 +1003,7 @@ export function Security() {
                 A care group is not all or nothing. Each person decides what
                 travels to it, and can change their mind.
               </p>
-              <div className="mt-auto space-y-1.5 rounded-2xl border border-line bg-mist/60 p-3.5">
+              <div className="mt-auto space-y-1.5 rounded-2xl border border-line bg-mist/60 p-3.5 transition duration-500 group-hover:border-sage/30 group-hover:bg-sage-wash/70">
                 {[
                   ["Medication adherence", true],
                   ["Vitals and readings", true],
@@ -963,7 +1031,7 @@ export function Security() {
 
           {/* 3. the record of who looked */}
           <Reveal delay={220}>
-            <article className="flex h-full flex-col rounded-3xl border border-line bg-white p-6">
+            <article className="group flex h-full flex-col rounded-3xl border border-line bg-white p-6 transition duration-500 hover:-translate-y-1 hover:border-sage/50 hover:shadow-[0_28px_60px_-44px_rgba(47,125,99,0.85)]">
               <h3 className="text-[1.02rem] font-semibold text-navy">
                 Access is logged, and withdrawable
               </h3>
@@ -971,7 +1039,7 @@ export function Security() {
                 Every grant is recorded with the date it was given, and you can
                 take it back without asking anybody.
               </p>
-              <div className="mt-auto space-y-1.5 rounded-2xl border border-line bg-mist/60 p-3.5">
+              <div className="mt-auto space-y-1.5 rounded-2xl border border-line bg-mist/60 p-3.5 transition duration-500 group-hover:border-sage/30 group-hover:bg-sage-wash/70">
                 {[
                   ["Dr S. Rao", "Granted 14 Oct", true],
                   ["Dr K. Menon", "Withdrawn 02 Oct", false],
@@ -1001,15 +1069,36 @@ export function Security() {
         </div>
 
         <Reveal>
-          <div className="mt-10 grid gap-6 rounded-3xl border border-line bg-mist/60 p-7 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              ["Encrypted in transit and at rest", "Records move over TLS and are stored encrypted."],
-              ["Nothing sold on", "Health data is not a product here, and never will be."],
-              ["Private by design", "The architecture shares nothing by default."],
-              ["Built towards ABDM", "Consent and interoperability are on the roadmap, not claimed today."],
-            ].map(([t, b]) => (
-              <div key={t}>
-                <h4 className="text-[0.88rem] font-semibold text-navy">{t}</h4>
+              ["Encrypted in transit and at rest", "Records move over TLS and are stored encrypted.", "M12 3 5 6v6c0 4.2 2.9 8.1 7 9 4.1-.9 7-4.8 7-9V6Z"],
+              ["Nothing sold on", "Health data is not a product here, and never will be.", "M4.5 4.5 19.5 19.5M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z"],
+              ["Private by design", "The architecture shares nothing by default.", "M6 10V7.4a6 6 0 0 1 12 0V10M5 10h14v10H5Z"],
+              ["Built towards ABDM", "Consent and interoperability are on the roadmap, not claimed today.", "M12 3v18M3 12h18"],
+            ].map(([t, b, d]) => (
+              <div
+                key={t}
+                className="group rounded-2xl border border-line bg-white p-5 transition duration-500 hover:border-navy/25 hover:bg-mist/50"
+              >
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-mist transition group-hover:bg-navy">
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.7"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-navy transition group-hover:text-white"
+                    aria-hidden="true"
+                  >
+                    <path d={d} />
+                  </svg>
+                </span>
+                <h4 className="mt-4 text-[0.88rem] font-semibold text-navy">
+                  {t}
+                </h4>
                 <p className="mt-1.5 text-[0.82rem] leading-relaxed text-slate">
                   {b}
                 </p>

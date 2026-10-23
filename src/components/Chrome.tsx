@@ -145,23 +145,18 @@ export function Footer() {
             <h3 className="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-white/40">
               Reach us
             </h3>
-            <address className="mt-4 space-y-2.5 text-[0.86rem] not-italic text-white/70">
-              <p className="leading-relaxed">
-                11-29-79 2nd Bank Colony,
-                <br />
-                Warangal, Telangana 506002
-              </p>
-              <p>
+            <ul className="mt-4 space-y-2.5 text-[0.86rem] text-white/70">
+              <li>
                 <a className="transition hover:text-white" href="mailto:info@ayussetu.com">
                   info@ayussetu.com
                 </a>
-              </p>
-              <p>
-                <a className="transition hover:text-white" href="tel:+917794864334">
-                  +91 7794 864 334
+              </li>
+              <li>
+                <a className="transition hover:text-white" href="#contact">
+                  Send us a message
                 </a>
-              </p>
-            </address>
+              </li>
+            </ul>
           </div>
         </div>
 

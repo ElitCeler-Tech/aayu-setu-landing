@@ -8,7 +8,10 @@ const API =
 const roles = [
   "I am a patient",
   "I am a doctor",
-  "I run a clinic",
+  "I run a clinic or hospital",
+  "I run a diagnostic lab",
+  "I run a scan or imaging centre",
+  "I run a pharmacy",
   "Partnership or press",
 ];
 
@@ -86,11 +89,11 @@ export function Contact() {
               </div>
               <div>
                 <dt className="text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-mute">
-                  For clinics
+                  Labs, scans and clinics
                 </dt>
                 <dd className="mt-0.5 text-slate">
-                  Ask for a walkthrough of the clinic console and we will set
-                  up a demo account.
+                  Ask for a walkthrough and we will set up a demo account for
+                  your team.
                 </dd>
               </div>
             </dl>

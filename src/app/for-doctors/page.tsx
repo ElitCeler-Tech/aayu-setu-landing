@@ -10,6 +10,54 @@ export const metadata: Metadata = {
     "Consult, prescribe and run a practice on Ayussetu. Download the doctor app, open the clinic console, or register to join.",
 };
 
+const doctorApp = [
+  {
+    t: "The day, one patient at a time",
+    b: "Appointments in order, with missed ones kept apart so they can be chased rather than lost.",
+    p: [
+      "Completed, upcoming and missed, separately",
+      "Patients today and all time",
+      "Prescriptions still to write",
+    ],
+  },
+  {
+    t: "The patient, before they sit down",
+    b: "Ask for access to their record. Once granted, their own readings, reports and medicines are in front of you.",
+    p: [
+      "Vitals, reports and current medicines",
+      "Record vitals for them yourself",
+      "Book a slot on their behalf",
+    ],
+  },
+  {
+    t: "The prescription, in a minute",
+    b: "Medicine with its generic resolved as you type, the end date worked out from the quantity, and your signature drawn with a finger.",
+    p: [
+      "Seventeen clinical fields, and a draft",
+      "Follow up books the next appointment",
+      "Their doses schedule themselves from it",
+    ],
+  },
+];
+
+const portal = [
+  {
+    t: "Departments and doctors",
+    b: "Set up the departments your clinic runs and the doctors who sit in them, with the front desk staff who need access.",
+    p: ["Departments", "Doctor roster", "Staff accounts"],
+  },
+  {
+    t: "The clinic's book",
+    b: "Every appointment across every department for the day, and the patient list behind it, rather than four separate registers.",
+    p: ["The day across all departments", "One patient list", "Patient history"],
+  },
+  {
+    t: "Prescriptions and billing",
+    b: "Every prescription written on your roster is filed to the clinic as well as the patient, with fees collected and outstanding alongside.",
+    p: ["Prescriptions by doctor", "Fees collected", "What is outstanding"],
+  },
+];
+
 const doctorPoints = [
   "The day's appointments, one at a time, with missed ones kept separate",
   "A patient's own readings and reports, once they grant access",
@@ -64,76 +112,118 @@ export default function ForDoctors() {
           </div>
         </section>
 
-        {/* The two ways in, side by side, because a doctor and a clinic
-            manager arrive on this page wanting different things. */}
+        {/* Two products, explained one after the other, because a
+            doctor and a clinic manager want different answers. */}
         <section className="border-b border-line bg-mist">
-          <div className="mx-auto grid max-w-6xl gap-5 px-5 py-18 sm:px-8 md:grid-cols-2 md:py-24">
+          <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
             <Reveal>
-              <article className="flex h-full flex-col rounded-3xl border border-line bg-white p-8">
-                <span className="text-[0.68rem] font-semibold uppercase tracking-[0.13em] text-amber-deep">
-                  Doctors
-                </span>
-                <h2 className="mt-3 font-display text-[1.5rem] leading-snug text-navy">
-                  Download the doctor app
-                </h2>
-                <p className="mt-3 text-[0.92rem] leading-relaxed text-slate">
-                  Everything a consultation needs, in a pocket. Free to
-                  install, and your registration number is all it takes to
-                  start.
-                </p>
-                <ul className="mt-6 space-y-2.5">
-                  {doctorPoints.map((p) => (
-                    <li key={p} className="flex gap-2.5 text-[0.86rem] text-navy">
-                      <svg width="13" height="13" viewBox="0 0 16 16" className="mt-[0.25rem] shrink-0 text-sage" aria-hidden="true">
-                        <path d="M6.2 11.3 3.4 8.5l1-1 1.8 1.8 5-5 1 1z" fill="currentColor" />
-                      </svg>
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-auto pt-7">
-                  <StoreButtons />
-                </div>
-              </article>
+              <p className="text-[0.7rem] font-semibold uppercase tracking-[0.13em] text-amber-deep">
+                The doctor app
+              </p>
+              <h2 className="mt-3 max-w-xl font-display text-[clamp(1.7rem,3.6vw,2.3rem)] leading-tight text-ink text-balance">
+                Everything a consultation needs, in a pocket
+              </h2>
+              <p className="mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-slate">
+                On Android and iPhone. A doctor signs in with their
+                registration number and works from the day&rsquo;s list: who is
+                coming, what each person has been through, and what they leave
+                with.
+              </p>
             </Reveal>
 
-            <Reveal delay={110}>
-              <article className="flex h-full flex-col rounded-3xl border border-line bg-ink p-8 text-white">
-                <span className="text-[0.68rem] font-semibold uppercase tracking-[0.13em] text-amber">
-                  Clinics
-                </span>
-                <h2 className="mt-3 font-display text-[1.5rem] leading-snug">
-                  Open the clinic console
-                </h2>
-                <p className="mt-3 text-[0.92rem] leading-relaxed text-white/60">
-                  A browser console for the people who run the place, with the
-                  whole practice in one view.
+            <div className="mt-12 grid gap-4 md:grid-cols-3">
+              {doctorApp.map((d, i) => (
+                <Reveal key={d.t} delay={i * 90}>
+                  <article className="h-full rounded-3xl border border-line bg-white p-6">
+                    <h3 className="font-display text-[1.1rem] text-navy">
+                      {d.t}
+                    </h3>
+                    <p className="mt-2 text-[0.88rem] leading-relaxed text-slate">
+                      {d.b}
+                    </p>
+                    <ul className="mt-4 space-y-2 border-t border-line pt-4">
+                      {d.p.map((x) => (
+                        <li key={x} className="flex gap-2.5 text-[0.84rem] text-navy">
+                          <svg width="13" height="13" viewBox="0 0 16 16" className="mt-[0.2rem] shrink-0 text-sage" aria-hidden="true">
+                            <path d="M6.2 11.3 3.4 8.5l1-1 1.8 1.8 5-5 1 1z" fill="currentColor" />
+                          </svg>
+                          {x}
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+
+            <Reveal>
+              <div className="mt-10 flex flex-wrap items-center gap-5 rounded-3xl border border-line bg-white p-6">
+                <p className="text-[0.92rem] text-slate">
+                  Free to install. Your registration number is all it takes to
+                  start.
                 </p>
-                <ul className="mt-6 space-y-2.5">
-                  {clinicPoints.map((p) => (
-                    <li key={p} className="flex gap-2.5 text-[0.86rem] text-white/85">
-                      <svg width="13" height="13" viewBox="0 0 16 16" className="mt-[0.25rem] shrink-0 text-amber" aria-hidden="true">
-                        <path d="M6.2 11.3 3.4 8.5l1-1 1.8 1.8 5-5 1 1z" fill="currentColor" />
-                      </svg>
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-auto flex flex-wrap gap-3 pt-7">
-                  <a
-                    href="#join"
-                    className="rounded-full bg-white px-6 py-3 text-[0.88rem] font-semibold text-ink transition hover:bg-white/90"
-                  >
-                    Ask for a walkthrough
-                  </a>
-                  <a
-                    href="#join"
-                    className="rounded-full border border-white/25 px-6 py-3 text-[0.88rem] font-semibold text-white transition hover:bg-white/10"
-                  >
-                    Request access
-                  </a>
+                <div className="ml-auto">
+                  <StoreButtons />
                 </div>
-              </article>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        <section className="border-b border-line bg-ink text-white">
+          <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
+            <Reveal>
+              <p className="text-[0.7rem] font-semibold uppercase tracking-[0.13em] text-amber">
+                The clinician portal
+              </p>
+              <h2 className="mt-3 max-w-xl font-display text-[clamp(1.7rem,3.6vw,2.3rem)] leading-tight text-balance">
+                A browser console for the people who run the place
+              </h2>
+              <p className="mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-white/60">
+                Doctors work from the app. The clinic works from a console: the
+                roster, the book, the patients and the money, in one view that
+                the front desk can use without being clinicians.
+              </p>
+            </Reveal>
+
+            <div className="mt-12 grid gap-4 md:grid-cols-3">
+              {portal.map((d, i) => (
+                <Reveal key={d.t} delay={i * 90}>
+                  <article className="h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+                    <h3 className="font-display text-[1.1rem] text-white">
+                      {d.t}
+                    </h3>
+                    <p className="mt-2 text-[0.88rem] leading-relaxed text-white/60">
+                      {d.b}
+                    </p>
+                    <ul className="mt-4 space-y-2 border-t border-white/10 pt-4">
+                      {d.p.map((x) => (
+                        <li key={x} className="flex gap-2.5 text-[0.84rem] text-white/85">
+                          <svg width="13" height="13" viewBox="0 0 16 16" className="mt-[0.2rem] shrink-0 text-amber" aria-hidden="true">
+                            <path d="M6.2 11.3 3.4 8.5l1-1 1.8 1.8 5-5 1 1z" fill="currentColor" />
+                          </svg>
+                          {x}
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+
+            <Reveal>
+              <div className="mt-10 flex flex-wrap items-center gap-5 rounded-3xl border border-white/12 bg-white/[0.04] p-6">
+                <p className="text-[0.92rem] text-white/70">
+                  Opened for your clinic once we have set it up. Ask and we
+                  will walk you through it.
+                </p>
+                <a
+                  href="#join"
+                  className="ml-auto rounded-full bg-white px-6 py-3 text-[0.88rem] font-semibold text-ink transition hover:bg-white/90"
+                >
+                  Ask for a walkthrough
+                </a>
+              </div>
             </Reveal>
           </div>
         </section>

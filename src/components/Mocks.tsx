@@ -153,43 +153,43 @@ export function ReportMock() {
 
 export function PrescriptionMock() {
   return (
-    <Frame dark>
+    <Frame>
       <div className="space-y-2">
-        <div className="rounded-xl border border-white/12 bg-white/[0.06] p-2.5">
-          <p className="text-[0.55rem] font-bold uppercase tracking-[0.12em] text-amber">
+        <div className="rounded-xl border border-line bg-white p-2.5">
+          <p className="text-[0.55rem] font-bold uppercase tracking-[0.12em] text-amber-deep">
             Medicine 1
           </p>
-          <p className="mt-1 text-[0.74rem] font-semibold text-white">
+          <p className="mt-1 text-[0.74rem] font-semibold text-navy">
             Amlodipine · 5mg · Tablet
           </p>
-          <p className="mt-0.5 text-[0.6rem] text-white/55">
+          <p className="mt-0.5 text-[0.6rem] text-mute">
             Morning 8:00 AM · after food · 10 tablets
           </p>
-          <div className="mt-2 flex gap-1.5">
-            <span className="rounded-md bg-white/10 px-2 py-0.5 text-[0.55rem] text-white/80">
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            <span className="rounded-md bg-mist px-2 py-0.5 text-[0.55rem] text-slate">
               Starts 22 Oct
             </span>
-            <span className="rounded-md bg-amber/20 px-2 py-0.5 text-[0.55rem] text-amber">
-              Ends 31 Oct · from quantity
+            <span className="rounded-md bg-amber-wash px-2 py-0.5 text-[0.55rem] font-medium text-amber-deep">
+              Ends 31 Oct, from quantity
             </span>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-2">
-          {["Diagnosis", "Vitals", "Tests", "Follow-up"].map((s) => (
+          {["Diagnosis", "Vitals", "Tests", "Follow up"].map((t) => (
             <div
-              key={s}
-              className="rounded-lg border border-white/10 px-2 py-1.5 text-[0.6rem] text-white/65"
+              key={t}
+              className="rounded-lg border border-line bg-white px-2 py-1.5 text-[0.6rem] text-slate"
             >
-              {s}
+              {t}
             </div>
           ))}
         </div>
-        <div className="flex items-center justify-between rounded-xl border border-white/12 bg-white/[0.06] px-2.5 py-2">
-          <span className="text-[0.62rem] text-white/60">Signature</span>
-          <svg width="64" height="20" viewBox="0 0 64 20" fill="none">
+        <div className="flex items-center justify-between rounded-xl border border-line bg-white px-2.5 py-2">
+          <span className="text-[0.62rem] text-mute">Signature</span>
+          <svg width="64" height="20" viewBox="0 0 64 20" fill="none" aria-hidden="true">
             <path
               d="M2 15c6-10 10 4 15-6s9 10 14 2 10 4 17-4"
-              stroke="white"
+              stroke="#1F3050"
               strokeWidth="1.3"
               strokeLinecap="round"
             />
@@ -202,37 +202,37 @@ export function PrescriptionMock() {
 
 export function EarningsMock() {
   return (
-    <Frame dark>
+    <Frame>
       <div className="mb-2.5 flex flex-wrap gap-1.5">
         {["Today", "Week", "Month", "Quarter", "Year"].map((p, i) => (
           <span
             key={p}
             className={`rounded-full px-2.5 py-1 text-[0.55rem] font-semibold ${
               i === 2
-                ? "bg-white text-ink"
-                : "border border-white/15 text-white/60"
+                ? "bg-navy text-white"
+                : "border border-line bg-white text-mute"
             }`}
           >
             {p}
           </span>
         ))}
       </div>
-      <div className="rounded-xl border border-white/12 bg-white/[0.06] p-3">
-        <p className="text-[0.55rem] font-bold uppercase tracking-[0.12em] text-white/45">
+      <div className="rounded-xl border border-line bg-white p-3">
+        <p className="text-[0.55rem] font-bold uppercase tracking-[0.12em] text-mute">
           This month
         </p>
-        <p className="mt-1 font-display text-[1.5rem] font-semibold text-white tabular-nums">
+        <p className="mt-1 font-display text-[1.5rem] tabular-nums text-navy">
           ₹48,200
         </p>
-        <p className="text-[0.6rem] text-white/50">61 consultations</p>
-        <div className="mt-3 space-y-1.5 border-t border-white/10 pt-2.5">
+        <p className="text-[0.6rem] text-mute">61 consultations</p>
+        <div className="mt-3 space-y-1.5 border-t border-line pt-2.5">
           {[
             ["Consultations", "₹44,600"],
             ["Referral share", "₹3,600"],
           ].map(([k, v]) => (
             <div key={k} className="flex justify-between text-[0.62rem]">
-              <span className="text-white/55">{k}</span>
-              <span className="font-semibold text-white tabular-nums">{v}</span>
+              <span className="text-mute">{k}</span>
+              <span className="font-semibold tabular-nums text-navy">{v}</span>
             </div>
           ))}
         </div>
@@ -277,21 +277,9 @@ export function GroupMock() {
   );
 }
 
-function Frame({
-  children,
-  dark = false,
-}: {
-  children: React.ReactNode;
-  dark?: boolean;
-}) {
+function Frame({ children }: { children: React.ReactNode }) {
   return (
-    <div
-      className={`rounded-2xl border p-3 ${
-        dark
-          ? "border-white/12 bg-white/[0.03]"
-          : "border-line bg-mist/60 shadow-[0_18px_40px_-28px_rgba(22,35,61,0.5)]"
-      }`}
-    >
+    <div className="rounded-2xl border border-line bg-mist/60 p-3 shadow-[0_24px_50px_-30px_rgba(22,35,61,0.55)]">
       {children}
     </div>
   );

@@ -108,6 +108,8 @@ export function JoinForm() {
                       "A doctor",
                       "A clinic or hospital",
                       "A diagnostic lab",
+                      "A scan or imaging centre",
+                      "A pharmacy",
                     ]}
                   />
                 </div>

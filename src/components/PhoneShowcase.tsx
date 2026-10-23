@@ -79,6 +79,32 @@ export function PhoneShowcase() {
         </div>
       </div>
 
+      <div className="float-a pointer-events-none absolute -right-[7.5rem] top-[52%] z-20 hidden w-[10rem] rounded-2xl border border-line bg-white/95 p-3 shadow-[0_22px_45px_-24px_rgba(22,35,61,0.55)] backdrop-blur [animation-delay:2.4s] xl:block">
+        <div className="flex items-center gap-2">
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-navy">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fff" aria-hidden="true">
+              <path d="M4 6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Zm11 3 5-3v10l-5-3" />
+            </svg>
+          </span>
+          <p className="text-[0.64rem] font-semibold text-navy">Consultation</p>
+        </div>
+        <p className="mt-1.5 text-[0.56rem] leading-snug text-mute">
+          Dr Rao, tomorrow 10:00 AM, video
+        </p>
+      </div>
+
+      <div className="float-b pointer-events-none absolute -left-[7.5rem] bottom-[26%] z-20 hidden w-[10rem] rounded-2xl border border-line bg-white/95 p-3 shadow-[0_22px_45px_-24px_rgba(22,35,61,0.55)] backdrop-blur [animation-delay:3.1s] xl:block">
+        <p className="text-[0.55rem] font-bold uppercase tracking-[0.12em] text-mute">
+          Health score
+        </p>
+        <div className="mt-1.5 flex items-center gap-2">
+          <p className="font-display text-[1.3rem] leading-none text-navy">72</p>
+          <span className="rounded-md bg-sage-wash px-1.5 py-0.5 text-[0.52rem] font-semibold text-sage">
+            Steady
+          </span>
+        </div>
+      </div>
+
       <div className="rounded-[2.5rem] border border-line bg-white p-2.5 shadow-[0_40px_90px_-30px_rgba(22,35,61,0.5)]">
         <div className="relative h-[33rem] overflow-hidden rounded-[2rem] bg-paper">
           {PANELS.map((p) => (
@@ -127,11 +153,10 @@ export function PhoneShowcase() {
 }
 
 
-/* Faces drawn as a camera feed, not as avatars.
-   These are illustrations on purpose. Putting a stock photograph of a
-   real person on a medical product implies that person is one of our
-   doctors, which is a claim we are not entitled to make; a drawn face
-   says "this is what a call looks like" and claims nothing. */
+/* The call panels use generated portraits: synthetic people, so no real
+   person is implied to be an Ayussetu doctor and there is no licence to
+   buy. Swap these two files for photographs of actual clinicians, with
+   their consent, whenever we have them. */
 function VideoFace({
   kind,
   className = "",
@@ -139,83 +164,13 @@ function VideoFace({
   kind: "doctor" | "patient";
   className?: string;
 }) {
-  const doctor = kind === "doctor";
-  const id = `f-${kind}`;
   return (
-    <svg viewBox="0 0 160 200" className={className} aria-hidden="true" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id={`${id}-room`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor={doctor ? "#23374F" : "#2B3A52"} />
-          <stop offset="100%" stopColor={doctor ? "#16233D" : "#1C2840"} />
-        </linearGradient>
-        <radialGradient id={`${id}-key`} cx="30%" cy="22%" r="75%">
-          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.16" />
-          <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
-        </radialGradient>
-        <linearGradient id={`${id}-skin`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor={doctor ? "#F0D2B2" : "#E7BE99"} />
-          <stop offset="100%" stopColor={doctor ? "#D9B089" : "#C99872"} />
-        </linearGradient>
-      </defs>
-
-      {/* the room behind them */}
-      <rect width="160" height="200" fill={`url(#${id}-room)`} />
-      <rect width="160" height="200" fill={`url(#${id}-key)`} />
-      {doctor ? (
-        <>
-          <rect x="104" y="28" width="44" height="58" rx="3" fill="#FFFFFF" opacity="0.05" />
-          <rect x="110" y="36" width="32" height="3" rx="1.5" fill="#FFFFFF" opacity="0.09" />
-          <rect x="110" y="44" width="22" height="3" rx="1.5" fill="#FFFFFF" opacity="0.07" />
-        </>
-      ) : (
-        <circle cx="128" cy="44" r="26" fill="#FFFFFF" opacity="0.04" />
-      )}
-
-      {/* shoulders and clothing */}
-      <path
-        d="M4 200c0-38 34-58 76-58s76 20 76 58z"
-        fill={doctor ? "#EEF2F7" : "#3C5075"}
-      />
-      {doctor && (
-        <>
-          <path d="M80 142 58 160l22 40 22-40z" fill="#DCE4EE" />
-          <path d="M80 142 62 156" stroke="#C9D4E2" strokeWidth="2" />
-          <path d="M80 142 98 156" stroke="#C9D4E2" strokeWidth="2" />
-          <path
-            d="M62 150c0 26 8 38 18 38s18-12 18-38"
-            stroke="#2F7D63"
-            strokeWidth="4"
-            fill="none"
-            strokeLinecap="round"
-          />
-          <circle cx="98" cy="186" r="6" fill="#2F7D63" />
-        </>
-      )}
-
-      {/* neck and head */}
-      <path d="M68 108h24v30H68z" fill={`url(#${id}-skin)`} />
-      <ellipse cx="80" cy="84" rx="31" ry="35" fill={`url(#${id}-skin)`} />
-      {/* hair */}
-      <path
-        d={
-          doctor
-            ? "M49 84c0-22 14-34 31-34s31 12 31 34c0-11-12-17-31-17s-31 6-31 17z"
-            : "M49 86c0-24 14-36 31-36s31 12 31 36c-2-9-6-14-12-17-7 4-31 5-38-2-6 3-10 9-12 19z"
-        }
-        fill="#2A3242"
-      />
-      {/* features */}
-      <ellipse cx="68" cy="84" rx="3.2" ry="3.6" fill="#2A3242" />
-      <ellipse cx="92" cy="84" rx="3.2" ry="3.6" fill="#2A3242" />
-      <path d="M80 88v8" stroke="#B98F6C" strokeWidth="2" strokeLinecap="round" />
-      <path
-        d="M70 100c4 4 16 4 20 0"
-        stroke="#9A6B4E"
-        strokeWidth="2.4"
-        fill="none"
-        strokeLinecap="round"
-      />
-    </svg>
+    <img
+      src={kind === "doctor" ? "/people/doctor.jpg" : "/people/patient.jpg"}
+      alt=""
+      aria-hidden="true"
+      className={`object-cover ${className}`}
+    />
   );
 }
 

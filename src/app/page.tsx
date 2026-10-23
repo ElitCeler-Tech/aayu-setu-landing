@@ -11,7 +11,6 @@ import {
   Markers,
   Audiences,
   Practice,
-  How,
   Abha,
   Team,
   Security,
@@ -28,10 +27,9 @@ export default function Home() {
         <Counts />
         <Thesis />
         <Features />
-        <Markers />
         <Audiences />
+        <Markers />
         <Practice />
-        <How />
         <Testimonials />
         <Abha />
         <Team />
