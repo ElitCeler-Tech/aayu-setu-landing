@@ -2,10 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 
 const nav = [
-  { label: "Patients", href: "#patients" },
-  { label: "Doctors", href: "#doctors" },
-  { label: "Clinics", href: "#clinics" },
+  { label: "Features", href: "#features" },
+  { label: "Who it's for", href: "#audiences" },
   { label: "How it works", href: "#how" },
+  { label: "FAQs", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -59,15 +59,15 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-12 gap-y-8 text-[0.86rem] sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-x-10 gap-y-8 text-[0.86rem] sm:grid-cols-3">
             <div>
               <h3 className="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-mute">
                 Product
               </h3>
               <ul className="mt-3 space-y-2 text-slate">
-                <li><a className="hover:text-navy" href="#patients">For patients</a></li>
-                <li><a className="hover:text-navy" href="#doctors">For doctors</a></li>
-                <li><a className="hover:text-navy" href="#clinics">For clinics</a></li>
+                <li><a className="hover:text-navy" href="#features">Features</a></li>
+                <li><a className="hover:text-navy" href="#audiences">Who it&rsquo;s for</a></li>
+                <li><a className="hover:text-navy" href="#how">How it works</a></li>
                 <li><a className="hover:text-navy" href="#download">Download</a></li>
               </ul>
             </div>
@@ -76,29 +76,69 @@ export function Footer() {
                 Company
               </h3>
               <ul className="mt-3 space-y-2 text-slate">
-                <li><a className="hover:text-navy" href="#how">How it works</a></li>
-                <li><a className="hover:text-navy" href="#security">Security</a></li>
-                <li><a className="hover:text-navy" href="#faq">Questions</a></li>
+                <li><a className="hover:text-navy" href="#team">Team</a></li>
+                <li><a className="hover:text-navy" href="#testimonials">Testimonials</a></li>
+                <li><a className="hover:text-navy" href="#faq">FAQs</a></li>
                 <li><a className="hover:text-navy" href="#contact">Contact us</a></li>
               </ul>
             </div>
             <div>
               <h3 className="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-mute">
-                Legal
+                Reach us
               </h3>
-              <ul className="mt-3 space-y-2 text-slate">
-                <li><a className="hover:text-navy" href="/privacy">Privacy</a></li>
-                <li><a className="hover:text-navy" href="/terms">Terms</a></li>
-              </ul>
+              <address className="mt-3 space-y-2 not-italic text-slate">
+                <p className="leading-relaxed">
+                  11-29-79 2nd Bank Colony,<br />Warangal, Telangana 506002
+                </p>
+                <p>
+                  <a className="hover:text-navy" href="mailto:info@ayussetu.com">
+                    info@ayussetu.com
+                  </a>
+                </p>
+                <p>
+                  <a className="hover:text-navy" href="tel:+917794864334">
+                    +91 7794 864 334
+                  </a>
+                </p>
+              </address>
             </div>
           </div>
         </div>
 
+        {/* The disclaimer set the product is obliged to publish, kept
+            together so none of it reads as small print hidden in a
+            paragraph. */}
+        <div className="mt-12 border-t border-line pt-6">
+          <h3 className="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-mute">
+            Disclaimers and policies
+          </h3>
+          <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-[0.8rem] text-slate">
+            {[
+              "Medical",
+              "AI use",
+              "Health records",
+              "Patient use",
+              "Clinical use",
+              "Outcomes",
+              "Third-party data",
+              "Regulatory",
+              "Terms of use",
+              "Privacy policy",
+            ].map((d) => (
+              <li key={d}>
+                <a className="hover:text-navy" href="/legal">
+                  {d}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         <div className="mt-12 flex flex-col gap-2 border-t border-line pt-6 text-[0.78rem] text-mute sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Ayussetu. All rights reserved.</p>
-          <p>
-            Ayussetu supports your care. It does not replace your doctor&rsquo;s
-            advice.
+          <p className="max-w-xl sm:text-right">
+            AI-powered insights to support preventive health actions. Not a
+            diagnostic or treatment tool.
           </p>
         </div>
       </div>

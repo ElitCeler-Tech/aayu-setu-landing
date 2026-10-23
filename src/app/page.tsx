@@ -4,12 +4,15 @@ import { Contact } from "@/components/Contact";
 import {
   Hero,
   Counts,
+  Thesis,
+  Features,
+  Markers,
   Audiences,
-  Patients,
-  Doctors,
-  Clinics,
-  Capabilities,
+  Practice,
   How,
+  Testimonial,
+  Abha,
+  Team,
   Security,
   Download,
   Faq,
@@ -23,12 +26,15 @@ export default function Home() {
       <main>
         <Hero />
         <Counts />
+        <Thesis />
+        <Features />
+        <Markers />
         <Audiences />
-        <Patients />
-        <Doctors />
-        <Clinics />
-        <Capabilities />
+        <Practice />
         <How />
+        <Testimonial />
+        <Abha />
+        <Team />
         <Security />
         <Download />
         <Contact />
