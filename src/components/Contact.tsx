@@ -61,7 +61,7 @@ export function Contact() {
             <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
               Contact us
             </p>
-            <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.4rem)] font-semibold leading-tight text-ink text-balance">
+            <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.4rem)] leading-tight text-ink text-balance">
               Tell us what you need it to do
             </h2>
             <p className="mt-4 text-[0.92rem] leading-relaxed text-slate">
@@ -102,7 +102,7 @@ export function Contact() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sage-wash">
                   <span className="h-3 w-3 rounded-full bg-sage" />
                 </div>
-                <h3 className="mt-4 font-display text-[1.3rem] font-semibold text-navy">
+                <h3 className="mt-4 font-display text-[1.3rem] text-navy">
                   Thank you &mdash; it reached us
                 </h3>
                 <p className="mt-2 text-[0.9rem] leading-relaxed text-slate">

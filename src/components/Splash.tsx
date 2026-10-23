@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 
 /* The app's own splash, on the website.
-   It is the same file the patient app plays on launch, so the first
-   thing somebody sees here is the first thing they will see there.
-   Shown once a session: a brand animation on every navigation is a
-   brand animation people learn to resent. */
+   The video is 1080 square on the app's navy, so the overlay is that
+   same navy and the video sits in it seamlessly - on white it was a
+   dark tile floating in a bright room. Shown once a session: a brand
+   animation on every navigation is one people learn to resent. */
 export function Splash() {
   const [done, setDone] = useState(true);
   const [leaving, setLeaving] = useState(false);
@@ -17,17 +17,15 @@ export function Splash() {
     try {
       seen = sessionStorage.getItem("ayussetu-splash") === "1";
     } catch {
-      // Private browsing, or storage refused. Skip it rather than
-      // trap somebody behind an animation that cannot remember itself.
       seen = true;
     }
-
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-
     if (seen || reduced) return;
+
     setDone(false);
+    document.documentElement.style.overflow = "hidden";
     try {
       sessionStorage.setItem("ayussetu-splash", "1");
     } catch {}
@@ -35,42 +33,52 @@ export function Splash() {
 
   useEffect(() => {
     if (done) return;
-    // Nothing may strand a visitor on the splash - a codec the browser
-    // will not open, autoplay refused, a frame that never arrives. The
-    // same rule the app's own splash screen keeps.
-    const bail = setTimeout(() => finish(), 4500);
-    video.current?.play().catch(() => finish());
+    // Nothing may strand a visitor behind an animation: a codec the
+    // browser will not open, autoplay refused, a frame that never
+    // arrives. The same rule the app's own splash keeps.
+    const bail = setTimeout(finish, 5200);
+    video.current?.play().catch(finish);
     return () => clearTimeout(bail);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [done]);
 
   function finish() {
     setLeaving(true);
-    setTimeout(() => setDone(true), 420);
+    setTimeout(() => {
+      document.documentElement.style.overflow = "";
+      setDone(true);
+    }, 520);
   }
 
   if (done) return null;
 
   return (
     <div
-      className={`fixed inset-0 z-[100] flex items-center justify-center bg-white transition-opacity duration-400 ${
+      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center transition-opacity duration-500 ${
         leaving ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
-      aria-hidden="true"
+      style={{ background: "#2C3D50" }}
     >
+      {/* The poster is the app icon on the same navy, so a browser
+          without H.264 - and there are still several - shows the mark
+          rather than a black rectangle while this bows out. */}
       <video
         ref={video}
         src="/splash.mp4"
+        poster="/ayussetu-icon.png"
         muted
         playsInline
         preload="auto"
         onEnded={finish}
         onError={finish}
-        className="max-h-[42vh] w-auto max-w-[78vw]"
+        className="aspect-square w-[min(62vw,24rem)] rounded-[1.6rem] object-contain"
       />
+      <p className="mt-8 text-[0.78rem] font-medium tracking-[0.18em] text-white/35 uppercase">
+        Connecting care for better health
+      </p>
       <button
         onClick={finish}
-        className="absolute bottom-10 text-[0.74rem] font-medium text-mute underline-offset-4 hover:underline"
+        className="absolute bottom-10 rounded-full border border-white/20 px-4 py-1.5 text-[0.74rem] font-medium text-white/70 transition hover:border-white/40 hover:text-white"
       >
         Skip
       </button>

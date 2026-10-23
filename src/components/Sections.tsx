@@ -16,50 +16,61 @@ const promise = ["Digitalise records", "Predict risk", "Prevent disease", "Live 
 export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-line">
-      <div className="mx-auto grid max-w-6xl items-center gap-14 px-5 py-16 sm:px-8 md:grid-cols-[1.05fr_0.95fr] md:py-24">
+      {/* A quiet grid, and one warm bloom behind the phone. Enough to
+          stop the section being a white rectangle, far short of the
+          purple gradient every health startup opens with. */}
+      <div className="grid-ground pointer-events-none absolute inset-0" />
+      <div className="pointer-events-none absolute right-[-12%] top-[-10%] h-[36rem] w-[36rem] rounded-full bg-amber/10 blur-[120px]" />
+
+      <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 py-20 sm:px-8 md:grid-cols-[1.08fr_0.92fr] md:py-28">
         <div>
-          <p className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3 py-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-mute">
-            <span className="h-1.5 w-1.5 rounded-full bg-sage" />
+          <p className="inline-flex items-center gap-2 rounded-full border border-line bg-white/80 px-3.5 py-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-slate backdrop-blur">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sage opacity-60" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-sage" />
+            </span>
             An AI-driven healthcare assistant
           </p>
-          <h1 className="mt-5 font-display text-[clamp(2.2rem,5.6vw,3.5rem)] font-semibold leading-[1.08] tracking-tight text-ink text-balance">
+
+          <h1 className="font-display mt-6 max-w-[16ch] text-[clamp(2.2rem,5.2vw,3.5rem)] leading-[1.06] text-ink text-balance">
             Your health records, read together for once
           </h1>
-          <p className="mt-5 max-w-xl text-[1.02rem] leading-relaxed text-slate">
+
+          <p className="mt-6 max-w-xl text-[1.05rem] leading-relaxed text-slate">
             Ayussetu brings scattered paper and digital records into one place
             and uses AI to show where your risk is building &mdash; so
             something can be done about it early, rather than explained
             afterwards.
           </p>
 
-          <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
+          <ul className="mt-7 flex flex-wrap gap-2">
             {promise.map((p) => (
               <li
                 key={p}
-                className="flex items-center gap-2 text-[0.86rem] font-medium text-navy"
+                className="rounded-full border border-line bg-white px-3.5 py-1.5 text-[0.82rem] font-medium text-navy"
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-amber" />
                 {p}
               </li>
             ))}
           </ul>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-9 flex flex-wrap items-center gap-3">
             <a
               href="#download"
-              className="rounded-full bg-amber px-6 py-3 text-[0.9rem] font-semibold text-white shadow-[0_10px_24px_-10px_rgba(255,139,11,0.8)] transition hover:bg-amber-deep"
+              className="group inline-flex items-center gap-2 rounded-full bg-amber px-6 py-3.5 text-[0.9rem] font-semibold text-white shadow-[0_14px_30px_-12px_rgba(255,139,11,0.9)] transition hover:bg-amber-deep"
             >
               Download the app
+              <span className="transition group-hover:translate-x-0.5">&rarr;</span>
             </a>
             <a
               href="#audiences"
-              className="rounded-full border border-line bg-white px-6 py-3 text-[0.9rem] font-semibold text-navy transition hover:border-navy"
+              className="rounded-full border border-line bg-white px-6 py-3.5 text-[0.9rem] font-semibold text-navy transition hover:border-navy"
             >
               Doctors, clinics and insurers
             </a>
           </div>
 
-          <p className="mt-5 max-w-md text-[0.76rem] leading-relaxed text-mute">
+          <p className="mt-6 max-w-md text-[0.76rem] leading-relaxed text-mute">
             AI-powered insights to support preventive health actions. Not a
             diagnostic or treatment tool.
           </p>
@@ -86,7 +97,7 @@ export function Counts() {
       <div className="mx-auto grid max-w-6xl gap-px bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
         {counts.map((c) => (
           <div key={c.l} className="bg-ink px-6 py-8">
-            <p className="font-display text-[2.1rem] font-semibold leading-none tabular-nums text-amber">
+            <p className="font-display text-[2.1rem] leading-none tabular-nums text-amber">
               {c.n}
             </p>
             <p className="mt-2 text-[0.88rem] font-semibold text-white">{c.l}</p>
@@ -126,7 +137,7 @@ export function Thesis() {
       <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
         <div className="grid gap-12 md:grid-cols-[1fr_0.85fr] md:gap-16">
           <div>
-            <h2 className="max-w-lg font-display text-[clamp(1.8rem,4vw,2.5rem)] font-semibold leading-tight text-ink text-balance">
+            <h2 className="max-w-lg font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-ink text-balance">
               Prevention needs the whole picture, not the latest page
             </h2>
             <div className="mt-10 space-y-8">
@@ -234,7 +245,7 @@ export function Features() {
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
             What it does
           </p>
-          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.5rem)] font-semibold leading-tight text-ink text-balance">
+          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-ink text-balance">
             Everything a hospital asks you to remember, remembered for you
           </h2>
         </div>
@@ -251,7 +262,7 @@ export function Features() {
                 <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-mute">
                   {b.eyebrow}
                 </p>
-                <h3 className="mt-2 font-display text-[clamp(1.3rem,2.6vw,1.75rem)] font-semibold leading-snug text-navy text-balance">
+                <h3 className="mt-2 font-display text-[clamp(1.3rem,2.6vw,1.75rem)] leading-snug text-navy text-balance">
                   {b.title}
                 </h3>
                 <p className="mt-3 text-[0.92rem] leading-relaxed text-slate">
@@ -305,7 +316,7 @@ export function Markers() {
             <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
               Understanding your numbers
             </p>
-            <h2 className="mt-3 font-display text-[clamp(1.7rem,3.6vw,2.3rem)] font-semibold leading-tight text-ink text-balance">
+            <h2 className="mt-3 font-display text-[clamp(1.7rem,3.6vw,2.3rem)] leading-tight text-ink text-balance">
               A marker is only useful if you know what it is for
             </h2>
             <p className="mt-4 text-[0.92rem] leading-relaxed text-slate">
@@ -369,7 +380,7 @@ export function Audiences() {
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber">
             Who it is for
           </p>
-          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.5rem)] font-semibold leading-tight text-balance">
+          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-balance">
             The same record, read four different ways
           </h2>
         </div>
@@ -379,7 +390,7 @@ export function Audiences() {
               <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-white/45">
                 {a.who}
               </p>
-              <h3 className="mt-2 font-display text-[1.3rem] font-semibold leading-snug text-balance">
+              <h3 className="mt-2 font-display text-[1.3rem] leading-snug text-balance">
                 {a.line}
               </h3>
               <p className="mt-2.5 text-[0.88rem] leading-relaxed text-white/60">
@@ -436,7 +447,7 @@ export function Practice() {
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
             The doctor app
           </p>
-          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.5rem)] font-semibold leading-tight text-ink text-balance">
+          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-ink text-balance">
             A consultation that ends in a record, not a paper slip
           </h2>
         </div>
@@ -452,7 +463,7 @@ export function Practice() {
                 <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-mute">
                   {b.eyebrow}
                 </p>
-                <h3 className="mt-2 font-display text-[clamp(1.3rem,2.6vw,1.75rem)] font-semibold leading-snug text-navy text-balance">
+                <h3 className="mt-2 font-display text-[clamp(1.3rem,2.6vw,1.75rem)] leading-snug text-navy text-balance">
                   {b.title}
                 </h3>
                 <p className="mt-3 text-[0.92rem] leading-relaxed text-slate">
@@ -500,13 +511,13 @@ export function How() {
   return (
     <section id="how" className="border-b border-line bg-paper">
       <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
-        <h2 className="max-w-xl font-display text-[clamp(1.8rem,4vw,2.5rem)] font-semibold leading-tight text-ink text-balance">
+        <h2 className="max-w-xl font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-ink text-balance">
           Three steps, and then it looks after itself
         </h2>
         <ol className="mt-12 grid gap-8 md:grid-cols-3">
           {steps.map((s) => (
             <li key={s.n} className="border-t border-line pt-5">
-              <span className="font-display text-[1.6rem] font-semibold tabular-nums text-amber">
+              <span className="font-display text-[1.6rem] tabular-nums text-amber">
                 {s.n}
               </span>
               <h3 className="mt-2 text-[1.02rem] font-semibold text-navy">
@@ -553,7 +564,7 @@ export function Abha() {
             <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
               Coming soon
             </p>
-            <h2 className="mt-3 font-display text-[clamp(1.5rem,3.2vw,2.1rem)] font-semibold leading-tight text-ink text-balance">
+            <h2 className="mt-3 font-display text-[clamp(1.5rem,3.2vw,2.1rem)] leading-tight text-ink text-balance">
               One health ID, all your records
             </h2>
             <p className="mt-3 max-w-xl text-[0.92rem] leading-relaxed text-slate">
@@ -590,7 +601,7 @@ export function Team() {
   return (
     <section id="team" className="border-b border-line bg-mist">
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 md:py-20">
-        <h2 className="font-display text-[clamp(1.6rem,3.4vw,2.2rem)] font-semibold leading-tight text-ink">
+        <h2 className="font-display text-[clamp(1.6rem,3.4vw,2.2rem)] leading-tight text-ink">
           The people behind it
         </h2>
         <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:w-2/3">
@@ -643,7 +654,7 @@ export function Security() {
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
             Privacy and safety
           </p>
-          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.4rem)] font-semibold leading-tight text-ink text-balance">
+          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.4rem)] leading-tight text-ink text-balance">
             A record is only useful if the person it belongs to controls it
           </h2>
         </div>
@@ -680,7 +691,7 @@ export function Download() {
     <section id="download" className="border-b border-line bg-mist">
       <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
         <div className="overflow-hidden rounded-3xl bg-navy px-6 py-12 text-center sm:px-14">
-          <h2 className="mx-auto max-w-2xl font-display text-[clamp(1.8rem,4vw,2.4rem)] font-semibold leading-tight text-white text-balance">
+          <h2 className="mx-auto max-w-2xl font-display text-[clamp(1.8rem,4vw,2.4rem)] leading-tight text-white text-balance">
             Start with the reports already in your drawer
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-[0.95rem] leading-relaxed text-white/70">
@@ -740,7 +751,7 @@ export function Faq() {
   return (
     <section id="faq" className="border-t border-line bg-paper">
       <div className="mx-auto max-w-3xl px-5 py-18 sm:px-8 md:py-24">
-        <h2 className="font-display text-[clamp(1.8rem,4vw,2.4rem)] font-semibold leading-tight text-ink">
+        <h2 className="font-display text-[clamp(1.8rem,4vw,2.4rem)] leading-tight text-ink">
           Questions people ask
         </h2>
         <dl className="mt-10 divide-y divide-line border-y border-line">

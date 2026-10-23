@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Poppins, IBM_Plex_Serif } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 
-/* Poppins is the face both apps are set in, and the serif is the one on
-   the prescription letterhead - so the website is typeset out of the
-   product rather than out of a template. */
+/* One face, the product's own. The serif that was here read as a
+   teaching hospital's annual report; Poppins is what both apps are set
+   in, and at display sizes with the tracking pulled in it is the
+   modern half of the brand rather than the soft one. */
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -12,21 +13,14 @@ const poppins = Poppins({
   display: "swap",
 });
 
-const serif = IBM_Plex_Serif({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-serif",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "Ayussetu — your health, in one place",
+  title: "Ayussetu — an AI-driven healthcare assistant",
   description:
-    "Ayussetu keeps your medicines, readings, reports and consultations together, and puts them in front of the doctor treating you. Free for patients, on Android and iPhone.",
+    "Ayussetu brings scattered paper and digital health records together and uses AI to show where your risk is building, so it can be acted on early. Free for patients, on Android and iPhone.",
   openGraph: {
-    title: "Ayussetu — your health, in one place",
+    title: "Ayussetu — an AI-driven healthcare assistant",
     description:
-      "Medicines, readings, reports and consultations in one place, and in front of the doctor treating you.",
+      "Digitalise your records, understand your risk, and act on it early.",
     type: "website",
   },
 };
@@ -37,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${poppins.variable} ${serif.variable}`}>
+    <html lang="en" className={poppins.variable}>
       <body>{children}</body>
     </html>
   );
