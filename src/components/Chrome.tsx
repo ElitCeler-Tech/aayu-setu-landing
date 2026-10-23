@@ -6,6 +6,7 @@ const nav = [
   { label: "Who it's for", href: "#audiences" },
   { label: "How it works", href: "#how" },
   { label: "FAQs", href: "#faq" },
+  { label: "For doctors", href: "/for-doctors" },
 ];
 
 /* The mark in a rounded square, exactly as it sits on a home screen.

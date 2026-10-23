@@ -122,16 +122,37 @@ export function Contact() {
                     >
                       You are
                     </label>
-                    <select
-                      id="role"
-                      name="role"
-                      defaultValue={roles[0]}
-                      className="mt-1.5 w-full rounded-xl border border-line bg-paper px-3.5 py-2.5 text-[0.88rem] text-navy outline-none transition focus:border-navy"
-                    >
-                      {roles.map((r) => (
-                        <option key={r}>{r}</option>
-                      ))}
-                    </select>
+                    {/* The native arrow sits differently in every
+                        browser and ignores the field's own type scale,
+                        so it is removed and drawn here instead. */}
+                    <div className="relative mt-1.5">
+                      <select
+                        id="role"
+                        name="role"
+                        defaultValue={roles[0]}
+                        className="h-[2.85rem] w-full appearance-none rounded-xl border border-line bg-paper pl-3.5 pr-10 text-[0.88rem] text-navy outline-none transition focus:border-navy"
+                      >
+                        {roles.map((r) => (
+                          <option key={r}>{r}</option>
+                        ))}
+                      </select>
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 12 12"
+                        aria-hidden="true"
+                        className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-mute"
+                      >
+                        <path
+                          d="m2.5 4.5 3.5 3.5 3.5-3.5"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
                   </div>
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2">
@@ -214,7 +235,7 @@ function Field({
         name={name}
         type={type}
         required={required}
-        className="mt-1.5 w-full rounded-xl border border-line bg-paper px-3.5 py-2.5 text-[0.88rem] text-navy outline-none transition placeholder:text-faint focus:border-navy"
+        className="mt-1.5 h-[2.85rem] w-full rounded-xl border border-line bg-paper px-3.5 text-[0.88rem] text-navy outline-none transition placeholder:text-faint focus:border-navy"
       />
     </div>
   );

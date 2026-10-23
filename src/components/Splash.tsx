@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 /* The app's own splash, on the website.
    The video is 1080 square on the app's navy, so the overlay is that
-   same navy and the video sits in it seamlessly - on white it was a
+   same navy and the video sits in it seamlessly. On white it was a
    dark tile floating in a bright room. Shown once a session: a brand
    animation on every navigation is one people learn to resent. */
 export function Splash() {

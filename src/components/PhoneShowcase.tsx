@@ -39,6 +39,46 @@ export function PhoneShowcase() {
     <div className="relative mx-auto w-[clamp(15rem,34vw,19.5rem)]">
       <div className="pointer-events-none absolute -inset-10 -z-10 rounded-[4rem] bg-amber/10 blur-3xl" />
 
+      {/* Lifted off the phone, drifting out of phase. */}
+      <div className="float-a pointer-events-none absolute -left-[8.5rem] top-20 z-20 hidden w-[10.5rem] xl:block rounded-2xl border border-line bg-white/95 p-3 shadow-[0_22px_45px_-24px_rgba(22,35,61,0.55)] backdrop-blur">
+        <div className="flex items-center gap-2">
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-sage-wash">
+            <svg width="11" height="11" viewBox="0 0 16 16" className="text-sage" aria-hidden="true">
+              <path d="M6.2 11.3 3.4 8.5l1-1 1.8 1.8 5-5 1 1z" fill="currentColor" />
+            </svg>
+          </span>
+          <p className="text-[0.66rem] font-semibold text-navy">Dose taken</p>
+        </div>
+        <p className="mt-1.5 text-[0.58rem] leading-snug text-mute">
+          Telmisartan 40mg, logged at 8:04 AM
+        </p>
+      </div>
+
+      <div className="float-b pointer-events-none absolute -right-[8rem] bottom-24 z-20 hidden w-[11rem] xl:block rounded-2xl border border-line bg-white/95 p-3 shadow-[0_22px_45px_-24px_rgba(22,35,61,0.55)] backdrop-blur">
+        <p className="text-[0.55rem] font-bold uppercase tracking-[0.12em] text-mute">
+          Lab report read
+        </p>
+        <div className="mt-2 space-y-1.5">
+          {[
+            { k: "LDL", v: "164", w: 82, high: true },
+            { k: "HDL", v: "38", w: 24, high: true },
+          ].map((m) => (
+            <div key={m.k}>
+              <div className="flex items-baseline justify-between text-[0.58rem]">
+                <span className="font-medium text-navy">{m.k}</span>
+                <span className="tabular-nums text-slate">{m.v} mg/dL</span>
+              </div>
+              <div className="mt-0.5 h-1 rounded-full bg-mist">
+                <div
+                  className="h-1 rounded-full bg-amber"
+                  style={{ width: `${m.w}%` }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="rounded-[2.5rem] border border-line bg-white p-2.5 shadow-[0_40px_90px_-30px_rgba(22,35,61,0.5)]">
         <div className="relative h-[33rem] overflow-hidden rounded-[2rem] bg-paper">
           {PANELS.map((p) => (
@@ -58,7 +98,12 @@ export function PhoneShowcase() {
         </div>
       </div>
 
-      <div className="mt-5 flex flex-col items-center gap-2.5">
+      <div
+        aria-hidden="true"
+        className="mx-auto mt-4 h-6 w-[72%] rounded-[50%] bg-ink/10 blur-xl"
+      />
+
+      <div className="mt-3 flex flex-col items-center gap-2.5">
         <p className="h-5 text-center text-[0.8rem] font-medium text-slate transition">
           {captions[panel]}
         </p>
@@ -78,6 +123,99 @@ export function PhoneShowcase() {
         )}
       </div>
     </div>
+  );
+}
+
+
+/* Faces drawn as a camera feed, not as avatars.
+   These are illustrations on purpose. Putting a stock photograph of a
+   real person on a medical product implies that person is one of our
+   doctors, which is a claim we are not entitled to make; a drawn face
+   says "this is what a call looks like" and claims nothing. */
+function VideoFace({
+  kind,
+  className = "",
+}: {
+  kind: "doctor" | "patient";
+  className?: string;
+}) {
+  const doctor = kind === "doctor";
+  const id = `f-${kind}`;
+  return (
+    <svg viewBox="0 0 160 200" className={className} aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id={`${id}-room`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor={doctor ? "#23374F" : "#2B3A52"} />
+          <stop offset="100%" stopColor={doctor ? "#16233D" : "#1C2840"} />
+        </linearGradient>
+        <radialGradient id={`${id}-key`} cx="30%" cy="22%" r="75%">
+          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.16" />
+          <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
+        </radialGradient>
+        <linearGradient id={`${id}-skin`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor={doctor ? "#F0D2B2" : "#E7BE99"} />
+          <stop offset="100%" stopColor={doctor ? "#D9B089" : "#C99872"} />
+        </linearGradient>
+      </defs>
+
+      {/* the room behind them */}
+      <rect width="160" height="200" fill={`url(#${id}-room)`} />
+      <rect width="160" height="200" fill={`url(#${id}-key)`} />
+      {doctor ? (
+        <>
+          <rect x="104" y="28" width="44" height="58" rx="3" fill="#FFFFFF" opacity="0.05" />
+          <rect x="110" y="36" width="32" height="3" rx="1.5" fill="#FFFFFF" opacity="0.09" />
+          <rect x="110" y="44" width="22" height="3" rx="1.5" fill="#FFFFFF" opacity="0.07" />
+        </>
+      ) : (
+        <circle cx="128" cy="44" r="26" fill="#FFFFFF" opacity="0.04" />
+      )}
+
+      {/* shoulders and clothing */}
+      <path
+        d="M4 200c0-38 34-58 76-58s76 20 76 58z"
+        fill={doctor ? "#EEF2F7" : "#3C5075"}
+      />
+      {doctor && (
+        <>
+          <path d="M80 142 58 160l22 40 22-40z" fill="#DCE4EE" />
+          <path d="M80 142 62 156" stroke="#C9D4E2" strokeWidth="2" />
+          <path d="M80 142 98 156" stroke="#C9D4E2" strokeWidth="2" />
+          <path
+            d="M62 150c0 26 8 38 18 38s18-12 18-38"
+            stroke="#2F7D63"
+            strokeWidth="4"
+            fill="none"
+            strokeLinecap="round"
+          />
+          <circle cx="98" cy="186" r="6" fill="#2F7D63" />
+        </>
+      )}
+
+      {/* neck and head */}
+      <path d="M68 108h24v30H68z" fill={`url(#${id}-skin)`} />
+      <ellipse cx="80" cy="84" rx="31" ry="35" fill={`url(#${id}-skin)`} />
+      {/* hair */}
+      <path
+        d={
+          doctor
+            ? "M49 84c0-22 14-34 31-34s31 12 31 34c0-11-12-17-31-17s-31 6-31 17z"
+            : "M49 86c0-24 14-36 31-36s31 12 31 36c-2-9-6-14-12-17-7 4-31 5-38-2-6 3-10 9-12 19z"
+        }
+        fill="#2A3242"
+      />
+      {/* features */}
+      <ellipse cx="68" cy="84" rx="3.2" ry="3.6" fill="#2A3242" />
+      <ellipse cx="92" cy="84" rx="3.2" ry="3.6" fill="#2A3242" />
+      <path d="M80 88v8" stroke="#B98F6C" strokeWidth="2" strokeLinecap="round" />
+      <path
+        d="M70 100c4 4 16 4 20 0"
+        stroke="#9A6B4E"
+        strokeWidth="2.4"
+        fill="none"
+        strokeLinecap="round"
+      />
+    </svg>
   );
 }
 
@@ -172,6 +310,39 @@ function Home() {
             Take
           </span>
         </div>
+
+        {/* Reports belong on this screen too: they are half of what the
+            app is for, and the panel had the room. */}
+        <div className="rounded-2xl border border-line bg-white p-3">
+          <div className="flex items-center justify-between">
+            <p className="text-[0.62rem] font-bold uppercase tracking-[0.12em] text-mute">
+              Reports
+            </p>
+            <span className="text-[0.55rem] font-medium text-faint">
+              34 files
+            </span>
+          </div>
+          <div className="mt-2 space-y-1.5">
+            {[
+              { n: "Lipid profile", d: "14 Oct", s: "2 markers high" },
+              { n: "Prescription, Dr Rao", d: "02 Oct", s: "3 medicines" },
+            ].map((r) => (
+              <div key={r.n} className="flex items-center gap-2">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-mist">
+                  <span className="h-2.5 w-2 rounded-[2px] border border-faint" />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-[0.64rem] font-semibold text-navy">
+                    {r.n}
+                  </p>
+                  <p className="text-[0.54rem] text-mute">
+                    {r.s}, {r.d}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </Shell>
   );
@@ -185,10 +356,11 @@ function Ringing() {
           Incoming video consultation
         </p>
         <div className="relative mt-8">
-          <span className="absolute inset-0 animate-ping rounded-full bg-white/10" />
-          <div className="relative flex h-20 w-20 items-center justify-center rounded-full bg-white/10 text-[1.3rem] font-semibold text-white">
-            SR
-          </div>
+          <span className="absolute -inset-2 animate-ping rounded-full bg-white/10" />
+          <VideoFace
+            kind="doctor"
+            className="relative h-24 w-24 rounded-full object-cover ring-2 ring-white/20"
+          />
         </div>
         <p className="mt-5 text-[1rem] font-semibold text-white">Dr S. Rao</p>
         <p className="mt-0.5 text-[0.7rem] text-white/50">
@@ -218,23 +390,23 @@ function InCall() {
   return (
     <div className="flex h-full flex-col bg-ink">
       <div className="relative flex-1 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(47,125,99,0.35),transparent_60%)]" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <div className="flex h-24 w-24 items-center justify-center rounded-full bg-white/10 text-[1.5rem] font-semibold text-white">
-            SR
-          </div>
-          <p className="mt-4 text-[0.92rem] font-semibold text-white">
-            Dr S. Rao
-          </p>
-          <p className="mt-1 text-[0.68rem] tabular-nums text-white/50">
-            04:12
+        {/* The doctor's camera fills the screen, as it does in a call. */}
+        <VideoFace kind="doctor" className="absolute inset-0 h-full w-full" />
+
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 to-transparent px-4 pb-4 pt-10">
+          <p className="text-[0.92rem] font-semibold text-white">Dr S. Rao</p>
+          <p className="mt-0.5 flex items-center gap-1.5 text-[0.66rem] text-white/60">
+            <span className="h-1.5 w-1.5 rounded-full bg-sage" />
+            Connected, 04:12
           </p>
         </div>
 
-        <div className="absolute right-3 top-3 h-20 w-14 rounded-xl border border-white/15 bg-white/10 backdrop-blur">
-          <div className="flex h-full items-center justify-center text-[0.6rem] font-semibold text-white/60">
+        {/* The patient's own tile, where every video app puts it. */}
+        <div className="absolute right-3 top-3 w-[4.2rem] overflow-hidden rounded-xl border border-white/20 shadow-lg">
+          <VideoFace kind="patient" className="h-[5.6rem] w-full" />
+          <span className="absolute bottom-1 left-1 rounded bg-ink/70 px-1 py-0.5 text-[0.46rem] font-medium text-white/80">
             You
-          </div>
+          </span>
         </div>
       </div>
 

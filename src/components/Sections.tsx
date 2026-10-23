@@ -8,6 +8,8 @@ import {
   GroupMock,
 } from "./Mocks";
 import { AyuMock, RecordsMock, RiskMock, ConsultMock } from "./Mocks2";
+import { Reveal, Parallax } from "./Motion";
+import { StoreButtons } from "./StoreButtons";
 
 /* ------------------------------- hero -------------------------------- */
 
@@ -19,17 +21,18 @@ export function Hero() {
       {/* A quiet grid, and one warm bloom behind the phone. Enough to
           stop the section being a white rectangle, far short of the
           purple gradient every health startup opens with. */}
-      <div className="grid-ground pointer-events-none absolute inset-0" />
-      <div className="pointer-events-none absolute right-[-12%] top-[-10%] h-[36rem] w-[36rem] rounded-full bg-amber/10 blur-[120px]" />
+      <div className="grid-ground grid-fade pointer-events-none absolute inset-0" />
+      <div className="pointer-events-none absolute right-[-18%] top-[-22%] h-[44rem] w-[44rem] rounded-full bg-amber/[0.07] blur-[140px]" />
+      <div className="pointer-events-none absolute bottom-[-30%] left-[-15%] h-[34rem] w-[34rem] rounded-full bg-sage/[0.05] blur-[130px]" />
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 py-20 sm:px-8 md:grid-cols-[1.08fr_0.92fr] md:py-28">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 py-20 sm:px-8 md:grid-cols-[1.1fr_0.9fr] md:py-28 xl:gap-20">
         <div>
           {/* Not a status pill. A pulsing green dot is the convention
               for "service is up", which is not what this sentence is
-              about - it is a claim, so it gets a mark that reads as AI.
+              about: it is a claim, so it gets a mark that reads as AI.
               The tracking is also eased off: at 0.1em the hyphen in
               "AI-driven" opened into a dash and the line read as two. */}
-          <p className="inline-flex items-center gap-2 rounded-full border border-line bg-white/80 px-3.5 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.07em] text-slate backdrop-blur">
+          <p className="rise inline-flex items-center gap-2 rounded-full border border-line bg-white/80 px-3.5 py-1.5 text-[0.64rem] font-semibold uppercase tracking-[0.13em] text-mute backdrop-blur [animation-delay:90ms]">
             <svg
               width="11"
               height="11"
@@ -43,31 +46,29 @@ export function Hero() {
                 fill="currentColor"
               />
             </svg>
-            Preventive health, powered by AI
+            Preventive health, powered by Ayu AI
           </p>
 
-          <h1 className="font-display mt-6 max-w-[16ch] text-[clamp(2.2rem,5.2vw,3.5rem)] leading-[1.06] text-ink text-balance">
+          <h1 className="rise font-display mt-6 max-w-[16ch] [animation-delay:170ms] text-[clamp(2.2rem,5.2vw,3.5rem)] leading-[1.06] text-ink text-balance">
             Your health records, read together for once
           </h1>
 
-          <p className="mt-6 max-w-xl text-[1.05rem] leading-relaxed text-slate">
+          <p className="rise mt-6 max-w-xl text-[1.05rem] leading-relaxed text-slate [animation-delay:250ms]">
             Ayussetu brings scattered paper and digital records into one place
             and uses AI to show where your risk is building, so something
             can be done about it early rather than explained afterwards.
           </p>
 
-          <ul className="mt-7 flex flex-wrap gap-2">
-            {promise.map((p) => (
-              <li
-                key={p}
-                className="rounded-full border border-line bg-white px-3.5 py-1.5 text-[0.82rem] font-medium text-navy"
-              >
+          <ul className="rise mt-6 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[0.86rem] font-medium text-navy [animation-delay:330ms]">
+            {promise.map((p, i) => (
+              <li key={p} className="flex items-center gap-3">
+                {i > 0 && <span className="h-1 w-1 rounded-full bg-faint" />}
                 {p}
               </li>
             ))}
           </ul>
 
-          <div className="mt-9 flex flex-wrap items-center gap-3">
+          <div className="rise mt-9 flex flex-wrap items-center gap-3 [animation-delay:410ms]">
             <a
               href="#download"
               className="group inline-flex items-center gap-2 rounded-full bg-amber px-6 py-3.5 text-[0.9rem] font-semibold text-white shadow-[0_14px_30px_-12px_rgba(255,139,11,0.9)] transition hover:bg-amber-deep"
@@ -76,14 +77,14 @@ export function Hero() {
               <span className="transition group-hover:translate-x-0.5">&rarr;</span>
             </a>
             <a
-              href="#audiences"
+              href="/for-doctors"
               className="rounded-full border border-line bg-white px-6 py-3.5 text-[0.9rem] font-semibold text-navy transition hover:border-navy"
             >
-              Doctors, clinics and insurers
+              For doctors and clinics
             </a>
           </div>
 
-          <ul className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-line pt-6 text-[0.8rem] text-slate">
+          <ul className="rise mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-line pt-6 text-[0.8rem] text-slate [animation-delay:530ms]">
             {[
               "Free for patients",
               "Android and iPhone",
@@ -104,7 +105,9 @@ export function Hero() {
           </p>
         </div>
 
-        <PhoneShowcase />
+        <div className="rise [animation-delay:300ms]">
+          <PhoneShowcase />
+        </div>
       </div>
     </section>
   );
@@ -116,24 +119,41 @@ const counts = [
   { n: "10", l: "vitals tracked", s: "BP, pulse, sugar, SpO2, temperature, respiratory rate, weight, BMI, sleep, steps" },
   { n: "14", l: "lab markers read", s: "Cholesterol, LDL, HDL, triglycerides, glucose, HbA1c, liver, kidney, haemoglobin, platelets, WBC, sodium, potassium, vitamin D" },
   { n: "17", l: "fields on a prescription", s: "From chief complaint and diagnosis codes to tests, immunisations and the follow up" },
-  { n: "3", l: "ways to consult", s: "In person, video call or voice call, booked against the doctor's own slots" },
+  { n: "3", l: "ways to consult", s: "In person, video call or voice call, booked against the doctor's own slots", exact: true },
 ];
 
 export function Counts() {
   return (
     <section className="border-b border-line bg-ink">
-      <div className="mx-auto grid max-w-6xl gap-px bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
-        {counts.map((c) => (
-          <div key={c.l} className="bg-ink px-6 py-8">
-            <p className="font-display text-[2.1rem] leading-none tabular-nums text-amber">
-              {c.n}
-            </p>
-            <p className="mt-2 text-[0.88rem] font-semibold text-white">{c.l}</p>
-            <p className="mt-1.5 text-[0.74rem] leading-relaxed text-white/45">
-              {c.s}
-            </p>
-          </div>
-        ))}
+      <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8 md:py-16">
+        <div className="grid gap-10 md:grid-cols-4 md:gap-6">
+          {counts.map((c, i) => (
+            <Reveal key={c.l} delay={i * 90}>
+              <div className="group relative md:px-6 md:first:pl-0 md:last:pr-0">
+                {/* A hairline between the figures rather than a box
+                    around each: four cards made four claims look like
+                    four products. */}
+                {i > 0 && (
+                  <span className="absolute left-0 top-1 hidden h-[calc(100%-0.5rem)] w-px bg-white/10 md:block" />
+                )}
+                <p className="font-display text-[clamp(2.6rem,5vw,3.4rem)] leading-none tabular-nums text-white">
+                  {c.n}
+                  {!("exact" in c) && (
+                    <span className="ml-1 align-top text-[0.9rem] text-amber">
+                      +
+                    </span>
+                  )}
+                </p>
+                <p className="mt-3 text-[0.9rem] font-semibold text-white">
+                  {c.l}
+                </p>
+                <p className="mt-2 text-[0.78rem] leading-relaxed text-white/45">
+                  {c.s}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -155,45 +175,66 @@ const thesis = [
   {
     n: "Why it matters",
     t: "Risk shows up in the trend, not the test",
-    b: "A single LDL means little. LDL rising across three reports while HDL falls and fasting glucose creeps up is a direction - and a direction is something you can still act on.",
+    b: "A single LDL means little. LDL rising across three reports while HDL falls and fasting glucose creeps up is a direction, and a direction is something you can still act on.",
   },
 ];
 
 export function Thesis() {
   return (
-    <section className="border-b border-line bg-paper">
-      <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
-        <div className="grid gap-12 md:grid-cols-[1fr_0.85fr] md:gap-16">
-          <div>
-            <h2 className="max-w-lg font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-ink text-balance">
-              Prevention needs the whole picture, not the latest page
-            </h2>
-            <div className="mt-10 space-y-8">
-              {thesis.map((t) => (
-                <div key={t.n} className="border-l-2 border-line pl-5">
-                  <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
-                    {t.n}
-                  </p>
-                  <h3 className="mt-1.5 text-[1.05rem] font-semibold text-navy">
-                    {t.t}
-                  </h3>
-                  <p className="mt-1.5 text-[0.9rem] leading-relaxed text-slate">
-                    {t.b}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="space-y-4 self-center">
-            <RecordsMock />
-            <RiskMock />
+    <section className="relative overflow-hidden border-b border-line bg-paper">
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
+        <Reveal>
+          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
+            Why Ayussetu exists
+          </p>
+          <h2 className="mt-3 max-w-2xl font-display text-[clamp(1.9rem,4.4vw,2.7rem)] leading-tight text-ink text-balance">
+            Prevention needs the whole picture, not the latest page
+          </h2>
+        </Reveal>
+
+        <div className="mt-14 grid gap-12 md:grid-cols-[1.05fr_0.95fr] md:gap-20">
+          {/* The argument, as a numbered spine. Three steps of one
+              thought, so they are numbered and joined by a rule rather
+              than scattered as three equal cards. */}
+          <ol className="relative">
+            <span className="absolute left-[1.15rem] top-3 bottom-3 w-px bg-line" />
+            {thesis.map((t, i) => (
+              <Reveal key={t.n} delay={i * 90}>
+                <li className="relative grid grid-cols-[2.4rem_1fr] gap-5 pb-10 last:pb-0">
+                  <span className="z-10 flex h-[2.4rem] w-[2.4rem] items-center justify-center rounded-full border border-line bg-white font-display text-[0.85rem] text-amber-deep">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="pt-1">
+                    <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-mute">
+                      {t.n}
+                    </p>
+                    <h3 className="mt-1.5 font-display text-[1.25rem] leading-snug text-navy">
+                      {t.t}
+                    </h3>
+                    <p className="mt-2 text-[0.92rem] leading-relaxed text-slate">
+                      {t.b}
+                    </p>
+                  </div>
+                </li>
+              </Reveal>
+            ))}
+          </ol>
+
+          {/* The two panels drift at different rates, so the column
+              reads as depth rather than as a stack. */}
+          <div className="relative self-center">
+            <Parallax speed={0.1}>
+              <RecordsMock />
+            </Parallax>
+            <Parallax speed={0.26} className="mt-5">
+              <RiskMock />
+            </Parallax>
           </div>
         </div>
       </div>
     </section>
   );
 }
-
 /* ----------------------------- features ------------------------------ */
 
 const features = [
@@ -222,7 +263,7 @@ const features = [
   {
     eyebrow: "Ayu, the AI assistant",
     title: "Answers drawn from your record, not from the internet",
-    body: "Ask about a medicine, a reading or a report and Ayu answers against what Ayussetu already knows about you - the markers in your last lab, the medicines you are on, the appointment you have on Tuesday. Clear summaries for faster decisions.",
+    body: "Ask about a medicine, a reading or a report and Ayu answers against what Ayussetu already knows about you: the markers in your last lab, the medicines you are on, the appointment you have on Tuesday. Clear summaries for faster decisions.",
     points: [
       "Reads your own reports, medicines and readings",
       "Plain language summaries of what a marker means",
@@ -233,7 +274,7 @@ const features = [
   {
     eyebrow: "Vitals tracking",
     title: "Ten readings, logged in one sitting",
-    body: "Blood pressure, pulse, sugar, SpO2, temperature, respiratory rate, weight, BMI, sleep and steps. Scored into a health score with its own confidence figure, and flagged the day a reading falls out of range - not a week later.",
+    body: "Blood pressure, pulse, sugar, SpO2, temperature, respiratory rate, weight, BMI, sleep and steps. Scored into a health score with its own confidence figure, and flagged the day a reading falls out of range, not a week later.",
     points: [
       "One form for several readings at a time",
       "Readings outside their range flagged the same day",
@@ -244,7 +285,7 @@ const features = [
   {
     eyebrow: "Doctor consultations",
     title: "Book in person, on video or by voice",
-    body: "Find a doctor by department, see the slots they actually have, and book the kind of consultation that suits. Join the call from the app, and keep the prescription that comes out of it - with your doses scheduled from it automatically.",
+    body: "Find a doctor by department, see the slots they actually have, and book the kind of consultation that suits. Join the call from the app, and keep the prescription that comes out of it, with your doses scheduled from it automatically.",
     points: [
       "Real slots, not a request form",
       "Video and voice calls inside the app",
@@ -255,7 +296,7 @@ const features = [
   {
     eyebrow: "Family health tracking",
     title: "See how a parent's week went without ringing to ask",
-    body: "A care group shares exactly what each person chooses to share - their score, their readings, how much of their medication they took. Privacy by design: every member controls their own sharing, and can stop it.",
+    body: "A care group shares exactly what each person chooses to share: their score, their readings, how much of their medication they took. Privacy by design: every member controls their own sharing, and can stop it.",
     points: [
       "Join with a code, share by choice",
       "Adherence and readings by day, week, month or year",
@@ -286,7 +327,7 @@ export function Features() {
                 i % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""
               }`}
             >
-              <div>
+              <Reveal>
                 <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-mute">
                   {b.eyebrow}
                 </p>
@@ -304,8 +345,8 @@ export function Features() {
                     </li>
                   ))}
                 </ul>
-              </div>
-              <div>{b.mock}</div>
+              </Reveal>
+              <Parallax speed={i % 2 === 0 ? 0.18 : 0.26}>{b.mock}</Parallax>
             </div>
           ))}
         </div>
@@ -409,43 +450,62 @@ const audiences = [
 export function Audiences() {
   return (
     <section id="audiences" className="border-b border-line bg-ink text-white">
-      <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
-        <div className="max-w-2xl">
-          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber">
-            Who it is for
-          </p>
-          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-balance">
-            The same record, read three different ways
-          </h2>
-        </div>
-        <div className="mt-12 grid gap-px overflow-hidden rounded-2xl bg-white/10 md:grid-cols-3">
-          {audiences.map((a) => (
-            <div key={a.who} className="bg-ink p-7">
-              <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-white/45">
-                {a.who}
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
+        <Reveal>
+          <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
+            <div>
+              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber">
+                Who it is for
               </p>
-              <h3 className="mt-2 font-display text-[1.3rem] leading-snug text-balance">
-                {a.line}
-              </h3>
-              <p className="mt-2.5 text-[0.88rem] leading-relaxed text-white/60">
-                {a.body}
-              </p>
-              <ul className="mt-4 space-y-1.5">
-                {a.points.map((p) => (
-                  <li key={p} className="flex gap-2.5 text-[0.84rem] text-white/85">
-                    <span className="mt-[0.45rem] h-1 w-1 shrink-0 rounded-full bg-amber" />
-                    {p}
-                  </li>
-                ))}
-              </ul>
+              <h2 className="mt-3 max-w-xl font-display text-[clamp(1.9rem,4.4vw,2.7rem)] leading-tight text-balance">
+                One record, read three different ways
+              </h2>
             </div>
+            <p className="max-w-sm text-[0.9rem] leading-relaxed text-white/55">
+              The same history serves the person it belongs to, the doctor
+              treating them and the clinic they walk into. Nobody is asked to
+              keep a second copy.
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="mt-14 grid gap-5 md:grid-cols-3">
+          {audiences.map((a, i) => (
+            <Reveal key={a.who} delay={i * 110}>
+              <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-7 transition duration-500 hover:border-amber/40 hover:bg-white/[0.06]">
+                <span className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-amber/0 blur-2xl transition duration-500 group-hover:bg-amber/20" />
+
+                <span className="font-display text-[0.8rem] tracking-[0.14em] text-amber">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <p className="mt-5 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-white/45">
+                  {a.who}
+                </p>
+                <h3 className="mt-2 font-display text-[1.28rem] leading-snug text-balance">
+                  {a.line}
+                </h3>
+                <p className="mt-3 text-[0.88rem] leading-relaxed text-white/60">
+                  {a.body}
+                </p>
+
+                <ul className="mt-6 space-y-2.5 border-t border-white/10 pt-5">
+                  {a.points.map((pt) => (
+                    <li key={pt} className="flex gap-2.5 text-[0.84rem] text-white/80">
+                      <svg width="13" height="13" viewBox="0 0 16 16" className="mt-[0.2rem] shrink-0 text-amber" aria-hidden="true">
+                        <path d="M6.2 11.3 3.4 8.5l1-1 1.8 1.8 5-5 1 1z" fill="currentColor" />
+                      </svg>
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </Reveal>
           ))}
         </div>
       </div>
     </section>
   );
 }
-
 /* ----------------------------- practice ------------------------------ */
 
 const doctorBlocks = [
@@ -463,7 +523,7 @@ const doctorBlocks = [
   {
     eyebrow: "Practice",
     title: "What you earned, by the period you actually think in",
-    body: "Today, this week, this month, this quarter, this year, or dates you pick. Consultations split by how they were seen, what is paid and what is owed, and referral share alongside - with a summary sheet to hand to a lab or an accountant.",
+    body: "Today, this week, this month, this quarter, this year, or dates you pick. Consultations split by how they were seen, what is paid and what is owed, and referral share alongside, with a summary sheet to hand to a lab or an accountant.",
     points: [
       "Paid and outstanding kept apart",
       "Referral partners, percentages and a shareable summary",
@@ -475,13 +535,13 @@ const doctorBlocks = [
 
 export function Practice() {
   return (
-    <section id="doctors" className="border-b border-line bg-mist">
+    <section id="doctors" className="border-b border-line bg-ink text-white">
       <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
         <div className="max-w-2xl">
-          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
+          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber">
             The doctor app
           </p>
-          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-ink text-balance">
+          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-balance">
             A consultation that ends in a record, not a paper slip
           </h2>
         </div>
@@ -493,26 +553,26 @@ export function Practice() {
                 i % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""
               }`}
             >
-              <div>
-                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-mute">
+              <Reveal>
+                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-white/45">
                   {b.eyebrow}
                 </p>
-                <h3 className="mt-2 font-display text-[clamp(1.3rem,2.6vw,1.75rem)] leading-snug text-navy text-balance">
+                <h3 className="mt-2 font-display text-[clamp(1.3rem,2.6vw,1.75rem)] leading-snug text-balance">
                   {b.title}
                 </h3>
-                <p className="mt-3 text-[0.92rem] leading-relaxed text-slate">
+                <p className="mt-3 text-[0.92rem] leading-relaxed text-white/60">
                   {b.body}
                 </p>
                 <ul className="mt-5 space-y-2">
                   {b.points.map((p) => (
-                    <li key={p} className="flex gap-2.5 text-[0.86rem] text-navy">
+                    <li key={p} className="flex gap-2.5 text-[0.86rem] text-white/85">
                       <span className="mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full bg-amber" />
                       {p}
                     </li>
                   ))}
                 </ul>
-              </div>
-              <div>{b.mock}</div>
+              </Reveal>
+              <Parallax speed={i % 2 === 0 ? 0.2 : 0.28}>{b.mock}</Parallax>
             </div>
           ))}
         </div>
@@ -544,30 +604,41 @@ const steps = [
 export function How() {
   return (
     <section id="how" className="border-b border-line bg-paper">
-      <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
-        <h2 className="max-w-xl font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-ink text-balance">
-          Three steps, and then it looks after itself
-        </h2>
-        <ol className="mt-12 grid gap-8 md:grid-cols-3">
-          {steps.map((s) => (
-            <li key={s.n} className="border-t border-line pt-5">
-              <span className="font-display text-[1.6rem] tabular-nums text-amber">
-                {s.n}
-              </span>
-              <h3 className="mt-2 text-[1.02rem] font-semibold text-navy">
-                {s.title}
-              </h3>
-              <p className="mt-2 text-[0.9rem] leading-relaxed text-slate">
-                {s.body}
-              </p>
-            </li>
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
+        <Reveal>
+          <h2 className="max-w-xl font-display text-[clamp(1.9rem,4.4vw,2.7rem)] leading-tight text-ink text-balance">
+            Three steps, and then it looks after itself
+          </h2>
+        </Reveal>
+
+        <ol className="mt-16 grid gap-y-14 md:grid-cols-3 md:gap-x-8">
+          {steps.map((st, i) => (
+            <Reveal key={st.n} delay={i * 140}>
+              <li className="relative">
+                {/* The rule runs to the next step and stops at the last,
+                    so the row reads as a sequence rather than as three
+                    boxes that happen to be beside each other. */}
+                {i < steps.length - 1 && (
+                  <span className="absolute left-14 top-6 hidden h-px w-[calc(100%-2rem)] bg-gradient-to-r from-line to-transparent md:block" />
+                )}
+                <span className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-navy font-display text-[1rem] text-white">
+                  {st.n}
+                  <span className="absolute inset-0 animate-pulse rounded-2xl bg-amber/0" />
+                </span>
+                <h3 className="mt-5 font-display text-[1.2rem] text-navy">
+                  {st.title}
+                </h3>
+                <p className="mt-2 max-w-sm text-[0.92rem] leading-relaxed text-slate">
+                  {st.body}
+                </p>
+              </li>
+            </Reveal>
           ))}
         </ol>
       </div>
     </section>
   );
 }
-
 /* ---------------------------- testimonial ---------------------------- */
 
 export function Testimonial() {
@@ -591,74 +662,122 @@ export function Testimonial() {
 
 export function Abha() {
   return (
-    <section className="border-b border-line bg-paper">
+    <section id="abha" className="border-b border-line bg-paper">
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 md:py-20">
-        <div className="grid items-center gap-10 rounded-3xl border border-line bg-white p-8 md:grid-cols-[1fr_auto] md:p-12">
-          <div>
-            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
-              Coming soon
-            </p>
-            <h2 className="mt-3 font-display text-[clamp(1.5rem,3.2vw,2.1rem)] leading-tight text-ink text-balance">
-              One health ID, all your records
-            </h2>
-            <p className="mt-3 max-w-xl text-[0.92rem] leading-relaxed text-slate">
-              Ayussetu is being readied for the Ayushman Bharat Digital
-              Mission, so your records can be linked to your ABHA and read by
-              any hospital on the national network, with your consent each
-              time.
-            </p>
+        <Reveal>
+          <div className="relative overflow-hidden rounded-[2rem] border border-line bg-ink px-7 py-12 text-white md:px-14 md:py-16">
+            <span className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-amber/15 blur-3xl" />
+            <span className="pointer-events-none absolute -bottom-28 -left-20 h-72 w-72 rounded-full bg-sage/15 blur-3xl" />
+
+            <div className="relative grid gap-10 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+              <div>
+                <p className="inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-amber">
+                  <span className="h-1.5 w-1.5 rounded-full bg-amber" />
+                  Coming soon
+                </p>
+                <h2 className="mt-5 font-display text-[clamp(1.7rem,3.6vw,2.4rem)] leading-tight text-balance">
+                  One health ID, all your records
+                </h2>
+                <p className="mt-4 max-w-xl text-[0.94rem] leading-relaxed text-white/65">
+                  Ayussetu is being readied for the Ayushman Bharat Digital
+                  Mission, so your records can be linked to your ABHA and read
+                  by any hospital on the national network, with your consent
+                  each time.
+                </p>
+              </div>
+
+              {/* The thing itself, rather than three words in pills. */}
+              <div className="rounded-2xl border border-white/12 bg-white/[0.05] p-5">
+                <p className="text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-white/40">
+                  Your ABHA
+                </p>
+                <p className="mt-2 font-display text-[1.3rem] tabular-nums tracking-[0.08em] text-white">
+                  12 3456 7890 1234
+                </p>
+                <p className="mt-1 text-[0.8rem] text-white/50">lakshmi@abdm</p>
+
+                <ul className="mt-5 space-y-2.5 border-t border-white/10 pt-4">
+                  {[
+                    "Linked to the records you already keep here",
+                    "Shared only against a consent you approve",
+                    "Readable by any hospital on the network",
+                  ].map((t) => (
+                    <li key={t} className="flex gap-2.5 text-[0.82rem] text-white/75">
+                      <svg width="13" height="13" viewBox="0 0 16 16" className="mt-[0.2rem] shrink-0 text-sage" aria-hidden="true">
+                        <path d="M6.2 11.3 3.4 8.5l1-1 1.8 1.8 5-5 1 1z" fill="currentColor" />
+                      </svg>
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
-          <div className="flex flex-wrap gap-2">
-            {["ABHA linking", "Consent-led", "Interoperable"].map((t) => (
-              <span
-                key={t}
-                className="rounded-full border border-line bg-mist px-3.5 py-1.5 text-[0.78rem] font-semibold text-slate"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
 }
-
 /* -------------------------------- team ------------------------------- */
 
 const team = [
-  { n: "Sandeep Konda", r: "Founder & CEO" },
-  { n: "Preeti Kotha", r: "Advisor" },
+  {
+    n: "Sandeep Konda",
+    r: "Founder and CEO",
+    l: "https://www.linkedin.com/in/sandeepkonda/",
+  },
+  {
+    n: "Preeti Kotha",
+    r: "Advisor, PharmD",
+    l: "https://www.linkedin.com/in/preeti-kotha-pharmd-app-75b95085/",
+  },
 ];
 
 export function Team() {
   return (
     <section id="team" className="border-b border-line bg-mist">
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 md:py-20">
-        <h2 className="font-display text-[clamp(1.6rem,3.4vw,2.2rem)] leading-tight text-ink">
-          The people behind it
-        </h2>
-        <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:w-2/3">
-          {team.map((m) => (
-            <div key={m.n} className="bg-white p-6">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-navy text-[0.9rem] font-semibold text-white">
-                {m.n
-                  .split(" ")
-                  .map((w) => w[0])
-                  .join("")}
-              </div>
-              <h3 className="mt-4 text-[1rem] font-semibold text-navy">
-                {m.n}
-              </h3>
-              <p className="text-[0.84rem] text-mute">{m.r}</p>
-            </div>
+        <Reveal>
+          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
+            About the founder
+          </p>
+          <h2 className="mt-3 font-display text-[clamp(1.7rem,3.6vw,2.3rem)] leading-tight text-ink">
+            Get to know the Ayussetu team
+          </h2>
+        </Reveal>
+
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:w-[46rem]">
+          {team.map((m, i) => (
+            <Reveal key={m.n} delay={i * 110}>
+              <a
+                href={m.l}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex h-full items-center gap-4 rounded-2xl border border-line bg-white p-5 transition hover:border-navy/30 hover:shadow-[0_18px_40px_-30px_rgba(22,35,61,0.6)]"
+              >
+                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-navy font-display text-[1.05rem] text-white">
+                  {m.n.split(" ").map((w) => w[0]).join("")}
+                </span>
+                <span className="min-w-0">
+                  <span className="block font-display text-[1.05rem] text-navy">
+                    {m.n}
+                  </span>
+                  <span className="block text-[0.84rem] text-mute">{m.r}</span>
+                  <span className="mt-1.5 inline-flex items-center gap-1.5 text-[0.76rem] font-semibold text-amber-deep">
+                    LinkedIn
+                    <span className="transition group-hover:translate-x-0.5">
+                      &rarr;
+                    </span>
+                  </span>
+                </span>
+              </a>
+            </Reveal>
           ))}
         </div>
       </div>
     </section>
   );
 }
-
 /* ------------------------------ privacy ------------------------------ */
 
 const security = [
@@ -668,7 +787,7 @@ const security = [
   },
   {
     title: "Encrypted, and private by design",
-    body: "Records are encrypted in transit and at rest, and shared only with the people you choose - family or clinician.",
+    body: "Records are encrypted in transit and at rest, and shared only with the people you choose, whether family or clinician.",
   },
   {
     title: "Built towards ABDM",
@@ -683,35 +802,155 @@ const security = [
 export function Security() {
   return (
     <section id="security" className="border-b border-line bg-paper">
-      <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
-        <div className="max-w-2xl">
-          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
-            Privacy and safety
-          </p>
-          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.4rem)] leading-tight text-ink text-balance">
-            A record is only useful if the person it belongs to controls it
-          </h2>
-        </div>
-        <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
-          {security.map((t) => (
-            <div key={t.title} className="bg-white p-6">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-sage-wash">
-                <span className="h-2.5 w-2.5 rounded-full bg-sage" />
-              </div>
-              <h3 className="mt-4 text-[0.98rem] font-semibold text-navy">
-                {t.title}
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
+        <Reveal>
+          <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
+            <div>
+              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
+                Privacy and safety
+              </p>
+              <h2 className="mt-3 max-w-xl font-display text-[clamp(1.9rem,4.4vw,2.6rem)] leading-tight text-ink text-balance">
+                A record is only useful if the person it belongs to controls it
+              </h2>
+            </div>
+            <p className="max-w-sm text-[0.9rem] leading-relaxed text-slate">
+              Every claim below is something you can see happening in the app,
+              rather than a padlock drawn on a website.
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="mt-14 grid gap-5 md:grid-cols-3">
+          {/* 1. consent, shown as the request itself */}
+          <Reveal>
+            <article className="flex h-full flex-col rounded-3xl border border-line bg-white p-6">
+              <h3 className="text-[1.02rem] font-semibold text-navy">
+                A doctor has to ask
               </h3>
               <p className="mt-2 text-[0.88rem] leading-relaxed text-slate">
-                {t.body}
+                Nothing of yours is visible to a clinician until you approve
+                it, and the request names who is asking and why.
               </p>
-            </div>
-          ))}
+              <div className="mt-auto rounded-2xl border border-line bg-mist/60 p-3.5 pt-3">
+                <p className="text-[0.56rem] font-bold uppercase tracking-[0.12em] text-mute">
+                  Access request
+                </p>
+                <p className="mt-1.5 text-[0.76rem] font-semibold text-navy">
+                  Dr S. Rao wants to see your records
+                </p>
+                <p className="mt-0.5 text-[0.66rem] text-mute">
+                  Documents, prescriptions and past readings
+                </p>
+                <div className="mt-3 flex gap-2">
+                  <span className="flex-1 rounded-lg bg-navy py-1.5 text-center text-[0.64rem] font-semibold text-white">
+                    Approve
+                  </span>
+                  <span className="flex-1 rounded-lg border border-line bg-white py-1.5 text-center text-[0.64rem] font-semibold text-slate">
+                    Not now
+                  </span>
+                </div>
+              </div>
+            </article>
+          </Reveal>
+
+          {/* 2. sharing, shown as the switches */}
+          <Reveal delay={110}>
+            <article className="flex h-full flex-col rounded-3xl border border-line bg-white p-6">
+              <h3 className="text-[1.02rem] font-semibold text-navy">
+                You choose what a group sees
+              </h3>
+              <p className="mt-2 text-[0.88rem] leading-relaxed text-slate">
+                A care group is not all or nothing. Each person decides what
+                travels to it, and can change their mind.
+              </p>
+              <div className="mt-auto space-y-1.5 rounded-2xl border border-line bg-mist/60 p-3.5">
+                {[
+                  ["Medication adherence", true],
+                  ["Vitals and readings", true],
+                  ["Lab reports", false],
+                ].map(([label, on]) => (
+                  <div
+                    key={label as string}
+                    className="flex items-center justify-between rounded-lg bg-white px-2.5 py-2"
+                  >
+                    <span className="text-[0.7rem] font-medium text-navy">
+                      {label as string}
+                    </span>
+                    <span
+                      className={`flex h-4 w-7 items-center rounded-full px-0.5 ${
+                        on ? "justify-end bg-sage" : "justify-start bg-line"
+                      }`}
+                    >
+                      <span className="h-3 w-3 rounded-full bg-white" />
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </article>
+          </Reveal>
+
+          {/* 3. the record of who looked */}
+          <Reveal delay={220}>
+            <article className="flex h-full flex-col rounded-3xl border border-line bg-white p-6">
+              <h3 className="text-[1.02rem] font-semibold text-navy">
+                Access is logged, and withdrawable
+              </h3>
+              <p className="mt-2 text-[0.88rem] leading-relaxed text-slate">
+                Every grant is recorded with the date it was given, and you can
+                take it back without asking anybody.
+              </p>
+              <div className="mt-auto space-y-1.5 rounded-2xl border border-line bg-mist/60 p-3.5">
+                {[
+                  ["Dr S. Rao", "Granted 14 Oct", true],
+                  ["Dr K. Menon", "Withdrawn 02 Oct", false],
+                ].map(([n, when, active]) => (
+                  <div
+                    key={n as string}
+                    className="flex items-center gap-2.5 rounded-lg bg-white px-2.5 py-2"
+                  >
+                    <span
+                      className={`h-1.5 w-1.5 shrink-0 rounded-full ${
+                        active ? "bg-sage" : "bg-faint"
+                      }`}
+                    />
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-[0.7rem] font-semibold text-navy">
+                        {n as string}
+                      </span>
+                      <span className="block text-[0.6rem] text-mute">
+                        {when as string}
+                      </span>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </article>
+          </Reveal>
         </div>
+
+        <Reveal>
+          <div className="mt-10 grid gap-6 rounded-3xl border border-line bg-mist/60 p-7 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              ["Encrypted in transit and at rest", "Records move over TLS and are stored encrypted."],
+              ["Nothing sold on", "Health data is not a product here, and never will be."],
+              ["Private by design", "The architecture shares nothing by default."],
+              ["Built towards ABDM", "Consent and interoperability are on the roadmap, not claimed today."],
+            ].map(([t, b]) => (
+              <div key={t}>
+                <h4 className="text-[0.88rem] font-semibold text-navy">{t}</h4>
+                <p className="mt-1.5 text-[0.82rem] leading-relaxed text-slate">
+                  {b}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
         <p className="mt-8 max-w-3xl text-[0.8rem] leading-relaxed text-mute">
-          Ayussetu provides AI-powered insights to support preventive health
+          Ayussetu provides AI powered insights to support preventive health
           actions. It is not a diagnostic or treatment tool, and does not
-          replace the judgement of a qualified clinician. AI can make
-          mistakes, so always consult a healthcare professional.
+          replace the judgement of a qualified clinician. AI can make mistakes,
+          so always consult a healthcare professional.
         </p>
       </div>
     </section>
@@ -732,72 +971,10 @@ export function Download() {
             Free for patients, on Android and iPhone. Doctors and clinics have
             tools of their own.
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <a
-              href="#"
-              className="rounded-full bg-amber px-7 py-3 text-[0.9rem] font-semibold text-white transition hover:bg-amber-deep"
-            >
-              Google Play
-            </a>
-            <a
-              href="#"
-              className="rounded-full border border-white/25 px-7 py-3 text-[0.9rem] font-semibold text-white transition hover:bg-white/10"
-            >
-              App Store
-            </a>
+          <div className="mt-8 flex justify-center">
+            <StoreButtons tone="dark" />
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
-
-/* -------------------------------- faq -------------------------------- */
-
-const faqs = [
-  {
-    q: "How does Ayussetu track my vitals?",
-    a: "Log them in the app in one sitting - blood pressure, pulse, sugar, SpO2, temperature, respiratory rate, weight, BMI, sleep and steps - or let a connected smartwatch fill in what it can. Each reading is scored and compared with your own history.",
-  },
-  {
-    q: "How does it read my lab report?",
-    a: "Photograph or upload it and the markers are pulled out, placed against their reference ranges and scored. Anything it cannot read stays as the document you uploaded, so nothing is lost.",
-  },
-  {
-    q: "Can I book appointments online as well as in person?",
-    a: "Yes. Find a doctor by department, see the slots they actually have, and book in person, by video or by voice. Everything stays in sync with your record.",
-  },
-  {
-    q: "Who can see my records?",
-    a: "You, and any doctor you grant access to. Access is per doctor, you are asked each time, and it can be withdrawn afterwards. A family group shares only what each member chooses.",
-  },
-  {
-    q: "Is my data secure?",
-    a: "Records are encrypted in transit and at rest, and the architecture is private by design. Nothing is shared without consent, and health data is never sold.",
-  },
-  {
-    q: "Do I need an ABHA to use it?",
-    a: "No. Ayussetu works on its own today, and ABHA linking is being added so your records can travel with you to any hospital on the national network.",
-  },
-];
-
-export function Faq() {
-  return (
-    <section id="faq" className="border-t border-line bg-paper">
-      <div className="mx-auto max-w-3xl px-5 py-18 sm:px-8 md:py-24">
-        <h2 className="font-display text-[clamp(1.8rem,4vw,2.4rem)] leading-tight text-ink">
-          Questions people ask
-        </h2>
-        <dl className="mt-10 divide-y divide-line border-y border-line">
-          {faqs.map((f) => (
-            <div key={f.q} className="py-5">
-              <dt className="text-[0.98rem] font-semibold text-navy">{f.q}</dt>
-              <dd className="mt-2 text-[0.9rem] leading-relaxed text-slate">
-                {f.a}
-              </dd>
-            </div>
-          ))}
-        </dl>
       </div>
     </section>
   );

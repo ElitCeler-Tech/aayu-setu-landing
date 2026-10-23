@@ -1,6 +1,8 @@
 import { Header, Footer } from "@/components/Chrome";
 import { Splash } from "@/components/Splash";
 import { Contact } from "@/components/Contact";
+import { Testimonials } from "@/components/Testimonials";
+import { Faq } from "@/components/Faq";
 import {
   Hero,
   Counts,
@@ -10,12 +12,10 @@ import {
   Audiences,
   Practice,
   How,
-  Testimonial,
   Abha,
   Team,
   Security,
   Download,
-  Faq,
 } from "@/components/Sections";
 
 export default function Home() {
@@ -32,7 +32,7 @@ export default function Home() {
         <Audiences />
         <Practice />
         <How />
-        <Testimonial />
+        <Testimonials />
         <Abha />
         <Team />
         <Security />
