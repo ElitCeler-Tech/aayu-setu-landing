@@ -54,7 +54,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="border-t border-line bg-mist">
+    <section id="contact" className="border-t border-line bg-paper">
       <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
         <div className="grid gap-12 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
           <div>
@@ -96,7 +96,7 @@ export function Contact() {
             </dl>
           </div>
 
-          <div className="rounded-2xl border border-line bg-white p-6 shadow-[0_24px_60px_-40px_rgba(22,35,61,0.45)] sm:p-8">
+          <div className="rounded-3xl border border-line bg-white p-6 shadow-[0_24px_60px_-40px_rgba(22,35,61,0.45)] sm:p-8">
             {state === "sent" ? (
               <div className="flex h-full min-h-[18rem] flex-col items-start justify-center">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sage-wash">

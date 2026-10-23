@@ -8,6 +8,9 @@ import {
   GroupMock,
 } from "./Mocks";
 import { AyuMock, RecordsMock, RiskMock, ConsultMock } from "./Mocks2";
+import Link from "next/link";
+import Image from "next/image";
+import { team } from "@/data/team";
 import { Reveal, Parallax } from "./Motion";
 import { StoreButtons } from "./StoreButtons";
 
@@ -116,40 +119,32 @@ export function Hero() {
 /* ------------------------------ counts ------------------------------- */
 
 const counts = [
-  { n: "10", l: "vitals tracked", s: "BP, pulse, sugar, SpO2, temperature, respiratory rate, weight, BMI, sleep, steps" },
-  { n: "14", l: "lab markers read", s: "Cholesterol, LDL, HDL, triglycerides, glucose, HbA1c, liver, kidney, haemoglobin, platelets, WBC, sodium, potassium, vitamin D" },
-  { n: "17", l: "fields on a prescription", s: "From chief complaint and diagnosis codes to tests, immunisations and the follow up" },
-  { n: "3", l: "ways to consult", s: "In person, video call or voice call, booked against the doctor's own slots", exact: true },
+  { n: "10", l: "vitals tracked", s: "From blood pressure to sleep" },
+  { n: "14", l: "lab markers read", s: "Lipids, sugar, liver, kidney, blood" },
+  { n: "17", l: "fields on a prescription", s: "Complaint to follow up" },
+  { n: "3", l: "ways to consult", s: "In person, video, voice", exact: true },
 ];
 
 export function Counts() {
   return (
     <section className="border-b border-line bg-ink">
-      <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8 md:py-16">
-        <div className="grid gap-10 md:grid-cols-4 md:gap-6">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <div className="grid divide-y divide-white/10 md:grid-cols-4 md:divide-x md:divide-y-0">
           {counts.map((c, i) => (
-            <Reveal key={c.l} delay={i * 90}>
-              <div className="group relative md:px-6 md:first:pl-0 md:last:pr-0">
-                {/* A hairline between the figures rather than a box
-                    around each: four cards made four claims look like
-                    four products. */}
-                {i > 0 && (
-                  <span className="absolute left-0 top-1 hidden h-[calc(100%-0.5rem)] w-px bg-white/10 md:block" />
-                )}
-                <p className="font-display text-[clamp(2.6rem,5vw,3.4rem)] leading-none tabular-nums text-white">
+            <Reveal key={c.l} delay={i * 80}>
+              <div className="flex items-baseline gap-4 py-8 md:block md:px-7 md:py-10 md:first:pl-0 md:last:pr-0">
+                <p className="font-display text-[clamp(2.4rem,4.4vw,3rem)] leading-none tabular-nums text-white">
                   {c.n}
                   {!("exact" in c) && (
-                    <span className="ml-1 align-top text-[0.9rem] text-amber">
-                      +
-                    </span>
+                    <span className="text-amber">+</span>
                   )}
                 </p>
-                <p className="mt-3 text-[0.9rem] font-semibold text-white">
-                  {c.l}
-                </p>
-                <p className="mt-2 text-[0.78rem] leading-relaxed text-white/45">
-                  {c.s}
-                </p>
+                <div className="md:mt-4">
+                  <p className="text-[0.92rem] font-semibold text-white">
+                    {c.l}
+                  </p>
+                  <p className="mt-1 text-[0.8rem] text-white/45">{c.s}</p>
+                </div>
               </div>
             </Reveal>
           ))}
@@ -179,62 +174,138 @@ const thesis = [
   },
 ];
 
+/* Each stage of the argument gets a picture, because "scattered",
+   "together" and "a trend" are three shapes before they are three
+   sentences. */
+function Scattered() {
+  const bits = [
+    { t: "Lab, March", x: "4%", y: "6%", r: "-7deg" },
+    { t: "Prescription", x: "52%", y: "0%", r: "5deg" },
+    { t: "Sugar, unwritten", x: "20%", y: "40%", r: "3deg" },
+    { t: "Discharge summary", x: "48%", y: "56%", r: "-4deg" },
+    { t: "Lab, August", x: "2%", y: "74%", r: "6deg" },
+  ];
+  return (
+    <div className="relative h-[10.5rem]">
+      {bits.map((b) => (
+        <span
+          key={b.t}
+          className="absolute rounded-lg border border-line bg-white px-2.5 py-1.5 text-[0.62rem] font-medium text-slate shadow-[0_6px_14px_-10px_rgba(22,35,61,0.6)]"
+          style={{ left: b.x, top: b.y, transform: `rotate(${b.r})` }}
+        >
+          {b.t}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function Stacked() {
+  return (
+    <div className="relative h-[10.5rem]">
+      {[0, 1, 2].map((i) => (
+        <span
+          key={i}
+          className="absolute left-1/2 w-[70%] -translate-x-1/2 rounded-xl border border-line bg-white shadow-[0_8px_18px_-14px_rgba(22,35,61,0.6)]"
+          style={{ top: `${i * 10}px`, height: "6.5rem", zIndex: 3 - i, opacity: 1 - i * 0.22 }}
+        />
+      ))}
+      <div className="absolute left-1/2 top-0 z-10 w-[70%] -translate-x-1/2 rounded-xl border border-line bg-white p-3">
+        <p className="text-[0.56rem] font-bold uppercase tracking-[0.12em] text-mute">
+          One record
+        </p>
+        {["LDL 164", "HbA1c 6.1", "Metformin 500mg"].map((t) => (
+          <p key={t} className="mt-1.5 text-[0.64rem] font-medium text-navy">
+            {t}
+          </p>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Trend() {
+  return (
+    <div className="relative h-[10.5rem] rounded-2xl border border-line bg-white p-3">
+      <p className="text-[0.56rem] font-bold uppercase tracking-[0.12em] text-mute">
+        LDL across three reports
+      </p>
+      <svg viewBox="0 0 200 86" className="mt-2 w-full" aria-hidden="true">
+        <defs>
+          <linearGradient id="trendfill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#FF8B0B" stopOpacity="0.22" />
+            <stop offset="100%" stopColor="#FF8B0B" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        {[20, 42, 64].map((y) => (
+          <line key={y} x1="0" x2="200" y1={y} y2={y} stroke="#EDF0F5" strokeWidth="1" />
+        ))}
+        <path d="M8 66 L100 48 L192 16 L192 86 L8 86 Z" fill="url(#trendfill)" />
+        <path d="M8 66 L100 48 L192 16" stroke="#FF8B0B" strokeWidth="2.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        {[[8, 66], [100, 48], [192, 16]].map(([x, y]) => (
+          <circle key={x} cx={x} cy={y} r="3.4" fill="#fff" stroke="#FF8B0B" strokeWidth="2" />
+        ))}
+      </svg>
+      <div className="flex justify-between text-[0.56rem] text-mute">
+        <span>Mar 128</span>
+        <span>Jun 146</span>
+        <span className="font-semibold text-amber-deep">Oct 164</span>
+      </div>
+    </div>
+  );
+}
+
+const thesisArt = [<Scattered key="a" />, <Stacked key="b" />, <Trend key="c" />];
+
 export function Thesis() {
   return (
     <section className="relative overflow-hidden border-b border-line bg-paper">
-      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[30rem] w-[60rem] -translate-x-1/2 rounded-full bg-amber/[0.05] blur-[130px]" />
+      <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <Reveal>
-          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
-            Why Ayussetu exists
-          </p>
-          <h2 className="mt-3 max-w-2xl font-display text-[clamp(1.9rem,4.4vw,2.7rem)] leading-tight text-ink text-balance">
-            Prevention needs the whole picture, not the latest page
-          </h2>
+          <div className="max-w-2xl">
+            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
+              Why Ayussetu exists
+            </p>
+            <h2 className="mt-3 font-display text-[clamp(1.9rem,4.4vw,2.7rem)] leading-tight text-ink text-balance">
+              Prevention needs the whole picture, not the latest page
+            </h2>
+          </div>
         </Reveal>
 
-        <div className="mt-14 grid gap-12 md:grid-cols-[1.05fr_0.95fr] md:gap-20">
-          {/* The argument, as a numbered spine. Three steps of one
-              thought, so they are numbered and joined by a rule rather
-              than scattered as three equal cards. */}
-          <ol className="relative">
-            <span className="absolute left-[1.15rem] top-3 bottom-3 w-px bg-line" />
-            {thesis.map((t, i) => (
-              <Reveal key={t.n} delay={i * 90}>
-                <li className="relative grid grid-cols-[2.4rem_1fr] gap-5 pb-10 last:pb-0">
-                  <span className="z-10 flex h-[2.4rem] w-[2.4rem] items-center justify-center rounded-full border border-line bg-white font-display text-[0.85rem] text-amber-deep">
+        <div className="mt-16 grid gap-10 md:grid-cols-3 md:gap-8">
+          {thesis.map((t, i) => (
+            <Reveal key={t.n} delay={i * 130}>
+              <article className="relative flex h-full flex-col">
+                {/* the picture first: scattered, then stacked, then a line */}
+                <div className="rounded-3xl border border-line bg-mist/50 p-4">
+                  {thesisArt[i]}
+                </div>
+
+                <div className="mt-6 flex items-center gap-3">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-navy font-display text-[0.7rem] text-white">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <div className="pt-1">
-                    <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-mute">
-                      {t.n}
-                    </p>
-                    <h3 className="mt-1.5 font-display text-[1.25rem] leading-snug text-navy">
-                      {t.t}
-                    </h3>
-                    <p className="mt-2 text-[0.92rem] leading-relaxed text-slate">
-                      {t.b}
-                    </p>
-                  </div>
-                </li>
-              </Reveal>
-            ))}
-          </ol>
+                  <span className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-mute">
+                    {t.n}
+                  </span>
+                </div>
 
-          {/* The two panels drift at different rates, so the column
-              reads as depth rather than as a stack. */}
-          <div className="relative self-center">
-            <Parallax speed={0.1}>
-              <RecordsMock />
-            </Parallax>
-            <Parallax speed={0.26} className="mt-5">
-              <RiskMock />
-            </Parallax>
-          </div>
+                <h3 className="mt-3 font-display text-[1.25rem] leading-snug text-navy text-balance">
+                  {t.t}
+                </h3>
+                <p className="mt-2.5 text-[0.9rem] leading-relaxed text-slate">
+                  {t.b}
+                </p>
+              </article>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
   );
 }
+
 /* ----------------------------- features ------------------------------ */
 
 const features = [
@@ -308,8 +379,9 @@ const features = [
 
 export function Features() {
   return (
-    <section id="features" className="border-b border-line bg-mist">
-      <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
+    <section id="features" className="relative overflow-hidden border-b border-line bg-mist">
+      <div className="grid-ground pointer-events-none absolute inset-0 opacity-60 [mask-image:linear-gradient(to_bottom,black,transparent_55%)]" />
+      <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <div className="max-w-2xl">
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
             What it does
@@ -346,7 +418,7 @@ export function Features() {
                   ))}
                 </ul>
               </Reveal>
-              <Parallax speed={i % 2 === 0 ? 0.18 : 0.26}>{b.mock}</Parallax>
+              <Parallax speed={i % 2 === 0 ? 0.34 : 0.46}>{b.mock}</Parallax>
             </div>
           ))}
         </div>
@@ -449,19 +521,19 @@ const audiences = [
 
 export function Audiences() {
   return (
-    <section id="audiences" className="border-b border-line bg-ink text-white">
+    <section id="audiences" className="border-b border-line bg-mist">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <Reveal>
           <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
             <div>
-              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber">
+              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
                 Who it is for
               </p>
-              <h2 className="mt-3 max-w-xl font-display text-[clamp(1.9rem,4.4vw,2.7rem)] leading-tight text-balance">
+              <h2 className="mt-3 max-w-xl font-display text-[clamp(1.9rem,4.4vw,2.7rem)] leading-tight text-ink text-balance">
                 One record, read three different ways
               </h2>
             </div>
-            <p className="max-w-sm text-[0.9rem] leading-relaxed text-white/55">
+            <p className="max-w-sm text-[0.9rem] leading-relaxed text-slate">
               The same history serves the person it belongs to, the doctor
               treating them and the clinic they walk into. Nobody is asked to
               keep a second copy.
@@ -472,25 +544,25 @@ export function Audiences() {
         <div className="mt-14 grid gap-5 md:grid-cols-3">
           {audiences.map((a, i) => (
             <Reveal key={a.who} delay={i * 110}>
-              <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-7 transition duration-500 hover:border-amber/40 hover:bg-white/[0.06]">
-                <span className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-amber/0 blur-2xl transition duration-500 group-hover:bg-amber/20" />
+              <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white p-7 transition duration-500 hover:border-amber/50 hover:shadow-[0_26px_60px_-42px_rgba(22,35,61,0.7)]">
+                <span className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-amber/0 blur-2xl transition duration-500 group-hover:bg-amber/15" />
 
-                <span className="font-display text-[0.8rem] tracking-[0.14em] text-amber">
+                <span className="font-display text-[0.8rem] tracking-[0.14em] text-amber-deep">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <p className="mt-5 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-white/45">
+                <p className="mt-5 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-mute">
                   {a.who}
                 </p>
-                <h3 className="mt-2 font-display text-[1.28rem] leading-snug text-balance">
+                <h3 className="mt-2 font-display text-[1.28rem] leading-snug text-navy text-balance">
                   {a.line}
                 </h3>
-                <p className="mt-3 text-[0.88rem] leading-relaxed text-white/60">
+                <p className="mt-3 text-[0.88rem] leading-relaxed text-slate">
                   {a.body}
                 </p>
 
-                <ul className="mt-6 space-y-2.5 border-t border-white/10 pt-5">
+                <ul className="mt-6 space-y-2.5 border-t border-line pt-5">
                   {a.points.map((pt) => (
-                    <li key={pt} className="flex gap-2.5 text-[0.84rem] text-white/80">
+                    <li key={pt} className="flex gap-2.5 text-[0.84rem] text-navy">
                       <svg width="13" height="13" viewBox="0 0 16 16" className="mt-[0.2rem] shrink-0 text-amber" aria-hidden="true">
                         <path d="M6.2 11.3 3.4 8.5l1-1 1.8 1.8 5-5 1 1z" fill="currentColor" />
                       </svg>
@@ -535,8 +607,10 @@ const doctorBlocks = [
 
 export function Practice() {
   return (
-    <section id="doctors" className="border-b border-line bg-ink text-white">
-      <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
+    <section id="doctors" className="relative overflow-hidden border-b border-line bg-ink text-white">
+      <span className="pointer-events-none absolute -right-32 top-10 h-[34rem] w-[34rem] rounded-full bg-amber/10 blur-[140px]" />
+      <span className="pointer-events-none absolute -left-40 bottom-0 h-[30rem] w-[30rem] rounded-full bg-sage/10 blur-[140px]" />
+      <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <div className="max-w-2xl">
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber">
             The doctor app
@@ -572,7 +646,7 @@ export function Practice() {
                   ))}
                 </ul>
               </Reveal>
-              <Parallax speed={i % 2 === 0 ? 0.2 : 0.28}>{b.mock}</Parallax>
+              <Parallax speed={i % 2 === 0 ? 0.36 : 0.48}>{b.mock}</Parallax>
             </div>
           ))}
         </div>
@@ -720,57 +794,54 @@ export function Abha() {
 }
 /* -------------------------------- team ------------------------------- */
 
-const team = [
-  {
-    n: "Sandeep Konda",
-    r: "Founder and CEO",
-    l: "https://www.linkedin.com/in/sandeepkonda/",
-  },
-  {
-    n: "Preeti Kotha",
-    r: "Advisor, PharmD",
-    l: "https://www.linkedin.com/in/preeti-kotha-pharmd-app-75b95085/",
-  },
-];
-
 export function Team() {
   return (
     <section id="team" className="border-b border-line bg-mist">
-      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 md:py-20">
+      <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
         <Reveal>
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
             About the founder
           </p>
-          <h2 className="mt-3 font-display text-[clamp(1.7rem,3.6vw,2.3rem)] leading-tight text-ink">
+          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.4rem)] leading-tight text-ink text-balance">
             Get to know the Ayussetu team
           </h2>
         </Reveal>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:w-[46rem]">
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
           {team.map((m, i) => (
-            <Reveal key={m.n} delay={i * 110}>
-              <a
-                href={m.l}
-                target="_blank"
-                rel="noreferrer"
-                className="group flex h-full items-center gap-4 rounded-2xl border border-line bg-white p-5 transition hover:border-navy/30 hover:shadow-[0_18px_40px_-30px_rgba(22,35,61,0.6)]"
+            <Reveal key={m.slug} delay={i * 110}>
+              <Link
+                href={`/founders/${m.slug}`}
+                className="group flex h-full gap-6 rounded-3xl border border-line bg-white p-6 transition hover:border-navy/25 hover:shadow-[0_24px_55px_-38px_rgba(22,35,61,0.65)] sm:p-7"
               >
-                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-navy font-display text-[1.05rem] text-white">
-                  {m.n.split(" ").map((w) => w[0]).join("")}
+                <span className="relative h-[8.5rem] w-[7.4rem] shrink-0 overflow-hidden rounded-2xl bg-mist">
+                  <Image
+                    src={m.photo}
+                    alt=""
+                    fill
+                    sizes="120px"
+                    className="object-cover object-top transition duration-500 group-hover:scale-[1.03]"
+                  />
                 </span>
-                <span className="min-w-0">
-                  <span className="block font-display text-[1.05rem] text-navy">
-                    {m.n}
+
+                <span className="flex min-w-0 flex-col">
+                  <span className="font-display text-[1.2rem] leading-snug text-navy">
+                    {m.name}
                   </span>
-                  <span className="block text-[0.84rem] text-mute">{m.r}</span>
-                  <span className="mt-1.5 inline-flex items-center gap-1.5 text-[0.76rem] font-semibold text-amber-deep">
-                    LinkedIn
-                    <span className="transition group-hover:translate-x-0.5">
+                  <span className="mt-0.5 text-[0.82rem] font-medium text-amber-deep">
+                    {m.role}
+                  </span>
+                  <span className="mt-3 text-[0.86rem] leading-relaxed text-slate">
+                    {m.lede}
+                  </span>
+                  <span className="mt-auto pt-4 text-[0.8rem] font-semibold text-navy">
+                    Read more
+                    <span className="ml-1.5 inline-block transition group-hover:translate-x-0.5">
                       &rarr;
                     </span>
                   </span>
                 </span>
-              </a>
+              </Link>
             </Reveal>
           ))}
         </div>
@@ -778,6 +849,7 @@ export function Team() {
     </section>
   );
 }
+
 /* ------------------------------ privacy ------------------------------ */
 
 const security = [
