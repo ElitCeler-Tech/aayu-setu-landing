@@ -79,33 +79,7 @@ export function PhoneShowcase() {
         </div>
       </div>
 
-      <div className="float-a pointer-events-none absolute -right-[7.5rem] top-[52%] z-20 hidden w-[10rem] rounded-2xl border border-line bg-white/95 p-3 shadow-[0_22px_45px_-24px_rgba(22,35,61,0.55)] backdrop-blur [animation-delay:2.4s] xl:block">
-        <div className="flex items-center gap-2">
-          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-navy">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fff" aria-hidden="true">
-              <path d="M4 6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Zm11 3 5-3v10l-5-3" />
-            </svg>
-          </span>
-          <p className="text-[0.64rem] font-semibold text-navy">Consultation</p>
-        </div>
-        <p className="mt-1.5 text-[0.56rem] leading-snug text-mute">
-          Dr Rao, tomorrow 10:00 AM, video
-        </p>
-      </div>
-
-      <div className="float-b pointer-events-none absolute -left-[7.5rem] bottom-[26%] z-20 hidden w-[10rem] rounded-2xl border border-line bg-white/95 p-3 shadow-[0_22px_45px_-24px_rgba(22,35,61,0.55)] backdrop-blur [animation-delay:3.1s] xl:block">
-        <p className="text-[0.55rem] font-bold uppercase tracking-[0.12em] text-mute">
-          Health score
-        </p>
-        <div className="mt-1.5 flex items-center gap-2">
-          <p className="font-display text-[1.3rem] leading-none text-navy">72</p>
-          <span className="rounded-md bg-sage-wash px-1.5 py-0.5 text-[0.52rem] font-semibold text-sage">
-            Steady
-          </span>
-        </div>
-      </div>
-
-      <div className="rounded-[2.5rem] border border-line bg-white p-2.5 shadow-[0_40px_90px_-30px_rgba(22,35,61,0.5)]">
+                  <div className="rounded-[2.5rem] border border-line bg-white p-2.5 shadow-[0_40px_90px_-30px_rgba(22,35,61,0.5)]">
         <div className="relative h-[33rem] overflow-hidden rounded-[2rem] bg-paper">
           {PANELS.map((p) => (
             <div
@@ -157,16 +131,22 @@ export function PhoneShowcase() {
    person is implied to be an Ayussetu doctor and there is no licence to
    buy. Swap these two files for photographs of actual clinicians, with
    their consent, whenever we have them. */
+const FACES = {
+  doctor: "/people/doctor.jpg",
+  "doctor-avatar": "/people/doctor-avatar.jpg",
+  patient: "/people/patient.jpg",
+} as const;
+
 function VideoFace({
   kind,
   className = "",
 }: {
-  kind: "doctor" | "patient";
+  kind: keyof typeof FACES;
   className?: string;
 }) {
   return (
     <img
-      src={kind === "doctor" ? "/people/doctor.jpg" : "/people/patient.jpg"}
+      src={FACES[kind]}
       alt=""
       aria-hidden="true"
       className={`object-cover ${className}`}
@@ -313,14 +293,23 @@ function Ringing() {
         <div className="relative mt-8">
           <span className="absolute -inset-2 animate-ping rounded-full bg-white/10" />
           <VideoFace
-            kind="doctor"
-            className="relative h-24 w-24 rounded-full object-cover ring-2 ring-white/20"
+            kind="doctor-avatar"
+            className="relative h-24 w-24 rounded-full object-cover object-center ring-2 ring-white/20"
           />
         </div>
         <p className="mt-5 text-[1rem] font-semibold text-white">Dr S. Rao</p>
         <p className="mt-0.5 text-[0.7rem] text-white/50">
           Cardiology, 10:00 AM
         </p>
+
+        <div className="mt-7 w-full rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5 text-left">
+          <p className="text-[0.56rem] font-semibold uppercase tracking-[0.14em] text-white/40">
+            Shared for this consult
+          </p>
+          <p className="mt-1 text-[0.68rem] leading-snug text-white/70">
+            Last 30 days of readings, 2 lab reports and your current medicines
+          </p>
+        </div>
       </div>
 
       <div className="flex w-full items-center justify-center gap-10">
@@ -343,29 +332,28 @@ function Ringing() {
 
 function InCall() {
   return (
-    <div className="flex h-full flex-col bg-ink">
-      <div className="relative flex-1 overflow-hidden">
-        {/* The doctor's camera fills the screen, as it does in a call. */}
-        <VideoFace kind="doctor" className="absolute inset-0 h-full w-full" />
+    <div className="flex h-full flex-col bg-ink p-3">
+      <div className="relative flex-1 overflow-hidden rounded-2xl">
+        <VideoFace kind="doctor" className="absolute inset-0 h-full w-full object-top" />
 
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 to-transparent px-4 pb-4 pt-10">
-          <p className="text-[0.92rem] font-semibold text-white">Dr S. Rao</p>
-          <p className="mt-0.5 flex items-center gap-1.5 text-[0.66rem] text-white/60">
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 to-transparent px-3 pb-3 pt-10">
+          <p className="text-[0.82rem] font-semibold text-white">Dr S. Rao</p>
+          <p className="mt-0.5 flex items-center gap-1.5 text-[0.6rem] text-white/65">
             <span className="h-1.5 w-1.5 rounded-full bg-sage" />
-            Connected, 04:12
+            Cardiology · connected 04:12
           </p>
         </div>
 
         {/* The patient's own tile, where every video app puts it. */}
-        <div className="absolute right-3 top-3 w-[4.2rem] overflow-hidden rounded-xl border border-white/20 shadow-lg">
-          <VideoFace kind="patient" className="h-[5.6rem] w-full" />
-          <span className="absolute bottom-1 left-1 rounded bg-ink/70 px-1 py-0.5 text-[0.46rem] font-medium text-white/80">
+        <div className="absolute right-2 top-2 w-[3.9rem] overflow-hidden rounded-lg border border-white/25 shadow-lg">
+          <VideoFace kind="patient" className="h-[2.9rem] w-full object-top" />
+          <span className="absolute bottom-0.5 left-0.5 rounded bg-ink/70 px-1 text-[0.44rem] font-medium text-white/85">
             You
           </span>
         </div>
       </div>
 
-      <div className="flex items-center justify-center gap-4 border-t border-white/10 px-4 py-5">
+      <div className="flex items-center justify-center gap-3.5 pt-4 pb-1">
         {[
           { l: "Mute", on: false },
           { l: "Voice only", on: true },
@@ -373,24 +361,24 @@ function InCall() {
         ].map((c) => (
           <div key={c.l} className="flex flex-col items-center gap-1.5">
             <span
-              className={`flex h-10 w-10 items-center justify-center rounded-full ${
+              className={`flex h-9 w-9 items-center justify-center rounded-full ${
                 c.on ? "bg-amber" : "bg-white/10"
               }`}
             >
               <span
-                className={`h-3 w-3 rounded-full ${
+                className={`h-2.5 w-2.5 rounded-full ${
                   c.on ? "bg-white" : "bg-white/60"
                 }`}
               />
             </span>
-            <span className="text-[0.55rem] text-white/45">{c.l}</span>
+            <span className="text-[0.52rem] text-white/45">{c.l}</span>
           </div>
         ))}
         <div className="flex flex-col items-center gap-1.5">
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#D4453D]">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#D4453D]">
             <PhoneIcon className="rotate-[135deg] text-white" small />
           </span>
-          <span className="text-[0.55rem] text-white/45">End</span>
+          <span className="text-[0.52rem] text-white/45">End</span>
         </div>
       </div>
     </div>

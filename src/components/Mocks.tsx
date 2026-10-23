@@ -155,7 +155,7 @@ export function PrescriptionMock() {
   return (
     <Frame>
       <div className="space-y-2">
-        <div className="rounded-xl border border-line bg-white p-2.5">
+        <div className="rounded-xl border border-line bg-paper p-2.5">
           <p className="text-[0.55rem] font-bold uppercase tracking-[0.12em] text-amber-deep">
             Medicine 1
           </p>
@@ -178,13 +178,13 @@ export function PrescriptionMock() {
           {["Diagnosis", "Vitals", "Tests", "Follow up"].map((t) => (
             <div
               key={t}
-              className="rounded-lg border border-line bg-white px-2 py-1.5 text-[0.6rem] text-slate"
+              className="rounded-lg border border-line bg-paper px-2 py-1.5 text-[0.6rem] text-slate"
             >
               {t}
             </div>
           ))}
         </div>
-        <div className="flex items-center justify-between rounded-xl border border-line bg-white px-2.5 py-2">
+        <div className="flex items-center justify-between rounded-xl border border-line bg-paper px-2.5 py-2">
           <span className="text-[0.62rem] text-mute">Signature</span>
           <svg width="64" height="20" viewBox="0 0 64 20" fill="none" aria-hidden="true">
             <path
@@ -217,7 +217,7 @@ export function EarningsMock() {
           </span>
         ))}
       </div>
-      <div className="rounded-xl border border-line bg-white p-3">
+      <div className="rounded-xl border border-line bg-paper p-3">
         <p className="text-[0.55rem] font-bold uppercase tracking-[0.12em] text-mute">
           This month
         </p>
@@ -279,7 +279,7 @@ export function GroupMock() {
 
 function Frame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border border-line bg-mist/60 p-3 shadow-[0_24px_50px_-30px_rgba(22,35,61,0.55)]">
+    <div className="rounded-2xl border border-line bg-white p-3 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)]">
       {children}
     </div>
   );

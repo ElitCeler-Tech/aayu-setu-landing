@@ -197,17 +197,17 @@ const thesis = [
   {
     n: "The problem",
     t: "Your health is written down in a dozen places",
-    b: "A lab in one clinic, a prescription in a drawer, a discharge summary on a phone, a sugar reading nobody wrote down. No one of them is wrong; together they are unreadable, and the pattern across them is what matters.",
+    b: "A lab in one clinic, a prescription in a drawer, a discharge summary on a phone, a reading nobody wrote down. Not one of them is wrong, and together they are unreadable.",
   },
   {
     n: "What we do",
     t: "Read them as one record",
-    b: "Upload what you have and Ayussetu pulls the markers out, places each against its range, and keeps every document alongside the medicines you take and the readings you log.",
+    b: "Upload what you have. Ayussetu reads the markers out of it, places each against its range, and files it beside the medicines you take and the readings you log.",
   },
   {
     n: "Why it matters",
     t: "Risk shows up in the trend, not the test",
-    b: "A single LDL means little. LDL rising across three reports while HDL falls and fasting glucose creeps up is a direction, and a direction is something you can still act on.",
+    b: "One LDL means little. LDL climbing across three reports while HDL falls is a direction, and a direction is something you can still act on.",
   },
 ];
 
@@ -230,7 +230,7 @@ function ArtFrame({
       <p className="text-[0.56rem] font-bold uppercase tracking-[0.12em] text-mute">
         {label}
       </p>
-      <div className="relative mt-3 h-[9.5rem]">{children}</div>
+      <div className="relative mt-3 h-[9.5rem] w-full">{children}</div>
     </div>
   );
 }
@@ -264,19 +264,25 @@ function Stacked() {
       {[2, 1].map((i) => (
         <span
           key={i}
-          className="absolute left-1/2 w-[76%] -translate-x-1/2 rounded-xl border border-line bg-paper"
-          style={{ top: `${i * 9}px`, height: "7.6rem", opacity: 1 - i * 0.3 }}
+          className="absolute left-1/2 w-[78%] -translate-x-1/2 rounded-xl border border-line bg-paper"
+          style={{
+            top: `${i * 7}px`,
+            bottom: `${-i * 7}px`,
+            opacity: 1 - i * 0.32,
+          }}
         />
       ))}
-      <div className="absolute left-1/2 top-0 w-[76%] -translate-x-1/2 rounded-xl border border-line bg-paper p-3">
+      <div className="absolute inset-x-[11%] inset-y-0 flex flex-col justify-between rounded-xl border border-line bg-paper p-3">
         {[
           ["LDL", "164 mg/dL"],
           ["HbA1c", "6.1 %"],
           ["Metformin", "500mg, daily"],
-        ].map(([k, v]) => (
+        ].map(([k, v], i) => (
           <div
             key={k}
-            className="flex items-baseline justify-between border-b border-line py-1.5 last:border-0"
+            className={`flex items-baseline justify-between ${
+              i < 2 ? "border-b border-line pb-2" : ""
+            }`}
           >
             <span className="text-[0.64rem] font-medium text-navy">{k}</span>
             <span className="text-[0.6rem] tabular-nums text-slate">{v}</span>
@@ -288,24 +294,63 @@ function Stacked() {
 }
 
 function Trend() {
+  /* Markers sit in HTML, not in the SVG: the plot is stretched to the frame,
+     which would turn an SVG circle into an oval. */
+  const points = [
+    { left: "8%", top: "75%" },
+    { left: "50%", top: "53.8%" },
+    { left: "92%", top: "21.2%" },
+  ];
   return (
     <ArtFrame label="LDL across three reports">
-      <svg viewBox="0 0 200 104" className="w-full" aria-hidden="true">
-        <defs>
-          <linearGradient id="trendfill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#FF8B0B" stopOpacity="0.2" />
-            <stop offset="100%" stopColor="#FF8B0B" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-        {[22, 50, 78].map((y) => (
-          <line key={y} x1="0" x2="200" y1={y} y2={y} stroke="#EDF0F5" strokeWidth="1" />
+      <div className="absolute inset-x-0 top-0 h-[calc(100%-1.15rem)]">
+        <svg
+          viewBox="0 0 200 104"
+          preserveAspectRatio="none"
+          className="h-full w-full"
+          aria-hidden="true"
+        >
+          <defs>
+            <linearGradient id="trendfill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#FF8B0B" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#FF8B0B" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          {[22, 50, 78].map((y) => (
+            <line
+              key={y}
+              x1="0"
+              x2="200"
+              y1={y}
+              y2={y}
+              stroke="#EDF0F5"
+              strokeWidth="1"
+              vectorEffect="non-scaling-stroke"
+            />
+          ))}
+          <path
+            d="M0 84 L16 78 L100 56 L184 22 L200 16 L200 104 L0 104 Z"
+            fill="url(#trendfill)"
+          />
+          <path
+            d="M0 84 L16 78 L100 56 L184 22 L200 16"
+            stroke="#FF8B0B"
+            strokeWidth="2.4"
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        {points.map((pt) => (
+          <span
+            key={pt.left}
+            aria-hidden="true"
+            className="absolute h-[0.55rem] w-[0.55rem] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-amber bg-white"
+            style={{ left: pt.left, top: pt.top }}
+          />
         ))}
-        <path d="M10 78 L100 56 L190 20 L190 104 L10 104 Z" fill="url(#trendfill)" />
-        <path d="M10 78 L100 56 L190 20" stroke="#FF8B0B" strokeWidth="2.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-        {[[10, 78], [100, 56], [190, 20]].map(([x, y]) => (
-          <circle key={x} cx={x} cy={y} r="3.6" fill="#fff" stroke="#FF8B0B" strokeWidth="2" />
-        ))}
-      </svg>
+      </div>
       <div className="absolute inset-x-0 bottom-0 flex justify-between text-[0.58rem] text-mute">
         <span>Mar 128</span>
         <span>Jun 146</span>
@@ -442,11 +487,15 @@ export function Features() {
       <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <div className="max-w-2xl">
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
-            What it does
+            For patients, in the app
           </p>
           <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-ink text-balance">
             Everything a hospital asks you to remember, remembered for you
           </h2>
+          <p className="mt-4 text-[0.95rem] leading-relaxed text-slate">
+            This is the patient app: what somebody gets on their own phone,
+            free, from the moment they add the first medicine.
+          </p>
         </div>
 
         <div className="mt-14 space-y-16 md:space-y-24">
@@ -491,32 +540,47 @@ const markers = [
   {
     k: "LDL cholesterol",
     tag: "Heart",
-    w: "The cholesterol that collects in artery walls. Watched over years rather than weeks, because the damage is cumulative and quiet.",
-    lo: 0, hi: 45, at: 74,
-    lowLabel: "Lower is better", range: "Under 100 mg/dL", highLabel: "Raised",
+    w: "The cholesterol that collects in artery walls, watched over years rather than weeks because the damage is cumulative and quiet.",
+    reading: "164 mg/dL", status: "High",
+    lo: 0, hi: 45, at: 74, range: "Under 100 mg/dL",
+    lowLabel: "Lower is better", highLabel: "Raised",
   },
   {
     k: "HbA1c",
     tag: "Sugar",
-    w: "Your average blood sugar over about three months. One fasting reading can be a bad morning; this one cannot.",
-    lo: 10, hi: 48, at: 58,
-    lowLabel: "Normal", range: "Under 5.7 %", highLabel: "Diabetes range",
+    w: "Your average blood sugar over about three months. A single fasting reading can be a bad morning; this one cannot be.",
+    reading: "6.1 %", status: "Raised",
+    lo: 10, hi: 48, at: 58, range: "Under 5.7 %",
+    lowLabel: "Normal", highLabel: "Diabetes range",
   },
   {
     k: "Fasting glucose",
     tag: "Sugar",
-    w: "Sugar after a night without food. Read alongside HbA1c, it separates a single high reading from a pattern.",
-    lo: 14, hi: 50, at: 44,
-    lowLabel: "Low", range: "70 to 99 mg/dL", highLabel: "High",
+    w: "Sugar after a night without food. Read alongside HbA1c, it separates one high morning from a pattern worth acting on.",
+    reading: "92 mg/dL", status: "In range",
+    lo: 14, hi: 50, at: 32, range: "70 to 99 mg/dL",
+    lowLabel: "Low", highLabel: "High",
   },
   {
     k: "Creatinine and eGFR",
     tag: "Kidney",
-    w: "How well the kidneys are clearing waste. It moves slowly and silently, which is exactly why it is worth tracking.",
-    lo: 40, hi: 95, at: 66,
-    lowLabel: "Reduced", range: "eGFR above 90", highLabel: "Healthy",
+    w: "How well the kidneys are clearing waste. It moves slowly and silently, which is exactly why it is worth watching over time.",
+    reading: "eGFR 78", status: "Watch",
+    lo: 40, hi: 95, at: 62, range: "Above 90",
+    lowLabel: "Reduced", highLabel: "Healthy",
   },
 ];
+
+/* A reading is either in its range or it is not, and the card should
+   say which in a word. A dot on a line leaves the reader to work it
+   out, which is the thing this section exists to stop. */
+const statusTone: Record<string, string> = {
+  "In range": "bg-sage-wash text-sage",
+  Watch: "bg-amber-wash text-amber-deep",
+  Raised: "bg-amber-wash text-amber-deep",
+  High: "bg-amber-wash text-amber-deep",
+  Low: "bg-amber-wash text-amber-deep",
+};
 
 export function Markers() {
   return (
@@ -548,29 +612,47 @@ export function Markers() {
                   <h3 className="font-display text-[1.18rem] text-navy">
                     {m.k}
                   </h3>
-                  <span className="shrink-0 rounded-full bg-mist px-2.5 py-1 text-[0.62rem] font-semibold text-mute transition group-hover:bg-amber-wash group-hover:text-amber-deep">
+                  <span className="shrink-0 rounded-full bg-mist px-2.5 py-1 text-[0.62rem] font-semibold text-mute">
                     {m.tag}
                   </span>
                 </div>
-                <p className="mt-2.5 text-[0.9rem] leading-relaxed text-slate">
+                <p className="mt-2.5 min-h-[3.4rem] text-[0.9rem] leading-relaxed text-slate">
                   {m.w}
                 </p>
 
-                {/* where a healthy reading sits, and where this one is */}
-                <div className="mt-5">
-                  <div className="relative h-1.5 rounded-full bg-mist">
+                {/* the last reading, and whether it is where it should be */}
+                <div className="mt-auto pt-5">
+                  <div className="flex items-baseline justify-between">
+                    <span className="text-[0.7rem] text-mute">Last reading</span>
+                    <span className="flex items-center gap-2">
+                      <span className="text-[0.95rem] font-semibold tabular-nums text-navy">
+                        {m.reading}
+                      </span>
+                      <span
+                        className={`rounded-full px-2 py-0.5 text-[0.62rem] font-semibold ${statusTone[m.status]}`}
+                      >
+                        {m.status}
+                      </span>
+                    </span>
+                  </div>
+
+                  <div className="relative mt-3 h-1.5 rounded-full bg-mist">
                     <span
-                      className="absolute inset-y-0 rounded-full bg-sage/35"
+                      className="absolute inset-y-0 rounded-full bg-sage/40"
                       style={{ left: `${m.lo}%`, right: `${100 - m.hi}%` }}
                     />
                     <span
-                      className="absolute top-1/2 h-3 w-3 -translate-y-1/2 rounded-full border-2 border-white bg-amber shadow"
-                      style={{ left: `calc(${m.at}% - 0.375rem)` }}
+                      className={`absolute top-1/2 h-3.5 w-3.5 -translate-y-1/2 rounded-full border-2 border-white shadow ${
+                        m.status === "In range" ? "bg-sage" : "bg-amber"
+                      }`}
+                      style={{ left: `calc(${m.at}% - 0.4375rem)` }}
                     />
                   </div>
                   <div className="mt-2 flex justify-between text-[0.66rem] text-mute">
                     <span>{m.lowLabel}</span>
-                    <span className="font-semibold text-navy">{m.range}</span>
+                    <span className="font-semibold text-navy">
+                      Healthy: {m.range}
+                    </span>
                     <span>{m.highLabel}</span>
                   </div>
                 </div>
