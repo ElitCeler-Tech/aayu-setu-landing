@@ -40,7 +40,7 @@ export function PhoneShowcase() {
       <div className="pointer-events-none absolute -inset-10 -z-10 rounded-[4rem] bg-navy/[0.07] blur-3xl" />
 
       {/* Lifted off the phone, drifting out of phase. */}
-      <div className="float-a pointer-events-none absolute -left-[8.5rem] top-20 z-20 hidden w-[10.5rem] xl:block rounded-2xl border border-line bg-white/95 p-3 shadow-[0_22px_45px_-24px_rgba(22,35,61,0.55)] backdrop-blur">
+      <div className="float-a pointer-events-none absolute -left-[8.5rem] top-20 z-20 hidden w-[10.5rem] xl:block rounded-2xl border border-[#E3E7EF] bg-white/95 p-3 shadow-[0_22px_45px_-24px_rgba(22,35,61,0.55)] backdrop-blur">
         <div className="flex items-center gap-2">
           <span className="flex h-6 w-6 items-center justify-center rounded-full bg-sage-wash">
             <svg width="11" height="11" viewBox="0 0 16 16" className="text-sage" aria-hidden="true">
@@ -49,13 +49,13 @@ export function PhoneShowcase() {
           </span>
           <p className="text-[0.66rem] font-semibold text-navy">Dose taken</p>
         </div>
-        <p className="mt-1.5 text-[0.58rem] leading-snug text-mute">
+        <p className="mt-1.5 text-[0.58rem] leading-snug text-[#76829A]">
           Telmisartan 40mg, logged at 8:04 AM
         </p>
       </div>
 
-      <div className="float-b pointer-events-none absolute -right-[8rem] bottom-24 z-20 hidden w-[11rem] xl:block rounded-2xl border border-line bg-white/95 p-3 shadow-[0_22px_45px_-24px_rgba(22,35,61,0.55)] backdrop-blur">
-        <p className="text-[0.55rem] font-bold uppercase tracking-[0.12em] text-mute">
+      <div className="float-b pointer-events-none absolute -right-[8rem] bottom-24 z-20 hidden w-[11rem] xl:block rounded-2xl border border-[#E3E7EF] bg-white/95 p-3 shadow-[0_22px_45px_-24px_rgba(22,35,61,0.55)] backdrop-blur">
+        <p className="text-[0.55rem] font-bold uppercase tracking-[0.12em] text-[#76829A]">
           Lab report read
         </p>
         <div className="mt-2 space-y-1.5">
@@ -66,11 +66,11 @@ export function PhoneShowcase() {
             <div key={m.k}>
               <div className="flex items-baseline justify-between text-[0.58rem]">
                 <span className="font-medium text-navy">{m.k}</span>
-                <span className="tabular-nums text-slate">{m.v} mg/dL</span>
+                <span className="tabular-nums text-[#46556F]">{m.v} mg/dL</span>
               </div>
-              <div className="mt-0.5 h-1 rounded-full bg-mist">
+              <div className="mt-0.5 h-1 rounded-full bg-[#F1F3F7]">
                 <div
-                  className="h-1 rounded-full bg-amber"
+                  className="h-1 rounded-full bg-[#FF8B0B]"
                   style={{ width: `${m.w}%` }}
                 />
               </div>
@@ -79,8 +79,8 @@ export function PhoneShowcase() {
         </div>
       </div>
 
-                  <div className="rounded-[2.5rem] border border-line bg-white p-2.5 shadow-[0_40px_90px_-30px_rgba(22,35,61,0.5)]">
-        <div className="relative h-[33rem] overflow-hidden rounded-[2rem] bg-paper">
+                  <div className="rounded-[2.5rem] border border-[#E3E7EF] bg-white p-2.5 shadow-[0_40px_90px_-30px_rgba(22,35,61,0.5)]">
+        <div className="relative h-[33rem] overflow-hidden rounded-[2rem] bg-[#FFFFFF]">
           {PANELS.map((p) => (
             <div
               key={p}
@@ -104,7 +104,7 @@ export function PhoneShowcase() {
       />
 
       <div className="mt-3 flex flex-col items-center gap-2.5">
-        <p className="h-5 text-center text-[0.8rem] font-medium text-slate transition">
+        <p className="h-5 text-center text-[0.8rem] font-medium text-[#46556F] transition">
           {captions[panel]}
         </p>
         {!still && (
@@ -176,7 +176,7 @@ function Home() {
       </div>
 
       <div className="space-y-3 px-3.5 pb-5 pt-4">
-        <div className="rounded-2xl border border-line bg-white p-3.5">
+        <div className="rounded-2xl border border-[#E3E7EF] bg-white p-3.5">
           <div className="flex items-center gap-3.5">
             <div className="relative h-14 w-14 shrink-0">
               <div
@@ -194,21 +194,21 @@ function Home() {
               <p className="text-[0.74rem] font-semibold text-navy">
                 Health score
               </p>
-              <p className="mt-0.5 text-[0.62rem] leading-snug text-mute">
+              <p className="mt-0.5 text-[0.62rem] leading-snug text-[#76829A]">
                 Steady this week, 5 of 6 readings logged
               </p>
             </div>
           </div>
         </div>
 
-        <div className="rounded-2xl border border-amber/30 bg-amber-wash p-3">
-          <p className="text-[0.56rem] font-bold uppercase tracking-[0.14em] text-amber-deep">
+        <div className="rounded-2xl border border-[#FF8B0B]/30 bg-[#FFF4E6] p-3">
+          <p className="eyebrow text-[#C96A00]">
             Reading
           </p>
           <p className="mt-1 text-[0.74rem] font-semibold leading-snug text-navy">
             Blood sugar needs attention
           </p>
-          <p className="mt-0.5 text-[0.62rem] text-amber-deep">
+          <p className="mt-0.5 text-[0.62rem] text-[#C96A00]">
             Out of range today
           </p>
         </div>
@@ -221,9 +221,9 @@ function Home() {
           ].map((t) => (
             <div
               key={t.k}
-              className="rounded-xl border border-line bg-white px-2 py-2"
+              className="rounded-xl border border-[#E3E7EF] bg-white px-2 py-2"
             >
-              <p className="text-[0.55rem] font-medium text-mute">{t.k}</p>
+              <p className="text-[0.55rem] font-medium text-[#76829A]">{t.k}</p>
               <p className="mt-0.5 text-[0.76rem] font-bold tabular-nums text-navy">
                 {t.v}
               </p>
@@ -231,7 +231,7 @@ function Home() {
           ))}
         </div>
 
-        <div className="flex items-center gap-2.5 rounded-2xl border border-line bg-white p-3">
+        <div className="flex items-center gap-2.5 rounded-2xl border border-[#E3E7EF] bg-white p-3">
           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-sage-wash">
             <span className="h-2 w-2 rounded-full bg-sage" />
           </div>
@@ -239,7 +239,7 @@ function Home() {
             <p className="truncate text-[0.72rem] font-semibold text-navy">
               Metformin 500mg
             </p>
-            <p className="text-[0.6rem] text-mute">8:00 AM, after food</p>
+            <p className="text-[0.6rem] text-[#76829A]">8:00 AM, after food</p>
           </div>
           <span className="rounded-lg bg-navy px-2.5 py-1 text-[0.58rem] font-semibold text-white">
             Take
@@ -248,12 +248,12 @@ function Home() {
 
         {/* Reports belong on this screen too: they are half of what the
             app is for, and the panel had the room. */}
-        <div className="rounded-2xl border border-line bg-white p-3">
+        <div className="rounded-2xl border border-[#E3E7EF] bg-white p-3">
           <div className="flex items-center justify-between">
-            <p className="text-[0.62rem] font-bold uppercase tracking-[0.12em] text-mute">
+            <p className="eyebrow text-[#76829A]">
               Reports
             </p>
-            <span className="text-[0.55rem] font-medium text-faint">
+            <span className="text-[0.55rem] font-medium text-[#A4AFC2]">
               34 files
             </span>
           </div>
@@ -263,14 +263,14 @@ function Home() {
               { n: "Prescription, Dr Rao", d: "02 Oct", s: "3 medicines" },
             ].map((r) => (
               <div key={r.n} className="flex items-center gap-2">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-mist">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-[#F1F3F7]">
                   <span className="h-2.5 w-2 rounded-[2px] border border-faint" />
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-[0.64rem] font-semibold text-navy">
                     {r.n}
                   </p>
-                  <p className="text-[0.54rem] text-mute">
+                  <p className="text-[0.54rem] text-[#76829A]">
                     {r.s}, {r.d}
                   </p>
                 </div>
@@ -303,7 +303,7 @@ function Ringing() {
         </p>
 
         <div className="mt-7 w-full rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5 text-left">
-          <p className="text-[0.56rem] font-semibold uppercase tracking-[0.14em] text-white/40">
+          <p className="eyebrow text-white/40">
             Shared for this consult
           </p>
           <p className="mt-1 text-[0.68rem] leading-snug text-white/70">
@@ -356,7 +356,7 @@ function InCall() {
       </div>
 
       <div className="mt-4 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5">
-        <p className="text-[0.56rem] font-semibold uppercase tracking-[0.14em] text-white/40">
+        <p className="eyebrow text-white/40">
           Open beside the call
         </p>
         <p className="mt-1 text-[0.68rem] leading-snug text-white/70">
@@ -373,7 +373,7 @@ function InCall() {
           <div key={c.l} className="flex flex-col items-center gap-1.5">
             <span
               className={`flex h-9 w-9 items-center justify-center rounded-full ${
-                c.on ? "bg-amber" : "bg-white/10"
+                c.on ? "bg-[#FF8B0B]" : "bg-white/10"
               }`}
             >
               <span

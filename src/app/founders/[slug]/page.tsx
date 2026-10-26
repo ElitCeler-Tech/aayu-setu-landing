@@ -145,7 +145,7 @@ export default async function Founder({
         </section>
 
         {others.length > 0 && (
-          <section className="border-b border-line bg-white">
+          <section className="border-b border-line bg-paper">
             <div className="mx-auto max-w-5xl px-5 py-14 sm:px-8">
               <h2 className="text-[0.7rem] font-semibold uppercase tracking-[0.13em] text-mute">
                 Also on the team

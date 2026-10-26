@@ -112,13 +112,13 @@ function Row({
 
 export function Testimonials() {
   return (
-    <section id="testimonials" className="border-b border-line bg-white py-18 md:py-24">
+    <section id="testimonials" className="border-b border-line bg-paper py-18 md:py-24">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="max-w-2xl">
-          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
+          <p className="eyebrow text-amber-deep">
             In their words
           </p>
-          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-ink text-balance">
+          <h2 className="mt-3 font-display text-[clamp(2.05rem,4.6vw,3rem)] leading-tight text-ink text-balance">
             Patients, carers and the doctors who treat them
           </h2>
         </div>

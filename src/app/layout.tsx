@@ -1,29 +1,40 @@
 import type { Metadata } from "next";
-import { Poppins, Schibsted_Grotesk } from "next/font/google";
+import { Instrument_Serif, Instrument_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
 
-/* Two faces, with a job each.
+/* Three faces, each with a job, picked against the reference the client
+   chose rather than by taste.
 
-   Poppins stays because it is what both apps are set in, so the
-   interface language of the site matches the thing it is selling. What
-   it cannot do is carry a headline: it is geometric and wide, which
-   reads as friendly at 14px and as slack at 56px.
+   Their headline face is Financier Display, a high contrast Scotch serif
+   set light at a line height of 1. Instrument Serif is the closest thing
+   to it that can be served: same sharp hairlines, same tight fit, and at
+   68px its contrast reads as light without a light weight existing.
 
-   Schibsted Grotesk takes the headlines. It is a newsroom grotesque,
-   tighter and squarer than Poppins, with a double storey a against
-   Poppins' single storey one, so the two are plainly different rather
-   than almost the same. */
-const poppins = Poppins({
+   Their text face is FT Base, a neutral grotesque. Instrument Sans was
+   drawn alongside Instrument Serif and sits in the same place.
+
+   And every small label on their page is mono, uppercase, eleven pixels,
+   a tenth of an em apart. That detail is doing more work than it looks,
+   so DM Mono takes the eyebrows and the figures. */
+const serif = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-poppins",
+  weight: ["400"],
+  style: ["normal", "italic"],
+  variable: "--font-serif",
   display: "swap",
 });
 
-const display = Schibsted_Grotesk({
+const sans = Instrument_Sans({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-schibsted",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans-face",
+  display: "swap",
+});
+
+const mono = DM_Mono({
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  variable: "--font-mono-face",
   display: "swap",
 });
 
@@ -45,7 +56,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${poppins.variable} ${display.variable}`}>
+    <html lang="en" className={`${sans.variable} ${serif.variable} ${mono.variable}`}>
       <body>{children}</body>
     </html>
   );

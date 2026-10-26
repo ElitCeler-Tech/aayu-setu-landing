@@ -36,7 +36,7 @@ export function Header() {
       <div className="mx-auto flex h-[4.25rem] max-w-6xl items-center gap-8 px-5 sm:px-8">
         <Link href="/" className="flex items-center gap-2.5">
           <Mark />
-          <span className="font-display text-[1.22rem] text-navy">
+          <span className="text-[1.2rem] font-semibold tracking-[-0.02em] text-navy">
             Ayussetu
           </span>
         </Link>
@@ -125,7 +125,7 @@ export function Footer() {
 
           {footerCols.map((c) => (
             <div key={c.h}>
-              <h3 className="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-white/40">
+              <h3 className="eyebrow text-white/40">
                 {c.h}
               </h3>
               <ul className="mt-4 space-y-2.5 text-[0.86rem]">
@@ -141,7 +141,7 @@ export function Footer() {
           ))}
 
           <div>
-            <h3 className="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-white/40">
+            <h3 className="eyebrow text-white/40">
               Reach us
             </h3>
             <ul className="mt-4 space-y-2.5 text-[0.86rem] text-white/70">
@@ -162,7 +162,7 @@ export function Footer() {
         {/* Kept together and named, so none of it reads as small print
             buried in a paragraph. */}
         <div className="mt-14 border-t border-white/10 pt-6">
-          <h3 className="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-white/40">
+          <h3 className="eyebrow text-white/40">
             Disclaimers and policies
           </h3>
           <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-[0.8rem]">

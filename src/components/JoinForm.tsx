@@ -65,7 +65,7 @@ export function JoinForm() {
             <p className="text-[0.68rem] font-semibold uppercase tracking-[0.13em] text-amber-deep">
               Register
             </p>
-            <h2 className="mt-3 font-display text-[clamp(1.7rem,3.6vw,2.3rem)] leading-tight text-ink text-balance">
+            <h2 className="mt-3 font-display text-[clamp(1.95rem,4.2vw,2.8rem)] leading-tight text-ink text-balance">
               Tell us about your practice
             </h2>
             <p className="mt-4 text-[0.92rem] leading-relaxed text-slate">

@@ -61,7 +61,7 @@ export function Contact() {
       <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
         <div className="grid gap-12 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
           <div>
-            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
+            <p className="eyebrow text-amber-deep">
               Contact us
             </p>
             <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.4rem)] leading-tight text-ink text-balance">

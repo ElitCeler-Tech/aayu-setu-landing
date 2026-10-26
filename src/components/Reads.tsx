@@ -80,7 +80,7 @@ export function Reads() {
       <span className="pointer-events-none absolute left-1/2 top-0 h-72 w-[52rem] -translate-x-1/2 rounded-full bg-white/[0.06] blur-[130px]" />
 
       <div className="relative mx-auto max-w-6xl px-5 pt-20 sm:px-8 md:pt-24">
-        <h2 className="max-w-2xl font-display text-[clamp(1.9rem,4.2vw,2.6rem)] leading-tight text-white text-balance">
+        <h2 className="max-w-2xl font-display text-[clamp(2.15rem,4.8vw,3.1rem)] leading-tight text-white text-balance">
           The markers that move before you feel anything
         </h2>
 

@@ -52,7 +52,7 @@ export function PhoneMock() {
 
             {/* attention */}
             <div className="rounded-2xl border border-amber/30 bg-amber-wash p-3">
-              <p className="text-[0.56rem] font-bold uppercase tracking-[0.14em] text-amber-deep">
+              <p className="eyebrow text-amber-deep">
                 Reading
               </p>
               <p className="mt-1 text-[0.74rem] font-semibold leading-snug text-navy">

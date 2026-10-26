@@ -35,11 +35,11 @@ export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="border-t border-line bg-white">
+    <section id="faq" className="border-t border-line bg-paper">
       <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8 md:py-28">
         <div className="grid gap-12 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
           <div>
-            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
+            <p className="eyebrow text-amber-deep">
               Questions
             </p>
             <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.4rem)] leading-tight text-ink text-balance">

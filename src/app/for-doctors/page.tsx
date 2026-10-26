@@ -87,7 +87,7 @@ export default function ForDoctors() {
             <p className="text-[0.64rem] font-semibold uppercase tracking-[0.13em] text-mute">
               For doctors and clinics
             </p>
-            <h1 className="mt-5 max-w-[20ch] font-display text-[clamp(2.1rem,5vw,3.2rem)] leading-[1.07] text-ink text-balance">
+            <h1 className="mt-5 max-w-[20ch] font-display text-[clamp(2.4rem,5.6vw,3.6rem)] leading-[1.07] text-ink text-balance">
               Consult on Ayussetu, and keep the record
             </h1>
             <p className="mt-5 max-w-2xl text-[1.02rem] leading-relaxed text-slate">
@@ -98,7 +98,7 @@ export default function ForDoctors() {
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#join"
-                className="rounded-full bg-amber px-6 py-3.5 text-[0.9rem] font-semibold text-white shadow-[0_14px_30px_-12px_rgba(255,139,11,0.9)] transition hover:bg-amber-deep"
+                className="rounded-full bg-amber px-6 py-3.5 text-[0.9rem] font-semibold text-white shadow-[0_14px_30px_-12px_rgba(255,139,11,0.55)] transition hover:bg-cta-deep"
               >
                 Register your interest
               </a>
@@ -114,13 +114,13 @@ export default function ForDoctors() {
 
         {/* Two products, explained one after the other, because a
             doctor and a clinic manager want different answers. */}
-        <section className="border-b border-line bg-white">
+        <section className="border-b border-line bg-paper">
           <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
             <Reveal>
               <p className="text-[0.7rem] font-semibold uppercase tracking-[0.13em] text-amber-deep">
                 The doctor app
               </p>
-              <h2 className="mt-3 max-w-xl font-display text-[clamp(1.7rem,3.6vw,2.3rem)] leading-tight text-ink text-balance">
+              <h2 className="mt-3 max-w-xl font-display text-[clamp(1.95rem,4.2vw,2.8rem)] leading-tight text-ink text-balance">
                 Everything a consultation needs, in a pocket
               </h2>
               <p className="mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-slate">
@@ -176,7 +176,7 @@ export default function ForDoctors() {
               <p className="text-[0.7rem] font-semibold uppercase tracking-[0.13em] text-amber">
                 The clinician portal
               </p>
-              <h2 className="mt-3 max-w-xl font-display text-[clamp(1.7rem,3.6vw,2.3rem)] leading-tight text-balance">
+              <h2 className="mt-3 max-w-xl font-display text-[clamp(1.95rem,4.2vw,2.8rem)] leading-tight text-balance">
                 A browser console for the people who run the place
               </h2>
               <p className="mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-white/60">

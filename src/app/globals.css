@@ -1,26 +1,38 @@
 @import "tailwindcss";
 
-/* Two grounds only: white, and the navy the apps draw every card in.
-   Nothing else is a background. Amber is kept for the one call to action
-   and the handful of marks that carry state, never as a wash, and the
-   neutrals below exist for borders and chips inside a card. */
+/* Three grounds: warm paper, the cream that sits on it, and the navy the
+   apps draw every card in. Nothing else is a background. */
 @theme {
+  /* Warm paper, not white. The reference sits on a beige and keeps a
+     deeper cream for anything raised off it, which is most of why that
+     page reads as printed matter and a white one reads as a template.
+     The navy and the orange are Ayussetu's own, so the structure is
+     borrowed and the colour is not. */
+  --color-paper: #FBF7F0;
+  --color-mist: #F3EDE2;
+  --color-line: #E4DACA;
+  --color-line-strong: #D6C9B4;
+
   --color-ink: #16233D;
   --color-navy: #1F3050;
-  --color-slate: #46556F;
-  --color-mute: #76829A;
-  --color-faint: #A4AFC2;
-  --color-amber: #FF8B0B;
-  --color-amber-deep: #C96A00;
-  --color-amber-wash: #FFF4E6;
-  --color-sage: #2F7D63;
-  --color-sage-wash: #E9F3EF;
-  --color-paper: #FFFFFF;
-  --color-mist: #F3F5F9;
-  --color-line: #E3E7EF;
+  --color-slate: #4D5260;
+  --color-mute: #807C76;
+  --color-faint: #ADA79D;
 
-  --font-display: var(--font-schibsted), var(--font-poppins), system-ui, sans-serif;
-  --font-sans: var(--font-poppins), system-ui, sans-serif;
+  /* Burnt orange carries the marks and the eyebrows; the app's brighter
+     orange is kept back for the one button that matters on a screen. */
+  --color-amber: #C25A1E;
+  --color-amber-deep: #9E4614;
+  --color-amber-wash: #F6E7DA;
+  --color-cta: #FF8B0B;
+  --color-cta-deep: #E07400;
+
+  --color-sage: #2F6B52;
+  --color-sage-wash: #E7EFEA;
+
+  --font-display: var(--font-serif), Georgia, serif;
+  --font-sans: var(--font-sans-face), system-ui, sans-serif;
+  --font-mono: var(--font-mono-face), ui-monospace, monospace;
 }
 
 html { scroll-behavior: smooth; }
@@ -52,17 +64,25 @@ body {
 .drift { animation: drift 7s ease-in-out infinite; }
 
 
-/* Display type. Schibsted is already tight, so it needs far less pulling
-   in than Poppins did, and it holds 600 at any size without going soft. */
+/* Display type. A high contrast serif wants almost no tracking and a
+   leading close to 1: the contrast does the work that weight does in a
+   grotesque, so pushing the weight up only makes it muddy. */
 .font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.018em;
-  font-weight: 600;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 1.04;
 }
-h1.font-display,
-.font-display.display-xl {
-  letter-spacing: -0.028em;
-  font-weight: 700;
+
+/* Every small label on the reference is mono, eleven pixels, uppercase,
+   a tenth of an em apart. It is the cheapest premium signal there is. */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 /* The quiet grid behind the hero. Two 1px lines repeated, at 4% of the

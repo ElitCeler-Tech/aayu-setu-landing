@@ -29,12 +29,12 @@ export default function About() {
     <>
       <Header />
       <main>
-        <section className="border-b border-line bg-white">
+        <section className="border-b border-line bg-paper">
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
-            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-mute">
+            <p className="eyebrow text-mute">
               About us
             </p>
-            <h1 className="mt-3 max-w-3xl font-display text-[clamp(2.1rem,5vw,3.2rem)] leading-[1.08] text-ink text-balance">
+            <h1 className="mt-3 max-w-3xl font-display text-[clamp(2.4rem,5.6vw,3.6rem)] leading-[1.08] text-ink text-balance">
               Health information people can actually read
             </h1>
             <p className="mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-slate">
@@ -48,7 +48,7 @@ export default function About() {
 
         <section className="border-b border-line bg-ink text-white">
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-24">
-            <h2 className="max-w-xl font-display text-[clamp(1.7rem,3.6vw,2.3rem)] leading-tight text-balance">
+            <h2 className="max-w-xl font-display text-[clamp(1.95rem,4.2vw,2.8rem)] leading-tight text-balance">
               What we hold to
             </h2>
             <div className="mt-12 grid gap-10 md:grid-cols-3 md:gap-12">

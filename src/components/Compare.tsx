@@ -32,13 +32,13 @@ function Tick({ on }: { on: boolean }) {
 
 export function Compare() {
   return (
-    <section id="compare" className="border-b border-line bg-white">
+    <section id="compare" className="border-b border-line bg-paper">
       <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8 md:py-28">
         <div className="max-w-2xl">
-          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-mute">
+          <p className="eyebrow text-mute">
             The difference
           </p>
-          <h2 className="mt-3 font-display text-[clamp(1.9rem,4.4vw,2.6rem)] leading-tight text-ink text-balance">
+          <h2 className="mt-3 font-display text-[clamp(2.15rem,5vw,3.2rem)] leading-tight text-ink text-balance">
             Not your average folder of reports
           </h2>
         </div>

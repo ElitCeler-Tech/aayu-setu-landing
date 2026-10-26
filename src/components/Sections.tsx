@@ -42,7 +42,7 @@ export function Hero() {
             Preventive health, powered by Ayu AI
           </p>
 
-          <h1 className="rise font-display mt-7 max-w-[13ch] [animation-delay:170ms] text-[clamp(2.6rem,6.2vw,4.25rem)] leading-[1.02] text-ink text-balance">
+          <h1 className="rise font-display mt-7 max-w-[13ch] [animation-delay:170ms] text-[clamp(2.9rem,7vw,5rem)] leading-[1.02] text-ink text-balance">
             Your records are scattered. Your risk is not.
           </h1>
 
@@ -64,7 +64,7 @@ export function Hero() {
           <div className="rise mt-9 flex flex-wrap items-center gap-3 [animation-delay:410ms]">
             <a
               href="#download"
-              className="group inline-flex items-center gap-2 rounded-full bg-amber px-7 py-4 text-[0.92rem] font-semibold text-white shadow-[0_14px_30px_-12px_rgba(255,139,11,0.9)] transition hover:bg-amber-deep"
+              className="group inline-flex items-center gap-2 rounded-full bg-cta px-7 py-4 text-[0.92rem] font-semibold text-white shadow-[0_14px_30px_-12px_rgba(255,139,11,0.55)] transition hover:bg-cta-deep"
             >
               Download the app
               <span className="transition group-hover:translate-x-0.5">&rarr;</span>
@@ -131,7 +131,7 @@ function ArtFrame({
 }) {
   return (
     <div className="rounded-2xl border border-line bg-white p-4">
-      <p className="text-[0.56rem] font-bold uppercase tracking-[0.12em] text-mute">
+      <p className="eyebrow text-mute">
         {label}
       </p>
       <div className="relative mt-3 h-[9.5rem] w-full">{children}</div>
@@ -268,12 +268,12 @@ const thesisArt = [<Scattered key="a" />, <Stacked key="b" />, <Trend key="c" />
 
 export function Thesis() {
   return (
-    <section id="how" className="relative border-b border-line bg-white">
+    <section id="how" className="relative border-b border-line bg-paper">
       <div className="pointer-events-none absolute left-1/2 top-0 h-[30rem] w-[60rem] -translate-x-1/2 rounded-full bg-navy/[0.04] blur-[130px]" />
       <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <Reveal>
           <div className="max-w-2xl">
-            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
+            <p className="eyebrow text-amber-deep">
               How Ayussetu works
             </p>
             <h2 className="mt-3 font-display text-[clamp(1.9rem,4.4vw,2.7rem)] leading-tight text-ink text-balance">
@@ -355,7 +355,7 @@ function ProblemSolution({
     >
       <div>
         <p
-          className={`text-[0.66rem] font-bold uppercase tracking-[0.16em] ${
+          className={`eyebrow ${
             dark ? "text-white/40" : "text-mute"
           }`}
         >
@@ -371,7 +371,7 @@ function ProblemSolution({
       </div>
       <div className={dark ? "sm:border-l sm:border-white/12 sm:pl-12" : "sm:border-l sm:border-line sm:pl-12"}>
         <p
-          className={`text-[0.66rem] font-bold uppercase tracking-[0.16em] ${
+          className={`eyebrow ${
             dark ? "text-amber" : "text-amber-deep"
           }`}
         >
@@ -394,10 +394,10 @@ export function Features() {
     <section id="features" className="relative border-b border-line bg-ink text-white">
       <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <div className="max-w-2xl">
-          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber">
+          <p className="eyebrow text-amber">
             For patients, in the app
           </p>
-          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-balance">
+          <h2 className="mt-3 font-display text-[clamp(2.05rem,4.6vw,3rem)] leading-tight text-balance">
             Everything a hospital asks you to remember, remembered for you
           </h2>
         </div>
@@ -457,15 +457,15 @@ const marker = {
 
 export function Markers() {
   return (
-    <section className="border-b border-line bg-white">
+    <section className="border-b border-line bg-paper">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <div className="grid gap-12 md:grid-cols-[0.92fr_1.08fr] md:items-center md:gap-16">
           <Reveal>
             <div>
-              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-mute">
+              <p className="eyebrow text-mute">
                 Understanding your numbers
               </p>
-              <h2 className="mt-3 font-display text-[clamp(1.9rem,4.4vw,2.6rem)] leading-tight text-ink text-balance">
+              <h2 className="mt-3 font-display text-[clamp(2.15rem,5vw,3.2rem)] leading-tight text-ink text-balance">
                 A marker is only useful if you know what it is for
               </h2>
               <p className="mt-5 max-w-md text-[0.98rem] leading-relaxed text-slate">
@@ -565,13 +565,13 @@ const doctorBlocks = [
 
 export function Practice() {
   return (
-    <section id="doctors" className="relative border-b border-line bg-white">
+    <section id="doctors" className="relative border-b border-line bg-paper">
       <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <div className="max-w-2xl">
-          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-mute">
+          <p className="eyebrow text-mute">
             The doctor app
           </p>
-          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-ink text-balance">
+          <h2 className="mt-3 font-display text-[clamp(2.05rem,4.6vw,3rem)] leading-tight text-ink text-balance">
             A consultation that ends in a record, not a paper slip
           </h2>
         </div>
@@ -609,7 +609,7 @@ export function Practice() {
 
 export function Testimonial() {
   return (
-    <section id="testimonials" className="border-b border-line bg-white">
+    <section id="testimonials" className="border-b border-line bg-paper">
       <div className="mx-auto max-w-4xl px-5 py-16 text-center sm:px-8 md:py-20">
         <blockquote className="font-display text-[clamp(1.3rem,3vw,1.9rem)] font-medium leading-snug text-ink text-balance">
           &ldquo;This app has completely changed how I manage my health. I
@@ -635,7 +635,7 @@ export function Abha() {
   ];
 
   return (
-    <section id="abha" className="border-b border-line bg-white">
+    <section id="abha" className="border-b border-line bg-paper">
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 md:py-20">
         <Reveal>
           <div className="relative overflow-hidden rounded-[2rem] border border-line bg-ink px-6 py-11 text-white sm:px-9 md:px-14 md:py-16">
@@ -643,14 +643,14 @@ export function Abha() {
 
             <div className="relative grid gap-12 md:grid-cols-[1.05fr_0.95fr] md:items-center md:gap-14">
               <div>
-                <p className="inline-flex items-center gap-2 rounded-full border border-amber/30 bg-amber/10 px-3 py-1.5 text-[0.66rem] font-semibold uppercase tracking-[0.12em] text-amber">
+                <p className="inline-flex items-center gap-2 rounded-full border border-amber/30 bg-amber/10 px-3 py-1.5 eyebrow text-amber">
                   <span className="relative flex h-1.5 w-1.5">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber/70" />
                     <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber" />
                   </span>
                   Planned, not yet live
                 </p>
-                <h2 className="mt-5 font-display text-[clamp(1.7rem,3.6vw,2.4rem)] leading-tight text-balance">
+                <h2 className="mt-5 font-display text-[clamp(1.95rem,4.2vw,2.85rem)] leading-tight text-balance">
                   One health ID, all your records
                 </h2>
                 <p className="mt-4 max-w-xl text-[0.94rem] leading-relaxed text-white/65">
@@ -685,7 +685,7 @@ export function Abha() {
                   />
                   <div className="relative flex items-start justify-between gap-4">
                     <div>
-                      <p className="text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-white/40">
+                      <p className="eyebrow text-white/40">
                         Ayushman Bharat Health Account
                       </p>
                       <p className="mt-3 font-display text-[1.3rem] tabular-nums tracking-[0.14em] text-white">
@@ -766,13 +766,13 @@ export function Abha() {
 
 export function Team() {
   return (
-    <section id="team" className="border-b border-line bg-white">
+    <section id="team" className="border-b border-line bg-paper">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <Reveal>
-          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
+          <p className="eyebrow text-amber-deep">
             About the founder
           </p>
-          <h2 className="mt-3 font-display text-[clamp(1.9rem,4.4vw,2.6rem)] leading-tight text-ink text-balance">
+          <h2 className="mt-3 font-display text-[clamp(2.15rem,5vw,3.2rem)] leading-tight text-ink text-balance">
             Get to know the Ayussetu team
           </h2>
         </Reveal>
@@ -845,15 +845,15 @@ const security = [
 
 export function Security() {
   return (
-    <section id="security" className="border-b border-line bg-white">
+    <section id="security" className="border-b border-line bg-paper">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <Reveal>
           <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
             <div>
-              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
+              <p className="eyebrow text-amber-deep">
                 Privacy and safety
               </p>
-              <h2 className="mt-3 max-w-xl font-display text-[clamp(1.9rem,4.4vw,2.6rem)] leading-tight text-ink text-balance">
+              <h2 className="mt-3 max-w-xl font-display text-[clamp(2.15rem,5vw,3.2rem)] leading-tight text-ink text-balance">
                 A record is only useful if the person it belongs to controls it
               </h2>
             </div>
@@ -874,7 +874,7 @@ export function Security() {
                 Nothing is visible to a clinician until you approve it.
               </p>
               <div className="mt-auto rounded-2xl border border-line bg-mist/60 p-3.5 pt-3 transition duration-500 group-hover:border-sage/30 group-hover:bg-sage-wash/70">
-                <p className="text-[0.56rem] font-bold uppercase tracking-[0.12em] text-mute">
+                <p className="eyebrow text-mute">
                   Access request
                 </p>
                 <p className="mt-1.5 text-[0.76rem] font-semibold text-navy">
@@ -1000,7 +1000,7 @@ export function Security() {
 
 export function Download() {
   return (
-    <section id="download" className="border-b border-line bg-white">
+    <section id="download" className="border-b border-line bg-paper">
       <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
         <div className="overflow-hidden rounded-3xl bg-navy px-6 py-12 text-center sm:px-14">
           <h2 className="mx-auto max-w-2xl font-display text-[clamp(1.8rem,4vw,2.4rem)] leading-tight text-white text-balance">
