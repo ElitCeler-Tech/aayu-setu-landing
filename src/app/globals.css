@@ -19,7 +19,7 @@
   --color-mist: #F3F5F9;
   --color-line: #E3E7EF;
 
-  --font-display: var(--font-poppins), system-ui, sans-serif;
+  --font-display: var(--font-schibsted), var(--font-poppins), system-ui, sans-serif;
   --font-sans: var(--font-poppins), system-ui, sans-serif;
 }
 
@@ -52,13 +52,17 @@ body {
 .drift { animation: drift 7s ease-in-out infinite; }
 
 
-/* Display type: Poppins is geometric and wide by default, which reads as
-   friendly at 14px and as slack at 48px. Pulling the tracking in and
-   holding the leading tight is what makes it look like a product rather
-   than a brochure. */
+/* Display type. Schibsted is already tight, so it needs far less pulling
+   in than Poppins did, and it holds 600 at any size without going soft. */
 .font-display {
-  letter-spacing: -0.028em;
+  font-family: var(--font-display);
+  letter-spacing: -0.018em;
   font-weight: 600;
+}
+h1.font-display,
+.font-display.display-xl {
+  letter-spacing: -0.028em;
+  font-weight: 700;
 }
 
 /* The quiet grid behind the hero. Two 1px lines repeated, at 4% of the

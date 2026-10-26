@@ -17,17 +17,14 @@ import { StoreButtons } from "./StoreButtons";
 export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-line">
-      {/* White, and one cool wash behind the phone. Nothing else: the
-          product is the only colour this section needs. */}
-      <div className="pointer-events-none absolute right-[-16%] top-[-24%] h-[46rem] w-[46rem] rounded-full bg-navy/[0.05] blur-[150px]" />
+      {/* One cool wash behind the phone, and a hairline grid that stops
+          under the headline. Nothing else: the product is the only colour
+          this section needs. */}
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-[62%] bg-gradient-to-l from-navy/[0.07] via-navy/[0.03] to-transparent" />
+      <div className="pointer-events-none absolute right-[-14%] top-[-28%] h-[52rem] w-[52rem] rounded-full bg-navy/[0.06] blur-[160px]" />
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 py-20 sm:px-8 md:grid-cols-[1.1fr_0.9fr] md:py-28 xl:gap-20">
-        <div>
-          {/* Not a status pill. A pulsing green dot is the convention
-              for "service is up", which is not what this sentence is
-              about: it is a claim, so it gets a mark that reads as AI.
-              The tracking is also eased off: at 0.1em the hyphen in
-              "AI-driven" opened into a dash and the line read as two. */}
+      <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 pb-16 pt-16 sm:px-8 md:grid-cols-[1.08fr_0.92fr] md:pb-24 md:pt-24 xl:gap-4">
+        <div className="md:pr-6">
           <p className="rise inline-flex items-center gap-2 rounded-full border border-line bg-white/80 px-3.5 py-1.5 text-[0.64rem] font-semibold uppercase tracking-[0.13em] text-mute backdrop-blur [animation-delay:90ms]">
             <svg
               width="11"
@@ -45,55 +42,51 @@ export function Hero() {
             Preventive health, powered by Ayu AI
           </p>
 
-          <h1 className="rise font-display mt-6 max-w-[17ch] [animation-delay:170ms] text-[clamp(2.2rem,5.2vw,3.5rem)] leading-[1.06] text-ink text-balance">
+          <h1 className="rise font-display mt-7 max-w-[13ch] [animation-delay:170ms] text-[clamp(2.6rem,6.2vw,4.25rem)] leading-[1.02] text-ink text-balance">
             Your records are scattered. Your risk is not.
           </h1>
 
-          <p className="rise mt-6 max-w-xl text-[1.05rem] leading-relaxed text-slate [animation-delay:250ms]">
+          <p className="rise mt-7 max-w-lg text-[1.08rem] leading-relaxed text-slate [animation-delay:250ms]">
             A lab in one clinic, a prescription in a drawer, a reading nobody
             wrote down. Ayussetu reads them as one record, so what is building
             shows up while there is still something to do about it.
           </p>
 
+          {/* The numbers that used to sit in four boxes further down the
+              page, said once, here, where they are worth something. */}
+          <p className="rise mt-5 max-w-lg text-[0.95rem] leading-relaxed text-navy [animation-delay:330ms]">
+            <span className="font-semibold">29 markers</span> read out of the
+            reports you already have.{" "}
+            <span className="font-semibold">Free for patients</span>, on
+            Android and iPhone.
+          </p>
 
           <div className="rise mt-9 flex flex-wrap items-center gap-3 [animation-delay:410ms]">
             <a
               href="#download"
-              className="group inline-flex items-center gap-2 rounded-full bg-amber px-6 py-3.5 text-[0.9rem] font-semibold text-white shadow-[0_14px_30px_-12px_rgba(255,139,11,0.9)] transition hover:bg-amber-deep"
+              className="group inline-flex items-center gap-2 rounded-full bg-amber px-7 py-4 text-[0.92rem] font-semibold text-white shadow-[0_14px_30px_-12px_rgba(255,139,11,0.9)] transition hover:bg-amber-deep"
             >
               Download the app
               <span className="transition group-hover:translate-x-0.5">&rarr;</span>
             </a>
             <a
               href="/for-doctors"
-              className="rounded-full border border-line bg-white px-6 py-3.5 text-[0.9rem] font-semibold text-navy transition hover:border-navy"
+              className="rounded-full border border-line bg-white px-7 py-4 text-[0.92rem] font-semibold text-navy transition hover:border-navy"
             >
               For doctors and clinics
             </a>
           </div>
 
-          <ul className="rise mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-line pt-6 text-[0.8rem] text-slate [animation-delay:530ms]">
-            {[
-              "Free for patients",
-              "Android and iPhone",
-              "Nothing shared without your consent",
-            ].map((t) => (
-              <li key={t} className="flex items-center gap-2">
-                <svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true" className="text-sage">
-                  <path d="M6.2 11.3 3.4 8.5l1-1 1.8 1.8 5-5 1 1z" fill="currentColor" />
-                </svg>
-                {t}
-              </li>
-            ))}
-          </ul>
-
-          <p className="mt-5 max-w-md text-[0.76rem] leading-relaxed text-mute">
-            AI powered insights to support preventive health actions. Not a
-            diagnostic or treatment tool.
+          <p className="mt-8 max-w-md border-t border-line pt-5 text-[0.76rem] leading-relaxed text-mute">
+            Nothing is shared without your consent. AI powered insights to
+            support preventive health actions, not a diagnostic or treatment
+            tool.
           </p>
         </div>
 
-        <div className="rise [animation-delay:300ms]">
+        {/* The phone runs past the edge of the column rather than sitting
+            inside a box, so the section reads as a window on the product. */}
+        <div className="rise [animation-delay:300ms] lg:-mr-8 xl:-mr-14">
           <PhoneShowcase />
         </div>
       </div>
