@@ -133,7 +133,7 @@ export function Contact() {
                         id="role"
                         name="role"
                         defaultValue={roles[0]}
-                        className="h-[2.85rem] w-full appearance-none rounded-xl border border-line bg-paper pl-3.5 pr-10 text-[0.88rem] text-navy outline-none transition focus:border-navy"
+                        className="h-[2.85rem] w-full appearance-none rounded-xl border border-line bg-mist pl-3.5 pr-10 text-[0.88rem] text-navy outline-none transition focus:border-navy"
                       >
                         {roles.map((r) => (
                           <option key={r}>{r}</option>
