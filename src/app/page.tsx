@@ -23,11 +23,11 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <Counts />
         <Thesis />
+        <Counts />
+        <Markers />
         <Features />
         <Audiences />
-        <Markers />
         <Practice />
         <Testimonials />
         <Abha />

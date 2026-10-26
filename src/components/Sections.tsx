@@ -46,13 +46,14 @@ export function Hero() {
             Preventive health, powered by Ayu AI
           </p>
 
-          <h1 className="rise font-display mt-6 max-w-[16ch] [animation-delay:170ms] text-[clamp(2.2rem,5.2vw,3.5rem)] leading-[1.06] text-ink text-balance">
-            Your health records, read together for once
+          <h1 className="rise font-display mt-6 max-w-[17ch] [animation-delay:170ms] text-[clamp(2.2rem,5.2vw,3.5rem)] leading-[1.06] text-ink text-balance">
+            Your records are scattered. Your risk is not.
           </h1>
 
           <p className="rise mt-6 max-w-xl text-[1.05rem] leading-relaxed text-slate [animation-delay:250ms]">
-            Your records in one place, read together, so where your risk is
-            building shows up early.
+            A lab in one clinic, a prescription in a drawer, a reading nobody
+            wrote down. Ayussetu reads them as one record, so what is building
+            shows up while there is still something to do about it.
           </p>
 
 
@@ -180,19 +181,19 @@ export function Counts() {
 
 const thesis = [
   {
-    n: "The problem",
-    t: "Your health is written down in a dozen places",
-    b: "A lab in one clinic, a prescription in a drawer, a reading nobody wrote down. None of them wrong, and together unreadable.",
+    n: "Bring it in",
+    t: "Whatever you already have",
+    b: "Photograph a lab report, a prescription, a discharge summary. Years of paper goes in as fast as you can point a camera at it.",
   },
   {
-    n: "What we do",
-    t: "Read them as one record",
-    b: "Upload what you have. Ayussetu reads the markers out, ranges each one, and files it beside your medicines and readings.",
+    n: "Read it",
+    t: "Markers out, ranges on",
+    b: "Ayussetu pulls the markers out of each one and places them against their ranges, beside the medicines you take and the readings you log.",
   },
   {
-    n: "Why it matters",
-    t: "Risk shows up in the trend, not the test",
-    b: "One LDL means little. LDL climbing across three reports is a direction, and a direction you can still act on.",
+    n: "See it coming",
+    t: "A direction, not a number",
+    b: "One LDL means little. LDL climbing across three reports is a direction, and a direction is something you can still act on.",
   },
 ];
 
@@ -349,13 +350,13 @@ const thesisArt = [<Scattered key="a" />, <Stacked key="b" />, <Trend key="c" />
 
 export function Thesis() {
   return (
-    <section className="relative border-b border-line bg-white">
+    <section id="how" className="relative border-b border-line bg-white">
       <div className="pointer-events-none absolute left-1/2 top-0 h-[30rem] w-[60rem] -translate-x-1/2 rounded-full bg-navy/[0.04] blur-[130px]" />
       <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <Reveal>
           <div className="max-w-2xl">
             <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
-              Why Ayussetu exists
+              How Ayussetu works
             </p>
             <h2 className="mt-3 font-display text-[clamp(1.9rem,4.4vw,2.7rem)] leading-tight text-ink text-balance">
               Prevention needs the whole picture, not the latest page
