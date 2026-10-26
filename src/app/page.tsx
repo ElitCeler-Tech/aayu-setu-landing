@@ -5,11 +5,9 @@ import { Testimonials } from "@/components/Testimonials";
 import { Faq } from "@/components/Faq";
 import {
   Hero,
-  Counts,
   Thesis,
   Features,
   Markers,
-  Audiences,
   Practice,
   Abha,
   Security,
@@ -24,10 +22,8 @@ export default function Home() {
       <main>
         <Hero />
         <Thesis />
-        <Counts />
         <Markers />
         <Features />
-        <Audiences />
         <Practice />
         <Testimonials />
         <Abha />

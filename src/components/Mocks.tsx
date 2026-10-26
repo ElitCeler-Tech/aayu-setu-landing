@@ -279,7 +279,7 @@ export function GroupMock() {
 
 function Frame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border border-line bg-white p-3 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)]">
+    <div className="rounded-2xl border border-line bg-white p-3 shadow-[0_26px_55px_-30px_rgba(22,35,61,0.5)]">
       {children}
     </div>
   );

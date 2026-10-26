@@ -3,7 +3,6 @@ import Image from "next/image";
 
 const nav = [
   { label: "Features", href: "#features" },
-  { label: "Who it's for", href: "#audiences" },
   { label: "How it works", href: "#how" },
   { label: "FAQs", href: "#faq" },
   { label: "For doctors", href: "/for-doctors" },
@@ -78,7 +77,6 @@ const footerCols = [
     h: "Product",
     links: [
       ["Features", "#features"],
-      ["Who it's for", "#audiences"],
       ["How it works", "#how"],
       ["Download", "#download"],
     ],

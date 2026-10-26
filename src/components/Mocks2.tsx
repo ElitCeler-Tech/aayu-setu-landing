@@ -2,7 +2,7 @@
 
 export function AyuMock() {
   return (
-    <div className="rounded-2xl border border-line bg-white p-3 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)]">
+    <div className="rounded-2xl border border-line bg-white p-3 shadow-[0_26px_55px_-30px_rgba(22,35,61,0.5)]">
       <div className="space-y-2">
         <div className="ml-auto max-w-[78%] rounded-2xl rounded-br-md bg-navy px-3 py-2">
           <p className="text-[0.68rem] leading-snug text-white">
@@ -32,7 +32,7 @@ export function RecordsMock() {
     { n: "Discharge summary", d: "04 Aug", t: "Hospital" },
   ];
   return (
-    <div className="rounded-2xl border border-line bg-white p-3 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)]">
+    <div className="rounded-2xl border border-line bg-white p-3 shadow-[0_26px_55px_-30px_rgba(22,35,61,0.5)]">
       <div className="mb-2 flex items-center justify-between">
         <p className="text-[0.66rem] font-semibold text-navy">Your records</p>
         <span className="rounded-md bg-mist px-1.5 py-0.5 text-[0.55rem] font-semibold text-mute">
@@ -70,7 +70,7 @@ export function RiskMock() {
     { n: "Liver", v: 22, s: "Clear" },
   ];
   return (
-    <div className="rounded-2xl border border-line bg-white p-3.5 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)]">
+    <div className="rounded-2xl border border-line bg-white p-3.5 shadow-[0_26px_55px_-30px_rgba(22,35,61,0.5)]">
       <p className="text-[0.56rem] font-bold uppercase tracking-[0.12em] text-mute">
         Where the risk is
       </p>
@@ -101,7 +101,7 @@ export function RiskMock() {
 
 export function ConsultMock() {
   return (
-    <div className="rounded-2xl border border-line bg-white p-3 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)]">
+    <div className="rounded-2xl border border-line bg-white p-3 shadow-[0_26px_55px_-30px_rgba(22,35,61,0.5)]">
       <div className="rounded-xl border border-line bg-paper p-3">
         <div className="flex items-center gap-2.5">
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-navy text-[0.62rem] font-semibold text-white">

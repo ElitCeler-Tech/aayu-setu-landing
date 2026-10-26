@@ -11,7 +11,6 @@ import Image from "next/image";
 import { team } from "@/data/team";
 import { Reveal, Parallax } from "./Motion";
 import { StoreButtons } from "./StoreButtons";
-import { AudienceLens } from "./Lens";
 
 /* ------------------------------- hero -------------------------------- */
 
@@ -102,55 +101,6 @@ export function Hero() {
   );
 }
 
-/* ------------------------------ counts ------------------------------- */
-
-const counts = [
-  { n: "14", l: "lab markers", s: "Lipids, sugar, liver, kidney, blood" },
-  { n: "10", l: "vitals", s: "Blood pressure through to sleep" },
-  { n: "17", l: "prescription fields", s: "Complaint through to follow up" },
-  { n: "3", l: "ways to consult", s: "In person, video, voice", exact: true },
-];
-
-export function Counts() {
-  return (
-    <section className="relative overflow-hidden border-b border-line bg-ink">
-      <span className="pointer-events-none absolute left-1/2 top-0 h-64 w-[48rem] -translate-x-1/2 rounded-full bg-white/[0.06] blur-[120px]" />
-      <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-8 md:py-20">
-        <Reveal>
-          <p className="max-w-lg font-display text-[clamp(1.25rem,2.4vw,1.6rem)] leading-snug text-white text-balance">
-            Point a camera at one report and Ayussetu takes this much out
-            of it.
-          </p>
-        </Reveal>
-
-        {/* No boxes. Four figures on a rule read as one statement; four
-            cards read as four unrelated claims. */}
-        <dl className="mt-12 grid gap-y-10 border-t border-white/12 sm:grid-cols-2 lg:grid-cols-4">
-          {counts.map((c, i) => (
-            <Reveal key={c.l} delay={i * 80}>
-              <div className="h-full border-white/12 pt-8 lg:border-l lg:pl-7 lg:first:border-l-0 lg:first:pl-0">
-                <dt className="font-display text-[clamp(2.6rem,5vw,3.4rem)] leading-none tabular-nums text-white">
-                  {c.n}
-                  {!("exact" in c) && (
-                    <span className="align-top text-[0.45em] text-amber">+</span>
-                  )}
-                </dt>
-                <dd>
-                  <span className="mt-3 block text-[0.92rem] font-semibold text-white">
-                    {c.l}
-                  </span>
-                  <span className="mt-1 block max-w-[18ch] text-[0.8rem] leading-relaxed text-white/45">
-                    {c.s}
-                  </span>
-                </dd>
-              </div>
-            </Reveal>
-          ))}
-        </dl>
-      </div>
-    </section>
-  );
-}
 
 /* ------------------------------ thesis ------------------------------- */
 
@@ -376,25 +326,75 @@ const features = [
   {
     eyebrow: "Unified health records",
     title: "Every report in one place, and read, not just stored",
-    body: "Photograph a lab report. Ayussetu pulls the markers out, places each against its range, and compares it with the last one.",
     mock: <ReportMock />,
   },  {
     eyebrow: "Smart medication management",
     title: "Doses you actually take, and the ones you did not",
-    body: "Add a medicine once and the schedule works itself out. A dose missed yesterday is still answerable this morning.",
     mock: <DoseMock />,
   },  {
     eyebrow: "Ayu, the AI assistant",
     title: "Answers drawn from your record, not from the internet",
-    body: "Ask about a medicine, a reading or a report. Ayu answers from your own record, not from the internet.",
     mock: <AyuMock />,
   },  {
     eyebrow: "Doctor consultations",
     title: "Book in person, on video or by voice",
-    body: "Find a doctor, see the slots they actually have, and take the call in the app. The prescription files itself.",
     mock: <ConsultMock />,
   },
 ];
+
+/* Both product sections open the same way the page does: name the thing
+   that is wrong, then say what Ayussetu does about it. The features that
+   follow are evidence for the second half, not a list on their own. */
+function ProblemSolution({
+  problem,
+  solution,
+  dark = false,
+}: {
+  problem: string;
+  solution: string;
+  dark?: boolean;
+}) {
+  return (
+    <div
+      className={`mt-10 grid gap-8 border-t pt-8 sm:grid-cols-2 sm:gap-12 ${
+        dark ? "border-white/12" : "border-line"
+      }`}
+    >
+      <div>
+        <p
+          className={`text-[0.66rem] font-bold uppercase tracking-[0.16em] ${
+            dark ? "text-white/40" : "text-mute"
+          }`}
+        >
+          The problem
+        </p>
+        <p
+          className={`mt-2.5 text-[0.98rem] leading-relaxed ${
+            dark ? "text-white/60" : "text-slate"
+          }`}
+        >
+          {problem}
+        </p>
+      </div>
+      <div className={dark ? "sm:border-l sm:border-white/12 sm:pl-12" : "sm:border-l sm:border-line sm:pl-12"}>
+        <p
+          className={`text-[0.66rem] font-bold uppercase tracking-[0.16em] ${
+            dark ? "text-amber" : "text-amber-deep"
+          }`}
+        >
+          What Ayussetu does
+        </p>
+        <p
+          className={`mt-2.5 text-[0.98rem] leading-relaxed ${
+            dark ? "text-white/85" : "text-navy"
+          }`}
+        >
+          {solution}
+        </p>
+      </div>
+    </div>
+  );
+}
 
 export function Features() {
   return (
@@ -407,12 +407,15 @@ export function Features() {
           <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-balance">
             Everything a hospital asks you to remember, remembered for you
           </h2>
-          <p className="mt-4 text-[0.95rem] leading-relaxed text-white/60">
-            Free, on their own phone, from the first medicine they add.
-          </p>
         </div>
 
-        <div className="mt-14 space-y-16 md:space-y-24">
+        <ProblemSolution
+          dark
+          problem="Nobody hands a patient their own history. They are expected to carry it in their head, across clinics that never speak to each other."
+          solution="Holds it for them on their own phone, free: every report, every dose, every reading, with an assistant that reads them back in plain language."
+        />
+
+        <div className="mt-12 space-y-12 md:space-y-16">
           {features.map((b, i) => (
             <div
               key={b.title}
@@ -424,12 +427,9 @@ export function Features() {
                 <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-white/45">
                   {b.eyebrow}
                 </p>
-                <h3 className="mt-2 font-display text-[clamp(1.3rem,2.6vw,1.75rem)] leading-snug text-balance">
+                <h3 className="mt-2.5 max-w-[20ch] font-display text-[clamp(1.4rem,2.8vw,1.95rem)] leading-snug text-balance">
                   {b.title}
                 </h3>
-                <p className="mt-3 text-[0.92rem] leading-relaxed text-white/60">
-                  {b.body}
-                </p>
               </Reveal>
               <Parallax speed={i % 2 === 0 ? 0.34 : 0.46}>{b.mock}</Parallax>
             </div>
@@ -479,7 +479,7 @@ export function Markers() {
                 Every marker Ayussetu reads is explained where it appears, in
                 plain language, with your own readings behind it.
               </p>
-              <p className="mt-6 max-w-md border-l-2 border-amber pl-4 text-[0.92rem] leading-relaxed text-navy">
+              <p className="mt-5 max-w-md text-[0.92rem] leading-relaxed text-navy">
                 One reading is a number. Three readings are a direction, and a
                 direction is the part you can still do something about.
               </p>
@@ -555,66 +555,39 @@ export function Markers() {
   );
 }
 
-/* ---------------------------- audiences ------------------------------ */
-
-
-export function Audiences() {
-  return (
-    <section id="audiences" className="relative border-b border-line bg-white">
-      <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
-        <Reveal>
-          <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
-            <div>
-              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber-deep">
-                Who it is for
-              </p>
-              <h2 className="mt-3 max-w-xl font-display text-[clamp(1.9rem,4.4vw,2.7rem)] leading-tight text-ink text-balance">
-                One record, read three different ways
-              </h2>
-            </div>
-            <p className="max-w-sm text-[0.9rem] leading-relaxed text-slate">
-              One history, three readings of it. Nobody keeps a second copy.
-            </p>
-          </div>
-        </Reveal>
-
-        <div className="mt-12">
-          <AudienceLens />
-        </div>
-      </div>
-    </section>
-  );
-}
 /* ----------------------------- practice ------------------------------ */
 
 const doctorBlocks = [
   {
     eyebrow: "Consultation",
     title: "A prescription written in a minute, delivered in seconds",
-    body: "Medicine, strength, quantity and schedule, with the end date worked out for you, and the rest of the visit around it: complaint, diagnosis, vitals, tests and a follow up that books itself.",
     mock: <PrescriptionMock />,
   },
   {
     eyebrow: "Practice",
     title: "What you earned, by the period you actually think in",
-    body: "Today, this week, this month, this quarter, or dates you pick. Paid and outstanding kept apart, with referral share alongside.",
     mock: <EarningsMock />,
   },
 ];
 
 export function Practice() {
   return (
-    <section id="doctors" className="relative border-b border-line bg-ink text-white">
+    <section id="doctors" className="relative border-b border-line bg-white">
       <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <div className="max-w-2xl">
-          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-amber">
+          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-mute">
             The doctor app
           </p>
-          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-balance">
+          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.5rem)] leading-tight text-ink text-balance">
             A consultation that ends in a record, not a paper slip
           </h2>
         </div>
-        <div className="mt-14 space-y-16 md:space-y-24">
+
+        <ProblemSolution
+          problem="A patient arrives with no history, so the consultation starts from nothing and ends on a paper slip that nobody will find again."
+          solution="Puts their own readings and reports in front of you before they sit down, and turns what you write into their record, their doses and your day's numbers."
+        />
+        <div className="mt-12 space-y-12 md:space-y-16">
           {doctorBlocks.map((b, i) => (
             <div
               key={b.title}
@@ -623,15 +596,12 @@ export function Practice() {
               }`}
             >
               <Reveal>
-                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-white/45">
+                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-mute">
                   {b.eyebrow}
                 </p>
-                <h3 className="mt-2 font-display text-[clamp(1.3rem,2.6vw,1.75rem)] leading-snug text-balance">
+                <h3 className="mt-2.5 max-w-[20ch] font-display text-[clamp(1.4rem,2.8vw,1.95rem)] leading-snug text-ink text-balance">
                   {b.title}
                 </h3>
-                <p className="mt-3 text-[0.92rem] leading-relaxed text-white/60">
-                  {b.body}
-                </p>
               </Reveal>
               <Parallax speed={i % 2 === 0 ? 0.36 : 0.48}>{b.mock}</Parallax>
             </div>
