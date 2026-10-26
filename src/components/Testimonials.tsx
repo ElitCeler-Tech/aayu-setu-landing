@@ -45,20 +45,40 @@ const quotes = [
 
 function Card({ q, n, r }: { q: string; n: string; r: string }) {
   return (
-    <figure className="w-[22rem] shrink-0 rounded-2xl border border-line bg-white p-6">
-      <div className="flex gap-0.5" aria-hidden="true">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <svg key={i} width="13" height="13" viewBox="0 0 12 12" className="text-amber">
-            <path d="M6 0.6 7.4 4.3 11.3 4.5 8.3 7 9.3 10.8 6 8.6 2.7 10.8 3.7 7 0.7 4.5 4.6 4.3Z" fill="currentColor" />
-          </svg>
-        ))}
-      </div>
-      <blockquote className="mt-3 text-[0.9rem] leading-relaxed text-slate">
+    <figure className="flex w-[24rem] shrink-0 flex-col rounded-[1.25rem] border border-line bg-white p-7">
+      {/* A row of five stars is the one thing every testimonial carries
+          and the one thing nobody reads. The quote is the design. */}
+      <svg
+        width="26"
+        height="20"
+        viewBox="0 0 26 20"
+        className="text-line"
+        aria-hidden="true"
+      >
+        <path
+          d="M0 20V11.4C0 5.4 3.2 1.6 9.3 0l1.2 3.3C7 4.6 5.3 6.7 5.3 9.4H10V20Zm16 0V11.4c0-6 3.2-9.8 9.3-11.4L26 3.3c-3.5 1.3-5.2 3.4-5.2 6.1H26V20Z"
+          fill="currentColor"
+        />
+      </svg>
+
+      <blockquote className="mt-5 flex-1 font-display text-[1.02rem] leading-relaxed text-navy">
         {q}
       </blockquote>
-      <figcaption className="mt-4 border-t border-line pt-3">
-        <span className="block text-[0.86rem] font-semibold text-navy">{n}</span>
-        <span className="block text-[0.76rem] text-mute">{r}</span>
+
+      <figcaption className="mt-6 flex items-center gap-3 border-t border-line pt-5">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-navy text-[0.76rem] font-semibold text-white">
+          {n
+            .split(" ")
+            .slice(0, 2)
+            .map((w) => w[0])
+            .join("")}
+        </span>
+        <span className="min-w-0">
+          <span className="block text-[0.86rem] font-semibold text-navy">
+            {n}
+          </span>
+          <span className="block text-[0.76rem] text-mute">{r}</span>
+        </span>
       </figcaption>
     </figure>
   );

@@ -105,73 +105,48 @@ export function Hero() {
 /* ------------------------------ counts ------------------------------- */
 
 const counts = [
-  {
-    n: "10",
-    l: "vitals tracked",
-    s: "From blood pressure to sleep",
-    icon: "M3 12h3.5l2-5 3 10 2.5-5H21",
-  },
-  {
-    n: "14",
-    l: "lab markers read",
-    s: "Lipids, sugar, liver, kidney, blood",
-    icon: "M9 3v6.5L4.5 17A2.5 2.5 0 0 0 6.7 21h10.6a2.5 2.5 0 0 0 2.2-3.5L15 9.5V3M8 3h8M7.5 14h9",
-  },
-  {
-    n: "17",
-    l: "fields on a prescription",
-    s: "Complaint through to follow up",
-    icon: "M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2ZM9 8h6M9 12h6M9 16h3",
-  },
-  {
-    n: "3",
-    l: "ways to consult",
-    s: "In person, video, voice",
-    icon: "M4 6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Zm11 3 5-3v10l-5-3",
-    exact: true,
-  },
+  { n: "14", l: "lab markers", s: "Lipids, sugar, liver, kidney, blood" },
+  { n: "10", l: "vitals", s: "Blood pressure through to sleep" },
+  { n: "17", l: "prescription fields", s: "Complaint through to follow up" },
+  { n: "3", l: "ways to consult", s: "In person, video, voice", exact: true },
 ];
 
 export function Counts() {
   return (
     <section className="relative overflow-hidden border-b border-line bg-ink">
       <span className="pointer-events-none absolute left-1/2 top-0 h-64 w-[48rem] -translate-x-1/2 rounded-full bg-white/[0.06] blur-[120px]" />
-      <div className="relative mx-auto max-w-6xl px-5 py-14 sm:px-8 md:py-16">
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-8 md:py-20">
+        <Reveal>
+          <p className="max-w-lg font-display text-[clamp(1.25rem,2.4vw,1.6rem)] leading-snug text-white text-balance">
+            Point a camera at one report and Ayussetu takes this much out
+            of it.
+          </p>
+        </Reveal>
+
+        {/* No boxes. Four figures on a rule read as one statement; four
+            cards read as four unrelated claims. */}
+        <dl className="mt-12 grid gap-y-10 border-t border-white/12 sm:grid-cols-2 lg:grid-cols-4">
           {counts.map((c, i) => (
             <Reveal key={c.l} delay={i * 80}>
-              <div className="group h-full rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition duration-500 hover:border-amber/40 hover:bg-white/[0.07]">
-                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 transition group-hover:bg-amber/20">
-                  <svg
-                    width="17"
-                    height="17"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.7"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-amber"
-                    aria-hidden="true"
-                  >
-                    <path d={c.icon} />
-                  </svg>
-                </span>
-
-                <p className="mt-5 font-display text-[2.4rem] leading-none tabular-nums text-white">
+              <div className="h-full border-white/12 pt-8 lg:border-l lg:pl-7 lg:first:border-l-0 lg:first:pl-0">
+                <dt className="font-display text-[clamp(2.6rem,5vw,3.4rem)] leading-none tabular-nums text-white">
                   {c.n}
-                  {!("exact" in c) && <span className="text-amber">+</span>}
-                </p>
-                <p className="mt-2.5 text-[0.9rem] font-semibold text-white">
-                  {c.l}
-                </p>
-                <p className="mt-1 text-[0.8rem] leading-relaxed text-white/45">
-                  {c.s}
-                </p>
+                  {!("exact" in c) && (
+                    <span className="align-top text-[0.45em] text-amber">+</span>
+                  )}
+                </dt>
+                <dd>
+                  <span className="mt-3 block text-[0.92rem] font-semibold text-white">
+                    {c.l}
+                  </span>
+                  <span className="mt-1 block max-w-[18ch] text-[0.8rem] leading-relaxed text-white/45">
+                    {c.s}
+                  </span>
+                </dd>
               </div>
             </Reveal>
           ))}
-        </div>
+        </dl>
       </div>
     </section>
   );
@@ -471,8 +446,12 @@ const marker = {
   k: "LDL cholesterol",
   tag: "Heart",
   w: "The cholesterol that collects in artery walls. It is watched over years rather than weeks, because the damage is cumulative and quiet.",
-  reading: "164 mg/dL",
-  status: "High",
+  history: [
+    { d: "March", v: "128", s: "In range" },
+    { d: "June", v: "146", s: "Raised" },
+    { d: "October", v: "164", s: "High" },
+  ],
+  verdict: "Up 36 mg/dL since March, across three separate reports.",
   range: "Under 100 mg/dL",
   lo: 0,
   hi: 45,
@@ -487,65 +466,90 @@ export function Markers() {
   return (
     <section className="border-b border-line bg-white">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
-        <Reveal>
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-mute">
-              Understanding your numbers
-            </p>
-            <h2 className="mt-3 font-display text-[clamp(1.9rem,4.4vw,2.6rem)] leading-tight text-ink text-balance">
-              A marker is only useful if you know what it is for
-            </h2>
-            <p className="mt-4 text-[0.95rem] leading-relaxed text-slate">
-              Explained in plain language, with your own reading against its range.
-            </p>
-          </div>
-        </Reveal>
-
-        <Reveal delay={90}>
-          <article className="mx-auto mt-12 max-w-3xl rounded-[1.75rem] border border-line bg-white p-7 shadow-[0_40px_90px_-65px_rgba(22,35,61,0.6)] md:p-10">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <h3 className="font-display text-[1.4rem] text-navy">
-                {marker.k}
-              </h3>
-              <span className="rounded-full bg-mist px-3 py-1 text-[0.66rem] font-semibold text-mute">
-                {marker.tag}
-              </span>
+        <div className="grid gap-12 md:grid-cols-[0.92fr_1.08fr] md:items-center md:gap-16">
+          <Reveal>
+            <div>
+              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-mute">
+                Understanding your numbers
+              </p>
+              <h2 className="mt-3 font-display text-[clamp(1.9rem,4.4vw,2.6rem)] leading-tight text-ink text-balance">
+                A marker is only useful if you know what it is for
+              </h2>
+              <p className="mt-5 max-w-md text-[0.98rem] leading-relaxed text-slate">
+                Every marker Ayussetu reads is explained where it appears, in
+                plain language, with your own readings behind it.
+              </p>
+              <p className="mt-6 max-w-md border-l-2 border-amber pl-4 text-[0.92rem] leading-relaxed text-navy">
+                One reading is a number. Three readings are a direction, and a
+                direction is the part you can still do something about.
+              </p>
             </div>
-            <p className="mt-3 max-w-xl text-[0.95rem] leading-relaxed text-slate">
-              {marker.w}
-            </p>
+          </Reveal>
 
-            <div className="mt-8 flex items-baseline justify-between">
-              <span className="text-[0.74rem] text-mute">Your last reading</span>
-              <span className="flex items-baseline gap-3">
-                <span className="font-display text-[1.5rem] tabular-nums text-navy">
-                  {marker.reading}
+          <Reveal delay={110}>
+            <article className="rounded-[1.75rem] border border-line bg-white p-7 shadow-[0_44px_100px_-70px_rgba(22,35,61,0.7)] md:p-9">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h3 className="font-display text-[1.35rem] text-navy">
+                  {marker.k}
+                </h3>
+                <span className="rounded-full bg-mist px-3 py-1 text-[0.66rem] font-semibold text-mute">
+                  {marker.tag}
                 </span>
-                <span className="rounded-full bg-amber-wash px-2.5 py-1 text-[0.66rem] font-semibold text-amber-deep">
-                  {marker.status}
-                </span>
-              </span>
-            </div>
+              </div>
+              <p className="mt-3 text-[0.92rem] leading-relaxed text-slate">
+                {marker.w}
+              </p>
 
-            <div className="relative mt-4 h-2 rounded-full bg-mist">
-              <span
-                className="absolute inset-y-0 rounded-full bg-sage/35"
-                style={{ left: `${marker.lo}%`, right: `${100 - marker.hi}%` }}
-              />
-              <span
-                className="absolute top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border-2 border-white bg-amber shadow"
-                style={{ left: `calc(${marker.at}% - 0.5rem)` }}
-              />
-            </div>
-            <div className="mt-3 flex justify-between text-[0.7rem] text-mute">
-              <span>{marker.lowLabel}</span>
-              <span className="font-semibold text-navy">
-                Healthy: {marker.range}
-              </span>
-              <span>{marker.highLabel}</span>
-            </div>
-          </article>
-        </Reveal>
+              {/* The three reports behind the latest number, because the
+                  latest number on its own is the problem this page opens on. */}
+              <ol className="mt-7 grid grid-cols-3 gap-px overflow-hidden rounded-xl border border-line bg-line">
+                {marker.history.map((h, i) => {
+                  const last = i === marker.history.length - 1;
+                  return (
+                    <li
+                      key={h.d}
+                      className={`px-3 py-3.5 text-center ${last ? "bg-amber-wash" : "bg-white"}`}
+                    >
+                      <span className="block text-[0.62rem] font-semibold uppercase tracking-[0.1em] text-mute">
+                        {h.d}
+                      </span>
+                      <span
+                        className={`mt-1 block font-display text-[1.25rem] tabular-nums ${last ? "text-amber-deep" : "text-navy"}`}
+                      >
+                        {h.v}
+                      </span>
+                      <span className="mt-0.5 block text-[0.62rem] text-mute">
+                        {h.s}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ol>
+
+              <p className="mt-4 text-[0.86rem] font-medium text-navy">
+                {marker.verdict}
+              </p>
+
+              <div className="relative mt-6 h-2 rounded-full bg-mist">
+                <span
+                  className="absolute inset-y-0 rounded-full bg-sage/35"
+                  style={{ left: `${marker.lo}%`, right: `${100 - marker.hi}%` }}
+                />
+                <span
+                  className="absolute top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border-2 border-white bg-amber shadow"
+                  style={{ left: `calc(${marker.at}% - 0.5rem)` }}
+                />
+              </div>
+              <div className="mt-3 flex justify-between text-[0.7rem] text-mute">
+                <span>{marker.lowLabel}</span>
+                <span className="font-semibold text-navy">
+                  Healthy: {marker.range}
+                </span>
+                <span>{marker.highLabel}</span>
+              </div>
+            </article>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
