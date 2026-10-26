@@ -480,7 +480,7 @@ export function Markers() {
           </Reveal>
 
           <Reveal delay={110}>
-            <article className="rounded-[1.75rem] border border-line bg-white p-7 shadow-[0_44px_100px_-70px_rgba(22,35,61,0.7)] md:p-9">
+            <article className="rounded-[2rem] border border-line bg-white p-7 shadow-[0_44px_100px_-70px_rgba(22,35,61,0.7)] md:p-9">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <h3 className="font-display text-[1.35rem] text-navy">
                   {marker.k}
@@ -638,7 +638,7 @@ export function Abha() {
     <section id="abha" className="border-b border-line bg-paper">
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 md:py-20">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[2rem] border border-line bg-ink px-6 py-11 text-white sm:px-9 md:px-14 md:py-16">
+          <div className="relative overflow-hidden rounded-[2.25rem] border border-line bg-ink px-6 py-11 text-white sm:px-9 md:px-14 md:py-16">
             <span className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/[0.07] blur-3xl" />
 
             <div className="relative grid gap-12 md:grid-cols-[1.05fr_0.95fr] md:items-center md:gap-14">

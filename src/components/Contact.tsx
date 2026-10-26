@@ -174,7 +174,7 @@ export function Contact() {
                     name="message"
                     required
                     rows={5}
-                    className="mt-1.5 w-full resize-y rounded-xl border border-line bg-paper px-3.5 py-2.5 text-[0.88rem] text-navy outline-none transition placeholder:text-faint focus:border-navy"
+                    className="mt-1.5 w-full resize-y rounded-xl border border-line bg-mist px-3.5 py-2.5 text-[0.88rem] text-navy outline-none transition placeholder:text-faint focus:border-navy"
                     placeholder="A sentence or two is plenty."
                   />
                 </div>
@@ -238,7 +238,7 @@ function Field({
         name={name}
         type={type}
         required={required}
-        className="mt-1.5 h-[2.85rem] w-full rounded-xl border border-line bg-paper px-3.5 text-[0.88rem] text-navy outline-none transition placeholder:text-faint focus:border-navy"
+        className="mt-1.5 h-[2.85rem] w-full rounded-xl border border-line bg-mist px-3.5 text-[0.88rem] text-navy outline-none transition placeholder:text-faint focus:border-navy"
       />
     </div>
   );

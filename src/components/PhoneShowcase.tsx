@@ -80,7 +80,7 @@ export function PhoneShowcase() {
       </div>
 
                   <div className="rounded-[2.5rem] border border-[#E3E7EF] bg-white p-2.5 shadow-[0_40px_90px_-30px_rgba(22,35,61,0.5)]">
-        <div className="relative h-[33rem] overflow-hidden rounded-[2rem] bg-[#FFFFFF]">
+        <div className="relative h-[33rem] overflow-hidden rounded-[2.25rem] bg-[#FFFFFF]">
           {PANELS.map((p) => (
             <div
               key={p}

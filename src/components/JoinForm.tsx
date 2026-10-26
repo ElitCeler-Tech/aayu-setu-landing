@@ -136,7 +136,7 @@ export function JoinForm() {
                     id="message"
                     name="message"
                     rows={3}
-                    className="mt-1.5 w-full resize-y rounded-xl border border-line bg-paper px-3.5 py-2.5 text-[0.88rem] text-navy outline-none transition placeholder:text-faint focus:border-navy"
+                    className="mt-1.5 w-full resize-y rounded-xl border border-line bg-mist px-3.5 py-2.5 text-[0.88rem] text-navy outline-none transition placeholder:text-faint focus:border-navy"
                     placeholder="How many doctors, which departments, what you want it to do."
                   />
                 </div>
@@ -190,7 +190,7 @@ function Field({
         name={name}
         type={type}
         required={required}
-        className="mt-1.5 h-[2.85rem] w-full rounded-xl border border-line bg-paper px-3.5 text-[0.88rem] text-navy outline-none transition placeholder:text-faint focus:border-navy"
+        className="mt-1.5 h-[2.85rem] w-full rounded-xl border border-line bg-mist px-3.5 text-[0.88rem] text-navy outline-none transition placeholder:text-faint focus:border-navy"
       />
     </div>
   );
