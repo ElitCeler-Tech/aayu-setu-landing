@@ -13,12 +13,12 @@ const sources = [
 
 function Gather() {
   return (
-    <div className="relative h-[12rem]">
+    <div className="relative h-[10rem]">
       {sources.map((s, i) => (
         <span
           key={s.t}
           className={`gather gather-${i + 1} absolute left-1 flex items-center gap-2 rounded-xl border border-line bg-white px-2.5 py-1.5 text-[0.7rem] font-medium text-slate shadow-[0_8px_18px_-12px_rgba(18,29,51,0.45)]`}
-          style={{ top: `${0.4 + i * 2.9}rem` }}
+          style={{ top: `${0.1 + i * 2.35}rem` }}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C25E00" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d={s.d} />
@@ -46,14 +46,15 @@ const years = [
 
 function Yearly() {
   return (
-    <div className="flex h-[12rem] items-end justify-between gap-3 px-2">
+    <div className="flex h-[10rem] items-end justify-between gap-3 px-2">
       {years.map((y, i) => (
         <div key={y.y} className="flex flex-1 flex-col items-center">
           <div className="flex w-full flex-col-reverse gap-1">
             {Array.from({ length: y.n }).map((_, k) => (
               <span
                 key={k}
-                className={`h-[0.85rem] rounded-[0.3rem] border ${
+                style={{ animationDelay: `${i * 0.45 + k * 0.08}s` }}
+                className={`stack-in h-[0.7rem] rounded-[0.3rem] border ${
                   i === years.length - 1 && k === y.n - 1 ? "border-cta bg-amber-wash" : "border-line-strong bg-white"
                 }`}
               />
@@ -76,16 +77,16 @@ function Trend() {
   ];
   const yOf = (v: number) => 150 - (v - 5.3) * 110;
   return (
-    <div className="h-[12rem]">
+    <div className="h-[10rem]">
       <div className="flex items-baseline justify-between px-1">
         <span className="text-[0.78rem] font-semibold text-ink">HbA1c, year by year</span>
         <span className="font-mono text-[0.62rem] text-amber">RISING</span>
       </div>
-      <svg viewBox="0 0 220 170" className="mt-1 h-[10.5rem] w-full" aria-label="HbA1c across five years: 5.4, 5.5, 5.7, 5.8, then 6.0">
+      <svg viewBox="0 0 220 170" className="mt-1 h-[8.6rem] w-full" aria-label="HbA1c across five years: 5.4, 5.5, 5.7, 5.8, then 6.0">
         <rect x="0" y={yOf(5.7)} width="220" height={150 - yOf(5.7)} fill="#E5F3EC" rx="4" />
-        <path d={`M${pts.map((p) => `${p.x} ${yOf(p.v)}`).join(" L")}`} fill="none" stroke="#1F3050" strokeWidth="1.8" strokeLinejoin="round" />
+        <path className="draw-line" pathLength={100} d={`M${pts.map((p) => `${p.x} ${yOf(p.v)}`).join(" L")}`} fill="none" stroke="#1F3050" strokeWidth="1.8" strokeLinejoin="round" />
         {pts.map((p, i) => (
-          <g key={p.y}>
+          <g key={p.y} className="pop-in" style={{ animationDelay: `${0.2 + i * 0.5}s` }}>
             <circle cx={p.x} cy={yOf(p.v)} r={i === pts.length - 1 ? 5 : 4} fill={p.v >= 5.7 ? "#FF8B0B" : "#2E8A62"} />
             <text x={p.x} y={yOf(p.v) - 9} fontSize="9" textAnchor="middle" fill="#4A5468" fontFamily="var(--font-mono)">{p.v.toFixed(1)}</text>
             <text x={p.x} y="166" fontSize="9" textAnchor="middle" fill="#7A8496">{p.y}</text>
@@ -105,14 +106,15 @@ const flags = [
 
 function Attention() {
   return (
-    <div className="flex h-[12rem] flex-col justify-center gap-1.5">
-      {flags.map((f) => (
-        <div key={f.k} className="flex items-center justify-between rounded-xl border border-line bg-white px-3 py-2">
+    <div className="flex h-[10rem] flex-col justify-center gap-1.5">
+      {flags.map((f, i) => (
+        <div key={f.k} style={{ animationDelay: `${i * 0.35}s` }} className="row-in flex items-center justify-between rounded-xl border border-line bg-white px-3 py-1.5">
           <span className="text-[0.78rem] font-medium text-ink">{f.k}</span>
           <span className="flex items-center gap-2.5">
             <span className="font-mono text-[0.72rem] text-slate">{f.v}</span>
             <span
-              className={`rounded-full px-2 py-0.5 text-[0.62rem] font-semibold ${
+              style={{ animationDelay: `${1.6 + i * 0.3}s` }}
+              className={`pop-in rounded-full px-2 py-0.5 text-[0.62rem] font-semibold ${
                 f.hot ? "bg-amber-wash text-amber" : f.ok ? "bg-sage-wash text-sage" : "bg-mist text-slate"
               }`}
             >
@@ -133,11 +135,11 @@ const plan = [
 
 function Actions() {
   return (
-    <div className="flex h-[12rem] flex-col justify-center gap-2 text-left">
+    <div className="flex h-[10rem] flex-col justify-center gap-2 text-left">
       {plan.map((p, i) => (
         <div key={p.t} className={`plan-row plan-row-${i + 1} flex items-center gap-3 rounded-2xl border border-line bg-white px-3 py-2.5`}>
-          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-[0.55rem] bg-navy">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF8B0B" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-[0.55rem] bg-amber-wash">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C25E00" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d={p.icon} />
             </svg>
           </span>
@@ -158,17 +160,17 @@ function Actions() {
 
 function Progress() {
   return (
-    <div className="flex h-[12rem] flex-col justify-center">
+    <div className="flex h-[10rem] flex-col justify-center">
       <p className="text-[0.78rem] font-semibold text-ink">Triglycerides since July</p>
       <div className="mt-3 flex items-baseline gap-3">
-        <span className="font-display text-[2.6rem] leading-none text-mute line-through decoration-1">210</span>
-        <span className="text-[1.2rem] text-faint">&rarr;</span>
-        <span className="font-display text-[2.6rem] leading-none text-sage">168</span>
+        <span className="strike-in font-display text-[2.2rem] leading-none text-mute decoration-1">210</span>
+        <span className="text-[1.1rem] text-faint">&rarr;</span>
+        <span className="pop-in font-display text-[2.2rem] leading-none text-sage" style={{ animationDelay: "1.2s" }}>168</span>
         <span className="text-[0.72rem] text-mute">mg/dL</span>
       </div>
       <svg viewBox="0 0 220 50" className="mt-4 h-12 w-full" aria-hidden="true">
-        <path d="M4 10 L50 14 L96 22 L142 30 L188 36 L216 38" fill="none" stroke="#2E8A62" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="216" cy="38" r="4" fill="#2E8A62" />
+        <path className="draw-line" pathLength={100} d="M4 10 L50 14 L96 22 L142 30 L188 36 L216 38" fill="none" stroke="#2E8A62" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <circle className="pop-in" style={{ animationDelay: "2.4s" }} cx="216" cy="38" r="4" fill="#2E8A62" />
       </svg>
       <p className="mt-1 text-[0.72rem] text-mute">Three reports since the evening walks began.</p>
     </div>
@@ -195,13 +197,13 @@ export function Journey() {
           </h2>
         </div>
 
-        <ol className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {steps.map((s, i) => (
-            <li key={s.t} className="flex flex-col rounded-3xl border border-line bg-mist px-6 pb-7 pt-7">
+            <li key={s.t} className="flex flex-col rounded-[1.4rem] border border-line bg-mist px-5 pb-5 pt-5">
               <span className="font-mono text-[0.9rem] text-amber">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="mt-2 font-display text-[1.75rem] leading-tight text-ink">{s.t}</h3>
-              <p className="mt-2 text-[0.88rem] leading-relaxed text-slate">{s.b}</p>
-              <div className="mt-auto pt-6">{s.art}</div>
+              <h3 className="mt-1.5 font-display text-[1.45rem] leading-tight text-ink">{s.t}</h3>
+              <p className="mt-1.5 text-[0.82rem] leading-relaxed text-slate">{s.b}</p>
+              <div className="mt-auto pt-4">{s.art}</div>
             </li>
           ))}
         </ol>

@@ -31,7 +31,7 @@ function Frame({ title, tag, tagTone = "amber", children }: { title: string; tag
 /* 1. Everything, in one record, newest first. */
 function History() {
   const items = [
-    { d: "14 Oct 2026", t: "Lipid profile", s: "Apollo Diagnostics · PDF", k: "Lab", c: "bg-amber-wash text-amber" },
+    { d: "14 Oct 2026", t: "Lipid profile", s: "Diagnostic lab · PDF", k: "Lab", c: "bg-amber-wash text-amber" },
     { d: "02 Oct 2026", t: "Prescription, Dr S. Rao", s: "3 medicines · photo", k: "Rx", c: "bg-navy text-white" },
     { d: "18 Sep 2026", t: "Blood pressure 128/82", s: "Logged at home", k: "Vital", c: "bg-sage-wash text-sage" },
     { d: "11 Jun 2026", t: "HbA1c and fasting glucose", s: "Shared on WhatsApp · photo", k: "Lab", c: "bg-amber-wash text-amber" },
@@ -59,18 +59,18 @@ function History() {
 /* 2. One marker across five years. */
 function Trends() {
   const pts = [
-    { y: "2022", v: 112 },
-    { y: "2023", v: 121 },
-    { y: "2024", v: 128 },
-    { y: "2025", v: 146 },
-    { y: "2026", v: 164 },
+    { y: "2024", v: 112 },
+    { y: "2025", v: 121 },
+    { y: "Mar 26", v: 128 },
+    { y: "Jun 26", v: 146 },
+    { y: "Oct 26", v: 164 },
   ];
   const x = (i: number) => 40 + i * 92;
   const y = (v: number) => 210 - (v - 80) * 1.9;
   const line = pts.map((p, i) => `${x(i)} ${y(p.v)}`).join(" L");
   return (
-    <Frame title="LDL cholesterol, five years" tag="Rising">
-      <svg viewBox="0 0 440 240" className="h-auto w-full" aria-label="LDL across five years: 112, 121, 128, 146, 164 mg/dL">
+    <Frame title="LDL cholesterol, five reports" tag="Rising">
+      <svg viewBox="0 0 440 240" className="h-auto w-full" aria-label="LDL across five reports: 112 in 2024, 121 in 2025, then 128, 146 and 164 this year">
         <defs>
           <linearGradient id="trend-fill" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stopColor="#FF8B0B" stopOpacity="0.22" />
@@ -96,62 +96,74 @@ function Trends() {
         ))}
       </svg>
       <p className="mt-3 text-[0.84rem] text-slate">
-        <span className="font-semibold text-ink">+52 mg/dL since 2022.</span> Each year looked
+        <span className="font-semibold text-ink">+52 mg/dL since 2024.</span> Each report looked
         only a little high on its own. Together, they are a direction.
       </p>
     </Frame>
   );
 }
 
-/* 3. The Swasth Score, broken into what moves it. */
-function Score() {
-  const factors = [
-    { k: "Glucose", w: 12, s: 75 },
-    { k: "LDL", w: 12, s: 50 },
-    { k: "Creatinine", w: 10, s: 100 },
-    { k: "Triglycerides", w: 10, s: 75 },
-    { k: "Haemoglobin", w: 8, s: 100 },
-    { k: "HDL", w: 8, s: 50 },
+/* 3. The app's two scores, side by side, each with what feeds it: the
+   Health Score from six everyday vitals, the Lab Score (the Swasth
+   Score) from the latest lab panel, each marker weighted. */
+function Ring({ v, label, sub }: { v: number; label: string; sub: string }) {
+  return (
+    <div className="flex items-center gap-4">
+      <div
+        className="grid h-[5.6rem] w-[5.6rem] shrink-0 place-items-center rounded-full"
+        style={{ background: `conic-gradient(#2E8A62 0 ${v}%, #EEF2F7 ${v}% 100%)` }}
+      >
+        <span className="grid h-[4.5rem] w-[4.5rem] place-items-center rounded-full bg-white font-display text-[2.3rem] leading-none text-ink">{v}</span>
+      </div>
+      <span>
+        <span className="block text-[0.95rem] font-semibold text-ink">{label}</span>
+        <span className="mt-0.5 block text-[0.74rem] leading-snug text-mute">{sub}</span>
+      </span>
+    </div>
+  );
+}
+
+function Chip({ k, ok }: { k: string; ok: boolean }) {
+  return (
+    <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[0.7rem] ${ok ? "border-[#BFE0CF] bg-sage-wash text-sage" : "border-[#FFD9B0] bg-amber-wash text-amber"}`}>
+      <span className={`h-1.5 w-1.5 rounded-full ${ok ? "bg-sage" : "bg-cta"}`} />
+      {k}
+    </span>
+  );
+}
+
+function Scores() {
+  const vitals = [
+    { k: "Heart rate", ok: true },
+    { k: "Blood pressure", ok: true },
+    { k: "Blood sugar", ok: false },
+    { k: "Sleep", ok: true },
+    { k: "Steps", ok: false },
+    { k: "BMI", ok: true },
   ];
-  const bands = [
-    { l: "Critical", r: "0" },
-    { l: "High", r: "20" },
-    { l: "Moderate", r: "40" },
-    { l: "Good", r: "60" },
-    { l: "Excellent", r: "80" },
+  const labs = [
+    { k: "LDL", ok: false },
+    { k: "Glucose", ok: false },
+    { k: "Triglycerides", ok: false },
+    { k: "Haemoglobin", ok: true },
+    { k: "Creatinine", ok: true },
+    { k: "Liver enzymes", ok: true },
   ];
   return (
-    <Frame title="Swasth Score" tag="Good" tagTone="sage">
-      <div className="grid items-center gap-6 sm:grid-cols-[auto_1fr]">
-        <div className="relative mx-auto grid h-36 w-36 place-items-center rounded-full bg-[conic-gradient(#FF8B0B_0_72%,#EEF2F7_72%_100%)]">
-          <div className="grid h-[7.4rem] w-[7.4rem] place-items-center rounded-full bg-white text-center">
-            <span>
-              <span className="block font-display text-[3.4rem] leading-none text-ink">72</span>
-              <span className="mt-1 block font-mono text-[0.58rem] uppercase tracking-[0.1em] text-mute">of 100</span>
-            </span>
-          </div>
+    <Frame title="Two scores, two views of you" tag="Updated today" tagTone="sage">
+      <div className="space-y-4">
+        <div className="rounded-2xl border border-line bg-white p-4">
+          <Ring v={81} label="Health Score" sub="From six everyday vitals you log or sync." />
+          <div className="mt-3.5 flex flex-wrap gap-1.5">{vitals.map((x) => <Chip key={x.k} {...x} />)}</div>
         </div>
-        <div className="space-y-2">
-          {factors.map((f) => (
-            <div key={f.k} className="grid grid-cols-[6.5rem_1fr_2rem] items-center gap-2.5 text-[0.74rem]">
-              <span className="text-slate">{f.k}</span>
-              <span className="h-1.5 rounded-full bg-mist">
-                <span className={`block h-1.5 rounded-full ${f.s === 100 ? "bg-sage" : f.s >= 75 ? "bg-cta/70" : "bg-cta"}`} style={{ width: `${f.s}%` }} />
-              </span>
-              <span className="text-right font-mono text-[0.64rem] text-mute">×{f.w}</span>
-            </div>
-          ))}
+        <div className="rounded-2xl border border-line bg-white p-4">
+          <Ring v={72} label="Lab Score" sub="The Swasth Score, from your latest lab panel. Good, 60 to 79." />
+          <div className="mt-3.5 flex flex-wrap gap-1.5">{labs.map((x) => <Chip key={x.k} {...x} />)}</div>
         </div>
       </div>
-      <div className="mt-6 grid grid-cols-5 gap-1">
-        {bands.map((b) => (
-          <div key={b.l}>
-            <div className={`h-1.5 rounded-full ${b.l === "Good" ? "bg-cta" : "bg-line"}`} />
-            <p className={`mt-1.5 text-[0.62rem] ${b.l === "Good" ? "font-semibold text-ink" : "text-mute"}`}>{b.l}</p>
-          </div>
-        ))}
-      </div>
-      <p className="mt-4 text-[0.76rem] text-mute">From your latest lab panel. Each marker is graded against its range for your age and weighted by how much it matters.</p>
+      <p className="mt-3.5 text-[0.74rem] text-mute">
+        Each marker is graded against the range for your age, and the ones that matter most weigh most.
+      </p>
     </Frame>
   );
 }
@@ -160,14 +172,14 @@ function Score() {
 function Insight() {
   const pts = [
     { d: "Jan", v: 98 },
-    { d: "May", v: 112 },
-    { d: "Oct", v: 126 },
+    { d: "May", v: 108 },
+    { d: "Oct", v: 118 },
   ];
   const x = (i: number) => 60 + i * 150;
   const y = (v: number) => 190 - (v - 85) * 3.6;
   return (
     <Frame title="Fasting blood sugar" tag="Worth attention">
-      <svg viewBox="0 0 420 210" className="h-auto w-full" aria-label="Fasting blood sugar: 98 in January, 112 in May, 126 in October">
+      <svg viewBox="0 0 420 210" className="h-auto w-full" aria-label="Fasting blood sugar: 98 in January, 108 in May, 118 in October">
         <rect x="0" y={y(100)} width="420" height={190 - y(100)} fill="#E5F3EC" rx="6" />
         <rect x="0" y={y(125)} width="420" height={y(100) - y(125)} fill="#FFF1E2" rx="6" />
         <rect x="0" y="6" width="420" height={y(125) - 6} fill="#FDE4D3" rx="6" />
@@ -189,8 +201,8 @@ function Insight() {
           <img src="/ayussetu-logo-white.png" alt="" width={28} height={28} />
         </span>
         <p className="text-[0.84rem] leading-relaxed text-white/85">
-          Up 28 mg/dL in ten months, and one point from the diabetes range.
-          <span className="font-semibold text-white"> Worth discussing with your doctor soon.</span>
+          Up 20 mg/dL this year, and now in the prediabetes range, 100 to 125.
+          <span className="font-semibold text-white"> Worth discussing with your doctor.</span>
         </p>
       </div>
     </Frame>
@@ -224,7 +236,7 @@ function Actions() {
           </div>
         ))}
       </div>
-      <p className="mt-4 text-[0.78rem] text-mute">Fasting sugar since the walks began: <span className="font-semibold text-sage">126 → 114</span></p>
+      <p className="mt-4 text-[0.78rem] text-mute">Fasting sugar since the walks began: <span className="font-semibold text-sage">118 → 108</span></p>
     </Frame>
   );
 }
@@ -232,7 +244,7 @@ function Actions() {
 const tabs = [
   { t: "Unified health history", b: "Every report, prescription and reading in one record you hold, whatever it arrived as.", scene: <History /> },
   { t: "Lab reports and longitudinal trends", b: "Markers read out of each report and followed across years, so drift is visible.", scene: <Trends /> },
-  { t: "Swasth Score", b: "One number from your latest lab panel, with what is moving it laid out.", scene: <Score /> },
+  { t: "Health Score and Lab Score", b: "Two numbers: one from your everyday vitals, one from your lab reports, each showing what moves it.", scene: <Scores /> },
   { t: "Health insights and risk awareness", b: "What is drifting toward a risk, flagged early and explained in plain language.", scene: <Insight /> },
   { t: "Personalised preventive actions", b: "Steps set around your readings and routine, and tracked against your results.", scene: <Actions /> },
 ];
@@ -269,7 +281,7 @@ export function Intelligence() {
           onMouseLeave={() => setPaused(false)}
         >
           {/* tabs */}
-          <div role="tablist" aria-label="Health intelligence" className="border-b border-line md:border-b-0 md:border-r">
+          <div role="tablist" aria-label="Health intelligence" className="flex flex-col border-b border-line md:border-b-0 md:border-r">
             {tabs.map((tab, i) => {
               const on = i === active;
               return (
@@ -279,7 +291,7 @@ export function Intelligence() {
                   aria-selected={on}
                   aria-controls="intelligence-stage"
                   onClick={() => setActive(i)}
-                  className={`relative block w-full border-b border-line px-6 py-5 text-left transition-colors last:border-b-0 md:px-8 ${on ? "bg-white" : "bg-mist/50 hover:bg-mist"}`}
+                  className={`relative block w-full flex-1 border-b border-line px-6 py-5 text-left transition-colors last:border-b-0 md:px-8 ${on ? "bg-white" : "bg-mist/50 hover:bg-mist"}`}
                 >
                   <span className="flex items-baseline gap-4">
                     <span className={`font-mono text-[0.72rem] ${on ? "text-amber" : "text-faint"}`}>{String(i + 1).padStart(2, "0")}</span>

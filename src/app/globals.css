@@ -27,11 +27,10 @@
      against white text, so a button in it needs dark text; this deeper
      orange reaches 4.67 and lets every button read white. */
   --color-cta-strong: #B85A00;
-  /* The logo's heart, sampled: a red orange that runs F86800 to F83800.
-     The header button takes it, so the one solid orange on screen
-     matches the mark beside it. */
-  --color-brand: #F55A00;
-  --color-brand-deep: #E04800;
+  /* Ayussetu's orange, as the app draws it (FF8B0B, its most used
+     accent after navy). Solid buttons take it exactly. */
+  --color-brand: #FF8B0B;
+  --color-brand-deep: #F07A00;
 
   /* A lighter orange that holds up on the hero's navy. */
   --color-amber-light: #FFB15C;
@@ -252,6 +251,24 @@ body {
 @keyframes intel-progress { from { width: 0; } to { width: 100%; } }
 .intel-progress { animation: intel-progress linear forwards; }
 @media (prefers-reduced-motion: reduce) { .intel-progress { animation: none; width: 0; } }
+
+/* "How it works", cards two, three, four and six. Each piece builds
+   in once, holds, and the whole card replays every seven seconds, so
+   the row is alive without anything flickering. Without motion they
+   simply sit finished. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes stack-in { 0% { opacity: 0; transform: translateY(6px); } 6%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  .stack-in { animation: stack-in 7s ease-out infinite both; }
+  @keyframes draw-line { 0% { stroke-dashoffset: 100; } 40%, 88% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+  .draw-line { stroke-dasharray: 100; animation: draw-line 7s ease-in-out infinite both; }
+  @keyframes pop-in { 0% { opacity: 0; transform: scale(0.6); } 6%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  .pop-in { transform-box: fill-box; transform-origin: center; animation: pop-in 7s ease-out infinite both; }
+  @keyframes row-in { 0% { opacity: 0; transform: translateX(-10px); } 6%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  .row-in { animation: row-in 7s ease-out infinite both; }
+  @keyframes strike-in { 0%, 12% { text-decoration-color: transparent; color: var(--color-ink); } 22%, 88% { text-decoration-color: currentColor; color: var(--color-mute); } 100% { opacity: 0; } }
+  .strike-in { text-decoration-line: line-through; animation: strike-in 7s ease-out infinite both; }
+}
+@media (prefers-reduced-motion: reduce) { .strike-in { text-decoration-line: line-through; } }
 
 /* The scan line passing over the report pages in "getting started". */
 @keyframes scan { from { top: 1.4rem; } to { top: 10.5rem; } }

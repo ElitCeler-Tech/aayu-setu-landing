@@ -35,8 +35,8 @@ export function WhoWeServe() {
         <div className="mt-14 grid gap-5 md:grid-cols-3">
           {who.map((w) => (
             <div key={w.t} className="rounded-3xl border border-line bg-mist p-7">
-              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-navy">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8B0B" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-amber-wash">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C25E00" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d={w.icon} />
                 </svg>
               </span>
