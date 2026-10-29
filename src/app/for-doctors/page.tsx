@@ -213,7 +213,7 @@ export default function ForDoctors() {
                   Free to install. Your registration number is all it takes to
                   start.
                 </p>
-                <div className="ml-auto">
+                <div className="sm:ml-auto">
                   <StoreButtons />
                 </div>
               </div>

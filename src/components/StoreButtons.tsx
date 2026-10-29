@@ -4,13 +4,22 @@ import Image from "next/image";
    this purpose, rather than lookalikes drawn by hand. The Google file
    came with a transparent margin baked in, which made it look a size
    smaller than Apple's at the same height; it is trimmed to the badge's
-   own edge, so both now stand at exactly the same height. Apple's
-   minimum is 40px on screen; these sit above it. */
+   own edge, so both stand at exactly the same height.
+
+   They always sit side by side, never wrapped: the pair is about 6.4
+   times as wide as it is tall, so on a phone both step down together to
+   40px (Apple's minimum on screen), which fits the narrowest common
+   phone inside a padded card, and grow again on wider screens. */
+const heights = {
+  md: "h-10 sm:h-11",
+  lg: "h-10 sm:h-12 lg:h-[3.25rem]",
+};
+
 export function StoreButtons({ size = "md" }: { size?: "md" | "lg" }) {
-  const h = size === "lg" ? "h-[3.25rem]" : "h-11";
+  const h = heights[size];
   return (
-    <div className="flex flex-wrap items-center gap-3">
-      <a href="#" aria-label="Get it on Google Play" className="inline-block transition hover:opacity-85">
+    <div className="flex flex-nowrap items-center gap-2.5 sm:gap-3">
+      <a href="#" aria-label="Get it on Google Play" className="inline-block shrink-0 transition hover:opacity-85">
         <Image
           src="/google-play-badge.png"
           alt="Get it on Google Play"
@@ -19,7 +28,7 @@ export function StoreButtons({ size = "md" }: { size?: "md" | "lg" }) {
           className={`${h} w-auto`}
         />
       </a>
-      <a href="#" aria-label="Download on the App Store" className="inline-block transition hover:opacity-85">
+      <a href="#" aria-label="Download on the App Store" className="inline-block shrink-0 transition hover:opacity-85">
         <Image
           src="/app-store-badge.svg"
           alt="Download on the App Store"
