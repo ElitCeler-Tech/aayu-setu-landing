@@ -36,7 +36,7 @@ export function Faq() {
 
   return (
     <section id="faq" className="border-t border-line bg-paper">
-      <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8 md:py-28">
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <div className="grid gap-12 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
           <div>
             <p className="eyebrow text-amber-deep">

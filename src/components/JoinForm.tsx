@@ -62,7 +62,7 @@ export function JoinForm() {
       <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8 md:py-24">
         <div className="grid gap-12 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
           <div>
-            <p className="text-[0.68rem] font-semibold uppercase tracking-[0.13em] text-amber-deep">
+            <p className="eyebrow text-amber-deep">
               Register
             </p>
             <h2 className="mt-3 font-display text-[clamp(1.95rem,4.2vw,2.8rem)] leading-tight text-ink text-balance">

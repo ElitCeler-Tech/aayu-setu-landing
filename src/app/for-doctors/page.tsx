@@ -84,7 +84,7 @@ export default function ForDoctors() {
         <section className="relative overflow-hidden border-b border-line">
           <div className="grid-ground grid-fade pointer-events-none absolute inset-0" />
           <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-24">
-            <p className="text-[0.64rem] font-semibold uppercase tracking-[0.13em] text-mute">
+            <p className="eyebrow text-mute">
               For doctors and clinics
             </p>
             <h1 className="mt-5 max-w-[20ch] font-display text-[clamp(2.4rem,5.6vw,3.6rem)] leading-[1.07] text-ink text-balance">
@@ -117,7 +117,7 @@ export default function ForDoctors() {
         <section className="border-b border-line bg-paper">
           <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
             <Reveal>
-              <p className="text-[0.7rem] font-semibold uppercase tracking-[0.13em] text-amber-deep">
+              <p className="eyebrow text-amber-deep">
                 The doctor app
               </p>
               <h2 className="mt-3 max-w-xl font-display text-[clamp(1.95rem,4.2vw,2.8rem)] leading-tight text-ink text-balance">
@@ -173,7 +173,7 @@ export default function ForDoctors() {
         <section className="border-b border-line bg-ink text-white">
           <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
             <Reveal>
-              <p className="text-[0.7rem] font-semibold uppercase tracking-[0.13em] text-amber">
+              <p className="eyebrow text-amber">
                 The clinician portal
               </p>
               <h2 className="mt-3 max-w-xl font-display text-[clamp(1.95rem,4.2vw,2.8rem)] leading-tight text-balance">

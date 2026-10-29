@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { HeaderFrame } from "./HeaderFrame";
+import { legal } from "@/data/legal";
 
 const nav = [
   { label: "Features", href: "/#features" },
@@ -88,25 +89,16 @@ const footerCols = [
     h: "Company",
     links: [
       ["About us", "/about"],
-      ["Testimonials", "/#testimonials"],
       ["FAQs", "/#faq"],
       ["Contact us", "/#contact"],
     ],
   },
 ];
 
-const policies = [
-  "Medical",
-  "AI use",
-  "Health records",
-  "Patient use",
-  "Clinical use",
-  "Outcomes",
-  "Third party data",
-  "Regulatory",
-  "Terms of use",
-  "Privacy policy",
-];
+/* Each one is a section of /legal. Terms of use and a privacy policy
+   go back in here once there is real text for them: the live site's
+   privacy page is a single sentence, and it has no terms at all. */
+const policies = legal.map((l) => [l.short, `/legal#${l.slug}`]);
 
 export function Footer() {
   return (
@@ -116,12 +108,12 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-2.5">
               <Mark size={32} />
-              <span className="font-display text-[1.15rem] text-white">
+              <span className="text-[1.15rem] font-semibold tracking-[-0.02em] text-white">
                 Ayussetu
               </span>
             </div>
             <p className="mt-4 max-w-xs text-[0.86rem] leading-relaxed text-white/55">
-              An AI-driven healthcare assistant. Records in one place, risk
+              An AI driven healthcare assistant. Records in one place, risk
               understood early, prevention made possible.
             </p>
           </div>
@@ -169,9 +161,9 @@ export function Footer() {
             Disclaimers and policies
           </h3>
           <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-[0.8rem]">
-            {policies.map((d) => (
+            {policies.map(([d, href]) => (
               <li key={d}>
-                <a className="text-white/55 transition hover:text-white" href="/legal">
+                <a className="text-white/55 transition hover:text-white" href={href}>
                   {d}
                 </a>
               </li>
@@ -180,9 +172,9 @@ export function Footer() {
         </div>
 
         <div className="mt-8 flex flex-col gap-3 border-t border-white/10 pt-6 text-[0.78rem] text-white/45 sm:flex-row sm:items-start sm:justify-between">
-          <p>© {new Date().getFullYear()} Ayus Setu. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Ayussetu. All rights reserved.</p>
           <p className="max-w-md sm:text-right">
-            AI-powered insights to support preventive health actions. Not a
+            AI powered insights to support preventive health actions. Not a
             diagnostic or treatment tool.
           </p>
         </div>

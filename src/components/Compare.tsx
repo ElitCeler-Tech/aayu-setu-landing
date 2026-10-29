@@ -33,7 +33,7 @@ function Tick({ on }: { on: boolean }) {
 export function Compare() {
   return (
     <section id="compare" className="border-b border-line bg-paper">
-      <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8 md:py-28">
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <div className="max-w-2xl">
           <p className="eyebrow text-mute">
             The difference
@@ -44,17 +44,17 @@ export function Compare() {
         </div>
 
         <div className="mt-12 overflow-hidden rounded-[1.5rem] border border-line">
-          <div className="grid grid-cols-[1fr_7.5rem_9rem] sm:grid-cols-[1fr_11rem_12rem]">
+          <div className="grid grid-cols-[1fr_4.5rem_5.5rem] sm:grid-cols-[1fr_11rem_12rem]">
             {/* heads */}
             <div className="border-b border-line bg-white px-5 py-5 sm:px-7" />
-            <div className="border-b border-l border-line bg-white px-3 py-5 text-center">
-              <span className="text-[0.78rem] font-semibold leading-tight text-mute">
+            <div className="border-b border-l border-line bg-white px-1.5 py-5 text-center sm:px-3">
+              <span className="text-[0.7rem] font-semibold leading-tight text-mute sm:text-[0.78rem]">
                 The folder
                 <span className="block font-normal">you keep now</span>
               </span>
             </div>
-            <div className="border-b border-line bg-navy px-3 py-5 text-center">
-              <span className="text-[0.86rem] font-semibold text-white">
+            <div className="border-b border-line bg-navy px-1.5 py-5 text-center sm:px-3">
+              <span className="text-[0.74rem] font-semibold text-white sm:text-[0.86rem]">
                 Ayussetu
               </span>
             </div>
@@ -64,7 +64,7 @@ export function Compare() {
               return (
                 <div key={label} className="contents">
                   <div
-                    className={`bg-white px-5 py-4 text-[0.88rem] leading-snug text-navy sm:px-7 ${
+                    className={`bg-white px-4 py-4 text-[0.86rem] leading-snug text-navy sm:px-7 sm:text-[0.88rem] ${
                       last ? "" : "border-b border-line"
                     }`}
                   >

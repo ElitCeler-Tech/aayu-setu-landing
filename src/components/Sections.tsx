@@ -308,7 +308,7 @@ export function Thesis() {
                   <span className="flex h-7 w-7 items-center justify-center rounded-full bg-navy font-display text-[0.7rem] text-white">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-mute">
+                  <span className="eyebrow text-mute">
                     {t.n}
                   </span>
                 </div>
@@ -432,7 +432,7 @@ export function Features() {
               }`}
             >
               <Reveal>
-                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-white/45">
+                <p className="eyebrow text-white/45">
                   {b.eyebrow}
                 </p>
                 <h3 className="mt-2.5 max-w-[20ch] font-display text-[clamp(1.4rem,2.8vw,1.95rem)] leading-snug text-balance">
@@ -604,7 +604,7 @@ export function Practice() {
               }`}
             >
               <Reveal>
-                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-mute">
+                <p className="eyebrow text-mute">
                   {b.eyebrow}
                 </p>
                 <h3 className="mt-2.5 max-w-[20ch] font-display text-[clamp(1.4rem,2.8vw,1.95rem)] leading-snug text-ink text-balance">
@@ -615,25 +615,6 @@ export function Practice() {
             </div>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------------------- testimonial ---------------------------- */
-
-export function Testimonial() {
-  return (
-    <section id="testimonials" className="border-b border-line bg-paper">
-      <div className="mx-auto max-w-4xl px-5 py-16 text-center sm:px-8 md:py-20">
-        <blockquote className="font-display text-[clamp(1.3rem,3vw,1.9rem)] font-medium leading-snug text-ink text-balance">
-          &ldquo;This app has completely changed how I manage my health. I
-          never miss a medication, and the AI chat gives instant answers to all
-          my questions.&rdquo;
-        </blockquote>
-        <figcaption className="mt-6 text-[0.86rem] text-mute">
-          Ria Singh · Ayussetu user
-        </figcaption>
       </div>
     </section>
   );

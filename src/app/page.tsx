@@ -1,7 +1,6 @@
 import { Header, Footer } from "@/components/Chrome";
 import { Splash } from "@/components/Splash";
 import { Contact } from "@/components/Contact";
-import { Testimonials } from "@/components/Testimonials";
 import { Faq } from "@/components/Faq";
 import { Reads } from "@/components/Reads";
 import { Compare } from "@/components/Compare";
@@ -29,7 +28,6 @@ export default function Home() {
         <Features />
         <Practice />
         <Compare />
-        <Testimonials />
         <Abha />
         <Security />
         <Download />

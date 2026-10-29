@@ -11,7 +11,7 @@ export function AyuMock() {
         </div>
         <div className="max-w-[88%] rounded-2xl rounded-bl-md border border-[#E3E7EF] bg-[#FFFFFF] px-3 py-2.5">
           <p className="text-[0.66rem] leading-relaxed text-[#46556F]">
-            Your LDL moved from 138 to 164 mg/dL since July, and your HDL is
+            Your LDL moved from 128 to 164 mg/dL since March, and your HDL is
             low at 38. Both are worth discussing with your doctor.
             Your next appointment is on 2 Nov.
           </p>

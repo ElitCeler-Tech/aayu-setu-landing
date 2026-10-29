@@ -63,7 +63,7 @@ export default async function Founder({
               </div>
 
               <div>
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.13em] text-amber-deep">
+                <p className="eyebrow text-amber-deep">
                   {m.role}
                 </p>
                 <h1 className="mt-3 font-display text-[clamp(1.9rem,4.4vw,2.8rem)] leading-tight text-ink text-balance">
@@ -112,7 +112,7 @@ export default async function Founder({
 
               <aside className="space-y-8">
                 <div>
-                  <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.13em] text-mute">
+                  <h3 className="eyebrow text-mute">
                     Education
                   </h3>
                   <ul className="mt-3 space-y-2.5 border-t border-line pt-3">
@@ -125,7 +125,7 @@ export default async function Founder({
                 </div>
 
                 <div>
-                  <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.13em] text-mute">
+                  <h3 className="eyebrow text-mute">
                     Along the way
                   </h3>
                   <ul className="mt-3 space-y-2.5 border-t border-line pt-3">
@@ -147,7 +147,7 @@ export default async function Founder({
         {others.length > 0 && (
           <section className="border-b border-line bg-paper">
             <div className="mx-auto max-w-5xl px-5 py-14 sm:px-8">
-              <h2 className="text-[0.7rem] font-semibold uppercase tracking-[0.13em] text-mute">
+              <h2 className="eyebrow text-mute">
                 Also on the team
               </h2>
               <div className="mt-5 grid gap-4 sm:grid-cols-2">

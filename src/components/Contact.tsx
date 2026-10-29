@@ -75,20 +75,20 @@ export function Contact() {
 
             <dl className="mt-8 space-y-4 text-[0.88rem]">
               <div>
-                <dt className="text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-mute">
+                <dt className="eyebrow text-mute">
                   Email
                 </dt>
                 <dd className="mt-0.5">
                   <a
                     className="font-medium text-navy underline-offset-4 hover:underline"
-                    href="mailto:support@ayussetu.com"
+                    href="mailto:info@ayussetu.com"
                   >
-                    support@ayussetu.com
+                    info@ayussetu.com
                   </a>
                 </dd>
               </div>
               <div>
-                <dt className="text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-mute">
+                <dt className="eyebrow text-mute">
                   Labs, scans and clinics
                 </dt>
                 <dd className="mt-0.5 text-slate">
