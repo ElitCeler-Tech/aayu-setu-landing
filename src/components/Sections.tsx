@@ -193,11 +193,15 @@ export function Markers() {
 
 /* ------------------------------- ABHA -------------------------------- */
 
+/* ABHA is the ID; the consent flow below is ABDM's, which runs on top
+   of it. Worded to what that flow actually does: a revoked consent
+   stops further access, and records already sent are deleted when the
+   consent expires, so "ends the moment you say so" would overstate it. */
 const abhaSteps = [
-  { n: "01", t: "A hospital asks", d: "The request names who is asking, and why." },
-  { n: "02", t: "You approve", d: "Which records, and for how long." },
-  { n: "03", t: "Records travel", d: "Only what you picked, nothing else." },
-  { n: "04", t: "You withdraw", d: "Access ends the moment you say so." },
+  { n: "01", t: "A hospital asks", d: "A hospital or doctor on the ABDM network requests your records, and says why." },
+  { n: "02", t: "You approve", d: "You choose which records, from which dates, and for how long." },
+  { n: "03", t: "Records travel", d: "Encrypted, straight from where they are kept. Nothing is held centrally." },
+  { n: "04", t: "You revoke", d: "No further access, and the consent expires on the date you set." },
 ];
 
 type NodeState = "approved" | "waiting" | "withdrawn" | "idle";
@@ -210,7 +214,7 @@ const abhaNodes: { label: string; angle: number; state: NodeState; note?: string
   { label: "Diagnostic lab", angle: -30, state: "idle", icon: "M9 3v6l-4.5 9.5A1.5 1.5 0 0 0 5.9 21h12.2a1.5 1.5 0 0 0 1.4-2.5L15 9V3M8 3h8M7 15h10" },
   { label: "Clinic", angle: 30, state: "waiting", note: "Request waiting", icon: "M6 3v6a4 4 0 0 0 8 0V3M10 13v3a4 4 0 0 0 8 0v-2M18 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4" },
   { label: "Pharmacy", angle: 90, state: "idle", icon: "M5.5 13.5 13.5 5.5a3.5 3.5 0 0 1 5 5l-8 8a3.5 3.5 0 0 1-5-5ZM9.5 9.5l5 5" },
-  { label: "Hospital", angle: 150, state: "withdrawn", note: "Withdrawn 02 Oct", icon: "M4 20V8l8-4 8 4v12M9 20v-5h6v5M12 8v4M10 10h4" },
+  { label: "Hospital", angle: 150, state: "withdrawn", note: "Revoked 02 Oct", icon: "M4 20V8l8-4 8 4v12M9 20v-5h6v5M12 8v4M10 10h4" },
   { label: "Imaging centre", angle: 210, state: "idle", icon: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" },
 ];
 
@@ -317,12 +321,13 @@ export function Abha() {
         <div>
           <p className="eyebrow text-amber-light">Planned, not yet live</p>
           <h2 className="mt-4 font-display text-[clamp(2.4rem,5vw,3.75rem)] leading-[1.02] text-balance">
-            One health ID, <em className="text-amber-light">every hospital</em>
+            Your health ID, <em className="text-amber-light">your consent</em>
           </h2>
           <p className="mt-5 max-w-[30rem] text-[1.02rem] leading-relaxed text-white/65">
-            The records you keep in Ayussetu will sit behind your ABHA, readable
-            by any hospital on the national network, and only against a consent
-            you approve each time.
+            Your ABHA is your national health ID. Link it to Ayussetu, and
+            hospitals on the ABDM network can ask for your records, but only
+            with a consent you approve: which records, from when, and for how
+            long. You can revoke it at any time.
           </p>
 
           <ol className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-white/12 pt-7">
