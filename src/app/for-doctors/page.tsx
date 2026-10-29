@@ -98,7 +98,7 @@ export default function ForDoctors() {
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#join"
-                className="rounded-full bg-amber px-6 py-3.5 text-[0.9rem] font-semibold text-white shadow-[0_14px_30px_-12px_rgba(255,139,11,0.55)] transition hover:bg-cta-deep"
+                className="rounded-full bg-navy px-6 py-3.5 text-[0.9rem] font-semibold text-white transition hover:bg-ink"
               >
                 Register your interest
               </a>

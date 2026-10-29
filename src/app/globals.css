@@ -112,24 +112,6 @@ body {
 }
 
 
-/* The quote rows. Duration is long on purpose: a wall of text moving
-   quickly is a wall of text nobody reads. */
-@keyframes marquee-left {
-  from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
-}
-@keyframes marquee-right {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(0); }
-}
-.marquee { animation: marquee-left 64s linear infinite; }
-.marquee-reverse { animation: marquee-right 64s linear infinite; }
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee, .marquee-reverse { animation: none; }
-}
-
-
 /* Entrance choreography. The hero arrives in the order a person reads
    it, a beat apart, and then never moves again. Elements start visible
    and are only animated from a hidden state once the stylesheet has
@@ -140,21 +122,8 @@ body {
 }
 .rise { animation: rise 760ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 
-/* The floating fragments beside the phone, drifting out of phase so the
-   pair never looks mechanical. */
-@keyframes float-a {
-  0%, 100% { transform: translateY(0) rotate(-2deg); }
-  50% { transform: translateY(-14px) rotate(-2deg); }
-}
-@keyframes float-b {
-  0%, 100% { transform: translateY(0) rotate(2.5deg); }
-  50% { transform: translateY(-11px) rotate(2.5deg); }
-}
-.float-a { animation: float-a 7.5s ease-in-out infinite; }
-.float-b { animation: float-b 9s ease-in-out 1.2s infinite; }
-
 @media (prefers-reduced-motion: reduce) {
-  .rise, .float-a, .float-b { animation: none; }
+  .rise { animation: none; }
 }
 
 
@@ -225,6 +194,11 @@ body {
 @keyframes scan { from { top: 1.4rem; } to { top: 10.5rem; } }
 .scan-line { animation: scan 2.8s ease-in-out infinite alternate; }
 
+/* ABHA: records travelling down the one approved line. Nothing else
+   in the diagram moves; a waiting request is shown, not pulsed. */
+@keyframes abha-flow { to { stroke-dashoffset: -17.2; } }
+.abha-flow { animation: abha-flow 1.6s linear infinite; }
+
 @media (prefers-reduced-motion: reduce) {
-  .ring-spin, .score-arc, .ticker-row, .ticker-row-rev, .scan-line { animation: none; }
+  .ring-spin, .score-arc, .ticker-row, .ticker-row-rev, .scan-line, .abha-flow { animation: none; }
 }

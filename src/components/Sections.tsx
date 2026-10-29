@@ -194,62 +194,156 @@ export function Markers() {
 /* ------------------------------- ABHA -------------------------------- */
 
 const abhaSteps = [
-  { n: "01", t: "A hospital asks", d: "A request arrives against your ABHA, naming who is asking and why." },
-  { n: "02", t: "You approve", d: "You choose which records, and for how long. Nothing moves before this." },
-  { n: "03", t: "Records travel", d: "Only what you picked is sent, over the national network." },
-  { n: "04", t: "You withdraw", d: "Access ends the moment you say so, and the grant stays on your record." },
+  { n: "01", t: "A hospital asks", d: "The request names who is asking, and why." },
+  { n: "02", t: "You approve", d: "Which records, and for how long." },
+  { n: "03", t: "Records travel", d: "Only what you picked, nothing else." },
+  { n: "04", t: "You withdraw", d: "Access ends the moment you say so." },
 ];
 
-/* What ABHA will mean, drawn as the path a consent takes rather than as
-   a picture of the ID card: a mock of a government card with a made up
-   number reads as an imitation of the real one. Marked as planned in
-   the heading's own label, because it is. */
+type NodeState = "approved" | "waiting" | "withdrawn" | "idle";
+
+/* Six places that can ask, set on a circle round the patient the way
+   the hero's ticks are set round the score. Angles run clockwise from
+   the top. */
+const abhaNodes: { label: string; angle: number; state: NodeState; note?: string; icon: string }[] = [
+  { label: "Cardiology", angle: -90, state: "approved", note: "Approved, 7 days", icon: "M4 20V8l8-4 8 4v12M9 20v-5h6v5M12 8v4M10 10h4" },
+  { label: "Diagnostic lab", angle: -30, state: "idle", icon: "M9 3v6l-4.5 9.5A1.5 1.5 0 0 0 5.9 21h12.2a1.5 1.5 0 0 0 1.4-2.5L15 9V3M8 3h8M7 15h10" },
+  { label: "Clinic", angle: 30, state: "waiting", note: "Request waiting", icon: "M6 3v6a4 4 0 0 0 8 0V3M10 13v3a4 4 0 0 0 8 0v-2M18 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4" },
+  { label: "Pharmacy", angle: 90, state: "idle", icon: "M5.5 13.5 13.5 5.5a3.5 3.5 0 0 1 5 5l-8 8a3.5 3.5 0 0 1-5-5ZM9.5 9.5l5 5" },
+  { label: "Hospital", angle: 150, state: "withdrawn", note: "Withdrawn 02 Oct", icon: "M4 20V8l8-4 8 4v12M9 20v-5h6v5M12 8v4M10 10h4" },
+  { label: "Imaging centre", angle: 210, state: "idle", icon: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" },
+];
+
+const R = 39; // node ring radius, as a percentage of the diagram
+
+function at(angle: number, r = R) {
+  const a = (angle * Math.PI) / 180;
+  return { x: 50 + r * Math.cos(a), y: 50 + r * Math.sin(a) };
+}
+
+function AbhaNetwork() {
+  return (
+    <div className="relative mx-auto aspect-square w-full max-w-[34rem]">
+      <div className="pointer-events-none absolute inset-[18%] rounded-full bg-[radial-gradient(circle,rgba(255,139,11,0.22),rgba(255,139,11,0)_65%)] blur-[8px]" />
+
+      <svg viewBox="0 0 100 100" aria-hidden="true" className="absolute inset-0 h-full w-full overflow-visible">
+        <circle cx="50" cy="50" r={R} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="0.25" />
+        <circle cx="50" cy="50" r="15" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="0.25" />
+        {abhaNodes.map((n) => {
+          const p = at(n.angle, R - 5);
+          const q = at(n.angle, 15);
+          if (n.state === "approved")
+            return (
+              <g key={n.label}>
+                <line x1={q.x} y1={q.y} x2={p.x} y2={p.y} stroke="#FF8B0B" strokeWidth="0.6" />
+                <line className="abha-flow" x1={q.x} y1={q.y} x2={p.x} y2={p.y} stroke="#FFD2A0" strokeWidth="0.9" strokeLinecap="round" strokeDasharray="1.2 16" />
+              </g>
+            );
+          if (n.state === "waiting")
+            return <line key={n.label} x1={q.x} y1={q.y} x2={p.x} y2={p.y} stroke="#FFB15C" strokeOpacity="0.7" strokeWidth="0.4" strokeDasharray="1 1.2" />;
+          return <line key={n.label} x1={q.x} y1={q.y} x2={p.x} y2={p.y} stroke="rgba(255,255,255,0.12)" strokeWidth="0.3" />;
+        })}
+      </svg>
+
+      {/* The patient, at the centre of every line. */}
+      <div className="absolute left-1/2 top-1/2 flex w-[30%] -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center">
+        <span className="grid h-14 w-14 place-items-center overflow-hidden rounded-2xl bg-white shadow-[0_0_0_6px_rgba(255,255,255,0.06),0_20px_40px_-12px_rgba(255,139,11,0.45)] md:h-16 md:w-16">
+          <Image src="/ayussetu-logo-white.png" alt="" width={64} height={64} />
+        </span>
+        <span className="mt-3 text-[0.82rem] font-semibold text-white md:text-[0.9rem]">Your ABHA</span>
+        <span className="eyebrow mt-1 hidden !text-[0.56rem] text-white/45 md:block">You hold the keys</span>
+      </div>
+
+      {abhaNodes.map((n) => {
+        const p = at(n.angle);
+        // The top node's line arrives from below, so its words go above
+        // the icon instead of across the line.
+        const top = n.angle === -90;
+        return (
+          <div
+            key={n.label}
+            className={`absolute flex w-[30%] -translate-x-1/2 items-center text-center ${
+              top ? "-translate-y-[calc(100%-1.25rem)] flex-col-reverse md:-translate-y-[calc(100%-1.5rem)]" : "-translate-y-5 flex-col md:-translate-y-6"
+            }`}
+            style={{ left: `${p.x}%`, top: `${p.y}%` }}
+          >
+            <span
+              className={`relative grid h-10 w-10 place-items-center rounded-xl border md:h-12 md:w-12 ${
+                n.state === "approved"
+                  ? "border-cta bg-cta/15 text-amber-light"
+                  : n.state === "waiting"
+                    ? "border-amber-light/50 bg-white/[0.05] text-amber-light"
+                    : n.state === "withdrawn"
+                      ? "border-white/10 bg-transparent text-white/25"
+                      : "border-white/15 bg-white/[0.04] text-white/60"
+              }`}
+            >
+              {n.state === "waiting" && (
+                <span className="absolute inset-[-5px] rounded-[0.9rem] border border-dashed border-amber-light/45" />
+              )}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d={n.icon} />
+              </svg>
+            </span>
+            <span className={`${top ? "mb-1.5" : "mt-2"} text-[0.66rem] leading-tight md:text-[0.76rem] ${n.state === "withdrawn" ? "text-white/30 line-through decoration-white/30" : "text-white/80"}`}>
+              {n.label}
+            </span>
+            {n.note && (
+              <span
+                className={`eyebrow ${top ? "mb-0.5" : "mt-1"} !text-[0.52rem] md:!text-[0.58rem] ${
+                  n.state === "approved" ? "text-amber-light" : n.state === "waiting" ? "text-amber-light/80" : "text-white/35"
+                }`}
+              >
+                {n.note}
+              </span>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/* What ABHA will mean, drawn as the network a consent travels across
+   rather than as a picture of the ID card: a mock government card with
+   a made up number reads as an imitation of the real one. One line is
+   lit because one hospital was let in, one waits, one was let go; the
+   rest are dark because nobody asked. Still labelled planned, because
+   it is. */
 export function Abha() {
   return (
-    <section id="abha" className="border-b border-line bg-paper">
-      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
-        <div className="text-center">
-          <p className="eyebrow text-amber">Planned, not yet live</p>
-          <h2 className="mt-4 font-display text-[clamp(2.4rem,5vw,3.75rem)] leading-[1.02] text-ink text-balance">
-            One health ID, <em className="text-amber">every hospital</em>
+    <section id="abha" className="hero-room relative overflow-hidden border-b border-line text-white">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 py-20 sm:px-8 md:grid-cols-[0.9fr_1.1fr] md:gap-10 md:py-28">
+        <div>
+          <p className="eyebrow text-amber-light">Planned, not yet live</p>
+          <h2 className="mt-4 font-display text-[clamp(2.4rem,5vw,3.75rem)] leading-[1.02] text-balance">
+            One health ID, <em className="text-amber-light">every hospital</em>
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-[1.02rem] leading-relaxed text-slate">
+          <p className="mt-5 max-w-[30rem] text-[1.02rem] leading-relaxed text-white/65">
             The records you keep in Ayussetu will sit behind your ABHA, readable
             by any hospital on the national network, and only against a consent
             you approve each time.
           </p>
-        </div>
 
-        <Reveal>
-          <ol className="relative mt-16 grid gap-10 rounded-3xl border border-line bg-mist px-6 py-10 sm:px-10 md:grid-cols-4 md:gap-8 md:py-12">
-            {/* The path: navy where the patient has acted, so the line
-                itself says that nothing travels before step two. */}
-            <span aria-hidden="true" className="absolute left-10 right-10 top-[4.15rem] hidden h-px bg-line-strong md:block" />
-            <span aria-hidden="true" className="absolute left-10 top-[4.15rem] hidden h-px w-[calc(50%-2.5rem)] bg-navy md:block" />
-            {abhaSteps.map((s, i) => (
-              <li key={s.n} className="relative">
-                <span
-                  className={`relative z-10 grid h-9 w-9 place-items-center rounded-full font-mono text-[0.72rem] ${
-                    i === 1
-                      ? "bg-cta text-ink"
-                      : i < 2
-                        ? "bg-navy text-white"
-                        : "border border-line-strong bg-paper text-mute"
-                  }`}
-                >
-                  {s.n}
-                </span>
-                <h3 className="mt-5 font-display text-[1.6rem] leading-tight text-ink">{s.t}</h3>
-                <p className="mt-2 text-[0.88rem] leading-relaxed text-slate">{s.d}</p>
+          <ol className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-white/12 pt-7">
+            {abhaSteps.map((s) => (
+              <li key={s.n}>
+                <span className="font-mono text-[0.72rem] text-amber-light">{s.n}</span>
+                <p className="mt-1.5 text-[0.95rem] font-semibold text-white">{s.t}</p>
+                <p className="mt-1 text-[0.82rem] leading-snug text-white/55">{s.d}</p>
               </li>
             ))}
           </ol>
-        </Reveal>
 
-        <p className="mt-6 text-center text-[0.78rem] text-mute">
-          Ayussetu is not yet certified on the ABDM network. This describes how
-          it will work once it is.
-        </p>
+          <p className="mt-9 text-[0.74rem] leading-relaxed text-white/40">
+            Ayussetu is not yet certified on the ABDM network. This shows how it
+            will work once it is.
+          </p>
+        </div>
+
+        <Reveal>
+          <AbhaNetwork />
+        </Reveal>
       </div>
     </section>
   );
@@ -289,7 +383,7 @@ export function Team() {
                     <span className="block font-display text-[1.45rem] leading-snug text-white">
                       {m.name}
                     </span>
-                    <span className="mt-0.5 block text-[0.84rem] font-medium text-amber">
+                    <span className="mt-0.5 block text-[0.84rem] font-medium text-amber-light">
                       {m.role}
                     </span>
                   </span>
