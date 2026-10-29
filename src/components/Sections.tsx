@@ -1,4 +1,3 @@
-import { PhoneShowcase } from "./PhoneShowcase";
 import {
   DoseMock,
   ReportMock,
@@ -14,81 +13,97 @@ import { StoreButtons } from "./StoreButtons";
 
 /* ------------------------------- hero -------------------------------- */
 
+const heroFigures = [
+  { k: "29 markers", v: "Read from your reports" },
+  { k: "One record", v: "Labs, prescriptions, vitals" },
+  { k: "Free", v: "On Android and iPhone" },
+];
+
+/* One dark room with one warm light in it. No phone and no screens:
+   the claim is the picture, and the figures underneath are the proof.
+   The disclaimer lives in the footer and the FAQ, not on the first
+   screen a person sees. */
 export function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-line">
-      {/* One cool wash behind the phone, and a hairline grid that stops
-          under the headline. Nothing else: the product is the only colour
-          this section needs. */}
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-[62%] bg-gradient-to-l from-navy/[0.07] via-navy/[0.03] to-transparent" />
-      <div className="pointer-events-none absolute right-[-14%] top-[-28%] h-[52rem] w-[52rem] rounded-full bg-navy/[0.06] blur-[160px]" />
+    <section
+      id="hero"
+      className="hero-room relative flex min-h-[100svh] flex-col overflow-hidden text-white"
+    >
+      {/* The heartbeat from the mark, drawn once through the light. */}
+      <svg
+        viewBox="0 0 1200 200"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-[44%] hidden h-[13rem] w-full md:block"
+      >
+        <defs>
+          <linearGradient id="pulse" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stopColor="#FFB46A" stopOpacity="0" />
+            <stop offset="52%" stopColor="#FFB46A" stopOpacity="0" />
+            <stop offset="68%" stopColor="#FFB46A" stopOpacity="0.6" />
+            <stop offset="86%" stopColor="#FFB46A" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#FFB46A" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <path
+          className="pulse-line"
+          d="M0 120 H780 L806 120 L828 30 L856 180 L880 90 L900 120 H1200"
+          stroke="url(#pulse)"
+          strokeWidth="1.6"
+          fill="none"
+          vectorEffect="non-scaling-stroke"
+          strokeLinejoin="round"
+        />
+      </svg>
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 pb-16 pt-16 sm:px-8 md:grid-cols-[1.08fr_0.92fr] md:pb-24 md:pt-24 xl:gap-4">
-        <div className="md:pr-6">
-          <p className="rise inline-flex items-center gap-2 rounded-full border border-line bg-white/80 px-3.5 py-1.5 text-[0.64rem] font-semibold uppercase tracking-[0.13em] text-mute backdrop-blur [animation-delay:90ms]">
-            <svg
-              width="11"
-              height="11"
-              viewBox="0 0 12 12"
-              fill="none"
-              aria-hidden="true"
-              className="text-amber"
-            >
-              <path
-                d="M6 0.5 7.1 4.2 10.8 5.3 7.1 6.4 6 10.1 4.9 6.4 1.2 5.3 4.9 4.2Z"
-                fill="currentColor"
-              />
-            </svg>
-            Preventive health, powered by Ayu AI
-          </p>
+      <div className="relative mx-auto w-full max-w-6xl flex-1 px-5 pb-10 pt-32 sm:px-8 md:pt-36">
+        <p className="rise inline-block rounded-full border border-white/15 bg-white/[0.07] px-4 py-2 text-[0.8rem] font-medium text-white/85 [animation-delay:90ms]">
+          Free for patients
+        </p>
 
-          <h1 className="rise font-display mt-7 max-w-[13ch] [animation-delay:170ms] text-[clamp(2.9rem,7vw,5rem)] leading-[1.02] text-ink text-balance">
-            Your records are scattered. Your risk is not.
-          </h1>
+        <h1 className="rise font-display mt-6 max-w-[11ch] text-[clamp(3.4rem,8vw,6.25rem)] leading-[0.95] tracking-[-0.015em] text-balance [animation-delay:170ms]">
+          Know where your health is{" "}
+          <em className="text-amber-light">heading.</em>
+        </h1>
 
-          <p className="rise mt-7 max-w-lg text-[1.08rem] leading-relaxed text-slate [animation-delay:250ms]">
-            A lab in one clinic, a prescription in a drawer, a reading nobody
-            wrote down. Ayussetu reads them as one record, so what is building
-            shows up while there is still something to do about it.
-          </p>
+        <p className="rise mt-6 max-w-[30rem] text-[1.05rem] leading-relaxed text-white/70 md:text-[1.18rem] [animation-delay:250ms]">
+          Every lab report and prescription you have, read together as one
+          record. Ayussetu shows the trend while there is still time to act
+          on it.
+        </p>
 
-          {/* The numbers that used to sit in four boxes further down the
-              page, said once, here, where they are worth something. */}
-          <p className="rise mt-5 max-w-lg text-[0.95rem] leading-relaxed text-navy [animation-delay:330ms]">
-            <span className="font-semibold">29 markers</span> read out of the
-            reports you already have.{" "}
-            <span className="font-semibold">Free for patients</span>, on
-            Android and iPhone.
-          </p>
-
-          <div className="rise mt-9 flex flex-wrap items-center gap-3 [animation-delay:410ms]">
-            <a
-              href="#download"
-              className="group inline-flex items-center gap-2 rounded-full bg-cta px-7 py-4 text-[0.92rem] font-semibold text-white shadow-[0_14px_30px_-12px_rgba(255,139,11,0.55)] transition hover:bg-cta-deep"
-            >
-              Download the app
-              <span className="transition group-hover:translate-x-0.5">&rarr;</span>
-            </a>
-            <a
-              href="/for-doctors"
-              className="rounded-full border border-line bg-white px-7 py-4 text-[0.92rem] font-semibold text-navy transition hover:border-navy"
-            >
-              For doctors and clinics
-            </a>
-          </div>
-
-          <p className="mt-8 max-w-md border-t border-line pt-5 text-[0.76rem] leading-relaxed text-mute">
-            Nothing is shared without your consent. AI powered insights to
-            support preventive health actions, not a diagnostic or treatment
-            tool.
-          </p>
+        <div className="rise mt-9 flex flex-col items-stretch gap-5 sm:flex-row sm:items-center sm:gap-7 [animation-delay:330ms]">
+          <a
+            href="#download"
+            className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-cream px-8 py-[1.05rem] text-[0.95rem] font-semibold text-ink transition hover:bg-white"
+          >
+            Download the app
+            <span className="transition group-hover:translate-x-0.5">&rarr;</span>
+          </a>
+          <a
+            href="/for-doctors"
+            className="text-center text-[0.95rem] font-medium text-white/80 transition hover:text-white"
+          >
+            For doctors and clinics &rarr;
+          </a>
         </div>
+      </div>
 
-        {/* The phone runs past the edge of the column rather than sitting
-            inside a box, so the section reads as a window on the product. */}
-        <div className="rise [animation-delay:300ms] lg:-mr-8 xl:-mr-14">
-          <PhoneShowcase />
-        </div>
+      {/* The figures on the floor of the room, as the reference sets them. */}
+      <div className="relative mx-auto w-full max-w-6xl px-5 pb-10 sm:px-8 md:pb-12">
+        <dl className="rise flex flex-col gap-4 sm:flex-row sm:gap-0 [animation-delay:430ms]">
+          {heroFigures.map((f, i) => (
+            <div
+              key={f.k}
+              className={`border-l-2 border-amber-light/60 pl-4 sm:border-l sm:border-white/20 sm:px-8 ${
+                i === 0 ? "sm:border-l-0 sm:pl-0" : ""
+              }`}
+            >
+              <dt className="text-[1.15rem] font-semibold md:text-[1.35rem]">{f.k}</dt>
+              <dd className="mt-1 text-[0.86rem] text-white/60 md:text-[0.92rem]">{f.v}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );

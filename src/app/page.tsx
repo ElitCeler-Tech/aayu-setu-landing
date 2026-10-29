@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <>
       <Splash />
-      <Header />
+      <Header overlay />
       <main>
         <Hero />
         <Thesis />

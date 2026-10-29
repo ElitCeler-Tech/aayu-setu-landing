@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+import { HeaderFrame } from "./HeaderFrame";
 
 const nav = [
-  { label: "Features", href: "#features" },
-  { label: "How it works", href: "#how" },
-  { label: "FAQs", href: "#faq" },
+  { label: "Features", href: "/#features" },
+  { label: "How it works", href: "/#how" },
+  { label: "FAQs", href: "/#faq" },
   { label: "For doctors", href: "/for-doctors" },
   { label: "About us", href: "/about" },
 ];
@@ -16,7 +17,7 @@ const nav = [
 function Mark({ size = 34 }: { size?: number }) {
   return (
     <span
-      className="inline-flex shrink-0 items-center justify-center overflow-hidden rounded-[0.65rem] shadow-[0_2px_8px_-2px_rgba(22,35,61,0.4)]"
+      className="inline-flex shrink-0 items-center justify-center overflow-hidden rounded-[0.65rem] shadow-[0_2px_8px_-2px_rgba(22,35,61,0.4)] group-data-[dark=true]:ring-1 group-data-[dark=true]:ring-white/25"
       style={{ width: size, height: size }}
     >
       <Image
@@ -30,13 +31,15 @@ function Mark({ size = 34 }: { size?: number }) {
   );
 }
 
-export function Header() {
+/* `overlay` is for the home page only: the header floats over the dark
+   hero and turns back into the paper header once it has scrolled by. */
+export function Header({ overlay = false }: { overlay?: boolean }) {
   return (
-    <header className="sticky top-0 z-50 border-b border-line/70 bg-paper/80 backdrop-blur-xl">
+    <HeaderFrame overlay={overlay}>
       <div className="mx-auto flex h-[4.25rem] max-w-6xl items-center gap-8 px-5 sm:px-8">
         <Link href="/" className="flex items-center gap-2.5">
           <Mark />
-          <span className="text-[1.2rem] font-semibold tracking-[-0.02em] text-navy">
+          <span className="text-[1.2rem] font-semibold tracking-[-0.02em] text-navy transition-colors group-data-[dark=true]:text-white">
             Ayussetu
           </span>
         </Link>
@@ -46,7 +49,7 @@ export function Header() {
             <a
               key={n.href}
               href={n.href}
-              className="rounded-full px-3.5 py-2 text-[0.84rem] font-medium text-slate transition hover:bg-mist hover:text-navy"
+              className="rounded-full px-3.5 py-2 text-[0.84rem] font-medium text-slate transition hover:bg-mist hover:text-navy group-data-[dark=true]:text-white/70 group-data-[dark=true]:hover:bg-white/10 group-data-[dark=true]:hover:text-white"
             >
               {n.label}
             </a>
@@ -55,20 +58,20 @@ export function Header() {
 
         <div className="ml-auto flex items-center gap-2">
           <a
-            href="#contact"
-            className="hidden rounded-full px-4 py-2 text-[0.84rem] font-medium text-slate transition hover:text-navy sm:block"
+            href="/#contact"
+            className="hidden rounded-full px-4 py-2 text-[0.84rem] font-medium text-slate transition hover:text-navy group-data-[dark=true]:text-white/70 group-data-[dark=true]:hover:text-white sm:block"
           >
             Contact
           </a>
           <a
-            href="#download"
-            className="rounded-full bg-navy px-5 py-2.5 text-[0.82rem] font-semibold text-white transition hover:bg-ink"
+            href="/#download"
+            className="rounded-full bg-navy px-5 py-2.5 text-[0.82rem] font-semibold text-white transition hover:bg-ink group-data-[dark=true]:bg-cream group-data-[dark=true]:text-ink group-data-[dark=true]:hover:bg-white"
           >
             Get the app
           </a>
         </div>
       </div>
-    </header>
+    </HeaderFrame>
   );
 }
 
@@ -76,18 +79,18 @@ const footerCols = [
   {
     h: "Product",
     links: [
-      ["Features", "#features"],
-      ["How it works", "#how"],
-      ["Download", "#download"],
+      ["Features", "/#features"],
+      ["How it works", "/#how"],
+      ["Download", "/#download"],
     ],
   },
   {
     h: "Company",
     links: [
       ["About us", "/about"],
-      ["Testimonials", "#testimonials"],
-      ["FAQs", "#faq"],
-      ["Contact us", "#contact"],
+      ["Testimonials", "/#testimonials"],
+      ["FAQs", "/#faq"],
+      ["Contact us", "/#contact"],
     ],
   },
 ];
@@ -151,7 +154,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a className="transition hover:text-white" href="#contact">
+                <a className="transition hover:text-white" href="/#contact">
                   Send us a message
                 </a>
               </li>
