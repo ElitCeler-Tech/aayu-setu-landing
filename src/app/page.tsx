@@ -1,5 +1,4 @@
 import { Header, Footer } from "@/components/Chrome";
-import { Splash } from "@/components/Splash";
 import { Journey } from "@/components/Journey";
 import { Intelligence } from "@/components/Intelligence";
 import { AyuAI } from "@/components/AyuAI";
@@ -15,7 +14,6 @@ import { Hero, Security, Abha, Download } from "@/components/Sections";
 export default function Home() {
   return (
     <>
-      <Splash />
       <Header overlay />
       <main>
         <Hero />

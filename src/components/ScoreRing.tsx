@@ -60,11 +60,15 @@ function useCount(target: number) {
 }
 
 export function ScoreRing() {
-  const [n, setN] = useState(months.length - 1);
+  // Starts on January from the first frame, so the page never opens on
+  // October and jumps back; reduced motion moves straight to October.
+  const [n, setN] = useState(0);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    setN(0);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setN(months.length - 1);
+      return;
+    }
     const t = setInterval(() => setN((x) => (x + 1) % months.length), 2800);
     return () => clearInterval(t);
   }, []);
