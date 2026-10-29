@@ -24,15 +24,14 @@ export function Hero() {
     >
       <div className="hero-leave relative mx-auto grid w-full max-w-6xl flex-1 items-center gap-10 px-5 pb-10 pt-32 sm:px-8 md:grid-cols-2 md:gap-6 md:pt-36">
         <div>
-          <h1 className="rise font-display max-w-[11ch] text-[clamp(3.4rem,7.5vw,6rem)] leading-[0.95] tracking-[-0.015em] text-balance [animation-delay:170ms]">
-            Know where your health is{" "}
-            <em className="text-amber-light">heading.</em>
+          <h1 className="rise font-display max-w-[12ch] text-[clamp(3.4rem,7.5vw,6rem)] leading-[0.95] tracking-[-0.015em] text-balance [animation-delay:170ms]">
+            Your health has a story.{" "}
+            <em className="text-amber-light">Understand it.</em>
           </h1>
 
           <p className="rise mt-6 max-w-[30rem] text-[1.05rem] leading-relaxed text-white/70 md:text-[1.15rem] [animation-delay:250ms]">
-            Every lab report and prescription you have, read together as one
-            record. Ayussetu shows the trend while there is still time to act
-            on it.
+            Bring your health records together, understand what is changing,
+            and discover practical steps toward better health.
           </p>
 
           {/* The app is the product, so the stores are the call to action:
@@ -40,12 +39,16 @@ export function Hero() {
               than a button that only scrolls down to them. */}
           <div className="rise mt-9 [animation-delay:330ms]">
             <StoreButtons size="lg" />
-            <a
-              href="/for-doctors"
-              className="mt-5 inline-block text-[0.95rem] font-medium text-white/75 transition hover:text-white"
-            >
-              For doctors and clinics &rarr;
-            </a>
+            {/* The deck's two doors: patients stay on this page, doctors
+                and clinics have their own. */}
+            <div className="mt-6 flex flex-wrap gap-x-7 gap-y-3 text-[0.95rem] font-medium">
+              <a href="#who" className="text-white/80 transition hover:text-white">
+                For patients &rarr;
+              </a>
+              <a href="/for-doctors" className="text-white/80 transition hover:text-white">
+                For doctors and clinics &rarr;
+              </a>
+            </div>
           </div>
         </div>
 
@@ -75,121 +78,6 @@ export function Hero() {
   );
 }
 
-
-/* ----------------------------- markers ------------------------------- */
-
-const marker = {
-  k: "LDL cholesterol",
-  tag: "Heart",
-  w: "The cholesterol that collects in artery walls. It is watched over years rather than weeks, because the damage is cumulative and quiet.",
-  history: [
-    { d: "March", v: "128", s: "Near optimal" },
-    { d: "June", v: "146", s: "Borderline" },
-    { d: "October", v: "164", s: "High" },
-  ],
-  verdict: "Up 36 mg/dL since March, across three separate reports.",
-  range: "Under 100 mg/dL",
-  lo: 0,
-  hi: 45,
-  at: 74,
-  lowLabel: "Lower is better",
-  highLabel: "Raised",
-};
-
-
-
-export function Markers() {
-  return (
-    <section className="border-b border-line bg-paper">
-      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
-        <div className="grid gap-12 md:grid-cols-[0.92fr_1.08fr] md:items-center md:gap-16">
-          <Reveal>
-            <div>
-              <p className="eyebrow text-mute">
-                Understanding your numbers
-              </p>
-              <h2 className="mt-3 font-display text-[clamp(2.15rem,5vw,3.2rem)] leading-tight text-ink text-balance">
-                A marker is only useful if you know what it is for
-              </h2>
-              <p className="mt-5 max-w-md text-[0.98rem] leading-relaxed text-slate">
-                Every marker Ayussetu reads is explained where it appears, in
-                plain language, with your own readings behind it.
-              </p>
-              <p className="mt-5 max-w-md text-[0.92rem] leading-relaxed text-navy">
-                One reading is a number. Three readings are a direction, and a
-                direction is the part you can still do something about.
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal delay={110}>
-            <article className="rounded-[2rem] border border-line bg-white p-7 shadow-[0_44px_100px_-70px_rgba(22,35,61,0.7)] md:p-9">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <h3 className="font-display text-[1.35rem] text-navy">
-                  {marker.k}
-                </h3>
-                <span className="rounded-full bg-mist px-3 py-1 text-[0.66rem] font-semibold text-mute">
-                  {marker.tag}
-                </span>
-              </div>
-              <p className="mt-3 text-[0.92rem] leading-relaxed text-slate">
-                {marker.w}
-              </p>
-
-              {/* The three reports behind the latest number, because the
-                  latest number on its own is the problem this page opens on. */}
-              <ol className="mt-7 grid grid-cols-3 gap-px overflow-hidden rounded-xl border border-line bg-line">
-                {marker.history.map((h, i) => {
-                  const last = i === marker.history.length - 1;
-                  return (
-                    <li
-                      key={h.d}
-                      className={`px-3 py-3.5 text-center ${last ? "bg-amber-wash" : "bg-white"}`}
-                    >
-                      <span className="block text-[0.62rem] font-semibold uppercase tracking-[0.1em] text-mute">
-                        {h.d}
-                      </span>
-                      <span
-                        className={`mt-1 block font-display text-[1.25rem] tabular-nums ${last ? "text-amber-deep" : "text-navy"}`}
-                      >
-                        {h.v}
-                      </span>
-                      <span className="mt-0.5 block text-[0.62rem] text-mute">
-                        {h.s}
-                      </span>
-                    </li>
-                  );
-                })}
-              </ol>
-
-              <p className="mt-4 text-[0.86rem] font-medium text-navy">
-                {marker.verdict}
-              </p>
-
-              <div className="relative mt-6 h-2 rounded-full bg-mist">
-                <span
-                  className="absolute inset-y-0 rounded-full bg-sage/35"
-                  style={{ left: `${marker.lo}%`, right: `${100 - marker.hi}%` }}
-                />
-                <span
-                  className="absolute top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border-2 border-white bg-amber shadow"
-                  style={{ left: `calc(${marker.at}% - 0.5rem)` }}
-                />
-              </div>
-              <div className="mt-3 flex justify-between text-[0.7rem] text-mute">
-                <span>{marker.lowLabel}</span>
-                <span className="font-semibold text-navy">
-                  Healthy: {marker.range}
-                </span>
-                <span>{marker.highLabel}</span>
-              </div>
-            </article>
-          </Reveal>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ------------------------------- ABHA -------------------------------- */
 
@@ -416,34 +304,15 @@ export function Team() {
 
 /* ------------------------------ privacy ------------------------------ */
 
-const security = [
-  {
-    title: "Access is asked for, never assumed",
-    body: "A doctor requests your record and sees nothing until you approve it. Approval is per doctor, and can be withdrawn afterwards.",
-  },
-  {
-    title: "Encrypted, and private by design",
-    body: "Records are encrypted in transit and at rest, and shared only with the people you choose, whether family or clinician.",
-  },
-  {
-    title: "Built towards ABDM",
-    body: "Consent, care contexts and interoperable records are on the roadmap, so your record can travel with your ABHA.",
-  },
-  {
-    title: "Nothing sold on",
-    body: "Health data is not a product here. It exists to be read by you and the clinician you choose.",
-  },
-];
-
 export function Security() {
   return (
-    <section id="security" className="border-b border-line bg-paper">
+    <section id="trust" className="border-b border-line bg-paper">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
         <Reveal>
           <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
             <div>
               <p className="eyebrow text-amber-deep">
-                Privacy and safety
+                Privacy, safety and trust
               </p>
               <h2 className="mt-3 max-w-xl font-display text-[clamp(2.15rem,5vw,3.2rem)] leading-tight text-ink text-balance">
                 A record is only useful if the person it belongs to controls it
@@ -526,7 +395,7 @@ export function Security() {
           <Reveal delay={220}>
             <article className="group flex h-full flex-col rounded-3xl border border-line bg-white p-6 transition duration-500 hover:-translate-y-1 hover:border-sage/50 hover:shadow-[0_28px_60px_-44px_rgba(47,125,99,0.85)]">
               <h3 className="text-[1.02rem] font-semibold text-navy">
-                Access is logged, and withdrawable
+                Access is logged, and revocable
               </h3>
               <p className="mt-2 text-[0.88rem] leading-relaxed text-slate">
                 Every grant is dated, and you can take it back without asking anybody.
@@ -534,7 +403,7 @@ export function Security() {
               <div className="mt-auto space-y-1.5 rounded-2xl border border-line bg-mist/60 p-3.5 transition duration-500 group-hover:border-sage/30 group-hover:bg-sage-wash/70">
                 {[
                   ["Dr S. Rao", "Granted 14 Oct", true],
-                  ["Dr K. Menon", "Withdrawn 02 Oct", false],
+                  ["Dr K. Menon", "Revoked 02 Oct", false],
                 ].map(([n, when, active]) => (
                   <div
                     key={n as string}
@@ -578,11 +447,34 @@ export function Security() {
           </ul>
         </Reveal>
 
-        <p className="mt-8 max-w-3xl text-[0.8rem] leading-relaxed text-mute">
-          Ayussetu supports preventive health actions. It is not a diagnostic
-          or treatment tool, and AI can make mistakes. Always consult a
-          qualified clinician.
-        </p>
+        {/* Consent, control and security are drawn above; the deck also
+            asks for responsible AI, limitations and clinicians, which are
+            said plainly here rather than drawn. */}
+        <div className="mt-12 grid gap-5 border-t border-line pt-10 md:grid-cols-3">
+          {[
+            {
+              t: "Responsible AI",
+              b: "Ayu answers from your own record, says when it is AI, and points you to a doctor instead of diagnosing.",
+            },
+            {
+              t: "Honest about limits",
+              b: "Ayussetu supports preventive health actions. It is not a diagnostic or treatment tool, and it is not for emergencies.",
+            },
+            {
+              t: "Clinicians involved",
+              b: "A pharmacist founder and a clinical advisor review what the app says about markers and medicines.",
+            },
+          ].map((x) => (
+            <div key={x.t}>
+              <h3 className="text-[1.02rem] font-semibold text-navy">{x.t}</h3>
+              <p className="mt-2 text-[0.88rem] leading-relaxed text-slate">{x.b}</p>
+            </div>
+          ))}
+        </div>
+
+        <a href="/legal" className="mt-10 inline-block text-[0.95rem] font-semibold text-navy underline decoration-line-strong underline-offset-[6px] transition hover:decoration-navy">
+          Our approach to trust &rarr;
+        </a>
       </div>
     </section>
   );

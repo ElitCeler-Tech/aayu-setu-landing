@@ -25,8 +25,8 @@ const ticks = Array.from({ length: 29 }, (_, i) => {
 
 const readings = [
   { k: "LDL", v: "164 mg/dL", n: "rising", tone: "up", pos: "left-[-16%] top-[5%]" },
-  { k: "HbA1c", v: "5.6 %", n: "in range", tone: "ok", pos: "right-[-14%] top-[7%] flex-row-reverse" },
-  { k: "Vitamin D", v: "34 ng/mL", n: "up from 14", tone: "ok", pos: "left-[-16%] top-[92%]" },
+  { k: "Haemoglobin", v: "13.8 g/dL", n: "in range", tone: "ok", pos: "right-[-14%] top-[7%] flex-row-reverse" },
+  { k: "Vitamin D", v: "14 ng/mL", n: "low", tone: "up", pos: "left-[-16%] top-[92%]" },
 ];
 
 export function ScoreRing() {
@@ -75,7 +75,7 @@ export function ScoreRing() {
 
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <span className="font-display text-[4.5rem] leading-none md:text-[7.5rem]">72</span>
-        <span className="eyebrow mt-1.5 text-white/55">Health score</span>
+        <span className="eyebrow mt-1.5 text-white/55">Swasth Score</span>
       </div>
 
       {/* Three readings, labelled off the ring. Desktop only: on a phone

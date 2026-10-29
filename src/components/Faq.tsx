@@ -48,7 +48,7 @@ export function Faq() {
             <p className="mt-4 text-[0.9rem] leading-relaxed text-slate">
               Something not answered here?{" "}
               <a
-                href="#contact"
+                href="/contact"
                 className="font-semibold text-navy underline decoration-amber underline-offset-4"
               >
                 Write to us

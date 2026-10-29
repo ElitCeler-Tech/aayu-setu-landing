@@ -4,9 +4,9 @@ import { HeaderFrame } from "./HeaderFrame";
 import { legal } from "@/data/legal";
 
 const nav = [
-  { label: "What it reads", href: "/#tracked" },
   { label: "How it works", href: "/#how" },
-  { label: "FAQs", href: "/#faq" },
+  { label: "Health intelligence", href: "/#intelligence" },
+  { label: "Ayu AI", href: "/#ai" },
   { label: "For doctors", href: "/for-doctors" },
   { label: "About us", href: "/about" },
 ];
@@ -44,7 +44,7 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-1 lg:flex">
           {nav.map((n) => (
             <a
               key={n.href}
@@ -58,14 +58,14 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
 
         <div className="ml-auto flex items-center gap-2">
           <a
-            href="/#contact"
+            href="/contact"
             className="hidden rounded-full px-4 py-2 text-[0.84rem] font-medium text-slate transition hover:text-navy group-data-[dark=true]:text-white/70 group-data-[dark=true]:hover:text-white sm:block"
           >
             Contact
           </a>
           <a
             href="/#download"
-            className="rounded-full bg-navy px-5 py-2.5 text-[0.82rem] font-semibold text-white transition hover:bg-ink group-data-[dark=true]:bg-cta group-data-[dark=true]:text-ink group-data-[dark=true]:hover:bg-cta-deep"
+            className="rounded-full bg-navy px-5 py-2.5 text-[0.82rem] font-semibold text-white transition hover:bg-ink group-data-[dark=true]:bg-cta-strong group-data-[dark=true]:hover:bg-amber-deep"
           >
             Get the app
           </a>
@@ -79,8 +79,10 @@ const footerCols = [
   {
     h: "Product",
     links: [
-      ["What it reads", "/#tracked"],
       ["How it works", "/#how"],
+      ["Health intelligence", "/#intelligence"],
+      ["Ayu AI", "/#ai"],
+      ["Who we serve", "/#who"],
       ["Download", "/#download"],
     ],
   },
@@ -88,8 +90,9 @@ const footerCols = [
     h: "Company",
     links: [
       ["About us", "/about"],
-      ["FAQs", "/#faq"],
-      ["Contact us", "/#contact"],
+      ["Privacy and safety", "/#trust"],
+      ["FAQs", "/faq"],
+      ["Contact us", "/contact"],
     ],
   },
 ];
@@ -145,7 +148,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a className="transition hover:text-white" href="/#contact">
+                <a className="transition hover:text-white" href="/contact">
                   Send us a message
                 </a>
               </li>

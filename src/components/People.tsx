@@ -9,15 +9,33 @@ import { Reveal } from "./Motion";
    the doctors page is live. Nobody is invented to fill the row. */
 export function People() {
   return (
-    <section id="team" className="border-b border-line bg-mist">
+    <section id="about" className="border-b border-line bg-mist">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
-        <h2 className="text-center font-display text-[clamp(2.4rem,5vw,3.75rem)] leading-[1.02] text-ink text-balance">
-          Built by people who <em className="text-amber">practise care</em>
-        </h2>
-        <p className="mx-auto mt-4 max-w-xl text-center text-[1.02rem] text-slate">
-          A pharmacist founder and a clinical advisor, keeping what the app
-          says about medicines and markers useful and safe.
-        </p>
+        <div className="grid gap-8 md:grid-cols-[1fr_1fr] md:items-end md:gap-14">
+          <div>
+            <p className="eyebrow text-amber">About Ayussetu</p>
+            <h2 className="mt-4 font-display text-[clamp(2.4rem,5vw,3.75rem)] leading-[1.02] text-ink text-balance">
+              Personal health intelligence, <em className="text-amber">built for India</em>
+            </h2>
+          </div>
+          <div className="text-[1rem] leading-relaxed text-slate">
+            <p>
+              Most families in India keep years of health records across paper
+              files, WhatsApp chats and inboxes, and almost none of it is read
+              together. Ayussetu exists to change that, so risk is seen while
+              there is still time to act.
+            </p>
+            <p className="mt-3">
+              It began with a pharmacist. Sandeep Konda brings twenty years of
+              pharmacy leadership, and the idea he took from building
+              iCancerCare: that the record, rather than the visit, is what
+              carries a patient's care.
+            </p>
+            <a href="/about" className="mt-5 inline-block font-semibold text-navy underline decoration-line-strong underline-offset-[6px] transition hover:decoration-navy">
+              Our vision &rarr;
+            </a>
+          </div>
+        </div>
 
         <div className="mt-14 grid gap-7 md:grid-cols-3">
           {team.map((m, i) => (

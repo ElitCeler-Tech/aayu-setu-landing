@@ -44,7 +44,7 @@ export default async function Founder({
           <div className="grid-ground grid-fade pointer-events-none absolute inset-0" />
           <div className="relative mx-auto max-w-5xl px-5 py-14 sm:px-8 md:py-20">
             <Link
-              href="/#team"
+              href="/#about"
               className="inline-flex items-center gap-1.5 text-[0.82rem] font-medium text-mute transition hover:text-navy"
             >
               <span>&larr;</span> The team

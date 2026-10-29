@@ -23,6 +23,10 @@
   --color-amber-wash: #FFF1E2;
   --color-cta: #FF8B0B;
   --color-cta-deep: #E07400;
+  /* Buttons that carry white text. The app's orange only reaches 2.35
+     against white text, so a button in it needs dark text; this deeper
+     orange reaches 4.67 and lets every button read white. */
+  --color-cta-strong: #B85A00;
 
   /* A lighter orange that holds up on the hero's navy. */
   --color-amber-light: #FFB15C;
@@ -221,6 +225,23 @@ body {
   .plan-tick { animation: plan-tick 6s ease-out infinite both; }
   .plan-tick-2 { animation-delay: 0.8s; }
   .plan-tick-3 { animation-delay: 1.6s; }
+}
+
+/* "How it works", step one: each source slides into the Ayussetu tile
+   in turn, and the tile gives a small beat as each one lands. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes gather {
+    0%, 30% { left: 0.25rem; opacity: 1; transform: none; }
+    50% { left: 52%; opacity: 0; transform: scale(0.7); }
+    51% { left: 0.25rem; opacity: 0; transform: none; }
+    70%, 100% { left: 0.25rem; opacity: 1; transform: none; }
+  }
+  .gather { animation: gather 5s ease-in-out infinite; }
+  .gather-2 { animation-delay: 1.25s; }
+  .gather-3 { animation-delay: 2.5s; }
+  .gather-4 { animation-delay: 3.75s; }
+  @keyframes gather-box { 0%, 34%, 100% { transform: none; } 42% { transform: scale(1.07); } }
+  .gather-box { animation: gather-box 1.25s ease-out infinite; }
 }
 
 /* The scan line passing over the report pages in "getting started". */
