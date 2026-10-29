@@ -190,6 +190,39 @@ body {
 .ticker-row { animation: ticker 70s linear infinite; }
 .ticker-row-rev { animation: ticker 84s linear infinite reverse; }
 
+/* "Getting started": boxes two and three play on the same six second
+   loop, so the row reads as one thing happening.
+
+   Box two: the line draws across the chart, the readings land one by
+   one, and the last turns green as the in range band lights up.
+   Box three: the plan arrives a line at a time and each is ticked off.
+
+   Without animation (reduced motion, or before it starts) everything
+   sits in its finished state, so nothing is ever missing. */
+.range-dot-3 { fill: #2E8A62; }
+.range-dot { transform-box: fill-box; transform-origin: center; }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes range-line { 0%, 6% { stroke-dashoffset: 100; opacity: 1; } 42%, 88% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+  .range-line { stroke-dasharray: 100; animation: range-line 6s ease-in-out infinite; }
+  @keyframes range-dot-1 { 0%, 4% { transform: scale(0); opacity: 1; } 10%, 88% { transform: scale(1); opacity: 1; } 100% { transform: scale(1); opacity: 0; } }
+  @keyframes range-dot-2 { 0%, 22% { transform: scale(0); opacity: 1; } 28%, 88% { transform: scale(1); opacity: 1; } 100% { transform: scale(1); opacity: 0; } }
+  @keyframes range-dot-3 { 0%, 38% { transform: scale(0); fill: #FF8B0B; opacity: 1; } 44% { transform: scale(1.25); fill: #FF8B0B; opacity: 1; } 52%, 88% { transform: scale(1); fill: #2E8A62; opacity: 1; } 100% { transform: scale(1); fill: #2E8A62; opacity: 0; } }
+  .range-dot-1 { animation: range-dot-1 6s ease-out infinite; }
+  .range-dot-2 { animation: range-dot-2 6s ease-out infinite; }
+  .range-dot-3 { animation: range-dot-3 6s ease-out infinite; }
+  @keyframes range-band { 0%, 46% { box-shadow: 0 0 0 0 rgba(46, 138, 98, 0); } 56% { box-shadow: 0 0 0 4px rgba(46, 138, 98, 0.18); } 88%, 100% { box-shadow: 0 0 0 0 rgba(46, 138, 98, 0); } }
+  .range-band { animation: range-band 6s ease-out infinite; }
+
+  @keyframes plan-row { 0% { opacity: 0; transform: translateY(10px); } 8%, 90% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .plan-row { animation: plan-row 6s ease-out infinite both; }
+  .plan-row-2 { animation-delay: 0.45s; }
+  .plan-row-3 { animation-delay: 0.9s; }
+  @keyframes plan-tick { 0%, 30% { opacity: 0; transform: scale(0.4); } 36%, 90% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+  .plan-tick { animation: plan-tick 6s ease-out infinite both; }
+  .plan-tick-2 { animation-delay: 0.8s; }
+  .plan-tick-3 { animation-delay: 1.6s; }
+}
+
 /* The scan line passing over the report pages in "getting started". */
 @keyframes scan { from { top: 1.4rem; } to { top: 10.5rem; } }
 .scan-line { animation: scan 2.8s ease-in-out infinite alternate; }

@@ -1,5 +1,3 @@
-import { Reveal } from "./Motion";
-
 /* How it works, in the three moves a patient actually makes: bring the
    paper in, have it read, act on it. Each card carries a small picture
    of that move, because "scan", "range" and "plan" are three shapes
@@ -40,7 +38,7 @@ function Range() {
             key={b}
             className={`eyebrow flex flex-1 items-center rounded-md border pl-2.5 !text-[0.56rem] ${
               b === "In range"
-                ? "border-[#BFE0CF] bg-sage-wash text-sage"
+                ? "range-band border-[#BFE0CF] bg-sage-wash text-sage"
                 : "border-line-strong bg-white text-mute"
             }`}
           >
@@ -48,13 +46,13 @@ function Range() {
           </div>
         ))}
       </div>
-      <svg viewBox="0 0 200 190" preserveAspectRatio="none" className="h-full w-full" aria-hidden="true">
+      <svg viewBox="0 0 200 190" preserveAspectRatio="xMidYMid meet" className="h-full w-full" aria-hidden="true">
         <line x1="0" y1="64" x2="200" y2="64" stroke="#E3E8EF" strokeDasharray="3 4" />
         <line x1="0" y1="126" x2="200" y2="126" stroke="#E3E8EF" strokeDasharray="3 4" />
-        <polyline points="30,22 100,48 170,96" fill="none" stroke="#C25E00" strokeWidth="1.6" vectorEffect="non-scaling-stroke" />
-        <circle cx="30" cy="22" r="5" fill="#FF8B0B" />
-        <circle cx="100" cy="48" r="5" fill="#FF8B0B" />
-        <circle cx="170" cy="96" r="6" fill="#2E8A62" />
+        <path className="range-line" pathLength={100} d="M30 22 L100 48 L170 96" fill="none" stroke="#C25E00" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        <circle className="range-dot range-dot-1" cx="30" cy="22" r="5" fill="#FF8B0B" />
+        <circle className="range-dot range-dot-2" cx="100" cy="48" r="5" fill="#FF8B0B" />
+        <circle className="range-dot range-dot-3" cx="170" cy="96" r="6" />
       </svg>
     </div>
   );
@@ -69,16 +67,21 @@ const planItems = [
 function Plan() {
   return (
     <div className="flex h-[12rem] flex-col justify-center gap-2 text-left">
-      {planItems.map((p) => (
-        <div key={p.t} className="flex items-center gap-3 rounded-2xl border border-line bg-white px-3 py-2.5">
+      {planItems.map((p, i) => (
+        <div key={p.t} className={`plan-row plan-row-${i + 1} flex items-center gap-3 rounded-2xl border border-line bg-white px-3 py-2.5`}>
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-[0.6rem] bg-navy">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF8B0B" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               {p.icon}
             </svg>
           </span>
-          <span>
+          <span className="flex-1">
             <span className="block text-[0.82rem] font-semibold text-ink">{p.t}</span>
             <span className="block text-[0.72rem] text-mute">{p.s}</span>
+          </span>
+          <span className={`plan-tick plan-tick-${i + 1} grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sage-wash text-sage`}>
+            <svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M6.2 11.8 2.9 8.5l1.1-1.1 2.2 2.2 5.6-5.6 1.1 1.1z" fill="currentColor" />
+            </svg>
           </span>
         </div>
       ))}
@@ -101,15 +104,15 @@ export function Steps() {
         </h2>
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">
-          {steps.map((s, i) => (
-            <Reveal key={s.n} delay={i * 110}>
+          {steps.map((s) => (
+            <div key={s.n}>
               <div className="flex h-full flex-col rounded-3xl border border-line bg-mist px-7 pb-8 pt-10 text-center">
                 <span className="font-mono text-[0.95rem] text-amber">{s.n}</span>
                 <h3 className="mt-2.5 font-display text-[2rem] leading-tight text-ink">{s.t}</h3>
                 <p className="mt-2.5 text-[0.9rem] text-slate">{s.b}</p>
                 <div className="mt-8">{s.art}</div>
               </div>
-            </Reveal>
+            </div>
           ))}
         </div>
 
