@@ -10,97 +10,70 @@ import Image from "next/image";
 import { team } from "@/data/team";
 import { Reveal, Parallax } from "./Motion";
 import { StoreButtons } from "./StoreButtons";
+import { ScoreRing } from "./ScoreRing";
 
 /* ------------------------------- hero -------------------------------- */
 
 const heroFigures = [
   { k: "29 markers", v: "Read from your reports" },
   { k: "One record", v: "Labs, prescriptions, vitals" },
-  { k: "Free", v: "On Android and iPhone" },
+  { k: "Free", v: "For patients, on Android and iPhone" },
 ];
 
-/* One dark room with one warm light in it. No phone and no screens:
-   the claim is the picture, and the figures underneath are the proof.
-   The disclaimer lives in the footer and the FAQ, not on the first
-   screen a person sees. */
+/* One dark room with one warm light in it, and the score ring standing
+   in that light. No phone and no screens: the claim and the instrument
+   are the picture, and the figures underneath are the proof. */
 export function Hero() {
   return (
     <section
       id="hero"
       className="hero-room relative flex min-h-[100svh] flex-col overflow-hidden text-white"
     >
-      {/* The heartbeat from the mark, drawn once through the light. */}
-      <svg
-        viewBox="0 0 1200 200"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-[44%] hidden h-[13rem] w-full md:block"
-      >
-        <defs>
-          <linearGradient id="pulse" x1="0" x2="1" y1="0" y2="0">
-            <stop offset="0%" stopColor="#FFB46A" stopOpacity="0" />
-            <stop offset="52%" stopColor="#FFB46A" stopOpacity="0" />
-            <stop offset="68%" stopColor="#FFB46A" stopOpacity="0.6" />
-            <stop offset="86%" stopColor="#FFB46A" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#FFB46A" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-        <path
-          className="pulse-line"
-          d="M0 120 H780 L806 120 L828 30 L856 180 L880 90 L900 120 H1200"
-          stroke="url(#pulse)"
-          strokeWidth="1.6"
-          fill="none"
-          vectorEffect="non-scaling-stroke"
-          strokeLinejoin="round"
-        />
-      </svg>
+      <div className="hero-leave relative mx-auto grid w-full max-w-6xl flex-1 items-center gap-10 px-5 pb-10 pt-32 sm:px-8 md:grid-cols-2 md:gap-6 md:pt-36">
+        <div>
+          <h1 className="rise font-display max-w-[11ch] text-[clamp(3.4rem,7.5vw,6rem)] leading-[0.95] tracking-[-0.015em] text-balance [animation-delay:170ms]">
+            Know where your health is{" "}
+            <em className="text-amber-light">heading.</em>
+          </h1>
 
-      <div className="relative mx-auto w-full max-w-6xl flex-1 px-5 pb-10 pt-32 sm:px-8 md:pt-36">
-        <p className="rise inline-block rounded-full border border-white/15 bg-white/[0.07] px-4 py-2 text-[0.8rem] font-medium text-white/85 [animation-delay:90ms]">
-          Free for patients
-        </p>
+          <p className="rise mt-6 max-w-[30rem] text-[1.05rem] leading-relaxed text-white/70 md:text-[1.15rem] [animation-delay:250ms]">
+            Every lab report and prescription you have, read together as one
+            record. Ayussetu shows the trend while there is still time to act
+            on it.
+          </p>
 
-        <h1 className="rise font-display mt-6 max-w-[11ch] text-[clamp(3.4rem,8vw,6.25rem)] leading-[0.95] tracking-[-0.015em] text-balance [animation-delay:170ms]">
-          Know where your health is{" "}
-          <em className="text-amber-light">heading.</em>
-        </h1>
+          {/* The app is the product, so the stores are the call to action:
+              the official badges, first thing under the promise, rather
+              than a button that only scrolls down to them. */}
+          <div className="rise mt-9 [animation-delay:330ms]">
+            <StoreButtons size="lg" />
+            <a
+              href="/for-doctors"
+              className="mt-5 inline-block text-[0.95rem] font-medium text-white/75 transition hover:text-white"
+            >
+              For doctors and clinics &rarr;
+            </a>
+          </div>
+        </div>
 
-        <p className="rise mt-6 max-w-[30rem] text-[1.05rem] leading-relaxed text-white/70 md:text-[1.18rem] [animation-delay:250ms]">
-          Every lab report and prescription you have, read together as one
-          record. Ayussetu shows the trend while there is still time to act
-          on it.
-        </p>
-
-        <div className="rise mt-9 flex flex-col items-stretch gap-5 sm:flex-row sm:items-center sm:gap-7 [animation-delay:330ms]">
-          <a
-            href="#download"
-            className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-cream px-8 py-[1.05rem] text-[0.95rem] font-semibold text-ink transition hover:bg-white"
-          >
-            Download the app
-            <span className="transition group-hover:translate-x-0.5">&rarr;</span>
-          </a>
-          <a
-            href="/for-doctors"
-            className="text-center text-[0.95rem] font-medium text-white/80 transition hover:text-white"
-          >
-            For doctors and clinics &rarr;
-          </a>
+        <div className="rise [animation-delay:300ms]">
+          <ScoreRing />
         </div>
       </div>
 
       {/* The figures on the floor of the room, as the reference sets them. */}
-      <div className="relative mx-auto w-full max-w-6xl px-5 pb-10 sm:px-8 md:pb-12">
-        <dl className="rise flex flex-col gap-4 sm:flex-row sm:gap-0 [animation-delay:430ms]">
+      <div className="hero-leave relative mx-auto w-full max-w-6xl px-5 pb-10 sm:px-8 md:pb-12">
+        {/* One ruled row on every width. On a phone the three figures
+            sit side by side under a hairline, not stacked behind a thick
+            coloured bar. */}
+        <dl className="rise grid grid-cols-3 border-t border-white/12 pt-5 sm:flex sm:border-0 sm:pt-0 [animation-delay:430ms]">
           {heroFigures.map((f, i) => (
             <div
               key={f.k}
-              className={`border-l-2 border-amber-light/60 pl-4 sm:border-l sm:border-white/20 sm:px-8 ${
-                i === 0 ? "sm:border-l-0 sm:pl-0" : ""
-              }`}
+              className={`px-3 sm:px-8 ${i === 0 ? "pl-0 sm:pl-0" : "border-l border-white/15 sm:border-white/20"}`}
             >
-              <dt className="text-[1.15rem] font-semibold md:text-[1.35rem]">{f.k}</dt>
-              <dd className="mt-1 text-[0.86rem] text-white/60 md:text-[0.92rem]">{f.v}</dd>
+              <dt className="text-[0.98rem] font-semibold leading-tight sm:text-[1.15rem] md:text-[1.35rem]">{f.k}</dt>
+              <dd className="mt-1 text-[0.74rem] leading-snug text-white/60 sm:text-[0.86rem] md:text-[0.92rem]">{f.v}</dd>
             </div>
           ))}
         </dl>
@@ -109,224 +82,6 @@ export function Hero() {
   );
 }
 
-
-/* ------------------------------ thesis ------------------------------- */
-
-const thesis = [
-  {
-    n: "Bring it in",
-    t: "Whatever you already have",
-    b: "Photograph a lab report, a prescription, a discharge summary. Years of paper goes in as fast as you can point a camera at it.",
-  },
-  {
-    n: "Read it",
-    t: "Markers out, ranges on",
-    b: "Ayussetu pulls the markers out of each one and places them against their ranges, beside the medicines you take and the readings you log.",
-  },
-  {
-    n: "See it coming",
-    t: "A direction, not a number",
-    b: "One LDL means little. LDL climbing across three reports is a direction, and a direction is something you can still act on.",
-  },
-];
-
-/* Each stage of the argument gets a picture, because "scattered",
-   "together" and "a trend" are three shapes before they are three
-   sentences.
-
-   All three sit in the same frame: one white card, one label in the
-   same place, the same height. They were three different objects
-   before, which made the row read as three unrelated ideas. */
-function ArtFrame({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="rounded-2xl border border-line bg-white p-4">
-      <p className="eyebrow text-mute">
-        {label}
-      </p>
-      <div className="relative mt-3 h-[9.5rem] w-full">{children}</div>
-    </div>
-  );
-}
-
-function Scattered() {
-  const bits = [
-    { t: "Lab, March", x: "0%", y: "4%", r: "-7deg" },
-    { t: "Prescription", x: "46%", y: "0%", r: "5deg" },
-    { t: "Sugar, unwritten", x: "14%", y: "38%", r: "3deg" },
-    { t: "Discharge summary", x: "40%", y: "60%", r: "-4deg" },
-    { t: "Lab, August", x: "0%", y: "76%", r: "6deg" },
-  ];
-  return (
-    <ArtFrame label="Five places, one person">
-      {bits.map((b) => (
-        <span
-          key={b.t}
-          className="absolute rounded-lg border border-line bg-mist px-2.5 py-1.5 text-[0.62rem] font-medium text-slate shadow-[0_6px_14px_-10px_rgba(22,35,61,0.6)]"
-          style={{ left: b.x, top: b.y, transform: `rotate(${b.r})` }}
-        >
-          {b.t}
-        </span>
-      ))}
-    </ArtFrame>
-  );
-}
-
-function Stacked() {
-  return (
-    <ArtFrame label="One record">
-      {[2, 1].map((i) => (
-        <span
-          key={i}
-          className="absolute left-1/2 w-[78%] -translate-x-1/2 rounded-xl border border-line bg-mist"
-          style={{
-            top: `${i * 7}px`,
-            bottom: `${-i * 7}px`,
-            opacity: 1 - i * 0.32,
-          }}
-        />
-      ))}
-      <div className="absolute inset-x-[11%] inset-y-0 flex flex-col justify-between rounded-xl border border-line bg-mist p-3">
-        {[
-          ["LDL", "164 mg/dL"],
-          ["HbA1c", "6.1 %"],
-          ["Metformin", "500mg, daily"],
-        ].map(([k, v], i) => (
-          <div
-            key={k}
-            className={`flex items-baseline justify-between ${
-              i < 2 ? "border-b border-line pb-2" : ""
-            }`}
-          >
-            <span className="text-[0.64rem] font-medium text-navy">{k}</span>
-            <span className="text-[0.6rem] tabular-nums text-slate">{v}</span>
-          </div>
-        ))}
-      </div>
-    </ArtFrame>
-  );
-}
-
-function Trend() {
-  /* Markers sit in HTML, not in the SVG: the plot is stretched to the frame,
-     which would turn an SVG circle into an oval. */
-  const points = [
-    { left: "8%", top: "75%" },
-    { left: "50%", top: "53.8%" },
-    { left: "92%", top: "21.2%" },
-  ];
-  return (
-    <ArtFrame label="LDL across three reports">
-      <div className="absolute inset-x-0 top-0 h-[calc(100%-1.15rem)]">
-        <svg
-          viewBox="0 0 200 104"
-          preserveAspectRatio="none"
-          className="h-full w-full"
-          aria-hidden="true"
-        >
-          <defs>
-            <linearGradient id="trendfill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#FF8B0B" stopOpacity="0.2" />
-              <stop offset="100%" stopColor="#FF8B0B" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          {[22, 50, 78].map((y) => (
-            <line
-              key={y}
-              x1="0"
-              x2="200"
-              y1={y}
-              y2={y}
-              stroke="#EDF0F5"
-              strokeWidth="1"
-              vectorEffect="non-scaling-stroke"
-            />
-          ))}
-          <path
-            d="M0 84 L16 78 L100 56 L184 22 L200 16 L200 104 L0 104 Z"
-            fill="url(#trendfill)"
-          />
-          <path
-            d="M0 84 L16 78 L100 56 L184 22 L200 16"
-            stroke="#FF8B0B"
-            strokeWidth="2.4"
-            vectorEffect="non-scaling-stroke"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-        {points.map((pt) => (
-          <span
-            key={pt.left}
-            aria-hidden="true"
-            className="absolute h-[0.55rem] w-[0.55rem] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-amber bg-white"
-            style={{ left: pt.left, top: pt.top }}
-          />
-        ))}
-      </div>
-      <div className="absolute inset-x-0 bottom-0 flex justify-between text-[0.58rem] text-mute">
-        <span>Mar 128</span>
-        <span>Jun 146</span>
-        <span className="font-semibold text-amber-deep">Oct 164</span>
-      </div>
-    </ArtFrame>
-  );
-}
-
-const thesisArt = [<Scattered key="a" />, <Stacked key="b" />, <Trend key="c" />];
-
-export function Thesis() {
-  return (
-    <section id="how" className="relative border-b border-line bg-paper">
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[30rem] w-[60rem] -translate-x-1/2 rounded-full bg-navy/[0.04] blur-[130px]" />
-      <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
-        <Reveal>
-          <div className="max-w-2xl">
-            <p className="eyebrow text-amber-deep">
-              How Ayussetu works
-            </p>
-            <h2 className="mt-3 font-display text-[clamp(1.9rem,4.4vw,2.7rem)] leading-tight text-ink text-balance">
-              Prevention needs the whole picture, not the latest page
-            </h2>
-          </div>
-        </Reveal>
-
-        <div className="mt-16 grid gap-10 md:grid-cols-3 md:gap-8">
-          {thesis.map((t, i) => (
-            <Reveal key={t.n} delay={i * 130}>
-              <article className="relative flex h-full flex-col">
-                {/* the picture first: scattered, then stacked, then a line */}
-                {thesisArt[i]}
-
-                <div className="mt-6 flex items-center gap-3">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-navy font-display text-[0.7rem] text-white">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="eyebrow text-mute">
-                    {t.n}
-                  </span>
-                </div>
-
-                <h3 className="mt-3 font-display text-[1.25rem] leading-snug text-navy text-balance">
-                  {t.t}
-                </h3>
-                <p className="mt-2.5 text-[0.9rem] leading-relaxed text-slate">
-                  {t.b}
-                </p>
-              </article>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ----------------------------- features ------------------------------ */
 
@@ -455,8 +210,8 @@ const marker = {
   tag: "Heart",
   w: "The cholesterol that collects in artery walls. It is watched over years rather than weeks, because the damage is cumulative and quiet.",
   history: [
-    { d: "March", v: "128", s: "In range" },
-    { d: "June", v: "146", s: "Raised" },
+    { d: "March", v: "128", s: "Near optimal" },
+    { d: "June", v: "146", s: "Borderline" },
     { d: "October", v: "164", s: "High" },
   ],
   verdict: "Up 36 mg/dL since March, across three separate reports.",
@@ -639,11 +394,7 @@ export function Abha() {
 
             <div className="relative grid gap-12 md:grid-cols-[1.05fr_0.95fr] md:items-center md:gap-14">
               <div>
-                <p className="inline-flex items-center gap-2 rounded-full border border-amber/30 bg-amber/10 px-3 py-1.5 eyebrow text-amber">
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber/70" />
-                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber" />
-                  </span>
+                <p className="eyebrow text-amber-light">
                   Planned, not yet live
                 </p>
                 <h2 className="mt-5 font-display text-[clamp(1.95rem,4.2vw,2.85rem)] leading-tight text-balance">
@@ -1007,7 +758,7 @@ export function Download() {
             tools of their own.
           </p>
           <div className="mt-8 flex justify-center">
-            <StoreButtons tone="dark" />
+            <StoreButtons size="lg" />
           </div>
         </div>
       </div>

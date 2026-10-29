@@ -15,84 +15,82 @@ const rows: [string, boolean][] = [
   ["Consultations by video or by voice", false],
 ];
 
-function Tick({ on }: { on: boolean }) {
-  return on ? (
-    <svg width="17" height="17" viewBox="0 0 16 16" aria-hidden="true">
-      <path
-        d="M6.2 11.8 2.9 8.5l1.1-1.1 2.2 2.2 5.6-5.6 1.1 1.1z"
-        fill="currentColor"
-      />
-    </svg>
-  ) : (
-    <svg width="17" height="17" viewBox="0 0 16 16" aria-hidden="true">
-      <path d="M4 7.3h8v1.4H4z" fill="currentColor" />
-    </svg>
+/* A filled tick on the Ayussetu column, an outlined cross for the
+   folder: the reference's own marks, which read at a glance from across
+   the table. */
+function Yes({ dark = false }: { dark?: boolean }) {
+  return (
+    <span
+      className={`inline-grid h-6 w-6 place-items-center rounded-full ${
+        dark ? "bg-white text-navy" : "text-sage"
+      }`}
+    >
+      <svg width="13" height="13" viewBox="0 0 16 16" aria-label="Yes">
+        <path d="M6.2 11.8 2.9 8.5l1.1-1.1 2.2 2.2 5.6-5.6 1.1 1.1z" fill="currentColor" />
+      </svg>
+    </span>
+  );
+}
+
+function No() {
+  return (
+    <span className="inline-grid h-6 w-6 place-items-center rounded-full border-[1.5px] border-mute text-mute">
+      <svg width="9" height="9" viewBox="0 0 10 10" aria-label="No">
+        <path d="m1.5 1.5 7 7m0-7-7 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    </span>
   );
 }
 
 export function Compare() {
+  const cols = "grid-cols-[1fr_4.75rem_4.75rem] sm:grid-cols-[1fr_11rem_11rem] md:grid-cols-[1fr_12.5rem_12.5rem]";
   return (
     <section id="compare" className="border-b border-line bg-paper">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
-        <div className="max-w-2xl">
-          <p className="eyebrow text-mute">
-            The difference
-          </p>
-          <h2 className="mt-3 font-display text-[clamp(2.15rem,5vw,3.2rem)] leading-tight text-ink text-balance">
-            Not your average folder of reports
-          </h2>
-        </div>
+        <h2 className="text-center font-display text-[clamp(2.4rem,5vw,3.75rem)] leading-[1.02] text-ink text-balance">
+          <em className="text-amber">Not your average</em> folder of reports
+        </h2>
 
-        <div className="mt-12 overflow-hidden rounded-[1.5rem] border border-line">
-          <div className="grid grid-cols-[1fr_4.5rem_5.5rem] sm:grid-cols-[1fr_11rem_12rem]">
-            {/* heads */}
-            <div className="border-b border-line bg-white px-5 py-5 sm:px-7" />
-            <div className="border-b border-l border-line bg-white px-1.5 py-5 text-center sm:px-3">
-              <span className="text-[0.7rem] font-semibold leading-tight text-mute sm:text-[0.78rem]">
-                The folder
-                <span className="block font-normal">you keep now</span>
+        <div className="relative mx-auto mt-14 max-w-5xl">
+          <div className={`relative z-20 grid ${cols} px-3.5 sm:px-9`}>
+            <div />
+            <div className="flex h-[4.6rem] items-center justify-center gap-2 text-white">
+              <span className="grid h-7 w-7 place-items-center overflow-hidden rounded-[0.45rem] bg-white">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/ayussetu-logo-white.png" alt="" width={28} height={28} />
               </span>
+              <span className="hidden text-[1.05rem] font-semibold sm:inline">Ayussetu</span>
             </div>
-            <div className="border-b border-line bg-navy px-1.5 py-5 text-center sm:px-3">
-              <span className="text-[0.74rem] font-semibold text-white sm:text-[0.86rem]">
-                Ayussetu
-              </span>
+            <div className="flex items-end justify-center pb-5 text-center text-[0.72rem] font-semibold text-navy sm:text-[0.84rem]">
+              A folder of reports
             </div>
+          </div>
 
-            {rows.map(([label, folder], i) => {
-              const last = i === rows.length - 1;
-              return (
-                <div key={label} className="contents">
-                  <div
-                    className={`bg-white px-4 py-4 text-[0.86rem] leading-snug text-navy sm:px-7 sm:text-[0.88rem] ${
-                      last ? "" : "border-b border-line"
-                    }`}
-                  >
-                    {label}
-                  </div>
-                  <div
-                    className={`flex items-center justify-center border-l border-line bg-white ${
-                      folder ? "text-sage" : "text-faint"
-                    } ${last ? "" : "border-b"}`}
-                  >
-                    <Tick on={folder} />
-                  </div>
-                  <div
-                    className={`flex items-center justify-center bg-navy text-white ${
-                      last ? "" : "border-b border-white/10"
-                    }`}
-                  >
-                    <Tick on />
-                  </div>
-                </div>
-              );
-            })}
+          <div className="rounded-3xl border border-line bg-mist px-3.5 sm:px-9">
+            {rows.map(([label, folder], i) => (
+              <div
+                key={label}
+                className={`grid min-h-[3.75rem] items-center py-2.5 ${cols} ${
+                  i < rows.length - 1 ? "border-b border-line" : ""
+                }`}
+              >
+                <div className="relative z-20 pr-3 text-[0.86rem] leading-snug text-navy sm:text-[0.95rem]">{label}</div>
+                <div className="relative z-20 text-center"><Yes dark /></div>
+                <div className="relative z-20 text-center">{folder ? <Yes /> : <No />}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* The Ayussetu column stands proud of the table, top and
+              bottom, the way the reference lifts its own. */}
+          <div className="pointer-events-none absolute inset-0 z-10 px-3.5 sm:px-9">
+            <div className={`grid h-full ${cols}`}>
+              <div />
+              <div className="-mb-7 rounded-3xl bg-[linear-gradient(170deg,#24385E_0%,#1F3050_45%,#3B3A4E_80%,#8A5A2E_100%)] shadow-[0_30px_60px_-28px_rgba(18,29,51,0.55)]" />
+              <div />
+            </div>
           </div>
         </div>
-
-        <p className="mt-5 text-[0.8rem] leading-relaxed text-mute">
-          A folder keeps the paper. The rest of this is the reading.
-        </p>
       </div>
     </section>
   );

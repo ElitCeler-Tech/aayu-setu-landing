@@ -1,39 +1,34 @@
 @import "tailwindcss";
 
-/* Three grounds: warm paper, the cream that sits on it, and the navy the
-   apps draw every card in. Nothing else is a background. */
+/* Ayussetu's own colours and nothing borrowed: white, one cool grey for
+   anything raised off it, and the app's navy and orange. The warm cream
+   the reference sits on read as somebody else's brand. */
 @theme {
-  /* Warm paper, not white. The reference sits on a beige and keeps a
-     deeper cream for anything raised off it, which is most of why that
-     page reads as printed matter and a white one reads as a template.
-     The navy and the orange are Ayussetu's own, so the structure is
-     borrowed and the colour is not. */
-  --color-paper: #FBF7F0;
-  --color-mist: #F3EDE2;
-  --color-line: #E4DACA;
-  --color-line-strong: #D6C9B4;
+  --color-paper: #FFFFFF;
+  --color-mist: #F5F7FA;
+  --color-line: #E3E8EF;
+  --color-line-strong: #D5DCE6;
 
-  --color-ink: #16233D;
+  --color-ink: #121D33;
   --color-navy: #1F3050;
-  --color-slate: #4D5260;
-  --color-mute: #807C76;
-  --color-faint: #ADA79D;
+  --color-slate: #4A5468;
+  --color-mute: #7A8496;
+  --color-faint: #A9B1BE;
 
-  /* Burnt orange carries the marks and the eyebrows; the app's brighter
-     orange is kept back for the one button that matters on a screen. */
-  --color-amber: #C25A1E;
-  --color-amber-deep: #9E4614;
-  --color-amber-wash: #F6E7DA;
+  /* The app's orange, deepened for anything small set on white so it
+     still reads; the full orange is kept for buttons and for marks on
+     navy. */
+  --color-amber: #C25E00;
+  --color-amber-deep: #A54F00;
+  --color-amber-wash: #FFF1E2;
   --color-cta: #FF8B0B;
   --color-cta-deep: #E07400;
 
-  /* The hero's dark room: a lighter orange that holds up on navy, and
-     the cream its button and the header's button take. */
-  --color-amber-light: #FFB46A;
-  --color-cream: #F6EEE2;
+  /* A lighter orange that holds up on the hero's navy. */
+  --color-amber-light: #FFB15C;
 
-  --color-sage: #2F6B52;
-  --color-sage-wash: #E7EFEA;
+  --color-sage: #2E8A62;
+  --color-sage-wash: #E5F3EC;
 
   --font-display: var(--font-serif), Georgia, serif;
   --font-sans: var(--font-sans-face), system-ui, sans-serif;
@@ -163,35 +158,73 @@ body {
 }
 
 
-/* The hero's dark room. Two warm lights low on the right, a cool lift
-   top left, and grain over all of it so the gradients read as light
-   rather than as CSS. */
+/* The hero's dark room. One warm light behind the score ring, a cool
+   lift top left, and grain over all of it so the gradients read as
+   light rather than as CSS. */
 .hero-room {
   background:
-    radial-gradient(48rem 34rem at 76% 64%, rgba(255, 139, 11, 0.26), rgba(255, 139, 11, 0) 70%),
-    radial-gradient(60rem 44rem at 84% 112%, rgba(194, 90, 30, 0.34), rgba(194, 90, 30, 0) 70%),
-    radial-gradient(76rem 50rem at 8% -12%, #24375c, rgba(36, 55, 92, 0) 60%),
-    #0e1729;
+    radial-gradient(40rem 32rem at 74% 50%, rgba(255, 139, 11, 0.22), rgba(255, 139, 11, 0) 70%),
+    radial-gradient(70rem 48rem at 6% -10%, #263a63, rgba(38, 58, 99, 0) 60%),
+    #0d1628;
 }
 .hero-room::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.09;
+  opacity: 0.08;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* The heartbeat draws itself once, after the headline has landed. */
-@keyframes pulse-draw {
-  from { stroke-dashoffset: 3200; }
-  to { stroke-dashoffset: 0; }
+/* The ring: ticks turn once every two and a half minutes, and the
+   score arc draws itself once on arrival. */
+@keyframes ring-spin { to { transform: rotate(360deg); } }
+.ring-spin { transform-origin: 270px 270px; animation: ring-spin 140s linear infinite; }
+@keyframes arc-draw { from { stroke-dashoffset: 760; } to { stroke-dashoffset: 0; } }
+.score-arc { animation: arc-draw 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both; }
+
+/* Moving from one section to the next.
+
+   Leaving the hero, its content drifts up and fades as the room
+   scrolls away, so the page reads as one movement instead of a cut
+   from dark to white. Every section after it rises into place as it
+   enters. Both are driven by the scroll position itself, not by
+   script, and both are skipped where the browser cannot do that or
+   the reader has asked for less motion: the page is simply static. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes hero-leave {
+      to { opacity: 0.15; transform: translateY(-6vh) scale(0.985); }
+    }
+    .hero-leave {
+      animation: hero-leave linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 80%;
+    }
+
+    @keyframes section-enter {
+      from { opacity: 0; transform: translateY(3.5rem); }
+      to { opacity: 1; transform: none; }
+    }
+    main > section:not(#hero) > * {
+      animation: section-enter linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+  }
 }
-.pulse-line {
-  stroke-dasharray: 3200;
-  animation: pulse-draw 2.4s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both;
-}
+
+/* The conditions drifting past the chart in "follow the markers". The
+   row is doubled, so moving it by half its width loops without a seam. */
+@keyframes ticker { to { transform: translateX(-50%); } }
+.ticker-row { animation: ticker 70s linear infinite; }
+.ticker-row-rev { animation: ticker 84s linear infinite reverse; }
+
+/* The scan line passing over the report pages in "getting started". */
+@keyframes scan { from { top: 1.4rem; } to { top: 10.5rem; } }
+.scan-line { animation: scan 2.8s ease-in-out infinite alternate; }
+
 @media (prefers-reduced-motion: reduce) {
-  .pulse-line { animation: none; stroke-dasharray: none; }
+  .ring-spin, .score-arc, .ticker-row, .ticker-row-rev, .scan-line { animation: none; }
 }

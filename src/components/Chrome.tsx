@@ -11,18 +11,17 @@ const nav = [
   { label: "About us", href: "/about" },
 ];
 
-/* The mark in a rounded square, exactly as it sits on a home screen.
-   The outline version disappeared at 30px and the bare heart carries a
-   white ECG line that vanishes on a white header; contained, it reads
-   at any size and matches the icon somebody taps afterwards. */
+/* The doctor app's mark: the orange heart on a white tile. White reads
+   on the dark hero without help; on the white header a hairline keeps
+   the tile from dissolving into the page. */
 function Mark({ size = 34 }: { size?: number }) {
   return (
     <span
-      className="inline-flex shrink-0 items-center justify-center overflow-hidden rounded-[0.65rem] shadow-[0_2px_8px_-2px_rgba(22,35,61,0.4)] group-data-[dark=true]:ring-1 group-data-[dark=true]:ring-white/25"
+      className="inline-flex shrink-0 items-center justify-center overflow-hidden rounded-[0.65rem] bg-white shadow-[0_2px_8px_-2px_rgba(22,35,61,0.35)] ring-1 ring-line group-data-[dark=true]:ring-white/20"
       style={{ width: size, height: size }}
     >
       <Image
-        src="/ayussetu-icon.png"
+        src="/ayussetu-logo-white.png"
         alt=""
         width={size}
         height={size}
@@ -66,7 +65,7 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
           </a>
           <a
             href="/#download"
-            className="rounded-full bg-navy px-5 py-2.5 text-[0.82rem] font-semibold text-white transition hover:bg-ink group-data-[dark=true]:bg-cream group-data-[dark=true]:text-ink group-data-[dark=true]:hover:bg-white"
+            className="rounded-full bg-navy px-5 py-2.5 text-[0.82rem] font-semibold text-white transition hover:bg-ink group-data-[dark=true]:bg-cta group-data-[dark=true]:text-ink group-data-[dark=true]:hover:bg-cta-deep"
           >
             Get the app
           </a>

@@ -2,11 +2,13 @@ import { Header, Footer } from "@/components/Chrome";
 import { Splash } from "@/components/Splash";
 import { Contact } from "@/components/Contact";
 import { Faq } from "@/components/Faq";
-import { Reads } from "@/components/Reads";
+import { Steps } from "@/components/Steps";
+import { Tracked } from "@/components/Tracked";
+import { AnyLab } from "@/components/AnyLab";
+import { People } from "@/components/People";
 import { Compare } from "@/components/Compare";
 import {
   Hero,
-  Thesis,
   Features,
   Markers,
   Practice,
@@ -22,12 +24,14 @@ export default function Home() {
       <Header overlay />
       <main>
         <Hero />
-        <Thesis />
-        <Reads />
+        <Steps />
+        <Tracked />
         <Markers />
         <Features />
-        <Practice />
+        <AnyLab />
         <Compare />
+        <Practice />
+        <People />
         <Abha />
         <Security />
         <Download />
