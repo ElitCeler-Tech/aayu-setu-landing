@@ -53,8 +53,7 @@ function Yearly() {
             {Array.from({ length: y.n }).map((_, k) => (
               <span
                 key={k}
-                style={{ animationDelay: `${i * 0.45 + k * 0.08}s` }}
-                className={`stack-in h-[0.7rem] rounded-[0.3rem] border ${
+                className={`seq seq-${i * 2 + (k >= 3 ? 1 : 0)} h-[0.7rem] rounded-[0.3rem] border ${
                   i === years.length - 1 && k === y.n - 1 ? "border-cta bg-amber-wash" : "border-line-strong bg-white"
                 }`}
               />
@@ -86,7 +85,7 @@ function Trend() {
         <rect x="0" y={yOf(5.7)} width="220" height={150 - yOf(5.7)} fill="#E5F3EC" rx="4" />
         <path className="draw-line" pathLength={100} d={`M${pts.map((p) => `${p.x} ${yOf(p.v)}`).join(" L")}`} fill="none" stroke="#1F3050" strokeWidth="1.8" strokeLinejoin="round" />
         {pts.map((p, i) => (
-          <g key={p.y} className="pop-in" style={{ animationDelay: `${0.2 + i * 0.5}s` }}>
+          <g key={p.y} className={`seq seq-${i * 2} seq-pop`}>
             <circle cx={p.x} cy={yOf(p.v)} r={i === pts.length - 1 ? 5 : 4} fill={p.v >= 5.7 ? "#FF8B0B" : "#2E8A62"} />
             <text x={p.x} y={yOf(p.v) - 9} fontSize="9" textAnchor="middle" fill="#4A5468" fontFamily="var(--font-mono)">{p.v.toFixed(1)}</text>
             <text x={p.x} y="166" fontSize="9" textAnchor="middle" fill="#7A8496">{p.y}</text>
@@ -108,13 +107,12 @@ function Attention() {
   return (
     <div className="flex h-[10rem] flex-col justify-center gap-1.5">
       {flags.map((f, i) => (
-        <div key={f.k} style={{ animationDelay: `${i * 0.35}s` }} className="row-in flex items-center justify-between rounded-xl border border-line bg-white px-3 py-1.5">
+        <div key={f.k} className={`seq seq-${i} seq-slide flex items-center justify-between rounded-xl border border-line bg-white px-3 py-1.5`}>
           <span className="text-[0.78rem] font-medium text-ink">{f.k}</span>
           <span className="flex items-center gap-2.5">
             <span className="font-mono text-[0.72rem] text-slate">{f.v}</span>
             <span
-              style={{ animationDelay: `${1.6 + i * 0.3}s` }}
-              className={`pop-in rounded-full px-2 py-0.5 text-[0.62rem] font-semibold ${
+              className={`seq seq-${5 + i} seq-pop rounded-full px-2 py-0.5 text-[0.62rem] font-semibold ${
                 f.hot ? "bg-amber-wash text-amber" : f.ok ? "bg-sage-wash text-sage" : "bg-mist text-slate"
               }`}
             >
@@ -165,12 +163,12 @@ function Progress() {
       <div className="mt-3 flex items-baseline gap-3">
         <span className="strike-in font-display text-[2.2rem] leading-none text-mute decoration-1">210</span>
         <span className="text-[1.1rem] text-faint">&rarr;</span>
-        <span className="pop-in font-display text-[2.2rem] leading-none text-sage" style={{ animationDelay: "1.2s" }}>168</span>
+        <span className="seq seq-4 seq-pop font-display text-[2.2rem] leading-none text-sage">168</span>
         <span className="text-[0.72rem] text-mute">mg/dL</span>
       </div>
       <svg viewBox="0 0 220 50" className="mt-4 h-12 w-full" aria-hidden="true">
         <path className="draw-line" pathLength={100} d="M4 10 L50 14 L96 22 L142 30 L188 36 L216 38" fill="none" stroke="#2E8A62" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        <circle className="pop-in" style={{ animationDelay: "2.4s" }} cx="216" cy="38" r="4" fill="#2E8A62" />
+        <circle className="seq seq-9 seq-pop" cx="216" cy="38" r="4" fill="#2E8A62" />
       </svg>
       <p className="mt-1 text-[0.72rem] text-mute">Three reports since the evening walks began.</p>
     </div>

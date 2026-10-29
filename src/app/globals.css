@@ -274,6 +274,45 @@ body {
   .swap-new { animation: swap-new 8s ease-out infinite both; }
 }
 
+/* ===== How it works: cards two, three, four and six ===== */
+/* Every piece in a card runs on the same seven second timeline: it
+   waits for its stage, arrives, holds, and everything clears together
+   at the end, so a card never drifts out of step with itself. seq-0 to
+   seq-9 are the stages, six percent apart. Without motion they simply
+   sit finished. */
+.seq { --seq-from: translateY(6px); }
+.seq-pop { --seq-from: scale(0.6); transform-box: fill-box; transform-origin: center; }
+.seq-slide { --seq-from: translateX(-10px); }
+.strike-in { text-decoration-line: line-through; }
+@media (prefers-reduced-motion: no-preference) {
+  .seq { animation-duration: 7s; animation-timing-function: ease-out; animation-iteration-count: infinite; animation-fill-mode: both; }
+  @keyframes seq-0 { 0%, 2% { opacity: 0; transform: var(--seq-from); } 8%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-0 { animation-name: seq-0; }
+  @keyframes seq-1 { 0%, 8% { opacity: 0; transform: var(--seq-from); } 14%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-1 { animation-name: seq-1; }
+  @keyframes seq-2 { 0%, 14% { opacity: 0; transform: var(--seq-from); } 20%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-2 { animation-name: seq-2; }
+  @keyframes seq-3 { 0%, 20% { opacity: 0; transform: var(--seq-from); } 26%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-3 { animation-name: seq-3; }
+  @keyframes seq-4 { 0%, 26% { opacity: 0; transform: var(--seq-from); } 32%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-4 { animation-name: seq-4; }
+  @keyframes seq-5 { 0%, 32% { opacity: 0; transform: var(--seq-from); } 38%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-5 { animation-name: seq-5; }
+  @keyframes seq-6 { 0%, 38% { opacity: 0; transform: var(--seq-from); } 44%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-6 { animation-name: seq-6; }
+  @keyframes seq-7 { 0%, 44% { opacity: 0; transform: var(--seq-from); } 50%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-7 { animation-name: seq-7; }
+  @keyframes seq-8 { 0%, 50% { opacity: 0; transform: var(--seq-from); } 56%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-8 { animation-name: seq-8; }
+  @keyframes seq-9 { 0%, 56% { opacity: 0; transform: var(--seq-from); } 62%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-9 { animation-name: seq-9; }
+  @keyframes draw-line { 0%, 2% { stroke-dashoffset: 100; opacity: 1; } 58%, 88% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+  .draw-line { stroke-dasharray: 100; animation: draw-line 7s ease-in-out infinite both; }
+  @keyframes strike-in { 0%, 10% { text-decoration-color: transparent; color: var(--color-ink); opacity: 1; } 20%, 88% { text-decoration-color: currentColor; color: var(--color-mute); opacity: 1; } 100% { opacity: 0; } }
+  .strike-in { animation: strike-in 7s ease-out infinite both; }
+}
+/* ===== end How it works ===== */
+
 /* The scan line passing over the report pages in "getting started". */
 @keyframes scan { from { top: 1.4rem; } to { top: 10.5rem; } }
 .scan-line { animation: scan 2.8s ease-in-out infinite alternate; }
