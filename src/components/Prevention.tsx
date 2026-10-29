@@ -1,71 +1,84 @@
-/* Personalised prevention, the deck's key differentiator, shown as the
-   difference itself: the advice everybody gets, against what Ayussetu
-   aims to suggest for one person, with the reasons it changed. Worded
-   as an aim, because adapting to outcomes is the direction, not a claim
-   about results. */
+/* Personalised prevention, the deck's key differentiator. Each row is
+   one piece of advice everybody gets, struck through, turning into the
+   version set for one person, with the reason it changed. Underneath,
+   the loop that keeps it personal: what you prefer, what you keep
+   doing, what your readings show. Worded as an aim, because adapting
+   to outcomes is the direction, not a claim about results.
 
-const generic = ["Exercise 30 minutes a day", "Eat less sugar", "Get your sugar checked"];
+   All of it comes from the two lists below. */
 
-const personal = [
+const swaps = [
   {
-    t: "A 20 minute walk after dinner",
-    why: ["You said evenings work best", "You logged 12 of 15 last month"],
+    generic: "Exercise 30 minutes a day",
+    personal: "Walk 20 minutes after dinner",
+    why: "You said evenings work best",
   },
   {
-    t: "Swap the evening chai biscuit, not the chai",
-    why: ["Your readings rise most after dinner"],
+    generic: "Cut down on sugar",
+    personal: "Swap the evening biscuit, keep the chai",
+    why: "Your readings rise most after dinner",
   },
   {
-    t: "Retest HbA1c in March",
-    why: ["Three months after your last report", "Your doctor asked to see it"],
+    generic: "Get your sugar checked",
+    personal: "Retest HbA1c in January",
+    why: "Three months after your last report",
   },
+];
+
+const loop = [
+  { t: "What you prefer", b: "Times, habits and food you tell us suit you." },
+  { t: "What you keep doing", b: "The steps you log, and the ones you skip." },
+  { t: "What your readings show", b: "Whether the numbers move in return." },
 ];
 
 export function Prevention() {
   return (
     <section id="prevention" className="hero-room relative overflow-hidden border-b border-line text-white">
-      <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
+      <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-24">
         <div className="max-w-2xl">
           <p className="eyebrow text-amber-light">Personalised prevention</p>
           <h2 className="mt-4 font-display text-[clamp(2.4rem,5vw,3.75rem)] leading-[1.02] text-balance">
             Advice that fits <em className="text-amber-light">one person</em>
           </h2>
-          <p className="mt-5 text-[1.02rem] leading-relaxed text-white/65">
-            Ayussetu aims to move past generic advice, toward actions that adapt
-            to what you prefer, what you actually keep doing, and what your
-            readings show in return.
+          <p className="mt-4 text-[1rem] leading-relaxed text-white/65">
+            Ayussetu aims to move past advice written for everybody, toward
+            steps that adapt to you.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-[0.8fr_1.2fr]">
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-            <p className="eyebrow text-white/40">Advice for everybody</p>
-            <ul className="mt-5 space-y-3">
-              {generic.map((g) => (
-                <li key={g} className="rounded-2xl border border-white/10 px-4 py-3.5 text-[0.92rem] text-white/45">
-                  {g}
-                </li>
-              ))}
-            </ul>
-          </div>
+        <ul className="mt-12 space-y-3">
+          {swaps.map((s, i) => (
+            <li
+              key={s.generic}
+              className="grid items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] p-3 md:grid-cols-[1fr_auto_1.3fr] md:gap-5 md:p-4"
+            >
+              <span className="swap-old px-2 text-[0.95rem] text-white/50" style={{ animationDelay: `${i * 0.6}s` }}>
+                {s.generic}
+              </span>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFB15C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="hidden md:block" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+              <span
+                className="swap-new flex flex-wrap items-center justify-between gap-2 rounded-xl bg-white px-4 py-3 text-ink"
+                style={{ animationDelay: `${i * 0.6}s` }}
+              >
+                <span className="text-[0.95rem] font-semibold">{s.personal}</span>
+                <span className="rounded-full bg-amber-wash px-2.5 py-1 text-[0.7rem] text-amber-deep">{s.why}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
 
-          <div className="rounded-3xl border border-cta/40 bg-white/[0.06] p-6">
-            <p className="eyebrow text-amber-light">Your plan</p>
-            <ul className="mt-5 space-y-3">
-              {personal.map((p) => (
-                <li key={p.t} className="rounded-2xl bg-white px-4 py-3.5 text-ink">
-                  <p className="text-[0.95rem] font-semibold">{p.t}</p>
-                  <div className="mt-2 flex flex-wrap gap-1.5">
-                    {p.why.map((w) => (
-                      <span key={w} className="rounded-full bg-amber-wash px-2.5 py-1 text-[0.7rem] text-amber-deep">
-                        {w}
-                      </span>
-                    ))}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="mt-10 grid gap-4 border-t border-white/12 pt-8 md:grid-cols-3">
+          {loop.map((l, i) => (
+            <div key={l.t} className="flex gap-3">
+              <span className="font-mono text-[0.72rem] leading-6 text-amber-light">{String(i + 1).padStart(2, "0")}</span>
+              <span>
+                <span className="block text-[0.95rem] font-semibold">{l.t}</span>
+                <span className="mt-1 block text-[0.84rem] leading-relaxed text-white/55">{l.b}</span>
+              </span>
+            </div>
+          ))}
         </div>
 
         <a href="#download" className="mt-10 inline-block rounded-full bg-brand px-7 py-4 text-[0.92rem] font-semibold text-white transition hover:bg-brand-deep">

@@ -53,11 +53,19 @@ export function AyuAI() {
             </span>
           </div>
 
-          <div className="mt-5 space-y-4">
-            <p className="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-md bg-navy px-4 py-3 text-[0.88rem] leading-relaxed text-white">
+          {/* The exchange plays out: the question, Ayu typing, the answer,
+              then the reports it was read from. Fixed height, so the card
+              does not jump while it plays. */}
+          <div className="relative mt-5 min-h-[22rem] space-y-4">
+            <p className="chat-q ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-md bg-navy px-4 py-3 text-[0.88rem] leading-relaxed text-white">
               My LDL went up to 164. Should I worry?
             </p>
-            <div className="max-w-[92%] rounded-2xl rounded-bl-md border border-line bg-white px-4 py-3.5 text-[0.88rem] leading-relaxed text-navy">
+            <span className="chat-typing absolute left-0 top-[4.6rem] inline-flex gap-1 rounded-2xl rounded-bl-md border border-line bg-white px-4 py-3.5" aria-hidden="true">
+              <i className="typing-dot h-1.5 w-1.5 rounded-full bg-mute" />
+              <i className="typing-dot h-1.5 w-1.5 rounded-full bg-mute [animation-delay:0.15s]" />
+              <i className="typing-dot h-1.5 w-1.5 rounded-full bg-mute [animation-delay:0.3s]" />
+            </span>
+            <div className="chat-a max-w-[92%] rounded-2xl rounded-bl-md border border-line bg-white px-4 py-3.5 text-[0.88rem] leading-relaxed text-navy">
               <p>
                 LDL is the cholesterol that can build up in artery walls. Yours
                 went from 128 in March to 164 in October, across three reports.
@@ -66,7 +74,7 @@ export function AyuAI() {
                 Under 100 is the healthy range, so 164 is high. It is worth
                 discussing with your doctor; your next appointment is on 2 Nov.
               </p>
-              <div className="mt-3.5 flex flex-wrap gap-1.5">
+              <div className="chat-chips mt-3.5 flex flex-wrap gap-1.5">
                 {["Lipid profile, Mar", "Lipid profile, Jun", "Lipid profile, Oct"].map((s) => (
                   <span key={s} className="rounded-full border border-line bg-mist px-2.5 py-1 text-[0.68rem] text-slate">
                     {s}

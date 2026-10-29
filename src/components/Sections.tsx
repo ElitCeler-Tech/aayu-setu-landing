@@ -327,14 +327,14 @@ export function Security() {
         <div className="mt-14 grid gap-5 md:grid-cols-3">
           {/* 1. consent, shown as the request itself */}
           <Reveal>
-            <article className="group flex h-full flex-col rounded-3xl border border-line bg-white p-6 transition duration-500 hover:-translate-y-1 hover:border-sage/50 hover:shadow-[0_28px_60px_-44px_rgba(47,125,99,0.85)]">
+            <article className="group flex h-full flex-col rounded-3xl border border-line bg-white p-6 transition duration-500 hover:-translate-y-1 hover:border-line-strong hover:shadow-[0_28px_60px_-44px_rgba(18,29,51,0.45)]">
               <h3 className="text-[1.02rem] font-semibold text-navy">
                 A doctor has to ask
               </h3>
               <p className="mt-2 text-[0.88rem] leading-relaxed text-slate">
                 Nothing is visible to a clinician until you approve it.
               </p>
-              <div className="mt-auto rounded-2xl border border-line bg-mist/60 p-3.5 pt-3 transition duration-500 group-hover:border-sage/30 group-hover:bg-sage-wash/70">
+              <div className="mt-auto rounded-2xl border border-line bg-mist/60 p-3.5 pt-3 transition duration-500 group-hover:bg-mist">
                 <p className="eyebrow text-mute">
                   Access request
                 </p>
@@ -358,14 +358,14 @@ export function Security() {
 
           {/* 2. sharing, shown as the switches */}
           <Reveal delay={110}>
-            <article className="group flex h-full flex-col rounded-3xl border border-line bg-white p-6 transition duration-500 hover:-translate-y-1 hover:border-sage/50 hover:shadow-[0_28px_60px_-44px_rgba(47,125,99,0.85)]">
+            <article className="group flex h-full flex-col rounded-3xl border border-line bg-white p-6 transition duration-500 hover:-translate-y-1 hover:border-line-strong hover:shadow-[0_28px_60px_-44px_rgba(18,29,51,0.45)]">
               <h3 className="text-[1.02rem] font-semibold text-navy">
                 You choose what a group sees
               </h3>
               <p className="mt-2 text-[0.88rem] leading-relaxed text-slate">
                 Each person decides what travels to a care group, and can change their mind.
               </p>
-              <div className="mt-auto space-y-1.5 rounded-2xl border border-line bg-mist/60 p-3.5 transition duration-500 group-hover:border-sage/30 group-hover:bg-sage-wash/70">
+              <div className="mt-auto space-y-1.5 rounded-2xl border border-line bg-mist/60 p-3.5 transition duration-500 group-hover:bg-mist">
                 {[
                   ["Medication adherence", true],
                   ["Vitals and readings", true],
@@ -393,14 +393,14 @@ export function Security() {
 
           {/* 3. the record of who looked */}
           <Reveal delay={220}>
-            <article className="group flex h-full flex-col rounded-3xl border border-line bg-white p-6 transition duration-500 hover:-translate-y-1 hover:border-sage/50 hover:shadow-[0_28px_60px_-44px_rgba(47,125,99,0.85)]">
+            <article className="group flex h-full flex-col rounded-3xl border border-line bg-white p-6 transition duration-500 hover:-translate-y-1 hover:border-line-strong hover:shadow-[0_28px_60px_-44px_rgba(18,29,51,0.45)]">
               <h3 className="text-[1.02rem] font-semibold text-navy">
                 Access is logged, and revocable
               </h3>
               <p className="mt-2 text-[0.88rem] leading-relaxed text-slate">
                 Every grant is dated, and you can take it back without asking anybody.
               </p>
-              <div className="mt-auto space-y-1.5 rounded-2xl border border-line bg-mist/60 p-3.5 transition duration-500 group-hover:border-sage/30 group-hover:bg-sage-wash/70">
+              <div className="mt-auto space-y-1.5 rounded-2xl border border-line bg-mist/60 p-3.5 transition duration-500 group-hover:bg-mist">
                 {[
                   ["Dr S. Rao", "Granted 14 Oct", true],
                   ["Dr K. Menon", "Revoked 02 Oct", false],

@@ -246,18 +246,32 @@ body {
   .gather-box { animation: gather-box 1.25s ease-out infinite; }
 }
 
-/* Health intelligence: rings and lines draw, and bars grow, as each
-   tile scrolls into view. Where the browser cannot tie animation to
-   scroll, or motion is reduced, they simply sit finished. */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    @keyframes view-draw { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
-    .view-draw { animation: view-draw linear both; animation-timeline: view(); animation-range: entry 20% cover 45%; }
-    @keyframes view-draw-ring { from { stroke-dashoffset: var(--v); } to { stroke-dashoffset: 0; } }
-    .view-draw-ring { animation: view-draw-ring linear both; animation-timeline: view(); animation-range: entry 20% cover 40%; }
-    @keyframes view-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-    .view-grow { transform-origin: left; animation: view-grow linear both; animation-timeline: view(); animation-range: entry 30% cover 45%; }
-  }
+/* Ayu's chat plays on a ten second loop: question, typing, answer,
+   sources, a pause to read, then it clears and starts again. Without
+   motion every message simply shows. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes chat-q { 0%, 2% { opacity: 0; transform: translateY(10px); } 7%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  .chat-q { animation: chat-q 10s ease-out infinite both; }
+  @keyframes chat-typing { 0%, 10% { opacity: 0; } 13%, 27% { opacity: 1; } 30%, 100% { opacity: 0; } }
+  .chat-typing { animation: chat-typing 10s ease-out infinite both; }
+  @keyframes chat-a { 0%, 29% { opacity: 0; transform: translateY(10px); } 35%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  .chat-a { animation: chat-a 10s ease-out infinite both; }
+  @keyframes chat-chips { 0%, 40% { opacity: 0; } 46%, 92% { opacity: 1; } 100% { opacity: 0; } }
+  .chat-chips { animation: chat-chips 10s ease-out infinite both; }
+  @keyframes typing-dot { 0%, 60%, 100% { transform: none; opacity: 0.4; } 30% { transform: translateY(-3px); opacity: 1; } }
+  .typing-dot { animation: typing-dot 0.9s ease-in-out infinite; }
+}
+@media (prefers-reduced-motion: reduce) { .chat-typing { display: none; } }
+
+/* Prevention: the generic line is struck through, then the personal
+   version arrives beside it, row after row, on an eight second loop.
+   Without motion: struck through and arrived. */
+.swap-old { text-decoration-line: line-through; text-decoration-color: rgba(255, 255, 255, 0.45); }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes swap-old { 0%, 8% { text-decoration-color: transparent; color: rgba(255,255,255,0.85); } 18%, 92% { text-decoration-color: rgba(255,255,255,0.45); color: rgba(255,255,255,0.5); } 100% { text-decoration-color: transparent; color: rgba(255,255,255,0.85); } }
+  .swap-old { animation: swap-old 8s ease-out infinite both; }
+  @keyframes swap-new { 0%, 16% { opacity: 0; transform: translateX(-12px); } 26%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  .swap-new { animation: swap-new 8s ease-out infinite both; }
 }
 
 /* The scan line passing over the report pages in "getting started". */
