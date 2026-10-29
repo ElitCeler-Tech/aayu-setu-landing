@@ -47,8 +47,8 @@ export function AnyLab() {
             copy in your drawer. Nothing to book and no lab to switch to. When
             something needs a doctor, consult on video, by voice or in person.
           </p>
-          <a href="#features" className="mt-7 inline-block text-[0.95rem] font-semibold text-navy underline decoration-line-strong underline-offset-[6px] transition hover:decoration-navy">
-            See everything it reads &rarr;
+          <a href="#compare" className="mt-7 inline-block text-[0.95rem] font-semibold text-navy underline decoration-line-strong underline-offset-[6px] transition hover:decoration-navy">
+            How it compares &rarr;
           </a>
         </div>
 

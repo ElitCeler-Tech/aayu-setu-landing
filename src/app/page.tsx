@@ -9,9 +9,7 @@ import { People } from "@/components/People";
 import { Compare } from "@/components/Compare";
 import {
   Hero,
-  Features,
   Markers,
-  Practice,
   Abha,
   Security,
   Download,
@@ -27,10 +25,8 @@ export default function Home() {
         <Steps />
         <Tracked />
         <Markers />
-        <Features />
         <AnyLab />
         <Compare />
-        <Practice />
         <People />
         <Abha />
         <Security />

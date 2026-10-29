@@ -4,7 +4,7 @@ import { HeaderFrame } from "./HeaderFrame";
 import { legal } from "@/data/legal";
 
 const nav = [
-  { label: "Features", href: "/#features" },
+  { label: "What it reads", href: "/#tracked" },
   { label: "How it works", href: "/#how" },
   { label: "FAQs", href: "/#faq" },
   { label: "For doctors", href: "/for-doctors" },
@@ -79,7 +79,7 @@ const footerCols = [
   {
     h: "Product",
     links: [
-      ["Features", "/#features"],
+      ["What it reads", "/#tracked"],
       ["How it works", "/#how"],
       ["Download", "/#download"],
     ],

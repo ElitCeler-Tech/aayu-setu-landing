@@ -117,8 +117,8 @@ export function Steps() {
           <a href="#download" className="rounded-full bg-navy px-7 py-4 text-center text-[0.92rem] font-semibold text-white transition hover:bg-ink">
             Download the app
           </a>
-          <a href="#features" className="rounded-full border border-line-strong px-7 py-4 text-center text-[0.92rem] font-semibold text-navy transition hover:border-navy">
-            See what it does
+          <a href="#tracked" className="rounded-full border border-line-strong px-7 py-4 text-center text-[0.92rem] font-semibold text-navy transition hover:border-navy">
+            See what it reads
           </a>
         </div>
       </div>

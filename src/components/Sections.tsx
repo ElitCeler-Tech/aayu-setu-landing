@@ -1,14 +1,7 @@
-import {
-  DoseMock,
-  ReportMock,
-  PrescriptionMock,
-  EarningsMock,
-} from "./Mocks";
-import { AyuMock, ConsultMock } from "./Mocks2";
 import Link from "next/link";
 import Image from "next/image";
 import { team } from "@/data/team";
-import { Reveal, Parallax } from "./Motion";
+import { Reveal } from "./Motion";
 import { StoreButtons } from "./StoreButtons";
 import { ScoreRing } from "./ScoreRing";
 
@@ -82,126 +75,6 @@ export function Hero() {
   );
 }
 
-
-/* ----------------------------- features ------------------------------ */
-
-const features = [
-  {
-    eyebrow: "Unified health records",
-    title: "Every report in one place, and read, not just stored",
-    mock: <ReportMock />,
-  },  {
-    eyebrow: "Smart medication management",
-    title: "Doses you actually take, and the ones you did not",
-    mock: <DoseMock />,
-  },  {
-    eyebrow: "Ayu, the AI assistant",
-    title: "Answers drawn from your record, not from the internet",
-    mock: <AyuMock />,
-  },  {
-    eyebrow: "Doctor consultations",
-    title: "Book in person, on video or by voice",
-    mock: <ConsultMock />,
-  },
-];
-
-/* Both product sections open the same way the page does: name the thing
-   that is wrong, then say what Ayussetu does about it. The features that
-   follow are evidence for the second half, not a list on their own. */
-function ProblemSolution({
-  problem,
-  solution,
-  dark = false,
-}: {
-  problem: string;
-  solution: string;
-  dark?: boolean;
-}) {
-  return (
-    <div
-      className={`mt-10 grid gap-8 border-t pt-8 sm:grid-cols-2 sm:gap-12 ${
-        dark ? "border-white/12" : "border-line"
-      }`}
-    >
-      <div>
-        <p
-          className={`eyebrow ${
-            dark ? "text-white/40" : "text-mute"
-          }`}
-        >
-          The problem
-        </p>
-        <p
-          className={`mt-2.5 text-[0.98rem] leading-relaxed ${
-            dark ? "text-white/60" : "text-slate"
-          }`}
-        >
-          {problem}
-        </p>
-      </div>
-      <div className={dark ? "sm:border-l sm:border-white/12 sm:pl-12" : "sm:border-l sm:border-line sm:pl-12"}>
-        <p
-          className={`eyebrow ${
-            dark ? "text-amber" : "text-amber-deep"
-          }`}
-        >
-          What Ayussetu does
-        </p>
-        <p
-          className={`mt-2.5 text-[0.98rem] leading-relaxed ${
-            dark ? "text-white/85" : "text-navy"
-          }`}
-        >
-          {solution}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-export function Features() {
-  return (
-    <section id="features" className="relative border-b border-line bg-ink text-white">
-      <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
-        <div className="max-w-2xl">
-          <p className="eyebrow text-amber">
-            For patients, in the app
-          </p>
-          <h2 className="mt-3 font-display text-[clamp(2.05rem,4.6vw,3rem)] leading-tight text-balance">
-            Everything a hospital asks you to remember, remembered for you
-          </h2>
-        </div>
-
-        <ProblemSolution
-          dark
-          problem="Nobody hands a patient their own history. They are expected to carry it in their head, across clinics that never speak to each other."
-          solution="Holds it for them on their own phone, free: every report, every dose, every reading, with an assistant that reads them back in plain language."
-        />
-
-        <div className="mt-12 space-y-12 md:space-y-16">
-          {features.map((b, i) => (
-            <div
-              key={b.title}
-              className={`grid items-center gap-10 md:grid-cols-2 md:gap-16 ${
-                i % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""
-              }`}
-            >
-              <Reveal>
-                <p className="eyebrow text-white/45">
-                  {b.eyebrow}
-                </p>
-                <h3 className="mt-2.5 max-w-[20ch] font-display text-[clamp(1.4rem,2.8vw,1.95rem)] leading-snug text-balance">
-                  {b.title}
-                </h3>
-              </Reveal>
-              <Parallax speed={i % 2 === 0 ? 0.34 : 0.46}>{b.mock}</Parallax>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ----------------------------- markers ------------------------------- */
 
@@ -318,192 +191,65 @@ export function Markers() {
   );
 }
 
-/* ----------------------------- practice ------------------------------ */
-
-const doctorBlocks = [
-  {
-    eyebrow: "Consultation",
-    title: "A prescription written in a minute, delivered in seconds",
-    mock: <PrescriptionMock />,
-  },
-  {
-    eyebrow: "Practice",
-    title: "What you earned, by the period you actually think in",
-    mock: <EarningsMock />,
-  },
-];
-
-export function Practice() {
-  return (
-    <section id="doctors" className="relative border-b border-line bg-paper">
-      <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
-        <div className="max-w-2xl">
-          <p className="eyebrow text-mute">
-            The doctor app
-          </p>
-          <h2 className="mt-3 font-display text-[clamp(2.05rem,4.6vw,3rem)] leading-tight text-ink text-balance">
-            A consultation that ends in a record, not a paper slip
-          </h2>
-        </div>
-
-        <ProblemSolution
-          problem="A patient arrives with no history, so the consultation starts from nothing and ends on a paper slip that nobody will find again."
-          solution="Puts their own readings and reports in front of you before they sit down, and turns what you write into their record, their doses and your day's numbers."
-        />
-        <div className="mt-12 space-y-12 md:space-y-16">
-          {doctorBlocks.map((b, i) => (
-            <div
-              key={b.title}
-              className={`grid items-center gap-10 md:grid-cols-2 md:gap-16 ${
-                i % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""
-              }`}
-            >
-              <Reveal>
-                <p className="eyebrow text-mute">
-                  {b.eyebrow}
-                </p>
-                <h3 className="mt-2.5 max-w-[20ch] font-display text-[clamp(1.4rem,2.8vw,1.95rem)] leading-snug text-ink text-balance">
-                  {b.title}
-                </h3>
-              </Reveal>
-              <Parallax speed={i % 2 === 0 ? 0.36 : 0.48}>{b.mock}</Parallax>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ------------------------------- ABHA -------------------------------- */
 
-export function Abha() {
-  const steps = [
-    { n: "01", t: "A hospital asks", d: "A request arrives against your ABHA" },
-    { n: "02", t: "You approve", d: "You choose what, and for how long" },
-    { n: "03", t: "Records travel", d: "Only the records you picked are sent" },
-    { n: "04", t: "You withdraw", d: "Access ends the moment you say so" },
-  ];
+const abhaSteps = [
+  { n: "01", t: "A hospital asks", d: "A request arrives against your ABHA, naming who is asking and why." },
+  { n: "02", t: "You approve", d: "You choose which records, and for how long. Nothing moves before this." },
+  { n: "03", t: "Records travel", d: "Only what you picked is sent, over the national network." },
+  { n: "04", t: "You withdraw", d: "Access ends the moment you say so, and the grant stays on your record." },
+];
 
+/* What ABHA will mean, drawn as the path a consent takes rather than as
+   a picture of the ID card: a mock of a government card with a made up
+   number reads as an imitation of the real one. Marked as planned in
+   the heading's own label, because it is. */
+export function Abha() {
   return (
     <section id="abha" className="border-b border-line bg-paper">
-      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 md:py-20">
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
+        <div className="text-center">
+          <p className="eyebrow text-amber">Planned, not yet live</p>
+          <h2 className="mt-4 font-display text-[clamp(2.4rem,5vw,3.75rem)] leading-[1.02] text-ink text-balance">
+            One health ID, <em className="text-amber">every hospital</em>
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-[1.02rem] leading-relaxed text-slate">
+            The records you keep in Ayussetu will sit behind your ABHA, readable
+            by any hospital on the national network, and only against a consent
+            you approve each time.
+          </p>
+        </div>
+
         <Reveal>
-          <div className="relative overflow-hidden rounded-[2.25rem] border border-line bg-ink px-6 py-11 text-white sm:px-9 md:px-14 md:py-16">
-            <span className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/[0.07] blur-3xl" />
-
-            <div className="relative grid gap-12 md:grid-cols-[1.05fr_0.95fr] md:items-center md:gap-14">
-              <div>
-                <p className="eyebrow text-amber-light">
-                  Planned, not yet live
-                </p>
-                <h2 className="mt-5 font-display text-[clamp(1.95rem,4.2vw,2.85rem)] leading-tight text-balance">
-                  One health ID, all your records
-                </h2>
-                <p className="mt-4 max-w-xl text-[0.94rem] leading-relaxed text-white/65">
-                  The records you keep here will sit behind your ABHA, readable by
-                  any hospital on the national network, against a consent you
-                  approve each time.
-                </p>
-
-                <ol className="mt-9 grid gap-x-6 gap-y-5 sm:grid-cols-2">
-                  {steps.map((st) => (
-                    <li key={st.n} className="relative pl-9">
-                      <span className="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full border border-white/15 bg-white/[0.06] text-[0.56rem] font-bold tabular-nums text-amber">
-                        {st.n}
-                      </span>
-                      <p className="text-[0.86rem] font-semibold leading-snug text-white">
-                        {st.t}
-                      </p>
-                      <p className="mt-0.5 text-[0.76rem] leading-snug text-white/50">
-                        {st.d}
-                      </p>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-
-              {/* The account itself, drawn the way the card is laid out. */}
-              <div className="relative mx-auto w-full max-w-sm">
-                <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-navy/60 bg-gradient-to-br from-white/[0.14] via-white/[0.07] to-white/[0.03] p-5 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.95)]">
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute -left-10 top-0 h-full w-24 rotate-12 bg-white/[0.07] blur-xl"
-                  />
-                  <div className="relative flex items-start justify-between gap-4">
-                    <div>
-                      <p className="eyebrow text-white/40">
-                        Ayushman Bharat Health Account
-                      </p>
-                      <p className="mt-3 font-display text-[1.3rem] tabular-nums tracking-[0.14em] text-white">
-                        12 3456 7890 1234
-                      </p>
-                      <p className="mt-1 text-[0.82rem] text-white/55">
-                        lakshmi@abdm
-                      </p>
-                    </div>
-                    <span className="shrink-0 rounded-lg bg-white/10 p-2">
-                      <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true">
-                        {[0, 1, 2].map((r) =>
-                          [0, 1, 2].map((c) => (
-                            <rect
-                              key={`${r}-${c}`}
-                              x={3 + c * 6.5}
-                              y={3 + r * 6.5}
-                              width="5"
-                              height="5"
-                              rx="1"
-                              fill="#fff"
-                              opacity={(r + c) % 2 === 0 ? 0.85 : 0.3}
-                            />
-                          )),
-                        )}
-                      </svg>
-                    </span>
-                  </div>
-
-                  <div className="relative mt-5 grid grid-cols-2 gap-4 border-t border-white/10 pt-4">
-                    <div>
-                      <p className="text-[0.54rem] font-semibold uppercase tracking-[0.14em] text-white/35">
-                        Records linked
-                      </p>
-                      <p className="mt-1 text-[0.84rem] font-medium tabular-nums text-white">
-                        34 files
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-[0.54rem] font-semibold uppercase tracking-[0.14em] text-white/35">
-                        Consents open
-                      </p>
-                      <p className="mt-1 text-[0.84rem] font-medium tabular-nums text-sage">
-                        1 of 1
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <ul className="mt-5 space-y-2.5">
-                  {[
-                    "Linked to the records you already keep here",
-                    "Shared only against a consent you approve",
-                    "Readable by any hospital on the network",
-                  ].map((t) => (
-                    <li key={t} className="flex gap-2.5 text-[0.82rem] text-white/70">
-                      <svg width="13" height="13" viewBox="0 0 16 16" className="mt-[0.2rem] shrink-0 text-sage" aria-hidden="true">
-                        <path d="M6.2 11.3 3.4 8.5l1-1 1.8 1.8 5-5 1 1z" fill="currentColor" />
-                      </svg>
-                      {t}
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-5 text-[0.68rem] leading-relaxed text-white/35">
-                  Illustration of the planned account. Ayussetu is not yet
-                  certified on the ABDM network.
-                </p>
-              </div>
-            </div>
-          </div>
+          <ol className="relative mt-16 grid gap-10 rounded-3xl border border-line bg-mist px-6 py-10 sm:px-10 md:grid-cols-4 md:gap-8 md:py-12">
+            {/* The path: navy where the patient has acted, so the line
+                itself says that nothing travels before step two. */}
+            <span aria-hidden="true" className="absolute left-10 right-10 top-[4.15rem] hidden h-px bg-line-strong md:block" />
+            <span aria-hidden="true" className="absolute left-10 top-[4.15rem] hidden h-px w-[calc(50%-2.5rem)] bg-navy md:block" />
+            {abhaSteps.map((s, i) => (
+              <li key={s.n} className="relative">
+                <span
+                  className={`relative z-10 grid h-9 w-9 place-items-center rounded-full font-mono text-[0.72rem] ${
+                    i === 1
+                      ? "bg-cta text-ink"
+                      : i < 2
+                        ? "bg-navy text-white"
+                        : "border border-line-strong bg-paper text-mute"
+                  }`}
+                >
+                  {s.n}
+                </span>
+                <h3 className="mt-5 font-display text-[1.6rem] leading-tight text-ink">{s.t}</h3>
+                <p className="mt-2 text-[0.88rem] leading-relaxed text-slate">{s.d}</p>
+              </li>
+            ))}
+          </ol>
         </Reveal>
+
+        <p className="mt-6 text-center text-[0.78rem] text-mute">
+          Ayussetu is not yet certified on the ABDM network. This describes how
+          it will work once it is.
+        </p>
       </div>
     </section>
   );
