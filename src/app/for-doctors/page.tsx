@@ -76,38 +76,84 @@ const clinicPoints = [
   "Front desk staff with access, without being clinicians",
 ];
 
+const today = [
+  { t: "09:30", n: "Ravi K.", m: "Video consultation", s: "Seen" },
+  { t: "10:00", n: "Meena S.", m: "In person", s: "Seen" },
+  { t: "10:30", n: "Arjun P.", m: "Video consultation", s: "Up next" },
+  { t: "11:00", n: "Fatima B.", m: "Voice call", s: "Booked" },
+  { t: "08:45", n: "Suresh N.", m: "In person", s: "Missed" },
+];
+
+/* An icon for each doctor app card, in the same tile the home page uses. */
+const doctorIcons = [
+  "M8 3v3M16 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z",
+  "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4.5 20a7.5 7.5 0 0 1 15 0",
+  "M6 3h9l4 4v14H6zM9 12h7M9 16h4M15 3v4h4",
+];
+
 export default function ForDoctors() {
   return (
     <>
-      <Header />
+      <Header overlay />
       <main>
-        <section className="relative overflow-hidden border-b border-line">
-          <div className="grid-ground grid-fade pointer-events-none absolute inset-0" />
-          <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-24">
-            <p className="eyebrow text-mute">
-              For doctors and clinics
-            </p>
-            <h1 className="mt-5 max-w-[20ch] font-display text-[clamp(2.4rem,5.6vw,3.6rem)] leading-[1.07] text-ink text-balance">
-              Consult on Ayussetu, and keep the record
-            </h1>
-            <p className="mt-5 max-w-2xl text-[1.02rem] leading-relaxed text-slate">
-              Doctors work from an app. Clinics run from a console in the
-              browser. Both write into the same record the patient already
-              keeps, so a consultation ends in something that lasts.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href="#join"
-                className="rounded-full bg-navy px-6 py-3.5 text-[0.9rem] font-semibold text-white transition hover:bg-ink"
-              >
-                Register your interest
-              </a>
-              <a
-                href="/"
-                className="rounded-full border border-line bg-white px-6 py-3.5 text-[0.9rem] font-semibold text-navy transition hover:border-navy"
-              >
-                Back to the patient app
-              </a>
+        {/* The same dark room as the home page, with the doctor's day in
+            it: who is next, who was seen, who did not come. */}
+        <section id="hero" className="hero-room relative overflow-hidden text-white">
+          <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 pb-20 pt-36 sm:px-8 md:grid-cols-[1.05fr_0.95fr] md:pb-24 md:pt-40">
+            <div>
+              <p className="eyebrow text-amber-light">For doctors and clinics</p>
+              <h1 className="mt-5 max-w-[16ch] font-display text-[clamp(2.8rem,6vw,4.6rem)] leading-[0.98] text-balance">
+                Consult on Ayussetu, <em className="text-amber-light">keep the record</em>
+              </h1>
+              <p className="mt-6 max-w-xl text-[1.05rem] leading-relaxed text-white/70">
+                Doctors work from an app. Clinics run from a console in the
+                browser. Both write into the same record the patient already
+                keeps, so a consultation ends in something that lasts.
+              </p>
+              <div className="mt-9 flex flex-wrap items-center gap-4">
+                <a href="#join" className="rounded-full bg-brand px-7 py-4 text-[0.92rem] font-semibold text-white transition hover:bg-brand-deep">
+                  Register your interest
+                </a>
+                <a href="/" className="text-[0.95rem] font-medium text-white/75 transition hover:text-white">
+                  For patients &rarr;
+                </a>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.06] p-5 backdrop-blur md:p-6">
+                <div className="flex items-baseline justify-between">
+                  <p className="text-[1rem] font-semibold">Today</p>
+                  <p className="font-mono text-[0.7rem] text-white/50">8 PATIENTS</p>
+                </div>
+                <ul className="mt-4 space-y-2">
+                  {today.map((a) => (
+                    <li key={a.t} className={`flex items-center gap-3 rounded-xl px-3.5 py-3 ${a.s === "Up next" ? "bg-white text-ink" : "border border-white/10 bg-white/[0.04]"}`}>
+                      <span className={`w-12 shrink-0 font-mono text-[0.72rem] ${a.s === "Up next" ? "text-amber" : "text-white/55"}`}>{a.t}</span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate text-[0.88rem] font-semibold">{a.n}</span>
+                        <span className={`block text-[0.7rem] ${a.s === "Up next" ? "text-mute" : "text-white/50"}`}>{a.m}</span>
+                      </span>
+                      <span
+                        className={`shrink-0 rounded-full px-2.5 py-1 text-[0.66rem] font-semibold ${
+                          a.s === "Up next" ? "bg-cta text-white" : a.s === "Seen" ? "bg-[#7FD3A8]/15 text-[#9BE2BD]" : "bg-white/10 text-white/60"
+                        }`}
+                      >
+                        {a.s}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="absolute -bottom-6 -left-4 hidden items-center gap-3 rounded-2xl bg-white px-4 py-3 text-ink shadow-[0_24px_50px_-24px_rgba(0,0,0,0.6)] sm:flex">
+                <span className="grid h-8 w-8 place-items-center rounded-full bg-sage-wash text-sage">
+                  <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.2 11.8 2.9 8.5l1.1-1.1 2.2 2.2 5.6-5.6 1.1 1.1z" fill="currentColor" /></svg>
+                </span>
+                <span>
+                  <span className="block text-[0.82rem] font-semibold">Prescription sent</span>
+                  <span className="block text-[0.7rem] text-mute">Doses scheduled in the patient&rsquo;s app</span>
+                </span>
+              </div>
             </div>
           </div>
         </section>
@@ -134,8 +180,13 @@ export default function ForDoctors() {
             <div className="mt-12 grid gap-4 md:grid-cols-3">
               {doctorApp.map((d, i) => (
                 <Reveal key={d.t} delay={i * 90}>
-                  <article className="h-full rounded-3xl border border-line bg-white p-6">
-                    <h3 className="font-display text-[1.1rem] text-navy">
+                  <article className="h-full rounded-3xl border border-line bg-mist p-6">
+                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-amber-wash">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C25E00" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d={doctorIcons[i]} />
+                      </svg>
+                    </span>
+                    <h3 className="mt-5 text-[1.05rem] font-semibold text-ink">
                       {d.t}
                     </h3>
                     <p className="mt-2 text-[0.88rem] leading-relaxed text-slate">
@@ -144,7 +195,7 @@ export default function ForDoctors() {
                     <ul className="mt-4 space-y-2 border-t border-line pt-4">
                       {d.p.map((x) => (
                         <li key={x} className="flex gap-2.5 text-[0.84rem] text-navy">
-                          <svg width="13" height="13" viewBox="0 0 16 16" className="mt-[0.2rem] shrink-0 text-sage" aria-hidden="true">
+                          <svg width="13" height="13" viewBox="0 0 16 16" className="mt-[0.2rem] shrink-0 text-amber" aria-hidden="true">
                             <path d="M6.2 11.3 3.4 8.5l1-1 1.8 1.8 5-5 1 1z" fill="currentColor" />
                           </svg>
                           {x}
@@ -190,7 +241,7 @@ export default function ForDoctors() {
               {portal.map((d, i) => (
                 <Reveal key={d.t} delay={i * 90}>
                   <article className="h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6">
-                    <h3 className="font-display text-[1.1rem] text-white">
+                    <h3 className="text-[1.05rem] font-semibold text-white">
                       {d.t}
                     </h3>
                     <p className="mt-2 text-[0.88rem] leading-relaxed text-white/60">
