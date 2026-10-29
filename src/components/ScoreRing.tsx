@@ -2,26 +2,29 @@
 
 import { useEffect, useState } from "react";
 
-/* The hero's centrepiece: the Swasth Score drawn as an instrument.
-   Twenty nine ticks, one per marker; the ones out of range are lit
-   orange. The ring itself stands still (labels used to sit where the
-   turning ticks passed under them); instead one marker at a time is
-   picked out, its tick lifted, and read out in the card beside it. */
+/* The hero's centrepiece: the Health Score, the app's score from six
+   everyday vitals, told as a year. A calendar strip steps through the
+   months; each month the score in the centre moves to that month's
+   value, the arc follows it, the ticks for readings still out of range
+   go out one by one, and the card under the ring says what happened.
+   Reduced motion: it rests on the latest month. */
 
 const C = 270;
-const N = 29;
+const N = 30;
+const ARC = 2 * Math.PI * 168; // circumference of the score arc
 
-type Tone = "high" | "low" | "watch" | "ok";
-const readings: { i: number; k: string; v: string; u: string; s: string; tone: Tone }[] = [
-  { i: 2, k: "LDL cholesterol", v: "164", u: "mg/dL", s: "High, rising since March", tone: "high" },
-  { i: 5, k: "Haemoglobin", v: "13.8", u: "g/dL", s: "In range", tone: "ok" },
-  { i: 9, k: "Vitamin D", v: "14", u: "ng/mL", s: "Low", tone: "low" },
-  { i: 13, k: "Creatinine", v: "0.9", u: "mg/dL", s: "In range", tone: "ok" },
-  { i: 17, k: "Fasting glucose", v: "118", u: "mg/dL", s: "Above range, up 20 this year", tone: "high" },
-  { i: 20, k: "HbA1c", v: "6.0", u: "%", s: "Worth watching", tone: "watch" },
-  { i: 23, k: "Triglycerides", v: "168", u: "mg/dL", s: "Borderline, easing", tone: "watch" },
+type Month = { m: string; score: number; out: number; k: string; v: string; s: string; good: boolean };
+const months: Month[] = [
+  { m: "Jan", score: 64, out: 6, k: "Blood pressure", v: "142/92", s: "Above range", good: false },
+  { m: "Mar", score: 67, out: 5, k: "Steps", v: "4,200", s: "A day, below your goal", good: false },
+  { m: "May", score: 71, out: 4, k: "Sleep", v: "6h 40m", s: "Up from 5h 50m", good: true },
+  { m: "Jul", score: 74, out: 3, k: "Fasting sugar", v: "108", s: "Easing, from 118", good: true },
+  { m: "Sep", score: 78, out: 2, k: "Blood pressure", v: "128/82", s: "Back near range", good: true },
+  { m: "Oct", score: 81, out: 1, k: "Heart rate", v: "72", s: "In range", good: true },
 ];
-const OUT = readings.filter((r) => r.tone !== "ok").map((r) => r.i);
+
+// Which ticks are lit while readings are out of range; they go out from the end of the list.
+const LIT = [3, 8, 13, 18, 23, 27];
 
 const at = (i: number, r: number) => {
   const a = (i / N) * Math.PI * 2 - Math.PI / 2;
@@ -29,31 +32,43 @@ const at = (i: number, r: number) => {
   return { x: Math.round((C + r * Math.cos(a)) * 100) / 100, y: Math.round((C + r * Math.sin(a)) * 100) / 100 };
 };
 
-const toneText: Record<Tone, string> = {
-  high: "text-amber-light",
-  low: "text-amber-light",
-  watch: "text-[#FFD08A]",
-  ok: "text-[#7FD3A8]",
-};
+/* The number in the centre counts to the new month's value instead of
+   jumping to it. */
+function useCount(target: number) {
+  const [v, setV] = useState(target);
+  useEffect(() => {
+    let raf = 0;
+    const from = v;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const p = Math.min((now - start) / 900, 1);
+      const e = 1 - Math.pow(1 - p, 3);
+      setV(Math.round(from + (target - from) * e));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [target]);
+  return v;
+}
 
 export function ScoreRing() {
-  const [step, setStep] = useState(0);
+  const [n, setN] = useState(months.length - 1);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = setInterval(() => setStep((s) => s + 1), 3200);
+    setN(0);
+    const t = setInterval(() => setN((x) => (x + 1) % months.length), 2800);
     return () => clearInterval(t);
   }, []);
 
-  const n = step % readings.length;
-  const lap = Math.floor(step / readings.length);
-  const cur = readings[n];
-  // Degrees from the top, never wrapping back: lap after lap it keeps
-  // going round, so the marker glides forwards instead of jumping back.
-  const deg = (lap * 360) + (cur.i / N) * 360;
+  const cur = months[n];
+  const shown = useCount(cur.score);
+  const lit = LIT.slice(0, cur.out);
 
   return (
-    <div className="relative mx-auto w-[min(20rem,82vw)] md:w-[min(31rem,42vw)]">
+    <div className="relative mx-auto w-[min(20rem,82vw)] md:w-[min(30rem,40vw)]">
       <div className="relative aspect-square">
         <div className="pointer-events-none absolute inset-[11%] rounded-full bg-[radial-gradient(circle,rgba(255,139,11,0.28),rgba(255,139,11,0)_65%)] blur-[10px]" />
 
@@ -67,7 +82,6 @@ export function ScoreRing() {
           <circle cx={C} cy={C} r="250" fill="none" stroke="rgba(255,255,255,0.07)" />
           <circle cx={C} cy={C} r="168" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="10" />
           <circle
-            className="score-arc"
             cx={C}
             cy={C}
             r="168"
@@ -75,13 +89,14 @@ export function ScoreRing() {
             stroke="url(#score-arc)"
             strokeWidth="10"
             strokeLinecap="round"
-            strokeDasharray="760 1056"
+            strokeDasharray={`${Math.round((cur.score / 100) * ARC)} ${Math.round(ARC)}`}
             transform={`rotate(-90 ${C} ${C})`}
+            style={{ transition: "stroke-dasharray 900ms cubic-bezier(0.33, 1, 0.68, 1)" }}
           />
           {Array.from({ length: N }, (_, i) => {
-            const out = OUT.includes(i);
+            const on = lit.includes(i);
             const a = at(i, 212);
-            const b = at(i, out ? 236 : 226);
+            const b = at(i, on ? 236 : 226);
             return (
               <line
                 key={i}
@@ -89,52 +104,54 @@ export function ScoreRing() {
                 y1={a.y}
                 x2={b.x}
                 y2={b.y}
-                stroke={out ? "#FF8B0B" : "rgba(255,255,255,0.32)"}
-                strokeWidth={out ? 3 : 1.6}
+                stroke={on ? "#FF8B0B" : "rgba(255,255,255,0.3)"}
+                strokeWidth={on ? 3 : 1.6}
                 strokeLinecap="round"
+                style={{ transition: "stroke 500ms ease" }}
               />
             );
           })}
-          {/* The marker: a lifted tick and a dot, drawn at the top and
-              turned round the centre, so the move is an arc, eased. */}
-          <g
-            style={{
-              transform: `rotate(${deg}deg)`,
-              transformOrigin: "270px 270px",
-              transition: "transform 1400ms cubic-bezier(0.65, 0, 0.35, 1)",
-            }}
-          >
-            <line x1={C} y1={C - 208} x2={C} y2={C - 246} stroke="#fff" strokeWidth="4" strokeLinecap="round" />
-            <circle cx={C} cy={C - 260} r="14" fill="rgba(255,255,255,0.12)" />
-            <circle cx={C} cy={C - 260} r="5.5" fill="#fff" />
-          </g>
         </svg>
 
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="font-display text-[4.5rem] leading-none md:text-[7rem]">72</span>
-          <span className="eyebrow mt-1.5 text-white/55">Lab Score</span>
+          <span className="font-display text-[4.5rem] leading-none tabular-nums md:text-[7rem]">{shown}</span>
+          <span className="eyebrow mt-1.5 text-white/55">Health Score</span>
         </div>
       </div>
 
-      {/* The reading itself, below the ring so nothing ever sits on it. */}
-      <div className="relative mx-auto -mt-2 h-[4.6rem] w-[min(19rem,100%)]">
-        {readings.map((r, i) => (
+      {/* The calendar: the months the story runs through, the current
+          one lit, the ones before it marked as passed. */}
+      <div className="mx-auto -mt-1 flex w-[min(21rem,100%)] items-center justify-between">
+        {months.map((x, i) => (
+          <span key={x.m} className="flex flex-col items-center gap-1.5">
+            <span
+              className={`h-1.5 w-1.5 rounded-full transition-all duration-500 ${
+                i === n ? "scale-150 bg-cta" : i < n ? "bg-white/60" : "bg-white/20"
+              }`}
+            />
+            <span className={`font-mono text-[0.62rem] uppercase tracking-[0.08em] transition-colors duration-500 ${i === n ? "text-white" : "text-white/40"}`}>
+              {x.m}
+            </span>
+          </span>
+        ))}
+      </div>
+
+      {/* That month's reading. */}
+      <div className="relative mx-auto mt-3 h-[4.6rem] w-[min(21rem,100%)]">
+        {months.map((r, i) => (
           <div
-            key={r.k}
+            key={r.m}
             aria-hidden={i !== n}
             className={`absolute inset-0 flex items-center gap-4 rounded-2xl border border-white/12 bg-white/[0.06] px-4 backdrop-blur transition-all duration-700 ease-out ${
               i === n ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-2 opacity-0"
             }`}
           >
-            <span className={`h-9 w-1 shrink-0 rounded-full ${r.tone === "ok" ? "bg-[#7FD3A8]" : "bg-cta"}`} />
+            <span className={`h-9 w-1 shrink-0 rounded-full ${r.good ? "bg-[#7FD3A8]" : "bg-cta"}`} />
             <span className="min-w-0 flex-1">
-              <span className="eyebrow block text-white/50">{r.k}</span>
-              <span className={`mt-1 block truncate text-[0.8rem] ${toneText[r.tone]}`}>{r.s}</span>
+              <span className="eyebrow block text-white/50">{r.m} · {r.k}</span>
+              <span className={`mt-1 block truncate text-[0.8rem] ${r.good ? "text-[#9BE2BD]" : "text-amber-light"}`}>{r.s}</span>
             </span>
-            <span className="shrink-0 text-right">
-              <span className="text-[1.35rem] font-semibold tabular-nums leading-none">{r.v}</span>
-              <span className="ml-1 text-[0.72rem] text-white/50">{r.u}</span>
-            </span>
+            <span className="shrink-0 text-[1.3rem] font-semibold tabular-nums leading-none">{r.v}</span>
           </div>
         ))}
       </div>

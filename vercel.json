@@ -1,0 +1,19 @@
+{
+  "redirects": [
+    { "source": "/medical-disclaimer", "destination": "/legal#medical", "permanent": true },
+    { "source": "/ai-use-disclaimer", "destination": "/legal#ai-use", "permanent": true },
+    { "source": "/health-records-disclaimer", "destination": "/legal#health-records", "permanent": true },
+    { "source": "/patient-use-disclaimer", "destination": "/legal#patient-use", "permanent": true },
+    { "source": "/clinical-use-disclaimer", "destination": "/legal#clinical-use", "permanent": true },
+    { "source": "/outcomes-disclaimer", "destination": "/legal#outcomes", "permanent": true },
+    { "source": "/third-party-data-disclaimer", "destination": "/legal#third-party-data", "permanent": true },
+    { "source": "/regulatory-disclaimer", "destination": "/legal#regulatory", "permanent": true },
+    { "source": "/privacy-policy", "destination": "/legal", "permanent": false },
+    { "source": "/disclaimers", "destination": "/legal", "permanent": true },
+    { "source": "/founders", "destination": "/about", "permanent": true },
+    { "source": "/teams", "destination": "/about", "permanent": true },
+    { "source": "/blogs", "destination": "/", "permanent": false },
+    { "source": "/login", "destination": "/", "permanent": false },
+    { "source": "/signup", "destination": "/", "permanent": false }
+  ]
+}
