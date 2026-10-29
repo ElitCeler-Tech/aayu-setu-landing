@@ -219,7 +219,7 @@ export default function ForDoctors() {
                 </p>
                 <a
                   href="#join"
-                  className="ml-auto rounded-full bg-cta-strong px-6 py-3 text-[0.88rem] font-semibold text-white transition hover:bg-amber-deep"
+                  className="ml-auto rounded-full bg-brand px-6 py-3 text-[0.88rem] font-semibold text-white transition hover:bg-brand-deep"
                 >
                   Ask for a walkthrough
                 </a>

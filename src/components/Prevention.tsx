@@ -68,7 +68,7 @@ export function Prevention() {
           </div>
         </div>
 
-        <a href="#download" className="mt-10 inline-block rounded-full bg-cta-strong px-7 py-4 text-[0.92rem] font-semibold text-white transition hover:bg-amber-deep">
+        <a href="#download" className="mt-10 inline-block rounded-full bg-brand px-7 py-4 text-[0.92rem] font-semibold text-white transition hover:bg-brand-deep">
           Make health actions personal
         </a>
       </div>

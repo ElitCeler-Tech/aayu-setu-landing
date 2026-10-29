@@ -65,7 +65,7 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
           </a>
           <a
             href="/#download"
-            className="rounded-full bg-navy px-5 py-2.5 text-[0.82rem] font-semibold text-white transition hover:bg-ink group-data-[dark=true]:bg-cta-strong group-data-[dark=true]:hover:bg-amber-deep"
+            className="rounded-full bg-navy px-5 py-2.5 text-[0.82rem] font-semibold text-white transition hover:bg-ink group-data-[dark=true]:bg-brand group-data-[dark=true]:hover:bg-brand-deep"
           >
             Get the app
           </a>

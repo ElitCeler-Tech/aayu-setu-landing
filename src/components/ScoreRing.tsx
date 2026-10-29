@@ -1,99 +1,137 @@
-/* The hero's centrepiece: a health score drawn as an instrument rather
-   than as a phone screen. Twenty nine ticks, one per marker Ayussetu
-   reads; the four that sit out of range are lit. The arc is the score.
-   The tick ring turns slowly, so the section is alive without anything
-   moving that somebody is trying to read. */
+"use client";
+
+import { useEffect, useState } from "react";
+
+/* The hero's centrepiece: the Swasth Score drawn as an instrument.
+   Twenty nine ticks, one per marker; the ones out of range are lit
+   orange. The ring itself stands still (labels used to sit where the
+   turning ticks passed under them); instead one marker at a time is
+   picked out, its tick lifted, and read out in the card beside it. */
 
 const C = 270;
-const LIT = [2, 9, 17, 23];
+const N = 29;
 
-const ticks = Array.from({ length: 29 }, (_, i) => {
-  const a = (i / 29) * Math.PI * 2;
-  const lit = LIT.includes(i);
-  const r2 = lit ? 236 : 226;
-  return {
-    i,
-    lit,
-    x1: C + 212 * Math.cos(a),
-    y1: C + 212 * Math.sin(a),
-    x2: C + r2 * Math.cos(a),
-    y2: C + r2 * Math.sin(a),
-    dx: C + 246 * Math.cos(a),
-    dy: C + 246 * Math.sin(a),
-  };
-});
-
-const readings = [
-  { k: "LDL", v: "164 mg/dL", n: "rising", tone: "up", pos: "left-[-16%] top-[5%]" },
-  { k: "Haemoglobin", v: "13.8 g/dL", n: "in range", tone: "ok", pos: "right-[-14%] top-[7%] flex-row-reverse" },
-  { k: "Vitamin D", v: "14 ng/mL", n: "low", tone: "up", pos: "left-[-16%] top-[92%]" },
+type Tone = "high" | "low" | "watch" | "ok";
+const readings: { i: number; k: string; v: string; u: string; s: string; tone: Tone }[] = [
+  { i: 2, k: "LDL cholesterol", v: "164", u: "mg/dL", s: "High, rising since March", tone: "high" },
+  { i: 5, k: "Haemoglobin", v: "13.8", u: "g/dL", s: "In range", tone: "ok" },
+  { i: 9, k: "Vitamin D", v: "14", u: "ng/mL", s: "Low", tone: "low" },
+  { i: 13, k: "Creatinine", v: "0.9", u: "mg/dL", s: "In range", tone: "ok" },
+  { i: 17, k: "Fasting glucose", v: "126", u: "mg/dL", s: "High, up 28 this year", tone: "high" },
+  { i: 20, k: "HbA1c", v: "6.0", u: "%", s: "Worth watching", tone: "watch" },
+  { i: 23, k: "Triglycerides", v: "168", u: "mg/dL", s: "Borderline, easing", tone: "watch" },
 ];
+const OUT = readings.filter((r) => r.tone !== "ok").map((r) => r.i);
+
+const at = (i: number, r: number) => {
+  const a = (i / N) * Math.PI * 2 - Math.PI / 2;
+  // Rounded, so the server and the browser print the same attribute.
+  return { x: Math.round((C + r * Math.cos(a)) * 100) / 100, y: Math.round((C + r * Math.sin(a)) * 100) / 100 };
+};
+
+const toneText: Record<Tone, string> = {
+  high: "text-amber-light",
+  low: "text-amber-light",
+  watch: "text-[#FFD08A]",
+  ok: "text-[#7FD3A8]",
+};
 
 export function ScoreRing() {
+  const [n, setN] = useState(0);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = setInterval(() => setN((x) => (x + 1) % readings.length), 2600);
+    return () => clearInterval(t);
+  }, []);
+
+  const cur = readings[n];
+
   return (
-    <div className="relative mx-auto aspect-square w-[min(20rem,82vw)] md:w-[min(33.75rem,44vw)]">
-      <div className="pointer-events-none absolute inset-[11%] rounded-full bg-[radial-gradient(circle,rgba(255,139,11,0.28),rgba(255,139,11,0)_65%)] blur-[10px]" />
+    <div className="relative mx-auto w-[min(20rem,82vw)] md:w-[min(31rem,42vw)]">
+      <div className="relative aspect-square">
+        <div className="pointer-events-none absolute inset-[11%] rounded-full bg-[radial-gradient(circle,rgba(255,139,11,0.28),rgba(255,139,11,0)_65%)] blur-[10px]" />
 
-      <svg viewBox="0 0 540 540" aria-hidden="true" className="absolute inset-0 h-full w-full overflow-visible">
-        <defs>
-          <linearGradient id="score-arc" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#FFB15C" />
-            <stop offset="1" stopColor="#FF8B0B" />
-          </linearGradient>
-        </defs>
-        <circle cx={C} cy={C} r="250" fill="none" stroke="rgba(255,255,255,0.07)" />
-        <circle cx={C} cy={C} r="168" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="10" />
-        <circle
-          className="score-arc"
-          cx={C}
-          cy={C}
-          r="168"
-          fill="none"
-          stroke="url(#score-arc)"
-          strokeWidth="10"
-          strokeLinecap="round"
-          strokeDasharray="760 1056"
-          transform={`rotate(-90 ${C} ${C})`}
-        />
-        <g className="ring-spin">
-          {ticks.map((t) => (
-            <g key={t.i}>
+        <svg viewBox="0 0 540 540" aria-hidden="true" className="absolute inset-0 h-full w-full overflow-visible">
+          <defs>
+            <linearGradient id="score-arc" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stopColor="#FFB15C" />
+              <stop offset="1" stopColor="#FF8B0B" />
+            </linearGradient>
+          </defs>
+          <circle cx={C} cy={C} r="250" fill="none" stroke="rgba(255,255,255,0.07)" />
+          <circle cx={C} cy={C} r="168" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="10" />
+          <circle
+            className="score-arc"
+            cx={C}
+            cy={C}
+            r="168"
+            fill="none"
+            stroke="url(#score-arc)"
+            strokeWidth="10"
+            strokeLinecap="round"
+            strokeDasharray="760 1056"
+            transform={`rotate(-90 ${C} ${C})`}
+          />
+          {Array.from({ length: N }, (_, i) => {
+            const active = i === cur.i;
+            const out = OUT.includes(i);
+            const a = at(i, 212);
+            const b = at(i, active ? 244 : out ? 236 : 226);
+            return (
               <line
-                x1={t.x1}
-                y1={t.y1}
-                x2={t.x2}
-                y2={t.y2}
-                stroke={t.lit ? "#FF8B0B" : "rgba(255,255,255,0.35)"}
-                strokeWidth={t.lit ? 3 : 1.6}
+                key={i}
+                x1={a.x}
+                y1={a.y}
+                x2={b.x}
+                y2={b.y}
+                stroke={active ? "#FFFFFF" : out ? "#FF8B0B" : "rgba(255,255,255,0.32)"}
+                strokeWidth={active ? 4 : out ? 3 : 1.6}
                 strokeLinecap="round"
+                style={{ transition: "all 400ms ease" }}
               />
-              {t.lit && <circle cx={t.dx} cy={t.dy} r="3.5" fill="#FF8B0B" />}
-            </g>
-          ))}
-        </g>
-      </svg>
+            );
+          })}
+          {/* The picked marker: a dot that travels round to it. */}
+          {(() => {
+            const d = at(cur.i, 258);
+            return (
+              <g style={{ transition: "transform 700ms cubic-bezier(0.4,0,0.2,1)", transform: `translate(${d.x}px, ${d.y}px)` }}>
+                <circle r="13" fill="rgba(255,255,255,0.12)" />
+                <circle r="5" fill="#fff" />
+              </g>
+            );
+          })()}
+        </svg>
 
-      <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="font-display text-[4.5rem] leading-none md:text-[7.5rem]">72</span>
-        <span className="eyebrow mt-1.5 text-white/55">Swasth Score</span>
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <span className="font-display text-[4.5rem] leading-none md:text-[7rem]">72</span>
+          <span className="eyebrow mt-1.5 text-white/55">Swasth Score</span>
+        </div>
       </div>
 
-      {/* Three readings, labelled off the ring. Desktop only: on a phone
-          the ring is the picture and the labels would crowd it. */}
-      {readings.map((r) => (
-        <div
-          key={r.k}
-          aria-hidden="true"
-          className={`absolute hidden items-center gap-2.5 whitespace-nowrap text-[0.8rem] lg:flex ${r.pos}`}
-        >
-          <span className="h-px w-8 bg-white/35" />
-          <span className="eyebrow text-white/50">{r.k}</span>
-          <span className="font-semibold">{r.v}</span>
-          <span className={`text-[0.75rem] ${r.tone === "up" ? "text-amber-light" : "text-[#7FD3A8]"}`}>
-            {r.n}
-          </span>
-        </div>
-      ))}
+      {/* The reading itself, below the ring so nothing ever sits on it. */}
+      <div className="relative mx-auto -mt-2 h-[4.6rem] w-[min(19rem,100%)]">
+        {readings.map((r, i) => (
+          <div
+            key={r.k}
+            aria-hidden={i !== n}
+            className={`absolute inset-0 flex items-center gap-4 rounded-2xl border border-white/12 bg-white/[0.06] px-4 backdrop-blur transition-all duration-500 ${
+              i === n ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-2 opacity-0"
+            }`}
+          >
+            <span className={`h-9 w-1 shrink-0 rounded-full ${r.tone === "ok" ? "bg-[#7FD3A8]" : "bg-cta"}`} />
+            <span className="min-w-0 flex-1">
+              <span className="eyebrow block text-white/50">{r.k}</span>
+              <span className={`mt-1 block truncate text-[0.8rem] ${toneText[r.tone]}`}>{r.s}</span>
+            </span>
+            <span className="shrink-0 text-right">
+              <span className="text-[1.35rem] font-semibold tabular-nums leading-none">{r.v}</span>
+              <span className="ml-1 text-[0.72rem] text-white/50">{r.u}</span>
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

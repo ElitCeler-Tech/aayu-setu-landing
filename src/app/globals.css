@@ -27,6 +27,11 @@
      against white text, so a button in it needs dark text; this deeper
      orange reaches 4.67 and lets every button read white. */
   --color-cta-strong: #B85A00;
+  /* The logo's heart, sampled: a red orange that runs F86800 to F83800.
+     The header button takes it, so the one solid orange on screen
+     matches the mark beside it. */
+  --color-brand: #F55A00;
+  --color-brand-deep: #E04800;
 
   /* A lighter orange that holds up on the hero's navy. */
   --color-amber-light: #FFB15C;
@@ -152,8 +157,6 @@ body {
 
 /* The ring: ticks turn once every two and a half minutes, and the
    score arc draws itself once on arrival. */
-@keyframes ring-spin { to { transform: rotate(360deg); } }
-.ring-spin { transform-origin: 270px 270px; animation: ring-spin 140s linear infinite; }
 @keyframes arc-draw { from { stroke-dashoffset: 760; } to { stroke-dashoffset: 0; } }
 .score-arc { animation: arc-draw 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both; }
 
@@ -244,6 +247,12 @@ body {
   .gather-box { animation: gather-box 1.25s ease-out infinite; }
 }
 
+/* Health intelligence: the bar under the active tab fills across the
+   time that tab is shown. */
+@keyframes intel-progress { from { width: 0; } to { width: 100%; } }
+.intel-progress { animation: intel-progress linear forwards; }
+@media (prefers-reduced-motion: reduce) { .intel-progress { animation: none; width: 0; } }
+
 /* The scan line passing over the report pages in "getting started". */
 @keyframes scan { from { top: 1.4rem; } to { top: 10.5rem; } }
 .scan-line { animation: scan 2.8s ease-in-out infinite alternate; }
@@ -254,5 +263,5 @@ body {
 .abha-flow { animation: abha-flow 1.6s linear infinite; }
 
 @media (prefers-reduced-motion: reduce) {
-  .ring-spin, .score-arc, .ticker-row, .ticker-row-rev, .scan-line, .abha-flow { animation: none; }
+  .score-arc, .ticker-row, .ticker-row-rev, .scan-line, .abha-flow { animation: none; }
 }
