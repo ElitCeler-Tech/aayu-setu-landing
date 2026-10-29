@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header, Footer } from "@/components/Chrome";
 import { legal } from "@/data/legal";
+import { PageHero } from "@/components/PageHero";
 
 export const metadata: Metadata = {
   title: "Disclaimers, Ayussetu",
@@ -14,16 +15,19 @@ export const metadata: Metadata = {
 export default function Legal() {
   return (
     <>
-      <Header />
+      <Header overlay />
       <main className="bg-paper">
+        <PageHero
+          eyebrow="Disclaimers"
+          title="What Ayussetu is,"
+          accent="and what it is not"
+          lede="Eight short statements on medical, AI, records, patient and clinical use, outcomes, third party data and regulation."
+        />
         <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 md:py-24">
           <div className="grid gap-12 md:grid-cols-[0.7fr_1.3fr] md:gap-16">
             <div className="md:sticky md:top-28 md:self-start">
-              <p className="eyebrow text-amber-deep">Disclaimers</p>
-              <h1 className="mt-3 font-display text-[clamp(2.2rem,5vw,3.2rem)] leading-tight text-ink text-balance">
-                What Ayussetu is, and what it is not
-              </h1>
-              <nav className="mt-8 hidden md:block">
+              <p className="eyebrow hidden text-mute md:block">On this page</p>
+              <nav className="mt-4 hidden md:block">
                 <ul className="space-y-2 text-[0.88rem]">
                   {legal.map((l) => (
                     <li key={l.slug}>

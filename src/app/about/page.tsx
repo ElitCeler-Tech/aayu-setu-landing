@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header, Footer } from "@/components/Chrome";
-import { Team } from "@/components/Sections";
+import { People } from "@/components/People";
+import { PageHero } from "@/components/PageHero";
 import { Contact } from "@/components/Contact";
 
 export const metadata: Metadata = {
@@ -27,46 +28,34 @@ const beliefs = [
 export default function About() {
   return (
     <>
-      <Header />
+      <Header overlay />
       <main>
-        <section className="border-b border-line bg-paper">
-          <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
-            <p className="eyebrow text-mute">
-              About us
-            </p>
-            <h1 className="mt-3 max-w-3xl font-display text-[clamp(2.4rem,5.6vw,3.6rem)] leading-[1.08] text-ink text-balance">
-              Health information people can actually read
-            </h1>
-            <p className="mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-slate">
-              Ayussetu began with a simple observation: people in India hold
-              years of their own health information, and almost none of it is
-              anywhere they can read it together. We are building the place
-              where it sits, and the reading that makes it useful.
-            </p>
-          </div>
-        </section>
+        <PageHero
+          eyebrow="About Ayussetu"
+          title="Health information people can"
+          accent="actually read"
+          lede="Ayussetu began with a simple observation: people in India hold years of their own health information, and almost none of it is anywhere they can read it together. We are building the place where it sits, and the reading that makes it useful."
+        />
 
-        <section className="border-b border-line bg-ink text-white">
+        <section className="border-b border-line bg-mist">
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-24">
-            <h2 className="max-w-xl font-display text-[clamp(1.95rem,4.2vw,2.8rem)] leading-tight text-balance">
-              What we hold to
+            <p className="eyebrow text-amber">What we hold to</p>
+            <h2 className="mt-4 max-w-xl font-display text-[clamp(2.2rem,4.6vw,3.2rem)] leading-[1.04] text-ink text-balance">
+              Three things we <em className="text-amber">will not trade</em>
             </h2>
-            <div className="mt-12 grid gap-10 md:grid-cols-3 md:gap-12">
-              {beliefs.map((b) => (
-                <div key={b.h}>
-                  <h3 className="font-display text-[1.15rem] leading-snug text-white text-balance">
-                    {b.h}
-                  </h3>
-                  <p className="mt-3 text-[0.92rem] leading-relaxed text-white/60">
-                    {b.p}
-                  </p>
+            <div className="mt-12 grid gap-4 md:grid-cols-3">
+              {beliefs.map((b, i) => (
+                <div key={b.h} className="rounded-3xl border border-line bg-white p-7">
+                  <p className="font-mono text-[0.8rem] text-amber">{String(i + 1).padStart(2, "0")}</p>
+                  <h3 className="mt-4 text-[1.1rem] font-semibold leading-snug text-ink text-balance">{b.h}</h3>
+                  <p className="mt-3 text-[0.92rem] leading-relaxed text-slate">{b.p}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        <Team />
+        <People intro={false} />
         <Contact />
       </main>
       <Footer />

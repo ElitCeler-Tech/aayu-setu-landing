@@ -1,6 +1,4 @@
-import Link from "next/link";
 import Image from "next/image";
-import { team } from "@/data/team";
 import { Reveal } from "./Motion";
 import { StoreButtons } from "./StoreButtons";
 import { ScoreRing } from "./ScoreRing";
@@ -237,66 +235,6 @@ export function Abha() {
         <Reveal>
           <AbhaNetwork />
         </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/* -------------------------------- team ------------------------------- */
-
-export function Team() {
-  return (
-    <section id="team" className="border-b border-line bg-paper">
-      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
-        <Reveal>
-          <p className="eyebrow text-amber-deep">
-            About the founder
-          </p>
-          <h2 className="mt-3 font-display text-[clamp(2.15rem,5vw,3.2rem)] leading-tight text-ink text-balance">
-            Get to know the Ayussetu team
-          </h2>
-        </Reveal>
-
-        <div className="mt-14 grid gap-6 md:grid-cols-2">
-          {team.map((m, i) => (
-            <Reveal key={m.slug} delay={i * 120}>
-              <Link
-                href={`/founders/${m.slug}`}
-                className="group block overflow-hidden rounded-3xl border border-line bg-white transition hover:border-navy/25 hover:shadow-[0_30px_70px_-45px_rgba(22,35,61,0.8)]"
-              >
-                <span className="relative block aspect-[16/11] w-full overflow-hidden bg-mist">
-                  <Image
-                    src={m.photo}
-                    alt={m.name}
-                    fill
-                    sizes="(min-width: 768px) 32rem, 100vw"
-                    className="object-cover object-[center_22%] transition duration-700 group-hover:scale-[1.04]"
-                  />
-                  <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/30 to-transparent p-5 pt-16">
-                    <span className="block font-display text-[1.45rem] leading-snug text-white">
-                      {m.name}
-                    </span>
-                    <span className="mt-0.5 block text-[0.84rem] font-medium text-amber-light">
-                      {m.role}
-                    </span>
-                  </span>
-                </span>
-
-                <span className="block p-6">
-                  <span className="block text-[0.9rem] leading-relaxed text-slate">
-                    {m.lede}
-                  </span>
-                  <span className="mt-4 inline-flex items-center gap-1.5 text-[0.82rem] font-semibold text-navy">
-                    Read more
-                    <span className="transition group-hover:translate-x-0.5">
-                      &rarr;
-                    </span>
-                  </span>
-                </span>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
       </div>
     </section>
   );

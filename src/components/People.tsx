@@ -7,10 +7,11 @@ import { Reveal } from "./Motion";
    only with people who are really here. The third place is an
    invitation to doctors, which is true today: the registration form on
    the doctors page is live. Nobody is invented to fill the row. */
-export function People() {
+export function People({ intro = true }: { intro?: boolean }) {
   return (
     <section id="about" className="border-b border-line bg-mist">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
+        {intro ? (
         <div className="grid gap-8 md:grid-cols-[1fr_1fr] md:items-end md:gap-14">
           <div>
             <p className="eyebrow text-amber">About Ayussetu</p>
@@ -36,6 +37,14 @@ export function People() {
             </a>
           </div>
         </div>
+        ) : (
+          <div>
+            <p className="eyebrow text-amber">The team</p>
+            <h2 className="mt-4 font-display text-[clamp(2.2rem,4.6vw,3.2rem)] leading-[1.04] text-ink">
+              The people <em className="text-amber">behind it</em>
+            </h2>
+          </div>
+        )}
 
         <div className="mt-14 grid gap-7 md:grid-cols-3">
           {team.map((m, i) => (

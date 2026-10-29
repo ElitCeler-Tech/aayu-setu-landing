@@ -38,20 +38,19 @@ export default async function Founder({
 
   return (
     <>
-      <Header />
+      <Header overlay />
       <main>
-        <section className="relative overflow-hidden border-b border-line">
-          <div className="grid-ground grid-fade pointer-events-none absolute inset-0" />
-          <div className="relative mx-auto max-w-5xl px-5 py-14 sm:px-8 md:py-20">
+        <section id="hero" className="hero-room relative overflow-hidden text-white">
+          <div className="relative mx-auto max-w-5xl px-5 pb-16 pt-32 sm:px-8 md:pb-20 md:pt-36">
             <Link
               href="/#about"
-              className="inline-flex items-center gap-1.5 text-[0.82rem] font-medium text-mute transition hover:text-navy"
+              className="inline-flex items-center gap-1.5 text-[0.82rem] font-medium text-white/60 transition hover:text-white"
             >
               <span>&larr;</span> The team
             </Link>
 
             <div className="mt-8 grid gap-10 md:grid-cols-[16rem_1fr] md:gap-14">
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-line bg-mist md:w-64">
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-white/10 bg-white/5 md:w-64">
                 <Image
                   src={m.photo}
                   alt={m.name}
@@ -63,13 +62,13 @@ export default async function Founder({
               </div>
 
               <div>
-                <p className="eyebrow text-amber-deep">
+                <p className="eyebrow text-amber-light">
                   {m.role}
                 </p>
-                <h1 className="mt-3 font-display text-[clamp(1.9rem,4.4vw,2.8rem)] leading-tight text-ink text-balance">
+                <h1 className="mt-3 font-display text-[clamp(2.4rem,5vw,3.6rem)] leading-[1.02] text-balance">
                   {m.name}
                 </h1>
-                <p className="mt-4 max-w-xl text-[1rem] leading-relaxed text-slate">
+                <p className="mt-4 max-w-xl text-[1.02rem] leading-relaxed text-white/70">
                   {m.lede}
                 </p>
 
@@ -78,7 +77,7 @@ export default async function Founder({
                     href={m.linkedin}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-[0.85rem] font-semibold text-white transition hover:bg-ink"
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-[0.85rem] font-semibold text-navy transition hover:bg-mist"
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                       <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-.95 1.82-1.95 3.75-1.95 4 0 4.4 2.5 4.4 5.75V21h-4v-5.6c0-1.34-.03-3.06-1.9-3.06-1.9 0-2.2 1.46-2.2 2.96V21h-4z" />
@@ -86,7 +85,7 @@ export default async function Founder({
                     LinkedIn
                   </a>
                   {m.location && (
-                    <span className="text-[0.84rem] text-mute">{m.location}</span>
+                    <span className="text-[0.84rem] text-white/55">{m.location}</span>
                   )}
                 </div>
               </div>

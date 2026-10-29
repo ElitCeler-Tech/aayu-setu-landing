@@ -31,14 +31,14 @@ const faqs = [
   },
 ];
 
-export function Faq() {
+export function Faq({ bare = false }: { bare?: boolean }) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
     <section id="faq" className="border-t border-line bg-paper">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
-        <div className="grid gap-12 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
-          <div>
+        <div className={bare ? "mx-auto max-w-3xl" : "grid gap-12 md:grid-cols-[0.8fr_1.2fr] md:gap-16"}>
+          <div className={bare ? "hidden" : ""}>
             <p className="eyebrow text-amber-deep">
               Questions
             </p>

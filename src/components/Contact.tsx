@@ -15,7 +15,7 @@ const roles = [
   "Partnership or press",
 ];
 
-export function Contact() {
+export function Contact({ bare = false }: { bare?: boolean }) {
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error">(
     "idle",
   );
@@ -61,12 +61,16 @@ export function Contact() {
       <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
         <div className="grid gap-12 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
           <div>
-            <p className="eyebrow text-amber-deep">
-              Contact us
-            </p>
-            <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.4rem)] leading-tight text-ink text-balance">
-              Tell us what you need it to do
-            </h2>
+            {!bare && (
+              <>
+                <p className="eyebrow text-amber-deep">
+                  Contact us
+                </p>
+                <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.4rem)] leading-tight text-ink text-balance">
+                  Tell us what you need it to do
+                </h2>
+              </>
+            )}
             <p className="mt-4 text-[0.92rem] leading-relaxed text-slate">
               Whether you are a patient with a question, a doctor who wants to
               consult on Ayussetu, or a clinic weighing it up for a whole

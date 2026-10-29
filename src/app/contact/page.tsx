@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header, Footer } from "@/components/Chrome";
 import { Contact } from "@/components/Contact";
+import { PageHero } from "@/components/PageHero";
 
 export const metadata: Metadata = {
   title: "Contact Ayussetu",
@@ -10,9 +11,10 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <Header />
+      <Header overlay />
       <main>
-        <Contact />
+        <PageHero eyebrow="Contact us" title="Tell us what you need" accent="it to do" />
+        <Contact bare />
       </main>
       <Footer />
     </>
