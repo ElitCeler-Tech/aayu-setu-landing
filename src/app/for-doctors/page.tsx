@@ -173,7 +173,7 @@ export default function ForDoctors() {
         <section className="border-b border-line bg-ink text-white">
           <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
             <Reveal>
-              <p className="eyebrow text-amber">
+              <p className="eyebrow text-amber-light">
                 The clinician portal
               </p>
               <h2 className="mt-3 max-w-xl font-display text-[clamp(1.95rem,4.2vw,2.8rem)] leading-tight text-balance">
@@ -199,7 +199,7 @@ export default function ForDoctors() {
                     <ul className="mt-4 space-y-2 border-t border-white/10 pt-4">
                       {d.p.map((x) => (
                         <li key={x} className="flex gap-2.5 text-[0.84rem] text-white/85">
-                          <svg width="13" height="13" viewBox="0 0 16 16" className="mt-[0.2rem] shrink-0 text-amber" aria-hidden="true">
+                          <svg width="13" height="13" viewBox="0 0 16 16" className="mt-[0.2rem] shrink-0 text-amber-light" aria-hidden="true">
                             <path d="M6.2 11.3 3.4 8.5l1-1 1.8 1.8 5-5 1 1z" fill="currentColor" />
                           </svg>
                           {x}

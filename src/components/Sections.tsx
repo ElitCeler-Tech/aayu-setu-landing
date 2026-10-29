@@ -166,8 +166,8 @@ function AbhaNetwork() {
                   : n.state === "waiting"
                     ? "border-amber-light/50 bg-white/[0.05] text-amber-light"
                     : n.state === "withdrawn"
-                      ? "border-white/10 bg-transparent text-white/25"
-                      : "border-white/15 bg-white/[0.04] text-white/60"
+                      ? "border-white/15 bg-white/[0.03] text-white/45"
+                      : "border-white/20 bg-white/[0.08] text-white/90"
               }`}
             >
               {n.state === "waiting" && (
