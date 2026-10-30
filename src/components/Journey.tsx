@@ -177,6 +177,65 @@ function Progress() {
 
 /* Each step is a problem people have today and how Ayussetu answers it:
    `p` is the problem, shown first with a red cross, then the answer. */
+/* --- what goes wrong today: one small picture per problem ------------- */
+
+function PChip({ children, style }: { children: React.ReactNode; style: React.CSSProperties }) {
+  return (
+    <span className="hp-jitter absolute whitespace-nowrap rounded-lg border border-line-strong bg-white px-2 py-1 text-[0.68rem] font-medium text-slate shadow-[0_6px_12px_-10px_rgba(18,29,51,0.6)]" style={style}>
+      {children}
+    </span>
+  );
+}
+
+function PBig({ value, note }: { value: React.ReactNode; note: string }) {
+  return (
+    <div className="grid h-full place-items-center text-center">
+      <div>
+        <span className="font-display text-[2.6rem] leading-none text-ink">{value}</span>
+        <div className="hp-blink mt-1 text-[0.72rem] text-[#D9403D]">{note}</div>
+      </div>
+    </div>
+  );
+}
+
+const PScattered = () => (
+  <>
+    <PChip style={{ left: "4%", top: 6 }}>📄 Paper report</PChip>
+    <PChip style={{ left: "52%", top: 22, animationDelay: "0.3s" }}>💬 WhatsApp</PChip>
+    <PChip style={{ left: "10%", top: 52, animationDelay: "0.6s" }}>✉️ Email PDF</PChip>
+    <PChip style={{ left: "56%", top: 70, animationDelay: "0.9s" }}>📱 Photo</PChip>
+  </>
+);
+
+const PLost = () => (
+  <>
+    {["14%", "42%", "70%"].map((x, i) => (
+      <span key={x} className="hp-fall absolute top-0 h-11 w-9 rounded-md border-[1.5px] border-dashed border-[#F1A9A7] bg-white" style={{ left: x, animationDelay: `${i * 0.7}s` }} />
+    ))}
+    <span className="absolute bottom-0 left-0 text-[0.72rem] text-[#D9403D]">Last year&rsquo;s report? Gone.</span>
+  </>
+);
+
+const PGeneric = () => (
+  <div className="grid h-full content-center gap-1.5">
+    {["Exercise 30 minutes a day", "Eat less sugar", "Get your sugar checked"].map((g, i) => (
+      <span key={g} className="relative rounded-lg border border-line-strong bg-white px-2.5 py-1.5 text-[0.72rem] text-mute">
+        {g}
+        <span className="hp-strike absolute inset-x-2 top-1/2 h-[1.5px] bg-[#D9403D]" style={{ animationDelay: `${i * 0.35}s` }} />
+      </span>
+    ))}
+  </div>
+);
+
+const problemArt = [
+  <PScattered key="1" />,
+  <PLost key="2" />,
+  <PBig key="3" value="5.8" note="HbA1c on its own. Fine?" />,
+  <PBig key="4" value="164" note="High? Normal?" />,
+  <PGeneric key="5" />,
+  <PBig key="6" value={<>210 → <span className="hp-blink text-[#D9403D]">?</span></>} note="Did the walks help?" />,
+];
+
 const steps = [
   { p: "Reports scattered across paper, WhatsApp and email", t: "Bring health records together", b: "Paper, WhatsApp, a photo on your phone, an email from the lab: all of it, in one place.", art: <Gather /> },
   { p: "Old reports lost, so there is no history to look back on", t: "Kept year by year", b: "Every report is filed by date, so your history builds into something you can look back across.", art: <Yearly /> },
@@ -212,12 +271,13 @@ export function Journey() {
             {steps.map((s, i) => (
               <li key={s.t} className="grid items-stretch gap-3 md:grid-cols-[0.8fr_2.75rem_1.2fr] md:gap-4">
                 {/* the problem */}
-                <div className="flex flex-col justify-center rounded-[1.4rem] border border-line bg-mist px-6 py-5">
+                <div className="flex flex-col rounded-[1.4rem] border border-line bg-mist px-6 py-5">
                   <span className="flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-[#D9403D]">
                     <span className="grid h-[1.15rem] w-[1.15rem] place-items-center rounded-full border border-[#F6C9C8] bg-white text-[0.58rem] font-bold">✕</span>
                     Today · {String(i + 1).padStart(2, "0")}
                   </span>
                   <p className="mt-2.5 text-[1.05rem] leading-snug text-slate">{s.p}</p>
+                  <div className="relative mt-4 h-[6.5rem]">{problemArt[i]}</div>
                 </div>
 
                 {/* the turn */}
