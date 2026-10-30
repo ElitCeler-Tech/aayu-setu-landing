@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 /* One How it works card, where the problem turns into the answer in
    place: one card, one picture box, three beats on its own clock.
 
-   1. Problem (3s): a red The problem today label, the problem in words, and the
+   1. Problem (3s): a red The problem label, the problem in words, and the
       problem's picture playing in the box.
    2. Turn (1s): an orange line wipes across the picture box from left
       to right, uncovering the answer's picture behind it; the label
@@ -71,7 +71,7 @@ export function FlowCard({
         <span className="relative h-5 flex-1">
           <span className={`absolute inset-0 flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-[#D9403D] transition-all duration-500 ${isProblem ? "opacity-100" : "-translate-y-2 opacity-0"}`}>
             <span className="grid h-[1.15rem] w-[1.15rem] place-items-center rounded-full border border-[#F6C9C8] bg-[#FDECEC] text-[0.58rem] font-bold">✕</span>
-            The problem today
+            The problem
           </span>
           <span className={`absolute inset-0 flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-sage transition-all duration-500 ${answered ? "opacity-100" : "translate-y-2 opacity-0"}`}>
             <span className="grid h-[1.15rem] w-[1.15rem] place-items-center rounded-full bg-sage-wash text-[0.58rem] font-bold">✓</span>
