@@ -175,13 +175,15 @@ function Progress() {
   );
 }
 
+/* Each step is a problem people have today and how Ayussetu answers it:
+   `p` is the problem, shown first with a red cross, then the answer. */
 const steps = [
-  { t: "Bring health records together", b: "Paper, WhatsApp, a photo on your phone, an email from the lab: all of it, in one place.", art: <Gather /> },
-  { t: "Kept year by year", b: "Every report is filed by date, so your history builds into something you can look back across.", art: <Yearly /> },
-  { t: "See trends over time", b: "One reading is a number. Five years of them is a direction you can see.", art: <Trend /> },
-  { t: "Know what deserves attention", b: "What is out of range, what is drifting, and what is fine, at a glance.", art: <Attention /> },
-  { t: "Take personalised actions", b: "Medicines, habits and retests, set around your own readings and routine.", art: <Actions /> },
-  { t: "Track how you respond", b: "See whether what you changed is moving the numbers that matter.", art: <Progress /> },
+  { p: "Reports scattered across paper, WhatsApp and email", t: "Bring health records together", b: "Paper, WhatsApp, a photo on your phone, an email from the lab: all of it, in one place.", art: <Gather /> },
+  { p: "Old reports lost, so there is no history to look back on", t: "Kept year by year", b: "Every report is filed by date, so your history builds into something you can look back across.", art: <Yearly /> },
+  { p: "Each report read alone, so slow changes go unseen", t: "See trends over time", b: "One reading is a number. Five years of them is a direction you can see.", art: <Trend /> },
+  { p: "Numbers with no meaning: is 164 bad, and for whom?", t: "Know what deserves attention", b: "What is out of range, what is drifting, and what is fine, at a glance.", art: <Attention /> },
+  { p: "Advice written for everybody, so nobody follows it", t: "Take personalised actions", b: "Medicines, habits and retests, set around your own readings and routine.", art: <Actions /> },
+  { p: "No way to tell if what you changed is working", t: "Track how you respond", b: "See whether what you changed is moving the numbers that matter.", art: <Progress /> },
 ];
 
 export function Journey() {
@@ -193,12 +195,26 @@ export function Journey() {
           <h2 className="mt-4 font-display text-[clamp(2.4rem,5vw,3.75rem)] leading-[1.02] text-ink text-balance">
             From scattered records to <em className="text-amber">useful action</em>
           </h2>
+          <p className="mx-auto mt-4 max-w-xl text-[1rem] leading-relaxed text-slate">
+            Six things that go wrong with health records today, and how
+            Ayussetu fixes each one.
+          </p>
         </div>
 
         <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {steps.map((s, i) => (
             <li key={s.t} className="flex flex-col rounded-[1.4rem] border border-line bg-mist px-5 pb-5 pt-5">
-              <span className="font-mono text-[0.9rem] text-amber">{String(i + 1).padStart(2, "0")}</span>
+              <div className="flex items-start gap-2.5 rounded-xl border border-[#F6C9C8] bg-[#FDECEC] px-3 py-2.5">
+                <span className="mt-px grid h-[1.15rem] w-[1.15rem] shrink-0 place-items-center rounded-full bg-white text-[0.62rem] font-bold text-[#D9403D]">✕</span>
+                <span>
+                  <span className="block font-mono text-[0.58rem] uppercase tracking-[0.1em] text-[#D9403D]">Today</span>
+                  <span className="mt-0.5 block text-[0.8rem] leading-snug text-[#7A2E2C]">{s.p}</span>
+                </span>
+              </div>
+              <div className="mt-4 flex items-center gap-2">
+                <span className="grid h-[1.15rem] w-[1.15rem] shrink-0 place-items-center rounded-full bg-sage-wash text-[0.62rem] font-bold text-sage">✓</span>
+                <span className="font-mono text-[0.58rem] uppercase tracking-[0.1em] text-sage">With Ayussetu · {String(i + 1).padStart(2, "0")}</span>
+              </div>
               <h3 className="mt-1.5 font-display text-[1.45rem] leading-tight text-ink">{s.t}</h3>
               <p className="mt-1.5 text-[0.82rem] leading-relaxed text-slate">{s.b}</p>
               <div className="mt-auto pt-4">{s.art}</div>
