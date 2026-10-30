@@ -20,12 +20,7 @@ export function AyuAI() {
           <h2 className="mt-4 font-display text-[clamp(2.4rem,5vw,3.75rem)] leading-[1.02] text-ink text-balance">
             AI that understands <em className="text-amber">your health</em>
           </h2>
-          <p className="mt-5 max-w-[30rem] text-[1.02rem] leading-relaxed text-slate">
-            Ayu answers from your own record, not from the internet.
-            Generative AI explains, machine learning reads your reports, and
-            controlled workflows decide what Ayu will and will not say.
-          </p>
-          <ul className="mt-8 space-y-3">
+          <ul className="mt-7 space-y-3">
             {can.map((c) => (
               <li key={c} className="flex items-start gap-3 text-[0.95rem] text-navy">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#C25E00" strokeWidth="1.5" className="mt-0.5 shrink-0" aria-hidden="true">
