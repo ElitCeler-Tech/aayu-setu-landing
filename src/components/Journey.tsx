@@ -262,16 +262,18 @@ export function Journey() {
 
         {/* Six rows: the problem on the left, the answer on the right. */}
         <div className="mx-auto mt-12 max-w-5xl">
-          <div className="mb-3 hidden grid-cols-[0.8fr_2.75rem_1.2fr] gap-4 font-mono text-[0.66rem] uppercase tracking-[0.12em] md:grid">
-            <span className="text-[#D9403D]">✕ Today</span>
-            <span />
-            <span className="text-sage">✓ With Ayussetu</span>
+          <div className="mb-3 hidden grid-cols-[0.8fr_1.2fr] font-mono text-[0.66rem] uppercase tracking-[0.12em] md:grid">
+            <span className="pl-6 text-[#D9403D]">✕ Today</span>
+            <span className="pl-9 text-sage">✓ With Ayussetu</span>
           </div>
-          <ol className="grid gap-8 md:gap-4">
+          <ol className="grid gap-5">
             {steps.map((s, i) => (
-              <li key={s.t} className="grid items-stretch gap-3 md:grid-cols-[0.8fr_2.75rem_1.2fr] md:gap-4">
-                {/* the problem */}
-                <div className="flex flex-col rounded-[1.4rem] border border-line bg-mist px-6 py-5">
+              <li
+                key={s.t}
+                className="relative grid overflow-hidden rounded-[1.5rem] border border-line bg-white transition duration-300 hover:shadow-[0_30px_60px_-40px_rgba(18,29,51,0.45)] md:grid-cols-[0.8fr_1.2fr]"
+              >
+                {/* the problem, on the grey half */}
+                <div className="flex flex-col border-b border-line bg-mist px-6 py-5 md:border-b-0 md:border-r">
                   <span className="flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-[#D9403D]">
                     <span className="grid h-[1.15rem] w-[1.15rem] place-items-center rounded-full border border-[#F6C9C8] bg-white text-[0.58rem] font-bold">✕</span>
                     Today · {String(i + 1).padStart(2, "0")}
@@ -280,16 +282,17 @@ export function Journey() {
                   <div className="relative mt-4 h-[6.5rem]">{problemArt[i]}</div>
                 </div>
 
-                {/* the turn */}
-                <span className="grid place-items-center">
-                  <span className="grid h-10 w-10 rotate-90 place-items-center rounded-full bg-cta text-white shadow-[0_10px_22px_-10px_rgba(255,139,11,0.8)] md:rotate-0">
-                    →
-                  </span>
+                {/* the turn, sitting on the line between the halves */}
+                <span
+                  aria-hidden="true"
+                  className="relative z-10 -my-5 grid h-10 w-10 rotate-90 place-items-center justify-self-center rounded-full bg-cta text-white shadow-[0_0_0_5px_#fff,0_10px_22px_-10px_rgba(255,139,11,0.8)] md:absolute md:left-[40%] md:top-1/2 md:my-0 md:-translate-x-1/2 md:-translate-y-1/2 md:rotate-0"
+                >
+                  →
                 </span>
 
-                {/* the answer */}
-                <div className="grid items-center gap-4 rounded-[1.4rem] border border-line bg-white p-5 transition duration-300 hover:shadow-[0_30px_60px_-40px_rgba(18,29,51,0.45)] sm:grid-cols-[1fr_15rem]">
-                  <div className="sm:pl-1">
+                {/* the answer, on the white half */}
+                <div className="grid items-center gap-4 p-5 sm:grid-cols-[1fr_15rem] md:pl-9">
+                  <div>
                     <span className="flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-sage">
                       <span className="grid h-[1.15rem] w-[1.15rem] place-items-center rounded-full bg-sage-wash text-[0.58rem] font-bold">✓</span>
                       With Ayussetu
