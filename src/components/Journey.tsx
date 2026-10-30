@@ -201,39 +201,48 @@ export function Journey() {
           </p>
         </div>
 
-        <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {steps.map((s, i) => (
-            <li
-              key={s.t}
-              className="flex flex-col overflow-hidden rounded-[1.5rem] border border-line bg-white transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-40px_rgba(18,29,51,0.45)]"
-            >
-              {/* Top half: the problem, on grey */}
-              <div className="relative bg-mist px-5 pb-6 pt-4">
-                <span className="flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-[#D9403D]">
-                  <span className="grid h-[1.15rem] w-[1.15rem] place-items-center rounded-full border border-[#F6C9C8] bg-white text-[0.58rem] font-bold">✕</span>
-                  Today · {String(i + 1).padStart(2, "0")}
+        {/* Six rows: the problem on the left, the answer on the right. */}
+        <div className="mx-auto mt-12 max-w-5xl">
+          <div className="mb-3 hidden grid-cols-[0.8fr_2.75rem_1.2fr] gap-4 font-mono text-[0.66rem] uppercase tracking-[0.12em] md:grid">
+            <span className="text-[#D9403D]">✕ Today</span>
+            <span />
+            <span className="text-sage">✓ With Ayussetu</span>
+          </div>
+          <ol className="grid gap-8 md:gap-4">
+            {steps.map((s, i) => (
+              <li key={s.t} className="grid items-stretch gap-3 md:grid-cols-[0.8fr_2.75rem_1.2fr] md:gap-4">
+                {/* the problem */}
+                <div className="flex flex-col justify-center rounded-[1.4rem] border border-line bg-mist px-6 py-5">
+                  <span className="flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-[#D9403D]">
+                    <span className="grid h-[1.15rem] w-[1.15rem] place-items-center rounded-full border border-[#F6C9C8] bg-white text-[0.58rem] font-bold">✕</span>
+                    Today · {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="mt-2.5 text-[1.05rem] leading-snug text-slate">{s.p}</p>
+                </div>
+
+                {/* the turn */}
+                <span className="grid place-items-center">
+                  <span className="grid h-10 w-10 rotate-90 place-items-center rounded-full bg-cta text-white shadow-[0_10px_22px_-10px_rgba(255,139,11,0.8)] md:rotate-0">
+                    →
+                  </span>
                 </span>
-                <p className="mt-2 min-h-[2.6em] text-[0.92rem] leading-snug text-slate">{s.p}</p>
-                {/* the turn from problem to answer */}
-                <span className="absolute -bottom-[1.1rem] right-5 grid h-9 w-9 place-items-center rounded-full bg-cta text-[0.95rem] text-white shadow-[0_0_0_5px_#fff,0_10px_20px_-8px_rgba(255,139,11,0.7)]">
-                  ↓
-                </span>
-              </div>
-              {/* Bottom half: the answer, on white */}
-              <div className="flex flex-1 flex-col px-5 pb-5 pt-6">
-                <span className="flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-sage">
-                  <span className="grid h-[1.15rem] w-[1.15rem] place-items-center rounded-full bg-sage-wash text-[0.58rem] font-bold">✓</span>
-                  With Ayussetu
-                </span>
-                <h3 className="mt-2 font-display text-[1.6rem] leading-[1.05] text-ink">{s.t}</h3>
-                <p className="mt-1.5 text-[0.84rem] leading-relaxed text-slate">{s.b}</p>
-                <div className="mt-auto pt-4">
+
+                {/* the answer */}
+                <div className="grid items-center gap-4 rounded-[1.4rem] border border-line bg-white p-5 transition duration-300 hover:shadow-[0_30px_60px_-40px_rgba(18,29,51,0.45)] sm:grid-cols-[1fr_15rem]">
+                  <div className="sm:pl-1">
+                    <span className="flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-sage">
+                      <span className="grid h-[1.15rem] w-[1.15rem] place-items-center rounded-full bg-sage-wash text-[0.58rem] font-bold">✓</span>
+                      With Ayussetu
+                    </span>
+                    <h3 className="mt-2 font-display text-[1.6rem] leading-[1.05] text-ink">{s.t}</h3>
+                    <p className="mt-1.5 text-[0.84rem] leading-relaxed text-slate">{s.b}</p>
+                  </div>
                   <div className="rounded-2xl bg-mist p-3">{s.art}</div>
                 </div>
-              </div>
-            </li>
-          ))}
-        </ol>
+              </li>
+            ))}
+          </ol>
+        </div>
 
         <div className="mt-12 text-center">
           <a href="#intelligence" className="inline-block rounded-full bg-navy px-7 py-4 text-[0.92rem] font-semibold text-white transition hover:bg-ink">
