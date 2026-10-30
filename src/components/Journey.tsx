@@ -15,7 +15,7 @@ const sources = [
 
 function Gather() {
   return (
-    <div className="relative h-[10rem]">
+    <div className="relative h-[8.5rem]">
       {sources.map((s, i) => (
         <span
           key={s.t}
@@ -48,14 +48,14 @@ const years = [
 
 function Yearly() {
   return (
-    <div className="flex h-[10rem] items-end justify-between gap-3 px-2">
+    <div className="flex h-[8.5rem] items-end justify-between gap-3 px-2">
       {years.map((y, i) => (
         <div key={y.y} className="flex flex-1 flex-col items-center">
-          <div className="flex w-full flex-col-reverse gap-1.5">
+          <div className="flex w-full flex-col-reverse gap-1">
             {Array.from({ length: y.n }).map((_, k) => (
               <span
                 key={k}
-                className={`seq seq-${i * 2 + (k >= 3 ? 1 : 0)} h-[1.05rem] rounded-[0.35rem] border ${
+                className={`seq seq-${i * 2 + (k >= 3 ? 1 : 0)} h-[0.8rem] rounded-[0.3rem] border ${
                   i === years.length - 1 && k === y.n - 1 ? "border-cta bg-amber-wash" : "border-line-strong bg-white"
                 }`}
               />
@@ -78,12 +78,12 @@ function Trend() {
   ];
   const yOf = (v: number) => 150 - (v - 5.3) * 110;
   return (
-    <div className="h-[10rem]">
+    <div className="h-[8.5rem]">
       <div className="flex items-baseline justify-between px-1">
         <span className="text-[0.78rem] font-semibold text-ink">HbA1c, year by year</span>
         <span className="font-mono text-[0.62rem] text-amber">RISING</span>
       </div>
-      <svg viewBox="0 0 220 170" className="mt-1 h-[8.6rem] w-full" aria-label="HbA1c across five years: 5.4, 5.5, 5.7, 5.8, then 6.0">
+      <svg viewBox="0 0 220 170" className="mt-1 h-[7.2rem] w-full" aria-label="HbA1c across five years: 5.4, 5.5, 5.7, 5.8, then 6.0">
         <rect x="0" y={yOf(5.7)} width="220" height={150 - yOf(5.7)} fill="#E5F3EC" rx="4" />
         <path className="draw-line" pathLength={100} d={`M${pts.map((p) => `${p.x} ${yOf(p.v)}`).join(" L")}`} fill="none" stroke="#1F3050" strokeWidth="1.8" strokeLinejoin="round" />
         {pts.map((p, i) => (
@@ -107,7 +107,7 @@ const flags = [
 
 function Attention() {
   return (
-    <div className="flex h-[10rem] flex-col justify-center gap-1.5">
+    <div className="flex h-[8.5rem] flex-col justify-center gap-1.5">
       {flags.map((f, i) => (
         <div key={f.k} className={`seq seq-${i} seq-slide flex items-center justify-between rounded-xl border border-line bg-white px-3 py-1.5`}>
           <span className="text-[0.78rem] font-medium text-ink">{f.k}</span>
@@ -135,7 +135,7 @@ const plan = [
 
 function Actions() {
   return (
-    <div className="flex h-[10rem] flex-col justify-center gap-1.5 text-left">
+    <div className="flex h-[8.5rem] flex-col justify-center gap-1 text-left">
       {plan.map((p, i) => (
         <div key={p.t} className={`plan-row plan-row-${i + 1} flex items-center gap-2.5 rounded-xl border border-line bg-white px-2.5 py-1.5`}>
           <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-amber-wash">
@@ -160,7 +160,7 @@ function Actions() {
 
 function Progress() {
   return (
-    <div className="flex h-[10rem] flex-col justify-center">
+    <div className="flex h-[8.5rem] flex-col justify-center">
       <p className="text-[0.78rem] font-semibold text-ink">Triglycerides since July</p>
       <div className="mt-3 flex items-baseline gap-3">
         <span className="strike-in font-display text-[2.2rem] leading-none text-mute decoration-1">210</span>

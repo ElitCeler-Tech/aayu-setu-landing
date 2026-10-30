@@ -65,7 +65,7 @@ export function FlowCard({
   const num = String(n).padStart(2, "0");
 
   return (
-    <li data-phase={phase} className="flex flex-col overflow-hidden rounded-[1.5rem] border border-line bg-white p-5 transition duration-300 hover:shadow-[0_30px_60px_-40px_rgba(18,29,51,0.45)]">
+    <li data-phase={phase} className="flex flex-col overflow-hidden rounded-[1.25rem] border border-line bg-white p-4 transition duration-300 hover:shadow-[0_30px_60px_-40px_rgba(18,29,51,0.45)]">
       {/* label: Today, then With Ayussetu */}
       <div className="flex items-center justify-between">
         <span className="relative h-5 flex-1">
@@ -82,24 +82,24 @@ export function FlowCard({
       </div>
 
       {/* words: the problem, then the answer */}
-      <div className="relative mt-3 min-h-[6.6rem]">
-        <p className={`absolute inset-x-0 top-0 font-display text-[1.5rem] leading-[1.1] text-slate transition-all duration-500 ${isProblem ? "opacity-100" : "-translate-y-2 opacity-0"}`}>
+      <div className="relative mt-2.5 min-h-[5.4rem]">
+        <p className={`absolute inset-x-0 top-0 font-display text-[1.28rem] leading-[1.12] text-slate transition-all duration-500 ${isProblem ? "opacity-100" : "-translate-y-2 opacity-0"}`}>
           {problem}
         </p>
         <div className={`transition-all duration-500 ${answered ? "opacity-100" : "translate-y-2 opacity-0"}`}>
           {still && <p className="mb-1 text-[0.78rem] text-mute line-through decoration-[#D9403D]">{problem}</p>}
-          <h3 className="font-display text-[1.5rem] leading-[1.1] text-ink">{title}</h3>
-          <p className="mt-1.5 text-[0.84rem] leading-relaxed text-slate">{body}</p>
+          <h3 className="font-display text-[1.28rem] leading-[1.12] text-ink">{title}</h3>
+          <p className="mt-1 text-[0.8rem] leading-relaxed text-slate">{body}</p>
         </div>
       </div>
 
       {/* picture: the problem's, wiped across into the answer's */}
-      <div className="relative mt-4 h-[11.5rem] overflow-hidden rounded-2xl bg-mist ring-1 ring-line">
-        <div key={isProblem ? `p${cycle}` : "p"} className={`absolute inset-0 p-3 transition-opacity duration-300 ${phase === "solution" || still ? "opacity-0" : "opacity-100"}`}>
+      <div className="relative mt-3 h-[9.75rem] overflow-hidden rounded-xl bg-mist ring-1 ring-line">
+        <div key={isProblem ? `p${cycle}` : "p"} className={`absolute inset-0 p-2.5 transition-opacity duration-300 ${phase === "solution" || still ? "opacity-0" : "opacity-100"}`}>
           <div className="relative h-full">{problemArt}</div>
         </div>
         <div
-          className="absolute inset-0 bg-white p-3"
+          className="absolute inset-0 bg-white p-2.5"
           style={{ clipPath: `inset(0 ${100 - wipe}% 0 0)`, transition: `clip-path ${wipeMs}ms ease-in-out` }}
         >
           <div key={phase === "turn" ? `s${cycle}` : "s"} className="h-full">
