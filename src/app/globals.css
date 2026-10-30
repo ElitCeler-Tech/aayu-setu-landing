@@ -190,6 +190,62 @@ body {
   }
 }
 
+/* The conditions drifting past the chart in "follow the markers". The
+   row is doubled, so moving it by half its width loops without a seam. */
+@keyframes ticker { to { transform: translateX(-50%); } }
+.ticker-row { animation: ticker 70s linear infinite; }
+.ticker-row-rev { animation: ticker 84s linear infinite reverse; }
+
+/* "Getting started": boxes two and three play on the same six second
+   loop, so the row reads as one thing happening.
+
+   Box two: the line draws across the chart, the readings land one by
+   one, and the last turns green as the in range band lights up.
+   Box three: the plan arrives a line at a time and each is ticked off.
+
+   Without animation (reduced motion, or before it starts) everything
+   sits in its finished state, so nothing is ever missing. */
+.range-dot-3 { fill: #2E8A62; }
+.range-dot { transform-box: fill-box; transform-origin: center; }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes range-line { 0%, 6% { stroke-dashoffset: 100; opacity: 1; } 42%, 88% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+  .range-line { stroke-dasharray: 100; animation: range-line 6s ease-in-out infinite; }
+  @keyframes range-dot-1 { 0%, 4% { transform: scale(0); opacity: 1; } 10%, 88% { transform: scale(1); opacity: 1; } 100% { transform: scale(1); opacity: 0; } }
+  @keyframes range-dot-2 { 0%, 22% { transform: scale(0); opacity: 1; } 28%, 88% { transform: scale(1); opacity: 1; } 100% { transform: scale(1); opacity: 0; } }
+  @keyframes range-dot-3 { 0%, 38% { transform: scale(0); fill: #FF8B0B; opacity: 1; } 44% { transform: scale(1.25); fill: #FF8B0B; opacity: 1; } 52%, 88% { transform: scale(1); fill: #2E8A62; opacity: 1; } 100% { transform: scale(1); fill: #2E8A62; opacity: 0; } }
+  .range-dot-1 { animation: range-dot-1 6s ease-out infinite; }
+  .range-dot-2 { animation: range-dot-2 6s ease-out infinite; }
+  .range-dot-3 { animation: range-dot-3 6s ease-out infinite; }
+  @keyframes range-band { 0%, 46% { box-shadow: 0 0 0 0 rgba(46, 138, 98, 0); } 56% { box-shadow: 0 0 0 4px rgba(46, 138, 98, 0.18); } 88%, 100% { box-shadow: 0 0 0 0 rgba(46, 138, 98, 0); } }
+  .range-band { animation: range-band 6s ease-out infinite; }
+
+  @keyframes plan-row { 0% { opacity: 0; transform: translateY(10px); } 8%, 90% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .plan-row { animation: plan-row 6s ease-out infinite both; }
+  .plan-row-2 { animation-delay: 0.45s; }
+  .plan-row-3 { animation-delay: 0.9s; }
+  @keyframes plan-tick { 0%, 30% { opacity: 0; transform: scale(0.4); } 36%, 90% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+  .plan-tick { animation: plan-tick 6s ease-out infinite both; }
+  .plan-tick-2 { animation-delay: 0.8s; }
+  .plan-tick-3 { animation-delay: 1.6s; }
+}
+
+/* "How it works", step one: each source slides into the Ayussetu tile
+   in turn, and the tile gives a small beat as each one lands. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes gather {
+    0%, 30% { left: 0.25rem; opacity: 1; transform: none; }
+    50% { left: 52%; opacity: 0; transform: scale(0.7); }
+    51% { left: 0.25rem; opacity: 0; transform: none; }
+    70%, 100% { left: 0.25rem; opacity: 1; transform: none; }
+  }
+  .gather { animation: gather 5s ease-in-out infinite; }
+  .gather-2 { animation-delay: 1.25s; }
+  .gather-3 { animation-delay: 2.5s; }
+  .gather-4 { animation-delay: 3.75s; }
+  @keyframes gather-box { 0%, 34%, 100% { transform: none; } 42% { transform: scale(1.07); } }
+  .gather-box { animation: gather-box 1.25s ease-out infinite; }
+}
+
 /* Ayu's chat plays on a ten second loop: question, typing, answer,
    sources, a pause to read, then it clears and starts again. Without
    motion every message simply shows. */
@@ -218,40 +274,54 @@ body {
   .swap-new { animation: swap-new 8s ease-out infinite both; }
 }
 
+/* ===== How it works: cards two, three, four and six ===== */
+/* Every piece in a card runs on the same seven second timeline: it
+   waits for its stage, arrives, holds, and everything clears together
+   at the end, so a card never drifts out of step with itself. seq-0 to
+   seq-9 are the stages, six percent apart. Without motion they simply
+   sit finished. */
+.seq { --seq-from: translateY(6px); }
+.seq-pop { --seq-from: scale(0.6); transform-box: fill-box; transform-origin: center; }
+.seq-slide { --seq-from: translateX(-10px); }
+.strike-in { text-decoration-line: line-through; }
+@media (prefers-reduced-motion: no-preference) {
+  .seq { animation-duration: 7s; animation-timing-function: ease-out; animation-iteration-count: infinite; animation-fill-mode: both; }
+  @keyframes seq-0 { 0%, 2% { opacity: 0; transform: var(--seq-from); } 8%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-0 { animation-name: seq-0; }
+  @keyframes seq-1 { 0%, 8% { opacity: 0; transform: var(--seq-from); } 14%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-1 { animation-name: seq-1; }
+  @keyframes seq-2 { 0%, 14% { opacity: 0; transform: var(--seq-from); } 20%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-2 { animation-name: seq-2; }
+  @keyframes seq-3 { 0%, 20% { opacity: 0; transform: var(--seq-from); } 26%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-3 { animation-name: seq-3; }
+  @keyframes seq-4 { 0%, 26% { opacity: 0; transform: var(--seq-from); } 32%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-4 { animation-name: seq-4; }
+  @keyframes seq-5 { 0%, 32% { opacity: 0; transform: var(--seq-from); } 38%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-5 { animation-name: seq-5; }
+  @keyframes seq-6 { 0%, 38% { opacity: 0; transform: var(--seq-from); } 44%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-6 { animation-name: seq-6; }
+  @keyframes seq-7 { 0%, 44% { opacity: 0; transform: var(--seq-from); } 50%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-7 { animation-name: seq-7; }
+  @keyframes seq-8 { 0%, 50% { opacity: 0; transform: var(--seq-from); } 56%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-8 { animation-name: seq-8; }
+  @keyframes seq-9 { 0%, 56% { opacity: 0; transform: var(--seq-from); } 62%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  .seq-9 { animation-name: seq-9; }
+  @keyframes draw-line { 0%, 2% { stroke-dashoffset: 100; opacity: 1; } 58%, 88% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+  .draw-line { stroke-dasharray: 100; animation: draw-line 7s ease-in-out infinite both; }
+  @keyframes strike-in { 0%, 10% { text-decoration-color: transparent; color: var(--color-ink); opacity: 1; } 20%, 88% { text-decoration-color: currentColor; color: var(--color-mute); opacity: 1; } 100% { opacity: 0; } }
+  .strike-in { animation: strike-in 7s ease-out infinite both; }
+}
+/* ===== end How it works ===== */
+
+/* The scan line passing over the report pages in "getting started". */
+@keyframes scan { from { top: 1.4rem; } to { top: 10.5rem; } }
+.scan-line { animation: scan 2.8s ease-in-out infinite alternate; }
+
 /* ABHA: records travelling down the one approved line. Nothing else
    in the diagram moves; a waiting request is shown, not pulsed. */
 @keyframes abha-flow { to { stroke-dashoffset: -17.2; } }
 .abha-flow { animation: abha-flow 1.6s linear infinite; }
 
 @media (prefers-reduced-motion: reduce) {
-  .score-arc, .abha-flow { animation: none; }
+  .score-arc, .ticker-row, .ticker-row-rev, .scan-line, .abha-flow { animation: none; }
 }
-
-/* ===== How it works: problem and answer rows (hiw-*) ===== */
-@media (prefers-reduced-motion: no-preference) {
-  @keyframes hiw-jitter { to { transform: translate(3px, -3px) rotate(4deg); } }
-  .hiw-jitter { animation: hiw-jitter 1.1s ease-in-out infinite alternate; }
-  @keyframes hiw-fall { 0% { transform: translateY(-6px); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(60px) rotate(20deg); opacity: 0; } }
-  .hiw-fall { animation: hiw-fall 2.2s ease-in infinite; }
-  @keyframes hiw-blink { 50% { opacity: 0.25; } }
-  .hiw-blink { animation: hiw-blink 1.3s infinite; }
-  @keyframes hiw-strike { 0%, 15% { transform: scaleX(0); } 45%, 100% { transform: scaleX(1); } }
-  .hiw-strike { transform-origin: left; animation: hiw-strike 3s ease-out infinite both; }
-  @keyframes hiw-flyin { 0% { transform: translate(-70px, var(--y)) scale(0.7); opacity: 0; } 25% { opacity: 1; } 45%, 100% { transform: none; opacity: 0; } }
-  .hiw-flyin { animation: hiw-flyin 6s infinite both; }
-  @keyframes hiw-pop { 0%, 35% { transform: scale(0.92); } 45% { transform: scale(1.05); } 55%, 100% { transform: none; } }
-  .hiw-pop { animation: hiw-pop 6s infinite both; }
-  @keyframes hiw-stack { 0% { opacity: 0; transform: translateY(-6px); } 12%, 90% { opacity: 1; transform: none; } 100% { opacity: 0; } }
-  .hiw-stack { animation: hiw-stack 6s infinite both; }
-  @keyframes hiw-draw { 0% { stroke-dashoffset: 100; } 40%, 100% { stroke-dashoffset: 0; } }
-  .hiw-draw { stroke-dasharray: 100; animation: hiw-draw 6s ease-out infinite both; }
-  @keyframes hiw-slide { 0% { opacity: 0; transform: translateX(-8px); } 10%, 90% { opacity: 1; transform: none; } 100% { opacity: 0; } }
-  .hiw-slide { animation: hiw-slide 6s infinite both; }
-  @keyframes hiw-nudge { 50% { translate: 3px 0; } }
-  .hiw-nudge { animation: hiw-nudge 1.6s ease-in-out infinite; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hiw-flyin { opacity: 0; }
-  .hiw-strike { transform: scaleX(1); }
-}
-/* ===== end How it works ===== */
