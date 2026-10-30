@@ -14,26 +14,6 @@ const orange = "#FF8B0B";
 
 /* --- the pictures on the right ----------------------------------------- */
 
-function Records() {
-  const rows = [
-    { t: "Lipid profile", s: "Lab PDF", d: "14 Oct" },
-    { t: "Prescription, Dr S. Rao", s: "Photo", d: "02 Oct" },
-    { t: "Blood pressure 128/82", s: "Logged at home", d: "18 Sep" },
-  ];
-  return (
-    <ul className="w-full space-y-2">
-      {rows.map((r) => (
-        <li key={r.t} className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.06] px-3.5 py-2.5">
-          <span className="min-w-0">
-            <span className="block truncate text-[0.82rem] font-semibold text-white">{r.t}</span>
-            <span className="block text-[0.68rem] text-white/50">{r.s}</span>
-          </span>
-          <span className="shrink-0 font-mono text-[0.66rem] text-white/45">{r.d}</span>
-        </li>
-      ))}
-    </ul>
-  );
-}
 
 function Trend() {
   const v = [112, 121, 128, 146, 164];
@@ -55,65 +35,8 @@ function Trend() {
   );
 }
 
-function Ring({ v, color, label }: { v: number; color: string; label: string }) {
-  return (
-    <div className="flex flex-col items-center">
-      <div className="relative h-[6.5rem] w-[6.5rem]">
-        <svg viewBox="0 0 120 120" className="h-full w-full -rotate-90" aria-hidden="true">
-          <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="9" />
-          <circle cx="60" cy="60" r="50" fill="none" stroke={color} strokeWidth="9" strokeLinecap="round" pathLength={100} strokeDasharray={`${v} 100`} />
-        </svg>
-        <span className="absolute inset-0 grid place-items-center font-display text-[2.2rem] text-white">{v}</span>
-      </div>
-      <span className="mt-2 text-[0.76rem] text-white/65">{label}</span>
-    </div>
-  );
-}
 
-function Scores() {
-  return (
-    <div className="flex w-full justify-center gap-8">
-      <Ring v={81} color={green} label="Health Score" />
-      <Ring v={72} color={orange} label="Lab Score" />
-    </div>
-  );
-}
 
-function Risk() {
-  // 70 to 140 mg/dL across the bar
-  const pct = (n: number) => ((n - 70) / 70) * 100;
-  const reads = [
-    { m: "Jan", v: 98 },
-    { m: "May", v: 108 },
-    { m: "Oct", v: 118 },
-  ];
-  return (
-    <div className="w-full">
-      <div className="relative pt-11">
-        <div className="flex h-3 overflow-hidden rounded-full">
-          <span style={{ width: `${pct(100)}%`, background: "rgba(127,211,168,0.75)" }} />
-          <span style={{ width: `${pct(126) - pct(100)}%`, background: "rgba(255,177,92,0.75)" }} />
-          <span className="flex-1" style={{ background: orange }} />
-        </div>
-        {reads.map((r, i) => (
-          <div key={r.m} className="absolute top-0 -translate-x-1/2 text-center" style={{ left: `${pct(r.v)}%` }}>
-            <span className={`block text-[0.8rem] font-semibold leading-none ${i === 2 ? "text-white" : "text-white/55"}`}>{r.v}</span>
-            <span className={`block text-[0.6rem] ${i === 2 ? "text-white/70" : "text-white/40"}`}>{r.m}</span>
-            <span className={`mx-auto mt-1 block h-6 w-[3px] rounded-full ${i === 2 ? "bg-white" : "bg-white/35"}`} />
-          </div>
-        ))}
-        <div
-          className="mt-2.5 grid font-mono text-[0.58rem] uppercase tracking-[0.06em] text-white/50"
-          style={{ gridTemplateColumns: `${pct(100)}fr ${pct(126) - pct(100)}fr ${100 - pct(126)}fr` }}
-        >
-          <span>Normal</span>
-          <span>Prediabetes</span>
-          <span>Diabetes</span>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function Plan() {
   const plan = [
@@ -138,48 +61,117 @@ function Plan() {
   );
 }
 
-/* --- the five cards ------------------------------------------------------ */
+/* Act: the steps chosen, before any are done. */
+function Steps() {
+  const steps = [
+    { t: "Walk 20 minutes after dinner", s: "Evenings suit you best" },
+    { t: "Swap the evening biscuit, keep the chai", s: "Readings rise most after dinner" },
+    { t: "Retest HbA1c in January", s: "Three months after your last report" },
+  ];
+  return (
+    <ul className="w-full space-y-2">
+      {steps.map((x, i) => (
+        <li key={x.t} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.06] px-3.5 py-2.5">
+          <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg font-mono text-[0.68rem] text-white" style={{ background: orange }}>{i + 1}</span>
+          <span className="min-w-0">
+            <span className="block text-[0.82rem] font-semibold text-white">{x.t}</span>
+            <span className="block text-[0.68rem] text-white/50">{x.s}</span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/* Learn: what moved the numbers for this one person. */
+function Lessons() {
+  const rows = [
+    { k: "Weeks with evening walks", v: 18, n: "−18 mg/dL" },
+    { k: "Weeks with morning walks", v: 7, n: "−7 mg/dL" },
+    { k: "Weeks with no walks", v: 1, n: "−1 mg/dL" },
+  ];
+  return (
+    <div className="w-full">
+      <p className="text-[0.72rem] text-white/55">Change in triglycerides, by kind of week</p>
+      <div className="mt-3 space-y-3">
+        {rows.map((r, i) => (
+          <div key={r.k}>
+            <div className="flex justify-between text-[0.8rem]">
+              <span className={i === 0 ? "font-semibold text-white" : "text-white/70"}>{r.k}</span>
+              <span className="font-mono text-[0.72rem]" style={{ color: i === 0 ? green : "rgba(255,255,255,0.55)" }}>{r.n}</span>
+            </div>
+            <div className="mt-1.5 h-2 rounded-full bg-white/10">
+              <div className="h-2 rounded-full" style={{ width: `${(r.v / 18) * 100}%`, background: i === 0 ? green : "rgba(255,255,255,0.35)" }} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* Adapt: the next plan, shaped by what was learned. */
+function NextPlan() {
+  const rows = [
+    { tag: "Keep", t: "Evening walk, 20 minutes", c: green },
+    { tag: "Add", t: "One more evening walk at the weekend", c: orange },
+    { tag: "Drop", t: "Early morning walks, which you skipped", c: "rgba(255,255,255,0.45)" },
+  ];
+  return (
+    <ul className="w-full space-y-2">
+      {rows.map((r) => (
+        <li key={r.t} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.06] px-3.5 py-2.5">
+          <span className="w-12 shrink-0 rounded-md py-1 text-center font-mono text-[0.62rem] uppercase tracking-[0.08em] text-[#0D1628]" style={{ background: r.c }}>{r.tag}</span>
+          <span className="text-[0.82rem] font-medium text-white">{r.t}</span>
+        </li>
+      ))}
+      <li className="pt-1 text-center font-mono text-[0.62rem] uppercase tracking-[0.12em] text-white/45">↻ The cycle continues with your next report</li>
+    </ul>
+  );
+}
+
+/* --- the five cards: the AyusSetu Learning Loop -------------------------- */
 
 const cards = [
   {
-    title: "Unified health history",
-    body: "Every report, prescription and reading in one record you hold, whatever it arrived as.",
-    stat: "34",
-    statLabel: "records from 6 sources",
+    title: "Understand",
+    body: "Connect health data and identify patterns. Every report is read together, so a slow rise shows up as a pattern, not three separate numbers.",
+    stat: "128 → 164",
+    statLabel: "LDL, mg/dL, rising across reports",
     bg: "#1F3050",
-    visual: <Records />,
-  },
-  {
-    title: "Lab trends over time",
-    body: "Markers read out of each report and followed across years, so drift is visible.",
-    stat: "+52",
-    statLabel: "LDL, mg/dL, across five reports",
-    bg: "#22365A",
     visual: <Trend />,
   },
   {
-    title: "Health Score and Lab Score",
-    body: "One score from your everyday vitals, one from your lab reports.",
-    stat: "81 · 72",
-    statLabel: "Health Score · Lab Score",
-    bg: "#263B62",
-    visual: <Scores />,
+    title: "Act",
+    body: "Take meaningful, personalised actions, set around your readings and what suits your day.",
+    stat: "3 steps",
+    statLabel: "chosen for this month",
+    bg: "#22365A",
+    visual: <Steps />,
   },
   {
-    title: "Risk awareness",
-    body: "What is drifting toward a risk, flagged early and explained plainly.",
-    stat: "118",
-    statLabel: "fasting sugar, prediabetes range",
-    bg: "#1B2B4A",
-    visual: <Risk />,
-  },
-  {
-    title: "Preventive actions",
-    body: "Steps set around your readings and routine, and tracked against your results.",
+    title: "Measure",
+    body: "Track behaviour and health changes: what you did, and what your numbers did in the same weeks.",
     stat: "12/15",
     statLabel: "evening walks this month",
-    bg: "#16233D",
+    bg: "#263B62",
     visual: <Plan />,
+  },
+  {
+    title: "Learn",
+    body: "Discover individual patterns and responses: which changes actually move your numbers.",
+    stat: "−18",
+    statLabel: "triglycerides, mg/dL, in weeks with evening walks",
+    bg: "#1B2B4A",
+    visual: <Lessons />,
+  },
+  {
+    title: "Adapt",
+    body: "Refine the next recommendation toward what worked for you, and the cycle continues.",
+    stat: "210 → 168",
+    statLabel: "triglycerides since the loop began",
+    bg: "#16233D",
+    visual: <NextPlan />,
   },
 ];
 
@@ -193,7 +185,8 @@ export function Intelligence() {
             Your records, <em className="text-amber">read for you</em>
           </h2>
           <p className="mt-4 text-[1rem] leading-relaxed text-slate">
-            Five things Ayussetu does with the reports you already have.
+            The AyusSetu Learning Loop: five stages that turn your reports
+            into steps, and your results into better steps.
           </p>
           <p className="mt-2 text-[0.76rem] text-mute">Example figures for illustration.</p>
         </div>
@@ -211,7 +204,7 @@ export function Intelligence() {
               <span className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-[radial-gradient(closest-side,rgba(255,139,11,0.28),transparent)]" />
               <div className="relative grid gap-8 p-7 md:min-h-[18.5rem] md:grid-cols-[1fr_1fr] md:items-center md:gap-12 md:p-10">
                 <div>
-                  <p className="eyebrow text-amber-light">{String(i + 1).padStart(2, "0")}</p>
+                  <p className="eyebrow text-amber-light">Stage {String(i + 1).padStart(2, "0")} of 05</p>
                   <h3 className="mt-3 font-display text-[clamp(1.9rem,3.4vw,2.6rem)] leading-[1.05]">{c.title}</h3>
                   <p className="mt-3 max-w-md text-[0.94rem] leading-relaxed text-white/65">{c.body}</p>
                   <p className="mt-6 font-display text-[3.4rem] leading-none">{c.stat}</p>
