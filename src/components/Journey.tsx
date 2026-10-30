@@ -264,44 +264,34 @@ export function Journey() {
 
         {/* Six rows: the problem on the left, the answer on the right. */}
         <div className="mx-auto mt-12 max-w-5xl">
-          <div className="mb-3 hidden grid-cols-[0.8fr_1.2fr] font-mono text-[0.66rem] uppercase tracking-[0.12em] md:grid">
-            <span className="pl-6 text-[#D9403D]">✕ Today</span>
-            <span className="pl-9 text-sage">✓ With Ayussetu</span>
-          </div>
           <ol className="grid gap-5">
             {steps.map((s, i) => (
               <FlowRow
                 key={s.t}
                 problem={
-                <div className="flex h-full flex-col border-b border-line bg-mist px-6 py-5 md:border-b-0 md:border-r">
-                  <span className="flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-[#D9403D]">
-                    <span className="grid h-[1.15rem] w-[1.15rem] place-items-center rounded-full border border-[#F6C9C8] bg-white text-[0.58rem] font-bold">✕</span>
-                    Today · {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p className="mt-2.5 text-[1.05rem] leading-snug text-slate">{s.p}</p>
-                  <div className="relative mt-4 h-[6.5rem]">{problemArt[i]}</div>
-                </div>
-                }
-                arrow={
-                <span
-                  aria-hidden="true"
-                  className="relative z-10 -my-5 grid h-10 w-10 rotate-90 place-items-center justify-self-center rounded-full bg-cta text-white shadow-[0_0_0_5px_#fff,0_10px_22px_-10px_rgba(255,139,11,0.8)] md:absolute md:left-[40%] md:top-1/2 md:my-0 md:-translate-x-1/2 md:-translate-y-1/2 md:rotate-0"
-                >
-                  →
-                </span>
+                  <div className="flex h-full flex-col px-6 pb-6 pt-5 md:pr-10">
+                    <span className="flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-[#D9403D]">
+                      <span className="grid h-[1.15rem] w-[1.15rem] place-items-center rounded-full border border-[#F6C9C8] bg-white text-[0.58rem] font-bold">✕</span>
+                      Today · {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div className="mt-2.5 md:min-h-[6.75rem]">
+                      <p className="font-display text-[1.6rem] leading-[1.08] text-slate">{s.p}</p>
+                    </div>
+                    <div className="relative mt-4 h-[11.5rem]">{problemArt[i]}</div>
+                  </div>
                 }
                 solution={
-                <div className="grid h-full items-center gap-4 p-5 sm:grid-cols-[1fr_15rem] md:pl-9">
-                  <div>
+                  <div className="flex h-full flex-col px-6 pb-6 pt-5 md:pl-10">
                     <span className="flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-sage">
                       <span className="grid h-[1.15rem] w-[1.15rem] place-items-center rounded-full bg-sage-wash text-[0.58rem] font-bold">✓</span>
                       With Ayussetu
                     </span>
-                    <h3 className="mt-2 font-display text-[1.6rem] leading-[1.05] text-ink">{s.t}</h3>
-                    <p className="mt-1.5 text-[0.84rem] leading-relaxed text-slate">{s.b}</p>
+                    <div className="mt-2.5 md:min-h-[6.75rem]">
+                      <h3 className="font-display text-[1.6rem] leading-[1.08] text-ink">{s.t}</h3>
+                      <p className="mt-1.5 text-[0.86rem] leading-relaxed text-slate">{s.b}</p>
+                    </div>
+                    <div className="mt-4 h-[11.5rem] rounded-2xl bg-white p-3 ring-1 ring-line">{s.art}</div>
                   </div>
-                  <div className="rounded-2xl bg-mist p-3">{s.art}</div>
-                </div>
                 }
               />
             ))}

@@ -362,9 +362,9 @@ body {
 /* ===== end problem side ===== */
 
 /* ===== How it works, problem to answer flow (flow-*) ===== */
-@keyframes flow-line { 0% { width: 0; } 42% { width: 40%; } 50% { width: 55%; } 100% { width: 100%; } }
-.flow-line { animation: flow-line linear forwards; }
-@keyframes flow-pulse { 0% { transform: scale(1); } 35% { transform: scale(1.25); } 100% { transform: scale(1); } }
-.flow-pulse > span { animation: flow-pulse 0.7s ease-out; }
-@media (prefers-reduced-motion: reduce) { .flow-line, .flow-pulse > span { animation: none; } }
+/* Dots run from the problem's picture into the answer's, once, as the
+   answer lights up. */
+@keyframes flow-dot { 0% { left: 0; opacity: 0; transform: translateY(-50%) scale(0.6); } 20% { opacity: 1; } 80% { opacity: 1; } 100% { left: 100%; opacity: 0; transform: translateY(-50%) scale(1); } }
+.flow-stream .flow-dot { animation: flow-dot 0.9s ease-in 2 both; }
+@media (prefers-reduced-motion: reduce) { .flow-stream { display: none; } }
 /* ===== end flow ===== */
