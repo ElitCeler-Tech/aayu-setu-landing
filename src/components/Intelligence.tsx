@@ -13,95 +13,139 @@ const green = "#7FD3A8";
 const orange = "#FF8B0B";
 
 /* --- the pictures on the right ----------------------------------------- */
+/* One illustration per stage, drawn for what that stage's words say.
+   Motion classes (hi-*) live in globals.css and stop for reduced motion. */
 
+const box = "w-full rounded-xl border border-white/10 bg-white/[0.06]";
 
-function Trend() {
-  const v = [112, 121, 128, 146, 164];
-  const x = (i: number) => 14 + i * 78;
-  const y = (n: number) => 100 - (n - 95) * 1.2;
-  const line = v.map((n, i) => `${x(i)} ${y(n)}`).join(" L");
+function Ic({ d, c = "#fff", s = 16 }: { d: string; c?: string; s?: number }) {
   return (
-    <svg viewBox="0 0 340 120" className="h-auto w-full" aria-label="LDL across five reports: 112, 121, 128, 146, 164 mg/dL">
-      <rect x="0" y={y(100)} width="340" height={110 - y(100)} rx="6" fill="rgba(127,211,168,0.12)" />
-      <text x="334" y={y(100) + 12} fontSize="8.5" textAnchor="end" fill={green} fontFamily="var(--font-mono)">HEALTHY, UNDER 100</text>
-      <path d={`M${line}`} fill="none" stroke={orange} strokeWidth="2.4" strokeLinejoin="round" strokeLinecap="round" />
-      {v.map((n, i) => (
-        <g key={i}>
-          <circle cx={x(i)} cy={y(n)} r={i === 4 ? 5.5 : 4} fill={i === 4 ? orange : "#1F3050"} stroke={orange} strokeWidth="2" />
-          <text x={x(i)} y={y(n) - 9} fontSize="10" textAnchor="middle" fill="#fff" fontWeight="600">{n}</text>
-        </g>
-      ))}
+    <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d={d} />
     </svg>
   );
 }
 
-
-
-
-function Plan() {
-  const plan = [
-    { t: "Walk 20 minutes after dinner", done: 12, of: 15 },
-    { t: "Metformin, as prescribed", done: 28, of: 30 },
-    { t: "Retest HbA1c, January", done: 0, of: 1 },
+/* Understand: four sources joining into one record, and the pattern that
+   only shows once they are together. */
+function Connect() {
+  const src = [
+    { k: "Lab report", d: "M6 3h9l4 4v14H6zM15 3v4h4M9 12h7M9 16h7", y: 14 },
+    { k: "Prescription", d: "M5 13.5h14a3 3 0 0 0 0-6H5a3 3 0 0 0 0 6ZM12 7.5v6", y: 58 },
+    { k: "Wearable", d: "M8 6h8v12H8zM10 3h4M10 21h4M11 10l1 2 1-1", y: 102 },
+    { k: "Daily habits", d: "M13 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3ZM10 21l2-6 3 3v3M9 12l3-4 3 3 3 1", y: 146 },
   ];
   return (
-    <div className="w-full space-y-3">
-      {plan.map((p) => (
-        <div key={p.t}>
-          <div className="flex items-baseline justify-between gap-3 text-[0.8rem]">
-            <span className="font-medium text-white">{p.t}</span>
-            <span className="shrink-0 font-mono text-[0.66rem] text-white/50">{p.of === 1 ? "Upcoming" : `${p.done}/${p.of}`}</span>
-          </div>
-          <div className="mt-1.5 h-1.5 rounded-full bg-white/10">
-            <div className="h-1.5 rounded-full" style={{ width: `${Math.max((p.done / p.of) * 100, 2)}%`, background: green }} />
-          </div>
+    <div className="relative h-[11.5rem] w-full">
+      <svg viewBox="0 0 300 184" preserveAspectRatio="none" className="absolute inset-0 h-full w-full" aria-hidden="true">
+        {src.map((x, i) => (
+          <path key={x.k} className="hi-flow" style={{ animationDelay: `${i * 0.35}s` }} d={`M112 ${x.y + 16} C 150 ${x.y + 16}, 150 92, 182 92`} fill="none" stroke="rgba(255,177,92,0.7)" strokeWidth="1.5" strokeDasharray="4 6" />
+        ))}
+      </svg>
+      {src.map((x) => (
+        <div key={x.k} className="absolute left-0 flex w-[37%] items-center gap-2 rounded-lg border border-white/10 bg-white/[0.07] px-2.5 py-1.5" style={{ top: x.y }}>
+          <Ic d={x.d} c="#FFB15C" s={14} />
+          <span className="truncate text-[0.72rem] text-white/85">{x.k}</span>
         </div>
       ))}
+      <div className="absolute right-0 top-1/2 w-[38%] -translate-y-1/2 rounded-xl bg-white p-3 text-ink">
+        <p className="font-mono text-[0.56rem] uppercase tracking-[0.1em] text-mute">One record</p>
+        <p className="mt-1 text-[0.72rem] font-semibold">LDL, three reports</p>
+        <svg viewBox="0 0 100 34" className="mt-1 h-8 w-full" aria-hidden="true">
+          <path className="hi-draw" pathLength={100} d="M4 28 L50 20 L96 6" fill="none" stroke={orange} strokeWidth="2.4" strokeLinecap="round" />
+          <circle cx="96" cy="6" r="3.5" fill={orange} />
+        </svg>
+        <p className="text-[0.62rem] font-semibold text-amber">Pattern: rising</p>
+      </div>
     </div>
   );
 }
 
-/* Act: the steps chosen, before any are done. */
-function Steps() {
-  const steps = [
-    { t: "Walk 20 minutes after dinner", s: "Evenings suit you best" },
-    { t: "Swap the evening biscuit, keep the chai", s: "Readings rise most after dinner" },
-    { t: "Retest HbA1c in January", s: "Three months after your last report" },
-  ];
-  return (
-    <ul className="w-full space-y-2">
-      {steps.map((x, i) => (
-        <li key={x.t} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.06] px-3.5 py-2.5">
-          <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg font-mono text-[0.68rem] text-white" style={{ background: orange }}>{i + 1}</span>
-          <span className="min-w-0">
-            <span className="block text-[0.82rem] font-semibold text-white">{x.t}</span>
-            <span className="block text-[0.68rem] text-white/50">{x.s}</span>
-          </span>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-/* Learn: what moved the numbers for this one person. */
-function Lessons() {
-  const rows = [
-    { k: "Weeks with evening walks", v: 18, n: "−18 mg/dL" },
-    { k: "Weeks with morning walks", v: 7, n: "−7 mg/dL" },
-    { k: "Weeks with no walks", v: 1, n: "−1 mg/dL" },
+/* Act: this month's focus, as actions that are switched on, each with a
+   reason and a reminder. */
+function Focus() {
+  const acts = [
+    { t: "Walk 20 min after dinner", s: "Reminder 8:30 pm", on: true },
+    { t: "Swap the evening biscuit", s: "Readings rise after dinner", on: true },
+    { t: "Retest HbA1c in January", s: "Reminder set", on: false },
   ];
   return (
     <div className="w-full">
-      <p className="text-[0.72rem] text-white/55">Change in triglycerides, by kind of week</p>
-      <div className="mt-3 space-y-3">
+      <div className="mb-2.5 flex items-center justify-between">
+        <span className="font-mono text-[0.6rem] uppercase tracking-[0.1em] text-white/50">This month&rsquo;s focus</span>
+        <span className="hi-ring grid h-7 w-7 place-items-center rounded-full bg-white/10">
+          <Ic d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10 21h4" c="#FFB15C" s={14} />
+        </span>
+      </div>
+      <ul className="space-y-2">
+        {acts.map((a, i) => (
+          <li key={a.t} className={`${box} flex items-center gap-3 px-3.5 py-2.5`}>
+            <span className="min-w-0 flex-1">
+              <span className="block truncate text-[0.8rem] font-semibold text-white">{a.t}</span>
+              <span className="block text-[0.66rem] text-white/50">{a.s}</span>
+            </span>
+            <span className={`relative h-5 w-9 shrink-0 rounded-full ${a.on ? "" : "bg-white/15"}`} style={a.on ? { background: orange } : undefined}>
+              <span className="hi-toggle absolute top-0.5 h-4 w-4 rounded-full bg-white" style={{ left: a.on ? 18 : 2, animationDelay: `${i * 0.3}s` }} />
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/* Measure: behaviour and health on one timeline, so the weeks line up. */
+function Tracks() {
+  const days = [1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0];
+  return (
+    <div className="w-full">
+      <p className="font-mono text-[0.6rem] uppercase tracking-[0.1em] text-white/50">Behaviour · evening walks</p>
+      <div className="mt-2 flex gap-1">
+        {days.map((d, i) => (
+          <span key={i} className="hi-pop h-5 flex-1 rounded-[4px]" style={{ background: d ? green : "rgba(255,255,255,0.12)", animationDelay: `${i * 0.06}s` }} />
+        ))}
+      </div>
+      <p className="mt-4 font-mono text-[0.6rem] uppercase tracking-[0.1em] text-white/50">Health · triglycerides, mg/dL</p>
+      <svg viewBox="0 0 300 70" className="mt-1 h-[4.4rem] w-full" aria-hidden="true">
+        <path className="hi-draw" pathLength={100} d="M6 14 L100 26 L200 42 L294 54" fill="none" stroke={green} strokeWidth="2.4" strokeLinecap="round" />
+        {[[6, 14, "210"], [100, 26, "194"], [200, 42, "181"], [294, 54, "168"]].map(([x, y, v]) => (
+          <g key={String(v)}>
+            <circle cx={Number(x)} cy={Number(y)} r="3.5" fill={green} />
+            <text x={Math.min(Number(x), 280)} y={Number(y) + 15} fontSize="10" fill="rgba(255,255,255,0.7)" textAnchor="middle">{v}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+/* Learn: an insight, drawn as the comparison it came from. */
+function Insight() {
+  const rows = [
+    { k: "Evening walk weeks", v: 100, n: "−18" },
+    { k: "Morning walk weeks", v: 40, n: "−7" },
+    { k: "No walk weeks", v: 6, n: "−1" },
+  ];
+  return (
+    <div className="w-full">
+      <div className={`${box} flex items-start gap-3 p-3.5`}>
+        <span className="hi-glow grid h-9 w-9 shrink-0 place-items-center rounded-full" style={{ background: "rgba(255,177,92,0.18)" }}>
+          <Ic d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3Z" c="#FFB15C" s={17} />
+        </span>
+        <span>
+          <span className="block font-mono text-[0.58rem] uppercase tracking-[0.1em] text-[#FFB15C]">What works for you</span>
+          <span className="mt-0.5 block text-[0.84rem] font-semibold text-white">Evening walks move your numbers most</span>
+        </span>
+      </div>
+      <div className="mt-3 space-y-2">
         {rows.map((r, i) => (
           <div key={r.k}>
-            <div className="flex justify-between text-[0.8rem]">
-              <span className={i === 0 ? "font-semibold text-white" : "text-white/70"}>{r.k}</span>
-              <span className="font-mono text-[0.72rem]" style={{ color: i === 0 ? green : "rgba(255,255,255,0.55)" }}>{r.n}</span>
+            <div className="flex justify-between text-[0.72rem]">
+              <span className={i === 0 ? "text-white" : "text-white/60"}>{r.k}</span>
+              <span className="font-mono" style={{ color: i === 0 ? green : "rgba(255,255,255,0.5)" }}>{r.n}</span>
             </div>
-            <div className="mt-1.5 h-2 rounded-full bg-white/10">
-              <div className="h-2 rounded-full" style={{ width: `${(r.v / 18) * 100}%`, background: i === 0 ? green : "rgba(255,255,255,0.35)" }} />
+            <div className="mt-1 h-1.5 rounded-full bg-white/10">
+              <div className="hi-grow h-1.5 rounded-full" style={{ width: `${r.v}%`, background: i === 0 ? green : "rgba(255,255,255,0.35)", animationDelay: `${i * 0.2}s` }} />
             </div>
           </div>
         ))}
@@ -110,23 +154,29 @@ function Lessons() {
   );
 }
 
-/* Adapt: the next plan, shaped by what was learned. */
-function NextPlan() {
-  const rows = [
-    { tag: "Keep", t: "Evening walk, 20 minutes", c: green },
-    { tag: "Add", t: "One more evening walk at the weekend", c: orange },
-    { tag: "Drop", t: "Early morning walks, which you skipped", c: "rgba(255,255,255,0.45)" },
-  ];
+/* Adapt: last month's plan turning into next month's, and round again. */
+function Refine() {
   return (
-    <ul className="w-full space-y-2">
-      {rows.map((r) => (
-        <li key={r.t} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.06] px-3.5 py-2.5">
-          <span className="w-12 shrink-0 rounded-md py-1 text-center font-mono text-[0.62rem] uppercase tracking-[0.08em] text-[#0D1628]" style={{ background: r.c }}>{r.tag}</span>
-          <span className="text-[0.82rem] font-medium text-white">{r.t}</span>
-        </li>
-      ))}
-      <li className="pt-1 text-center font-mono text-[0.62rem] uppercase tracking-[0.12em] text-white/45">↻ The cycle continues with your next report</li>
-    </ul>
+    <div className="grid w-full grid-cols-[1fr_auto_1fr] items-center gap-3">
+      <div className={`${box} p-3`}>
+        <p className="font-mono text-[0.56rem] uppercase tracking-[0.1em] text-white/45">Last plan</p>
+        {["Evening walk", "Morning walk", "No biscuit"].map((x, i) => (
+          <p key={x} className={`mt-1.5 text-[0.74rem] ${i === 1 ? "text-white/40 line-through" : "text-white/80"}`}>{x}</p>
+        ))}
+      </div>
+      <span className="hi-spin grid h-9 w-9 place-items-center rounded-full" style={{ background: orange }}>
+        <Ic d="M20 11a8 8 0 0 0-14.9-4M4 4v4h4M4 13a8 8 0 0 0 14.9 4M20 20v-4h-4" s={16} />
+      </span>
+      <div className="rounded-xl bg-white p-3 text-ink">
+        <p className="font-mono text-[0.56rem] uppercase tracking-[0.1em] text-sage">Next plan</p>
+        {[["Keep", "Evening walk"], ["Add", "Weekend walk"], ["Keep", "No biscuit"]].map(([k, x], i) => (
+          <p key={x} className="hi-slide mt-1.5 flex items-center gap-1.5 text-[0.74rem] font-semibold" style={{ animationDelay: `${0.4 + i * 0.2}s` }}>
+            <span className="rounded px-1 font-mono text-[0.52rem] uppercase" style={{ background: k === "Add" ? "#FFF1E2" : "#E5F3EC", color: k === "Add" ? "#C25E00" : "#2E8A62" }}>{k}</span>
+            {x}
+          </p>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -139,7 +189,7 @@ const cards = [
     stat: "128 → 164",
     statLabel: "LDL, mg/dL, rising across reports",
     bg: "#1F3050",
-    visual: <Trend />,
+    visual: <Connect />,
   },
   {
     title: "Act",
@@ -147,7 +197,7 @@ const cards = [
     stat: "3 steps",
     statLabel: "chosen for this month",
     bg: "#22365A",
-    visual: <Steps />,
+    visual: <Focus />,
   },
   {
     title: "Measure",
@@ -155,7 +205,7 @@ const cards = [
     stat: "12/15",
     statLabel: "evening walks this month",
     bg: "#263B62",
-    visual: <Plan />,
+    visual: <Tracks />,
   },
   {
     title: "Learn",
@@ -163,7 +213,7 @@ const cards = [
     stat: "−18",
     statLabel: "triglycerides, mg/dL, in weeks with evening walks",
     bg: "#1B2B4A",
-    visual: <Lessons />,
+    visual: <Insight />,
   },
   {
     title: "Adapt",
@@ -171,7 +221,7 @@ const cards = [
     stat: "210 → 168",
     statLabel: "triglycerides since the loop began",
     bg: "#16233D",
-    visual: <NextPlan />,
+    visual: <Refine />,
   },
 ];
 

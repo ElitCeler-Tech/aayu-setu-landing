@@ -325,3 +325,24 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .score-arc, .ticker-row, .ticker-row-rev, .scan-line, .abha-flow { animation: none; }
 }
+
+/* ===== Health intelligence illustrations (hi-*) ===== */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes hi-flow { to { stroke-dashoffset: -20; } }
+  .hi-flow { animation: hi-flow 1.2s linear infinite; }
+  @keyframes hi-draw { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+  .hi-draw { stroke-dasharray: 100; animation: hi-draw 2.2s ease-out infinite alternate; }
+  @keyframes hi-ring { 0%, 70%, 100% { transform: rotate(0); } 75% { transform: rotate(14deg); } 85% { transform: rotate(-12deg); } }
+  .hi-ring { animation: hi-ring 2.6s ease-in-out infinite; }
+  @keyframes hi-pop { from { opacity: 0; transform: scaleY(0.3); } to { opacity: 1; transform: none; } }
+  .hi-pop { transform-origin: bottom; animation: hi-pop 0.5s ease-out both; }
+  @keyframes hi-grow { from { transform: scaleX(0); } to { transform: none; } }
+  .hi-grow { transform-origin: left; animation: hi-grow 1.2s ease-out both; }
+  @keyframes hi-glow { 50% { box-shadow: 0 0 0 8px rgba(255, 177, 92, 0.12); } }
+  .hi-glow { animation: hi-glow 2.2s ease-in-out infinite; }
+  @keyframes hi-spin { to { transform: rotate(360deg); } }
+  .hi-spin { animation: hi-spin 4s linear infinite; }
+  @keyframes hi-slide { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: none; } }
+  .hi-slide { animation: hi-slide 0.6s ease-out both; }
+}
+/* ===== end Health intelligence illustrations ===== */
