@@ -1,190 +1,179 @@
-/* How it works, as the deck lays it out: the journey from records
-   scattered across paper, WhatsApp, a phone and an inbox, to something
-   a person can act on. Six steps, each with a small picture of itself;
-   the first one moves, because "bring it all together" is a motion
-   before it is a sentence. */
+/* How it works, as six rows of problem and answer. Each row is one white
+   card with a red edge for what goes wrong today, an arrow, and one with
+   a green edge for how Ayussetu fixes it: a short label, one line, and a
+   small moving picture on the right of each. The words live in the list
+   at the bottom, so copy changes never touch the layout. Motion is CSS
+   (hiw-* in globals.css) and stops for reduced motion. */
 
-const sources = [
-  { t: "Paper report", d: "M6 3h9l4 4v14H6zM15 3v4h4M9 12h7M9 16h7" },
-  { t: "WhatsApp", d: "M4 20l1.3-4A8 8 0 1 1 8.5 19zM9 10c0 3 2 5 5 5l1.5-1.5-2-1-1 1c-1 0-2-1-2-2l1-1-1-2z" },
-  { t: "Phone photo", d: "M8 3h8a1.5 1.5 0 0 1 1.5 1.5v15A1.5 1.5 0 0 1 16 21H8a1.5 1.5 0 0 1-1.5-1.5v-15A1.5 1.5 0 0 1 8 3ZM11 18h2" },
-  { t: "Email", d: "M3.5 6h17v12h-17zM3.5 6.5 12 13l8.5-6.5" },
-];
-
-function Gather() {
+function Chip({ children, className = "", style }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
   return (
-    <div className="relative h-[10rem]">
-      {sources.map((s, i) => (
-        <span
-          key={s.t}
-          className={`gather gather-${i + 1} absolute left-1 flex items-center gap-2 rounded-xl border border-line bg-white px-2.5 py-1.5 text-[0.7rem] font-medium text-slate shadow-[0_8px_18px_-12px_rgba(18,29,51,0.45)]`}
-          style={{ top: `${0.1 + i * 2.35}rem` }}
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C25E00" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d={s.d} />
-          </svg>
-          {s.t}
-        </span>
-      ))}
-      <div className="absolute right-1 top-1/2 flex -translate-y-1/2 flex-col items-center">
-        <span className="gather-box grid h-[4.5rem] w-[4.5rem] place-items-center overflow-hidden rounded-[1.1rem] bg-white shadow-[0_0_0_1px_var(--color-line),0_18px_36px_-18px_rgba(255,139,11,0.6)]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/ayussetu-logo-white.png" alt="" width={72} height={72} />
-        </span>
-        <span className="eyebrow mt-2.5 !text-[0.56rem] text-mute">One record</span>
+    <span
+      className={`absolute whitespace-nowrap rounded-lg border border-line-strong bg-white px-2 py-1 text-[0.66rem] font-semibold text-ink shadow-[0_6px_12px_-10px_rgba(18,29,51,0.6)] ${className}`}
+      style={style}
+    >
+      {children}
+    </span>
+  );
+}
+
+function Big({ value, note }: { value: React.ReactNode; note?: string }) {
+  return (
+    <div className="grid h-full place-items-center text-center">
+      <div>
+        <span className="font-display text-[2.75rem] leading-none text-ink">{value}</span>
+        {note && <div className="hiw-blink mt-1 text-[0.7rem] text-[#D9403D]">{note}</div>}
       </div>
     </div>
   );
 }
 
-const years = [
-  { y: "2023", n: 3 },
-  { y: "2024", n: 5 },
-  { y: "2025", n: 4 },
-  { y: "2026", n: 6 },
-];
+/* --- today ------------------------------------------------------------- */
 
-function Yearly() {
-  return (
-    <div className="flex h-[10rem] items-end justify-between gap-3 px-2">
-      {years.map((y, i) => (
-        <div key={y.y} className="flex flex-1 flex-col items-center">
-          <div className="flex w-full flex-col-reverse gap-1">
-            {Array.from({ length: y.n }).map((_, k) => (
-              <span
-                key={k}
-                className={`seq seq-${i * 2 + (k >= 3 ? 1 : 0)} h-[0.7rem] rounded-[0.3rem] border ${
-                  i === years.length - 1 && k === y.n - 1 ? "border-cta bg-amber-wash" : "border-line-strong bg-white"
-                }`}
-              />
-            ))}
-          </div>
-          <span className="mt-2 font-mono text-[0.68rem] text-mute">{y.y}</span>
-        </div>
-      ))}
+const Scattered = () => (
+  <>
+    <Chip className="hiw-jitter" style={{ left: 0, top: 4 }}>📄 Paper</Chip>
+    <Chip className="hiw-jitter" style={{ left: 58, top: 26, animationDelay: "0.3s" }}>💬 WhatsApp</Chip>
+    <Chip className="hiw-jitter" style={{ left: 6, top: 54, animationDelay: "0.6s" }}>✉️ Email</Chip>
+  </>
+);
+
+const Lost = () => (
+  <>
+    {[18, 62, 106].map((x, i) => (
+      <span
+        key={x}
+        className="hiw-fall absolute top-0 h-[2.4rem] w-[1.9rem] rounded-md border-[1.5px] border-dashed border-[#F1A9A7] bg-white"
+        style={{ left: x, animationDelay: `${i * 0.7}s` }}
+      />
+    ))}
+  </>
+);
+
+const Generic = () => (
+  <div className="grid h-full content-center gap-1">
+    {["Exercise daily", "Eat less sugar", "Get checked"].map((g, i) => (
+      <span key={g} className="relative rounded-md bg-mist px-2 py-1 text-[0.66rem] text-mute">
+        {g}
+        <span className="hiw-strike absolute inset-x-1.5 top-1/2 h-[1.5px] bg-[#D9403D]" style={{ animationDelay: `${i * 0.3}s` }} />
+      </span>
+    ))}
+  </div>
+);
+
+/* --- with Ayussetu ----------------------------------------------------- */
+
+const OneRecord = () => (
+  <>
+    {[["📄", -8, 8], ["💬", 0, 34], ["✉️", 8, 60]].map(([e, y, top], i) => (
+      <Chip key={String(e)} className="hiw-flyin" style={{ left: 0, top: Number(top), ["--y" as string]: `${y}px`, animationDelay: `${i * 0.25}s` }}>
+        {e}
+      </Chip>
+    ))}
+    <div className="hiw-pop absolute right-0 top-1/2 -mt-[2.1rem] h-[4.25rem] w-24 rounded-[0.875rem] bg-navy px-3 py-2.5 text-[0.62rem] text-white">
+      AYUSSETU
+      <b className="mt-0.5 block text-[0.8rem]">One record</b>
+      <i className="not-italic text-[#9BE2BD]">✓ 34 reports</i>
     </div>
-  );
-}
+  </>
+);
 
-function Trend() {
-  const pts = [
-    { y: "2022", v: 5.4, x: 18 },
-    { y: "2023", v: 5.5, x: 64 },
-    { y: "2024", v: 5.7, x: 110 },
-    { y: "2025", v: 5.8, x: 156 },
-    { y: "2026", v: 6.0, x: 202 },
-  ];
-  const yOf = (v: number) => 150 - (v - 5.3) * 110;
-  return (
-    <div className="h-[10rem]">
-      <div className="flex items-baseline justify-between px-1">
-        <span className="text-[0.78rem] font-semibold text-ink">HbA1c, year by year</span>
-        <span className="font-mono text-[0.62rem] text-amber">RISING</span>
-      </div>
-      <svg viewBox="0 0 220 170" className="mt-1 h-[8.6rem] w-full" aria-label="HbA1c across five years: 5.4, 5.5, 5.7, 5.8, then 6.0">
-        <rect x="0" y={yOf(5.7)} width="220" height={150 - yOf(5.7)} fill="#E5F3EC" rx="4" />
-        <path className="draw-line" pathLength={100} d={`M${pts.map((p) => `${p.x} ${yOf(p.v)}`).join(" L")}`} fill="none" stroke="#1F3050" strokeWidth="1.8" strokeLinejoin="round" />
-        {pts.map((p, i) => (
-          <g key={p.y} className={`seq seq-${i * 2} seq-pop`}>
-            <circle cx={p.x} cy={yOf(p.v)} r={i === pts.length - 1 ? 5 : 4} fill={p.v >= 5.7 ? "#FF8B0B" : "#2E8A62"} />
-            <text x={p.x} y={yOf(p.v) - 9} fontSize="9" textAnchor="middle" fill="#4A5468" fontFamily="var(--font-mono)">{p.v.toFixed(1)}</text>
-            <text x={p.x} y="166" fontSize="9" textAnchor="middle" fill="#7A8496">{p.y}</text>
-          </g>
-        ))}
-      </svg>
-    </div>
-  );
-}
-
-const flags = [
-  { k: "LDL cholesterol", v: "164", s: "High", hot: true },
-  { k: "Vitamin D", v: "14", s: "Low", hot: true },
-  { k: "HbA1c", v: "6.0", s: "Watch", hot: false },
-  { k: "Haemoglobin", v: "13.8", s: "In range", ok: true },
-];
-
-function Attention() {
-  return (
-    <div className="flex h-[10rem] flex-col justify-center gap-1.5">
-      {flags.map((f, i) => (
-        <div key={f.k} className={`seq seq-${i} seq-slide flex items-center justify-between rounded-xl border border-line bg-white px-3 py-1.5`}>
-          <span className="text-[0.78rem] font-medium text-ink">{f.k}</span>
-          <span className="flex items-center gap-2.5">
-            <span className="font-mono text-[0.72rem] text-slate">{f.v}</span>
+const Years = () => (
+  <div className="flex h-full items-end justify-between">
+    {[
+      ["2023", 2],
+      ["2024", 3],
+      ["2025", 2],
+      ["2026", 3],
+    ].map(([y, n], col) => (
+      <div key={String(y)} className="flex flex-col items-center">
+        <div className="flex flex-col-reverse gap-[3px]">
+          {Array.from({ length: Number(n) }).map((_, k) => (
             <span
-              className={`seq seq-${5 + i} seq-pop rounded-full px-2 py-0.5 text-[0.62rem] font-semibold ${
-                f.hot ? "bg-amber-wash text-amber" : f.ok ? "bg-sage-wash text-sage" : "bg-mist text-slate"
-              }`}
-            >
-              {f.s}
-            </span>
-          </span>
+              key={k}
+              className={`hiw-stack h-[0.56rem] w-[1.6rem] rounded-[3px] border ${col === 3 && k === Number(n) - 1 ? "border-cta bg-amber-wash" : "border-line-strong bg-white"}`}
+              style={{ animationDelay: `${col * 0.25 + k * 0.08}s` }}
+            />
+          ))}
         </div>
-      ))}
-    </div>
-  );
-}
-
-const plan = [
-  { t: "Metformin 500mg", s: "8:00 AM, after food", icon: "M5 13.5h14a3 3 0 0 0 0-6H5a3 3 0 0 0 0 6ZM12 7.5v6" },
-  { t: "Evening walk, 20 minutes", s: "After dinner", icon: "M13 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3ZM10 21l2-6 3 3v3M9 12l3-4 3 3 3 1M8 17l2-5" },
-  { t: "HbA1c retest", s: "In three months", icon: "M9 3v6l-4 9a1.5 1.5 0 0 0 1.4 2h11.2A1.5 1.5 0 0 0 19 18l-4-9V3M8 3h8" },
-];
-
-function Actions() {
-  return (
-    <div className="flex h-[10rem] flex-col justify-center gap-2 text-left">
-      {plan.map((p, i) => (
-        <div key={p.t} className={`plan-row plan-row-${i + 1} flex items-center gap-3 rounded-2xl border border-line bg-white px-3 py-2.5`}>
-          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-[0.55rem] bg-amber-wash">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C25E00" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d={p.icon} />
-            </svg>
-          </span>
-          <span className="flex-1">
-            <span className="block text-[0.78rem] font-semibold text-ink">{p.t}</span>
-            <span className="block text-[0.68rem] text-mute">{p.s}</span>
-          </span>
-          <span className={`plan-tick plan-tick-${i + 1} grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sage-wash text-sage`}>
-            <svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true">
-              <path d="M6.2 11.8 2.9 8.5l1.1-1.1 2.2 2.2 5.6-5.6 1.1 1.1z" fill="currentColor" />
-            </svg>
-          </span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function Progress() {
-  return (
-    <div className="flex h-[10rem] flex-col justify-center">
-      <p className="text-[0.78rem] font-semibold text-ink">Triglycerides since July</p>
-      <div className="mt-3 flex items-baseline gap-3">
-        <span className="strike-in font-display text-[2.2rem] leading-none text-mute decoration-1">210</span>
-        <span className="text-[1.1rem] text-faint">&rarr;</span>
-        <span className="seq seq-4 seq-pop font-display text-[2.2rem] leading-none text-sage">168</span>
-        <span className="text-[0.72rem] text-mute">mg/dL</span>
+        <em className="mt-1 font-mono text-[0.56rem] not-italic text-mute">{y}</em>
       </div>
-      <svg viewBox="0 0 220 50" className="mt-4 h-12 w-full" aria-hidden="true">
-        <path className="draw-line" pathLength={100} d="M4 10 L50 14 L96 22 L142 30 L188 36 L216 38" fill="none" stroke="#2E8A62" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        <circle className="seq seq-9 seq-pop" cx="216" cy="38" r="4" fill="#2E8A62" />
-      </svg>
-      <p className="mt-1 text-[0.72rem] text-mute">Three reports since the evening walks began.</p>
+    ))}
+  </div>
+);
+
+const TrendLine = () => (
+  <svg viewBox="0 0 150 84" className="h-full w-full" aria-hidden="true">
+    <rect x="0" y="50" width="150" height="26" rx="5" fill="#E5F3EC" />
+    <path className="hiw-draw" pathLength={100} d="M6 68 L40 62 L75 50 L110 40 L144 20" fill="none" stroke="#1F3050" strokeWidth="2.2" />
+    <circle cx="144" cy="20" r="4.5" fill="#FF8B0B" />
+    <text x="144" y="11" fontSize="10" textAnchor="middle" fill="#121D33" fontWeight="600">6.0</text>
+  </svg>
+);
+
+const Flags = () => (
+  <div className="grid h-full content-center gap-1">
+    {[
+      ["LDL 164", "High", false],
+      ["Vit D 14", "Low", false],
+      ["Hb 13.8", "In range", true],
+    ].map(([k, t, ok], i) => (
+      <div key={String(k)} className="hiw-slide flex justify-between rounded-md bg-mist px-2 py-1 text-[0.66rem]" style={{ animationDelay: `${i * 0.25}s` }}>
+        <span>{k}</span>
+        <span className={`rounded-full px-1.5 text-[0.56rem] font-bold ${ok ? "bg-sage-wash text-sage" : "bg-amber-wash text-amber"}`}>{t}</span>
+      </div>
+    ))}
+  </div>
+);
+
+const Plan = () => (
+  <div className="grid h-full content-center gap-1">
+    {["Walk after dinner", "Metformin, 8 am", "Retest in Jan"].map((p, i) => (
+      <div key={p} className="hiw-slide flex justify-between rounded-md bg-sage-wash px-2 py-1 text-[0.66rem] font-semibold text-ink" style={{ animationDelay: `${i * 0.25}s` }}>
+        <span>{p}</span>
+        <span className="text-sage">✓</span>
+      </div>
+    ))}
+  </div>
+);
+
+const Progress = () => (
+  <svg viewBox="0 0 150 84" className="h-full w-full" aria-hidden="true">
+    <text x="0" y="22" fontSize="18" fill="#7A8496" textDecoration="line-through" fontFamily="var(--font-serif)">210</text>
+    <text x="42" y="22" fontSize="16" fill="#7A8496">→</text>
+    <text x="64" y="22" fontSize="22" fill="#2E8A62" fontFamily="var(--font-serif)">168</text>
+    <path className="hiw-draw" pathLength={100} d="M4 40 L40 46 L76 58 L112 66 L146 72" fill="none" stroke="#2E8A62" strokeWidth="2.4" strokeLinecap="round" />
+    <circle cx="146" cy="72" r="4" fill="#2E8A62" />
+  </svg>
+);
+
+/* --- the six rows ------------------------------------------------------- */
+
+const rows = [
+  { pk: "Scattered", p: "Reports on paper, WhatsApp and email", pv: <Scattered />, sk: "One record", s: "Every report in one place you hold", sv: <OneRecord /> },
+  { pk: "Lost", p: "Old reports go missing, so there is no history", pv: <Lost />, sk: "Kept by year", s: "Every report filed by date, year after year", sv: <Years /> },
+  { pk: "Read alone", p: "Each report read on its own, so drift goes unseen", pv: <Big value="5.8" note="HbA1c. Fine?" />, sk: "Trends", s: "Years of results in one line, so you see the rise", sv: <TrendLine /> },
+  { pk: "Unexplained", p: "A number like 164, and no idea if it matters", pv: <Big value="164" note="High? Normal?" />, sk: "Explained", s: "Each marker against its range, in plain words", sv: <Flags /> },
+  { pk: "Generic", p: "Advice written for everybody, so nobody follows it", pv: <Generic />, sk: "Personal", s: "Steps set around your readings and routine", sv: <Plan /> },
+  { pk: "No feedback", p: "No way to tell if what you changed is working", pv: <Big value={<>210 → <span className="hiw-blink text-[#D9403D]">?</span></>} />, sk: "Progress", s: "Each new report shows whether it moved", sv: <Progress /> },
+];
+
+function Card({ tone, label, text, children }: { tone: "bad" | "good"; label: string; text: string; children: React.ReactNode }) {
+  const bad = tone === "bad";
+  return (
+    <div
+      className={`relative grid h-28 grid-cols-[1fr_9.4rem] items-center gap-3.5 overflow-hidden rounded-[1.1rem] border border-line bg-white py-0 pl-5 pr-4 ${
+        bad ? "" : "shadow-[0_18px_40px_-32px_rgba(46,138,98,0.6)]"
+      }`}
+    >
+      <span className={`absolute inset-y-3.5 left-0 w-[3px] rounded-full ${bad ? "bg-[#D9403D]" : "bg-sage"}`} />
+      <div>
+        <p className={`font-mono text-[0.62rem] uppercase tracking-[0.1em] ${bad ? "text-[#D9403D]" : "text-sage"}`}>{label}</p>
+        <p className={`mt-1.5 text-[1rem] leading-snug ${bad ? "font-medium text-slate" : "font-semibold text-ink"}`}>{text}</p>
+      </div>
+      <div className="relative h-[5.25rem]">{children}</div>
     </div>
   );
 }
-
-/* Each step is a problem people have today and how Ayussetu answers it:
-   `p` is the problem, shown first with a red cross, then the answer. */
-const steps = [
-  { p: "Reports scattered across paper, WhatsApp and email", t: "Bring health records together", b: "Paper, WhatsApp, a photo on your phone, an email from the lab: all of it, in one place.", art: <Gather /> },
-  { p: "Old reports lost, so there is no history to look back on", t: "Kept year by year", b: "Every report is filed by date, so your history builds into something you can look back across.", art: <Yearly /> },
-  { p: "Each report read alone, so slow changes go unseen", t: "See trends over time", b: "One reading is a number. Five years of them is a direction you can see.", art: <Trend /> },
-  { p: "Numbers with no meaning: is 164 bad, and for whom?", t: "Know what deserves attention", b: "What is out of range, what is drifting, and what is fine, at a glance.", art: <Attention /> },
-  { p: "Advice written for everybody, so nobody follows it", t: "Take personalised actions", b: "Medicines, habits and retests, set around your own readings and routine.", art: <Actions /> },
-  { p: "No way to tell if what you changed is working", t: "Track how you respond", b: "See whether what you changed is moving the numbers that matter.", art: <Progress /> },
-];
 
 export function Journey() {
   return (
@@ -201,26 +190,30 @@ export function Journey() {
           </p>
         </div>
 
-        <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {steps.map((s, i) => (
-            <li key={s.t} className="flex flex-col rounded-[1.4rem] border border-line bg-mist px-5 pb-5 pt-5">
-              <div className="flex items-start gap-2.5 rounded-xl border border-[#F6C9C8] bg-[#FDECEC] px-3 py-2.5">
-                <span className="mt-px grid h-[1.15rem] w-[1.15rem] shrink-0 place-items-center rounded-full bg-white text-[0.62rem] font-bold text-[#D9403D]">✕</span>
-                <span>
-                  <span className="block font-mono text-[0.58rem] uppercase tracking-[0.1em] text-[#D9403D]">Today</span>
-                  <span className="mt-0.5 block text-[0.8rem] leading-snug text-[#7A2E2C]">{s.p}</span>
+        <div className="mx-auto mt-12 max-w-5xl">
+          <div className="mb-2.5 hidden grid-cols-[1fr_3rem_1fr] gap-3 font-mono text-[0.68rem] uppercase tracking-[0.12em] md:grid">
+            <span className="text-[#D9403D]">✕ Today</span>
+            <span />
+            <span className="text-sage">✓ With Ayussetu</span>
+          </div>
+          <ol className="grid gap-7 md:gap-3">
+            {rows.map((r, i) => (
+              <li key={r.pk} className="grid items-center gap-2 md:grid-cols-[1fr_3rem_1fr] md:gap-3">
+                <Card tone="bad" label={`${String(i + 1).padStart(2, "0")} · ${r.pk}`} text={r.p}>
+                  {r.pv}
+                </Card>
+                <span className="grid place-items-center">
+                  <span className="hiw-nudge grid h-9 w-9 rotate-90 place-items-center rounded-full bg-cta text-white shadow-[0_10px_22px_-10px_rgba(255,139,11,0.8)] md:rotate-0">
+                    →
+                  </span>
                 </span>
-              </div>
-              <div className="mt-4 flex items-center gap-2">
-                <span className="grid h-[1.15rem] w-[1.15rem] shrink-0 place-items-center rounded-full bg-sage-wash text-[0.62rem] font-bold text-sage">✓</span>
-                <span className="font-mono text-[0.58rem] uppercase tracking-[0.1em] text-sage">With Ayussetu · {String(i + 1).padStart(2, "0")}</span>
-              </div>
-              <h3 className="mt-1.5 font-display text-[1.45rem] leading-tight text-ink">{s.t}</h3>
-              <p className="mt-1.5 text-[0.82rem] leading-relaxed text-slate">{s.b}</p>
-              <div className="mt-auto pt-4">{s.art}</div>
-            </li>
-          ))}
-        </ol>
+                <Card tone="good" label={r.sk} text={r.s}>
+                  {r.sv}
+                </Card>
+              </li>
+            ))}
+          </ol>
+        </div>
 
         <div className="mt-12 text-center">
           <a href="#intelligence" className="inline-block rounded-full bg-navy px-7 py-4 text-[0.92rem] font-semibold text-white transition hover:bg-ink">
