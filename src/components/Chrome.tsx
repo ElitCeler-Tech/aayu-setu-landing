@@ -1,33 +1,27 @@
 import Link from "next/link";
 import Image from "next/image";
 import { HeaderFrame } from "./HeaderFrame";
+import { HeaderActions } from "./HeaderActions";
+import { NAV } from "@/data/siteIndex";
 import { legal } from "@/data/legal";
 
-const nav = [
-  { label: "How it works", href: "/#how" },
-  { label: "Health intelligence", href: "/#intelligence" },
-  { label: "Ayu AI", href: "/#ai" },
-  { label: "For doctors", href: "/for-doctors" },
-  { label: "About us", href: "/about" },
-];
 
-/* The doctor app's mark: the orange heart on a white tile. White reads
-   on the dark hero without help; on the white header a hairline keeps
-   the tile from dissolving into the page. */
-function Mark({ size = 34 }: { size?: number }) {
+/* The brand mark: the solid orange heart with its pulse line, the
+   doctor app's icon without the white tile around it. Two cuts, chosen by
+   the ground: on light bars the pulse is knocked out of the heart
+   (logo.png); on the dark hero and footer the pulse is drawn in white
+   (ayussetu-heart.png). `tone` fixes one for a ground that never changes;
+   left unset it follows the header's own dark state. */
+function Mark({ size = "h-[30px]", tone }: { size?: string; tone?: "light" | "dark" }) {
+  const onLight = <Image src="/logo.png" alt="" width={429} height={354} priority className={`w-auto shrink-0 ${size} ${tone ? "" : "group-data-[dark=true]:hidden"}`} />;
+  const onDark = <Image src="/ayussetu-heart.png" alt="" width={512} height={361} priority className={`w-auto shrink-0 ${size} ${tone ? "" : "hidden group-data-[dark=true]:block"}`} />;
+  if (tone === "light") return onLight;
+  if (tone === "dark") return onDark;
   return (
-    <span
-      className="inline-flex shrink-0 items-center justify-center overflow-hidden rounded-[0.65rem] bg-white shadow-[0_2px_8px_-2px_rgba(22,35,61,0.35)] ring-1 ring-line group-data-[dark=true]:ring-white/20"
-      style={{ width: size, height: size }}
-    >
-      <Image
-        src="/ayussetu-logo-white.png"
-        alt=""
-        width={size}
-        height={size}
-        priority
-      />
-    </span>
+    <>
+      {onLight}
+      {onDark}
+    </>
   );
 }
 
@@ -36,40 +30,52 @@ function Mark({ size = 34 }: { size?: number }) {
 export function Header({ overlay = false }: { overlay?: boolean }) {
   return (
     <HeaderFrame overlay={overlay}>
-      <div className="mx-auto flex h-[4.25rem] max-w-6xl items-center gap-8 px-5 sm:px-8">
-        <Link href="/" className="flex items-center gap-2.5">
-          <Mark />
-          <span className="text-[1.2rem] font-semibold tracking-[-0.02em] text-navy transition-colors group-data-[dark=true]:text-white">
-            Ayussetu
-          </span>
+      {/* Shorter and wider than it was: 3.5rem tall against the old
+          4.25, and running to max-w-7xl so the bar reaches across the
+          page instead of stopping short of it.
+
+          The wordmark is the logo's own lettering, cut from
+          ayussetu-logo-full.png and recoloured, rather than Lastica set
+          live — the typeface is licensed and not installed here, and a
+          near-miss substitute in the one place the brand is named is
+          worse than using the real artwork. Two files because the bar
+          turns dark over the hero and light everywhere else. */}
+      <div className="mx-auto grid h-11 max-w-6xl grid-cols-[1fr_auto] items-center gap-3 px-4 sm:px-5 lg:grid-cols-[1fr_auto_1fr]">
+        <Link href="/" className="flex shrink-0 items-center gap-2.5">
+          <Mark size="h-[24px] sm:h-[28px]" />
+          <Image
+            src="/wordmark-dark.png"
+            alt="Ayus Setu"
+            width={181}
+            height={17}
+            priority
+            style={{ height: "0.82rem", width: "auto" }}
+            className="group-data-[dark=true]:hidden"
+          />
+          <Image
+            src="/wordmark-light.png"
+            alt="Ayus Setu"
+            width={181}
+            height={17}
+            priority
+            style={{ height: "0.82rem", width: "auto" }}
+            className="hidden group-data-[dark=true]:block"
+          />
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
-          {nav.map((n) => (
+        <nav className="hidden items-center justify-center gap-0.5 lg:flex">
+          {NAV.map((n) => (
             <a
               key={n.href}
               href={n.href}
-              className="rounded-full px-3.5 py-2 text-[0.84rem] font-medium text-slate transition hover:bg-mist hover:text-navy group-data-[dark=true]:text-white/70 group-data-[dark=true]:hover:bg-white/10 group-data-[dark=true]:hover:text-white"
+              className="rounded-full px-2.5 py-1.5 text-[0.78rem] font-medium text-slate transition hover:bg-mist hover:text-navy group-data-[dark=true]:text-white/70 group-data-[dark=true]:hover:bg-white/10 group-data-[dark=true]:hover:text-white"
             >
               {n.label}
             </a>
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-2">
-          <a
-            href="/contact"
-            className="hidden rounded-full px-4 py-2 text-[0.84rem] font-medium text-slate transition hover:text-navy group-data-[dark=true]:text-white/70 group-data-[dark=true]:hover:text-white sm:block"
-          >
-            Contact
-          </a>
-          <a
-            href="/#download"
-            className="rounded-full bg-navy px-5 py-2.5 text-[0.82rem] font-semibold text-white transition hover:bg-ink group-data-[dark=true]:bg-brand group-data-[dark=true]:hover:bg-brand-deep"
-          >
-            Get the app
-          </a>
-        </div>
+        <HeaderActions />
       </div>
     </HeaderFrame>
   );
@@ -109,10 +115,8 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-[1.2fr_1fr_1fr_1.1fr]">
           <div>
             <div className="flex items-center gap-2.5">
-              <Mark size={32} />
-              <span className="text-[1.15rem] font-semibold tracking-[-0.02em] text-white">
-                Ayussetu
-              </span>
+              <Mark size="h-[30px]" tone="dark" />
+              <Image src="/wordmark-light.png" alt="Ayus Setu" width={181} height={17} style={{ height: "0.95rem", width: "auto" }} />
             </div>
             <p className="mt-4 max-w-xs text-[0.86rem] leading-relaxed text-white/55">
               An AI driven healthcare assistant. Records in one place, risk

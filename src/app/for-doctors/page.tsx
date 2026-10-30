@@ -3,60 +3,13 @@ import { Header, Footer } from "@/components/Chrome";
 import { StoreButtons } from "@/components/StoreButtons";
 import { Reveal } from "@/components/Motion";
 import { JoinForm } from "@/components/JoinForm";
+import { DoctorAppCards, PortalCards } from "@/components/DoctorAppTour";
 
 export const metadata: Metadata = {
   title: "Ayussetu for doctors and clinics",
   description:
     "Consult, prescribe and run a practice on Ayussetu. Download the doctor app, open the clinic console, or register to join.",
 };
-
-const doctorApp = [
-  {
-    t: "The day, one patient at a time",
-    b: "Appointments in order, with missed ones kept apart so they can be chased rather than lost.",
-    p: [
-      "Completed, upcoming and missed, separately",
-      "Patients today and all time",
-      "Prescriptions still to write",
-    ],
-  },
-  {
-    t: "The patient, before they sit down",
-    b: "Ask for access to their record. Once granted, their own readings, reports and medicines are in front of you.",
-    p: [
-      "Vitals, reports and current medicines",
-      "Record vitals for them yourself",
-      "Book a slot on their behalf",
-    ],
-  },
-  {
-    t: "The prescription, in a minute",
-    b: "Medicine with its generic resolved as you type, the end date worked out from the quantity, and your signature drawn with a finger.",
-    p: [
-      "Seventeen clinical fields, and a draft",
-      "Follow up books the next appointment",
-      "Their doses schedule themselves from it",
-    ],
-  },
-];
-
-const portal = [
-  {
-    t: "Departments and doctors",
-    b: "Set up the departments your clinic runs and the doctors who sit in them, with the front desk staff who need access.",
-    p: ["Departments", "Doctor roster", "Staff accounts"],
-  },
-  {
-    t: "The clinic's book",
-    b: "Every appointment across every department for the day, and the patient list behind it, rather than four separate registers.",
-    p: ["The day across all departments", "One patient list", "Patient history"],
-  },
-  {
-    t: "Prescriptions and billing",
-    b: "Every prescription written on your roster is filed to the clinic as well as the patient, with fees collected and outstanding alongside.",
-    p: ["Prescriptions by doctor", "Fees collected", "What is outstanding"],
-  },
-];
 
 const doctorPoints = [
   "The day's appointments, one at a time, with missed ones kept separate",
@@ -82,13 +35,6 @@ const today = [
   { t: "10:30", n: "Arjun P.", m: "Video consultation", s: "Up next" },
   { t: "11:00", n: "Fatima B.", m: "Voice call", s: "Booked" },
   { t: "08:45", n: "Suresh N.", m: "In person", s: "Missed" },
-];
-
-/* An icon for each doctor app card, in the same tile the home page uses. */
-const doctorIcons = [
-  "M8 3v3M16 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z",
-  "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4.5 20a7.5 7.5 0 0 1 15 0",
-  "M6 3h9l4 4v14H6zM9 12h7M9 16h4M15 3v4h4",
 ];
 
 export default function ForDoctors() {
@@ -177,35 +123,7 @@ export default function ForDoctors() {
               </p>
             </Reveal>
 
-            <div className="mt-12 grid gap-4 md:grid-cols-3">
-              {doctorApp.map((d, i) => (
-                <Reveal key={d.t} delay={i * 90}>
-                  <article className="h-full rounded-3xl border border-line bg-mist p-6">
-                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-amber-wash">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C25E00" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                        <path d={doctorIcons[i]} />
-                      </svg>
-                    </span>
-                    <h3 className="mt-5 text-[1.05rem] font-semibold text-ink">
-                      {d.t}
-                    </h3>
-                    <p className="mt-2 text-[0.88rem] leading-relaxed text-slate">
-                      {d.b}
-                    </p>
-                    <ul className="mt-4 space-y-2 border-t border-line pt-4">
-                      {d.p.map((x) => (
-                        <li key={x} className="flex gap-2.5 text-[0.84rem] text-navy">
-                          <svg width="13" height="13" viewBox="0 0 16 16" className="mt-[0.2rem] shrink-0 text-amber" aria-hidden="true">
-                            <path d="M6.2 11.3 3.4 8.5l1-1 1.8 1.8 5-5 1 1z" fill="currentColor" />
-                          </svg>
-                          {x}
-                        </li>
-                      ))}
-                    </ul>
-                  </article>
-                </Reveal>
-              ))}
-            </div>
+            <DoctorAppCards />
 
             <Reveal>
               <div className="mt-10 flex flex-wrap items-center gap-5 rounded-3xl border border-line bg-white p-6">
@@ -237,30 +155,7 @@ export default function ForDoctors() {
               </p>
             </Reveal>
 
-            <div className="mt-12 grid gap-4 md:grid-cols-3">
-              {portal.map((d, i) => (
-                <Reveal key={d.t} delay={i * 90}>
-                  <article className="h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6">
-                    <h3 className="text-[1.05rem] font-semibold text-white">
-                      {d.t}
-                    </h3>
-                    <p className="mt-2 text-[0.88rem] leading-relaxed text-white/60">
-                      {d.b}
-                    </p>
-                    <ul className="mt-4 space-y-2 border-t border-white/10 pt-4">
-                      {d.p.map((x) => (
-                        <li key={x} className="flex gap-2.5 text-[0.84rem] text-white/85">
-                          <svg width="13" height="13" viewBox="0 0 16 16" className="mt-[0.2rem] shrink-0 text-amber-light" aria-hidden="true">
-                            <path d="M6.2 11.3 3.4 8.5l1-1 1.8 1.8 5-5 1 1z" fill="currentColor" />
-                          </svg>
-                          {x}
-                        </li>
-                      ))}
-                    </ul>
-                  </article>
-                </Reveal>
-              ))}
-            </div>
+            <PortalCards />
 
             <Reveal>
               <div className="mt-10 flex flex-wrap items-center gap-5 rounded-3xl border border-white/12 bg-white/[0.04] p-6">

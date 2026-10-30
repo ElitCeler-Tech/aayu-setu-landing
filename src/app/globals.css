@@ -266,9 +266,9 @@ body {
 /* Prevention: the generic line is struck through, then the personal
    version arrives beside it, row after row, on an eight second loop.
    Without motion: struck through and arrived. */
-.swap-old { text-decoration-line: line-through; text-decoration-color: rgba(255, 255, 255, 0.45); }
+.swap-old { text-decoration-line: line-through; text-decoration-color: rgba(217, 64, 61, 0.6); }
 @media (prefers-reduced-motion: no-preference) {
-  @keyframes swap-old { 0%, 8% { text-decoration-color: transparent; color: rgba(255,255,255,0.85); } 18%, 92% { text-decoration-color: rgba(255,255,255,0.45); color: rgba(255,255,255,0.5); } 100% { text-decoration-color: transparent; color: rgba(255,255,255,0.85); } }
+  @keyframes swap-old { 0%, 8% { text-decoration-color: transparent; color: #4A5468; } 18%, 92% { text-decoration-color: rgba(217, 64, 61, 0.6); color: #7A8496; } 100% { text-decoration-color: transparent; color: #4A5468; } }
   .swap-old { animation: swap-old 8s ease-out infinite both; }
   @keyframes swap-new { 0%, 16% { opacity: 0; transform: translateX(-12px); } 26%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
   .swap-new { animation: swap-new 8s ease-out infinite both; }
@@ -362,3 +362,36 @@ body {
 /* ===== end problem side ===== */
 
 
+
+/* ===== ABHA story (abha-*) ===== */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes abha-ask { to { stroke-dashoffset: -4.4; } }
+  .abha-ask { animation: abha-ask 0.8s linear infinite; }
+  @keyframes abha-wait { 50% { transform: scale(1.08); opacity: 0.4; } }
+  .abha-wait { animation: abha-wait 1.2s ease-in-out infinite; }
+  @keyframes abha-note { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  .abha-note { animation: abha-note 0.45s ease-out both; }
+}
+/* ===== end ABHA story ===== */
+
+/* ===== Sequence: the bar under the lit card ===== */
+@keyframes seq-fill { from { width: 0; } to { width: 100%; } }
+.seq-fill { animation: seq-fill linear forwards; }
+
+/* Who we serve: the active card's picture plays in, piece by piece. */
+@keyframes who-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.92); }
+  to { opacity: 1; transform: none; }
+}
+.who-in { animation: who-in 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+
+/* Doctor app tour: the signature draws, then the prescription is sent. */
+@keyframes doc-sign { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+.doc-sign { stroke-dasharray: 1; animation: doc-sign 1.3s ease-in-out 0.7s both; }
+@keyframes doc-sent { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.doc-sent { animation: doc-sent 0.45s ease-out 2.1s both; }
+@keyframes doc-bar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.doc-bar { transform-origin: left; animation: doc-bar 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes belief-mark { from { left: 4%; } }
+.belief-mark { animation: belief-mark 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both; }
+@media (prefers-reduced-motion: reduce) { .who-in, .doc-sign, .doc-sent, .doc-bar, .belief-mark { animation: none; } }

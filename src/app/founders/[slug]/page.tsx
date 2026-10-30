@@ -73,6 +73,7 @@ export default async function Founder({
                 </p>
 
                 <div className="mt-7 flex flex-wrap items-center gap-3">
+                  {m.linkedin && (
                   <a
                     href={m.linkedin}
                     target="_blank"
@@ -84,6 +85,7 @@ export default async function Founder({
                     </svg>
                     LinkedIn
                   </a>
+                  )}
                   {m.location && (
                     <span className="text-[0.84rem] text-white/55">{m.location}</span>
                   )}
@@ -110,6 +112,7 @@ export default async function Founder({
               </div>
 
               <aside className="space-y-8">
+                {m.education.length > 0 && (
                 <div>
                   <h3 className="eyebrow text-mute">
                     Education
@@ -122,6 +125,7 @@ export default async function Founder({
                     ))}
                   </ul>
                 </div>
+                )}
 
                 <div>
                   <h3 className="eyebrow text-mute">

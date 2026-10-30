@@ -46,7 +46,7 @@ export function People({ intro = true }: { intro?: boolean }) {
           </div>
         )}
 
-        <div className="mt-14 grid gap-7 md:grid-cols-3">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {team.map((m, i) => (
             <Reveal key={m.slug} delay={i * 110}>
               <Link href={`/founders/${m.slug}`} className="group block">
@@ -55,7 +55,7 @@ export function People({ intro = true }: { intro?: boolean }) {
                     src={m.photo}
                     alt={m.name}
                     fill
-                    sizes="(min-width: 768px) 22rem, 100vw"
+                    sizes="(min-width: 1024px) 17rem, (min-width: 640px) 50vw, 100vw"
                     className="object-cover object-top transition duration-700 group-hover:scale-[1.03]"
                   />
                 </span>

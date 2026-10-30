@@ -7,7 +7,7 @@ export type Member = {
   name: string;
   role: string;
   photo: string;
-  linkedin: string;
+  linkedin?: string;
   lede: string;
   bio: string[];
   education: string[];
@@ -57,6 +57,21 @@ export const team: Member[] = [
       "Director of Pharmacy Services and Operations",
       "Assistant Professor, teaching PharmD students",
       "Led vaccine access and community outreach programmes",
+    ],
+  },
+  {
+    slug: "sai-krishna-alishala",
+    name: "Sai Krishna Alishala",
+    role: "CTO",
+    photo: "/team/sai.jpg",
+    lede: "Leads technology at Ayussetu: the patient app, the doctor app, the clinic console and the systems that keep records private.",
+    bio: [
+      "Sai Krishna leads the engineering behind Ayussetu, from the apps people and doctors use every day to the services that read reports and keep every record behind the patient's consent.",
+    ],
+    education: [],
+    highlights: [
+      "Leads the Ayussetu engineering team",
+      "Patient app, doctor app and clinic console",
     ],
   },
 ];

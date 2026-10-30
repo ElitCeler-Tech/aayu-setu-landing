@@ -4,8 +4,7 @@ import { Intelligence } from "@/components/Intelligence";
 import { AyuAI } from "@/components/AyuAI";
 import { Prevention } from "@/components/Prevention";
 import { WhoWeServe } from "@/components/WhoWeServe";
-import { People } from "@/components/People";
-import { Hero, Security, Abha, Download } from "@/components/Sections";
+import { Hero, Security, Promises, Download } from "@/components/Sections";
 
 /* The order the client's website deck sets out: the promise, how it
    works, what it reads, the assistant, prevention, trust, who it is
@@ -22,9 +21,8 @@ export default function Home() {
         <AyuAI />
         <Prevention />
         <Security />
-        <Abha />
+        <Promises />
         <WhoWeServe />
-        <People />
         <Download />
       </main>
       <Footer />
