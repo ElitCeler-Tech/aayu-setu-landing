@@ -1,8 +1,6 @@
 /* Personalised prevention, the deck's key differentiator. Each row is
    one piece of advice everybody gets, struck through, turning into the
-   version set for one person, with the reason it changed. Underneath,
-   the loop that keeps it personal: what you prefer, what you keep
-   doing, what your readings show. Worded as an aim, because adapting
+   version set for one person, with the reason it changed. Worded as an aim, because adapting
    to outcomes is the direction, not a claim about results.
 
    All of it comes from the two lists below. */
@@ -25,11 +23,6 @@ const swaps = [
   },
 ];
 
-const loop = [
-  { t: "What you prefer", b: "Times, habits and food you tell us suit you." },
-  { t: "What you keep doing", b: "The steps you log, and the ones you skip." },
-  { t: "What your readings show", b: "Whether the numbers move in return." },
-];
 
 export function Prevention() {
   return (
@@ -69,17 +62,6 @@ export function Prevention() {
           ))}
         </ul>
 
-        <div className="mt-10 grid gap-4 border-t border-white/12 pt-8 md:grid-cols-3">
-          {loop.map((l, i) => (
-            <div key={l.t} className="flex gap-3">
-              <span className="font-mono text-[0.72rem] leading-6 text-amber-light">{String(i + 1).padStart(2, "0")}</span>
-              <span>
-                <span className="block text-[0.95rem] font-semibold">{l.t}</span>
-                <span className="mt-1 block text-[0.84rem] leading-relaxed text-white/55">{l.b}</span>
-              </span>
-            </div>
-          ))}
-        </div>
 
         <a href="#download" className="mt-10 inline-block rounded-full bg-brand px-7 py-4 text-[0.92rem] font-semibold text-white transition hover:bg-brand-deep">
           Make health actions personal
