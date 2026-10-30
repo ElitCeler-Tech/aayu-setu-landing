@@ -203,21 +203,34 @@ export function Journey() {
 
         <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {steps.map((s, i) => (
-            <li key={s.t} className="flex flex-col rounded-[1.4rem] border border-line bg-mist px-5 pb-5 pt-5">
-              <div className="flex items-start gap-2.5 rounded-xl border border-[#F6C9C8] bg-[#FDECEC] px-3 py-2.5">
-                <span className="mt-px grid h-[1.15rem] w-[1.15rem] shrink-0 place-items-center rounded-full bg-white text-[0.62rem] font-bold text-[#D9403D]">✕</span>
-                <span>
-                  <span className="block font-mono text-[0.58rem] uppercase tracking-[0.1em] text-[#D9403D]">Today</span>
-                  <span className="mt-0.5 block text-[0.8rem] leading-snug text-[#7A2E2C]">{s.p}</span>
+            <li
+              key={s.t}
+              className="flex flex-col overflow-hidden rounded-[1.5rem] border border-line bg-white transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-40px_rgba(18,29,51,0.45)]"
+            >
+              {/* Top half: the problem, on grey */}
+              <div className="relative bg-mist px-5 pb-6 pt-4">
+                <span className="flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-[#D9403D]">
+                  <span className="grid h-[1.15rem] w-[1.15rem] place-items-center rounded-full border border-[#F6C9C8] bg-white text-[0.58rem] font-bold">✕</span>
+                  Today · {String(i + 1).padStart(2, "0")}
+                </span>
+                <p className="mt-2 min-h-[2.6em] text-[0.92rem] leading-snug text-slate">{s.p}</p>
+                {/* the turn from problem to answer */}
+                <span className="absolute -bottom-[1.1rem] right-5 grid h-9 w-9 place-items-center rounded-full bg-cta text-[0.95rem] text-white shadow-[0_0_0_5px_#fff,0_10px_20px_-8px_rgba(255,139,11,0.7)]">
+                  ↓
                 </span>
               </div>
-              <div className="mt-4 flex items-center gap-2">
-                <span className="grid h-[1.15rem] w-[1.15rem] shrink-0 place-items-center rounded-full bg-sage-wash text-[0.62rem] font-bold text-sage">✓</span>
-                <span className="font-mono text-[0.58rem] uppercase tracking-[0.1em] text-sage">With Ayussetu · {String(i + 1).padStart(2, "0")}</span>
+              {/* Bottom half: the answer, on white */}
+              <div className="flex flex-1 flex-col px-5 pb-5 pt-6">
+                <span className="flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-sage">
+                  <span className="grid h-[1.15rem] w-[1.15rem] place-items-center rounded-full bg-sage-wash text-[0.58rem] font-bold">✓</span>
+                  With Ayussetu
+                </span>
+                <h3 className="mt-2 font-display text-[1.6rem] leading-[1.05] text-ink">{s.t}</h3>
+                <p className="mt-1.5 text-[0.84rem] leading-relaxed text-slate">{s.b}</p>
+                <div className="mt-auto pt-4">
+                  <div className="rounded-2xl bg-mist p-3">{s.art}</div>
+                </div>
               </div>
-              <h3 className="mt-1.5 font-display text-[1.45rem] leading-tight text-ink">{s.t}</h3>
-              <p className="mt-1.5 text-[0.82rem] leading-relaxed text-slate">{s.b}</p>
-              <div className="mt-auto pt-4">{s.art}</div>
             </li>
           ))}
         </ol>
