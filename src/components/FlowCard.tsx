@@ -96,7 +96,7 @@ export function FlowCard({
       {/* picture: the problem's, wiped across into the answer's */}
       <div className="relative mt-4 h-[11.5rem] overflow-hidden rounded-2xl bg-mist ring-1 ring-line">
         <div key={isProblem ? `p${cycle}` : "p"} className={`absolute inset-0 p-3 transition-opacity duration-300 ${phase === "solution" || still ? "opacity-0" : "opacity-100"}`}>
-          {problemArt}
+          <div className="relative h-full">{problemArt}</div>
         </div>
         <div
           className="absolute inset-0 bg-white p-3"

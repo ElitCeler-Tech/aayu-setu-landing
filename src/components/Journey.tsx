@@ -51,11 +51,11 @@ function Yearly() {
     <div className="flex h-[10rem] items-end justify-between gap-3 px-2">
       {years.map((y, i) => (
         <div key={y.y} className="flex flex-1 flex-col items-center">
-          <div className="flex w-full flex-col-reverse gap-1">
+          <div className="flex w-full flex-col-reverse gap-1.5">
             {Array.from({ length: y.n }).map((_, k) => (
               <span
                 key={k}
-                className={`seq seq-${i * 2 + (k >= 3 ? 1 : 0)} h-[0.7rem] rounded-[0.3rem] border ${
+                className={`seq seq-${i * 2 + (k >= 3 ? 1 : 0)} h-[1.05rem] rounded-[0.35rem] border ${
                   i === years.length - 1 && k === y.n - 1 ? "border-cta bg-amber-wash" : "border-line-strong bg-white"
                 }`}
               />
@@ -129,25 +129,25 @@ function Attention() {
 
 const plan = [
   { t: "Metformin 500mg", s: "8:00 AM, after food", icon: "M5 13.5h14a3 3 0 0 0 0-6H5a3 3 0 0 0 0 6ZM12 7.5v6" },
-  { t: "Evening walk, 20 minutes", s: "After dinner", icon: "M13 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3ZM10 21l2-6 3 3v3M9 12l3-4 3 3 3 1M8 17l2-5" },
+  { t: "Evening walk, 20 min", s: "After dinner", icon: "M13 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3ZM10 21l2-6 3 3v3M9 12l3-4 3 3 3 1M8 17l2-5" },
   { t: "HbA1c retest", s: "In three months", icon: "M9 3v6l-4 9a1.5 1.5 0 0 0 1.4 2h11.2A1.5 1.5 0 0 0 19 18l-4-9V3M8 3h8" },
 ];
 
 function Actions() {
   return (
-    <div className="flex h-[10rem] flex-col justify-center gap-2 text-left">
+    <div className="flex h-[10rem] flex-col justify-center gap-1.5 text-left">
       {plan.map((p, i) => (
-        <div key={p.t} className={`plan-row plan-row-${i + 1} flex items-center gap-3 rounded-2xl border border-line bg-white px-3 py-2.5`}>
-          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-[0.55rem] bg-amber-wash">
+        <div key={p.t} className={`plan-row plan-row-${i + 1} flex items-center gap-2.5 rounded-xl border border-line bg-white px-2.5 py-1.5`}>
+          <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-amber-wash">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C25E00" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d={p.icon} />
             </svg>
           </span>
-          <span className="flex-1">
-            <span className="block text-[0.78rem] font-semibold text-ink">{p.t}</span>
-            <span className="block text-[0.68rem] text-mute">{p.s}</span>
+          <span className="min-w-0 flex-1">
+            <span className="block truncate text-[0.76rem] font-semibold leading-tight text-ink">{p.t}</span>
+            <span className="block truncate text-[0.66rem] leading-tight text-mute">{p.s}</span>
           </span>
-          <span className={`plan-tick plan-tick-${i + 1} grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sage-wash text-sage`}>
+          <span className={`plan-tick plan-tick-${i + 1} grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sage-wash text-sage`}>
             <svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true">
               <path d="M6.2 11.8 2.9 8.5l1.1-1.1 2.2 2.2 5.6-5.6 1.1 1.1z" fill="currentColor" />
             </svg>
@@ -211,7 +211,7 @@ const PScattered = () => (
 
 const PLost = () => (
   <>
-    {["14%", "42%", "70%"].map((x, i) => (
+    {["12%", "42%", "72%"].map((x, i) => (
       <span key={x} className="hp-fall absolute top-0 h-11 w-9 rounded-md border-[1.5px] border-dashed border-[#F1A9A7] bg-white" style={{ left: x, animationDelay: `${i * 0.7}s` }} />
     ))}
     <span className="absolute bottom-0 left-0 text-[0.72rem] text-[#D9403D]">Last year&rsquo;s report? Gone.</span>
@@ -219,11 +219,11 @@ const PLost = () => (
 );
 
 const PGeneric = () => (
-  <div className="grid h-full content-center gap-1.5">
+  <div className="grid h-full content-center gap-2.5">
     {["Exercise 30 minutes a day", "Eat less sugar", "Get your sugar checked"].map((g, i) => (
-      <span key={g} className="relative rounded-lg border border-line-strong bg-white px-2.5 py-1.5 text-[0.72rem] text-mute">
+      <span key={g} className="relative w-fit rounded-lg border border-line-strong bg-white px-3 py-2 text-[0.78rem] text-slate">
         {g}
-        <span className="hp-strike absolute inset-x-2 top-1/2 h-[1.5px] bg-[#D9403D]" style={{ animationDelay: `${i * 0.35}s` }} />
+        <span className="hp-strike absolute inset-x-3 top-1/2 h-px bg-[#D9403D]/70" style={{ animationDelay: `${i * 0.35}s` }} />
       </span>
     ))}
   </div>
