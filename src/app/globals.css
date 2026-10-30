@@ -360,3 +360,11 @@ body {
 }
 @media (prefers-reduced-motion: reduce) { .hp-strike { transform: scaleX(1); } }
 /* ===== end problem side ===== */
+
+/* ===== How it works, problem to answer flow (flow-*) ===== */
+@keyframes flow-line { 0% { width: 0; } 42% { width: 40%; } 50% { width: 55%; } 100% { width: 100%; } }
+.flow-line { animation: flow-line linear forwards; }
+@keyframes flow-pulse { 0% { transform: scale(1); } 35% { transform: scale(1.25); } 100% { transform: scale(1); } }
+.flow-pulse > span { animation: flow-pulse 0.7s ease-out; }
+@media (prefers-reduced-motion: reduce) { .flow-line, .flow-pulse > span { animation: none; } }
+/* ===== end flow ===== */

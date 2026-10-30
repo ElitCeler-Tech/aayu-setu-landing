@@ -1,3 +1,5 @@
+import { FlowRow } from "./FlowRow";
+
 /* How it works, as the deck lays it out: the journey from records
    scattered across paper, WhatsApp, a phone and an inbox, to something
    a person can act on. Six steps, each with a small picture of itself;
@@ -268,12 +270,10 @@ export function Journey() {
           </div>
           <ol className="grid gap-5">
             {steps.map((s, i) => (
-              <li
+              <FlowRow
                 key={s.t}
-                className="relative grid overflow-hidden rounded-[1.5rem] border border-line bg-white transition duration-300 hover:shadow-[0_30px_60px_-40px_rgba(18,29,51,0.45)] md:grid-cols-[0.8fr_1.2fr]"
-              >
-                {/* the problem, on the grey half */}
-                <div className="flex flex-col border-b border-line bg-mist px-6 py-5 md:border-b-0 md:border-r">
+                problem={
+                <div className="flex h-full flex-col border-b border-line bg-mist px-6 py-5 md:border-b-0 md:border-r">
                   <span className="flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-[#D9403D]">
                     <span className="grid h-[1.15rem] w-[1.15rem] place-items-center rounded-full border border-[#F6C9C8] bg-white text-[0.58rem] font-bold">✕</span>
                     Today · {String(i + 1).padStart(2, "0")}
@@ -281,17 +281,17 @@ export function Journey() {
                   <p className="mt-2.5 text-[1.05rem] leading-snug text-slate">{s.p}</p>
                   <div className="relative mt-4 h-[6.5rem]">{problemArt[i]}</div>
                 </div>
-
-                {/* the turn, sitting on the line between the halves */}
+                }
+                arrow={
                 <span
                   aria-hidden="true"
                   className="relative z-10 -my-5 grid h-10 w-10 rotate-90 place-items-center justify-self-center rounded-full bg-cta text-white shadow-[0_0_0_5px_#fff,0_10px_22px_-10px_rgba(255,139,11,0.8)] md:absolute md:left-[40%] md:top-1/2 md:my-0 md:-translate-x-1/2 md:-translate-y-1/2 md:rotate-0"
                 >
                   →
                 </span>
-
-                {/* the answer, on the white half */}
-                <div className="grid items-center gap-4 p-5 sm:grid-cols-[1fr_15rem] md:pl-9">
+                }
+                solution={
+                <div className="grid h-full items-center gap-4 p-5 sm:grid-cols-[1fr_15rem] md:pl-9">
                   <div>
                     <span className="flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-sage">
                       <span className="grid h-[1.15rem] w-[1.15rem] place-items-center rounded-full bg-sage-wash text-[0.58rem] font-bold">✓</span>
@@ -302,7 +302,8 @@ export function Journey() {
                   </div>
                   <div className="rounded-2xl bg-mist p-3">{s.art}</div>
                 </div>
-              </li>
+                }
+              />
             ))}
           </ol>
         </div>
