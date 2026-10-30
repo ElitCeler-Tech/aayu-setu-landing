@@ -362,9 +362,14 @@ body {
 /* ===== end problem side ===== */
 
 /* ===== How it works, problem to answer flow (flow-*) ===== */
-/* Dots run from the problem's picture into the answer's, once, as the
-   answer lights up. */
-@keyframes flow-dot { 0% { left: 0; opacity: 0; transform: translateY(-50%) scale(0.6); } 20% { opacity: 1; } 80% { opacity: 1; } 100% { left: 100%; opacity: 0; transform: translateY(-50%) scale(1); } }
-.flow-stream .flow-dot { animation: flow-dot 0.9s ease-in 2 both; }
-@media (prefers-reduced-motion: reduce) { .flow-stream { display: none; } }
+/* The turn: a glow sweeps across the middle of the card, dots run from
+   the problem's picture into the answer's, and the answer's picture box
+   flashes an orange ring as it lands. */
+@keyframes flow-glow { 0% { opacity: 0; transform: translateX(-30%); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateX(30%); } }
+.flow-glow { background: radial-gradient(closest-side, rgba(255, 139, 11, 0.28), transparent); animation: flow-glow 1s ease-in-out both; }
+@keyframes flow-dot { 0% { left: 0; opacity: 0; transform: translateY(-50%) scale(0.5); } 15% { opacity: 1; } 85% { opacity: 1; } 100% { left: 100%; opacity: 0; transform: translateY(-50%) scale(1); } }
+.flow-stream .flow-dot { animation: flow-dot 0.75s ease-in both; }
+@keyframes flow-ring { 0% { box-shadow: 0 0 0 0 rgba(255, 139, 11, 0.55); } 100% { box-shadow: 0 0 0 14px rgba(255, 139, 11, 0); } }
+.flow-land .ring-1 { animation: flow-ring 0.9s ease-out; }
+@media (prefers-reduced-motion: reduce) { .flow-glow, .flow-stream { display: none; } .flow-land .ring-1 { animation: none; } }
 /* ===== end flow ===== */
