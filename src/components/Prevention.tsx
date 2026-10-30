@@ -38,11 +38,11 @@ export function Prevention() {
         <div className="max-w-2xl">
           <p className="eyebrow text-amber-light">Personalised prevention</p>
           <h2 className="mt-4 font-display text-[clamp(2.4rem,5vw,3.75rem)] leading-[1.02] text-balance">
-            Advice that fits <em className="text-amber-light">one person</em>
+            Advice that fits <em className="text-amber-light">you</em>
           </h2>
           <p className="mt-4 text-[1rem] leading-relaxed text-white/65">
-            Ayussetu aims to move past advice written for everybody, toward
-            steps that adapt to you.
+            Ayussetu aims to move past generic health suggestions, toward
+            continuously improving, adaptive personalisation.
           </p>
         </div>
 
