@@ -1,4 +1,4 @@
-import { FlowRow } from "./FlowRow";
+import { FlowCard } from "./FlowCard";
 
 /* How it works, as the deck lays it out: the journey from records
    scattered across paper, WhatsApp, a phone and an inbox, to something
@@ -262,41 +262,12 @@ export function Journey() {
           </p>
         </div>
 
-        {/* Six rows: the problem on the left, the answer on the right. */}
-        <div className="mx-auto mt-12 max-w-5xl">
-          <ol className="grid gap-5">
-            {steps.map((s, i) => (
-              <FlowRow
-                key={s.t}
-                problem={
-                  <div className="flex h-full flex-col px-6 pb-6 pt-5 md:pr-10">
-                    <span className="flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-[#D9403D]">
-                      <span className="grid h-[1.15rem] w-[1.15rem] place-items-center rounded-full border border-[#F6C9C8] bg-white text-[0.58rem] font-bold">✕</span>
-                      Today · {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div className="mt-2.5 md:min-h-[6.75rem]">
-                      <p className="font-display text-[1.6rem] leading-[1.08] text-slate">{s.p}</p>
-                    </div>
-                    <div className="relative mt-4 h-[11.5rem]">{problemArt[i]}</div>
-                  </div>
-                }
-                solution={
-                  <div className="flex h-full flex-col px-6 pb-6 pt-5 md:pl-10">
-                    <span className="flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-sage">
-                      <span className="grid h-[1.15rem] w-[1.15rem] place-items-center rounded-full bg-sage-wash text-[0.58rem] font-bold">✓</span>
-                      With Ayussetu
-                    </span>
-                    <div className="mt-2.5 md:min-h-[6.75rem]">
-                      <h3 className="font-display text-[1.6rem] leading-[1.08] text-ink">{s.t}</h3>
-                      <p className="mt-1.5 text-[0.86rem] leading-relaxed text-slate">{s.b}</p>
-                    </div>
-                    <div className="mt-4 h-[11.5rem] rounded-2xl bg-white p-3 ring-1 ring-line">{s.art}</div>
-                  </div>
-                }
-              />
-            ))}
-          </ol>
-        </div>
+        {/* Six cards: in each, the problem turns into the answer in place. */}
+        <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {steps.map((s, i) => (
+            <FlowCard key={s.t} n={i + 1} problem={s.p} problemArt={problemArt[i]} title={s.t} body={s.b} art={s.art} />
+          ))}
+        </ol>
 
         <div className="mt-12 text-center">
           <a href="#intelligence" className="inline-block rounded-full bg-navy px-7 py-4 text-[0.92rem] font-semibold text-white transition hover:bg-ink">
