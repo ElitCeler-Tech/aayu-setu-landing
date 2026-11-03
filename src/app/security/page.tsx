@@ -35,19 +35,24 @@ export default function Security() {
     <>
       <Header overlay />
       <main>
+        {/* The headline and its line run across the top; below them the
+            four points and the locked record sit side by side, centred on
+            each other, so nothing floats. */}
         <section id="hero" className="hero-room relative overflow-hidden text-white">
-          <div className="relative mx-auto grid max-w-6xl items-start gap-14 px-5 pb-20 pt-36 sm:px-8 md:grid-cols-[1.1fr_0.9fr] md:pb-28 md:pt-40">
-            <div>
+          <div className="relative mx-auto max-w-6xl px-5 pb-20 pt-36 sm:px-8 md:pb-28 md:pt-40">
+            <div className="max-w-3xl">
               <p className="eyebrow text-amber-light">Security and trust</p>
-              <h1 className="mt-5 max-w-[16ch] font-display text-[clamp(2.6rem,6vw,4.4rem)] leading-[1] text-balance">
+              <h1 className="mt-5 font-display text-[clamp(2.6rem,6vw,4.4rem)] leading-[1] text-balance">
                 Your health data, <em className="text-amber-light">protected at every level</em>
               </h1>
-              <p className="mt-6 max-w-xl text-[1.05rem] leading-relaxed text-white/70">
+              <p className="mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-white/70">
                 Your health history is personal. Ayussetu is built so it stays yours: kept private,
                 shared only when you say yes, and handled with care at every step.
               </p>
+            </div>
 
-              <ul className="mt-10 space-y-5">
+            <div className="mt-14 grid items-center gap-12 border-t border-white/10 pt-14 md:grid-cols-[1.1fr_0.9fr] md:gap-16">
+              <ul className="grid gap-6 sm:grid-cols-2 md:grid-cols-1">
                 {checks.map((c) => (
                   <li key={c.t} className="flex gap-4">
                     <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#7FD3A8]/15 text-[#9BE2BD]">
@@ -62,11 +67,6 @@ export default function Security() {
                   </li>
                 ))}
               </ul>
-            </div>
-
-            {/* Held level with the four points rather than floating in the
-                middle of the column, and kept in view while they are read. */}
-            <div className="md:sticky md:top-32 md:mt-[19rem]">
               <LockCard />
             </div>
           </div>
