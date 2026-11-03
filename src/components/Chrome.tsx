@@ -4,6 +4,7 @@ import { HeaderFrame } from "./HeaderFrame";
 import { HeaderActions } from "./HeaderActions";
 import { NAV } from "@/data/siteIndex";
 import { legal } from "@/data/legal";
+import { SocialLinks } from "./SocialLinks";
 
 
 /* The brand mark: the solid orange heart with its pulse line, the
@@ -116,14 +117,14 @@ const footerCols = [
   },
 ];
 
-/* The profile links are not set yet: Ayussetu has no published social
-   accounts. Each one is `#` until the real handle is known. */
+/* Ayussetu has no published social accounts yet, so each icon shows
+   Coming soon when clicked. Add an `href` once the real handle is known. */
 const socials = [
-  { name: "Instagram", href: "#", d: "M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Zm5 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm5.5-1.5h.01" },
-  { name: "LinkedIn", href: "#", d: "M4 9h3.5v11H4zM5.75 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM10 9h3.3v1.6c.5-.9 1.7-1.9 3.6-1.9 3.6 0 4.1 2.3 4.1 5.3v6h-3.5v-5.3c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V20H10z", fill: true },
-  { name: "Facebook", href: "#", d: "M14 21v-7.5h2.6l.4-3H14V8.6c0-.9.3-1.5 1.5-1.5H17V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H8.2v3h2.6V21z", fill: true },
-  { name: "X", href: "#", d: "M17.8 3h3l-6.6 7.5L22 21h-6.1l-4.8-6.2L5.6 21H2.6l7-8L2 3h6.2l4.3 5.7zm-1 16.2h1.7L7.3 4.7H5.5z", fill: true },
-  { name: "YouTube", href: "#", d: "M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8ZM10 15V9l5.2 3z", fill: true },
+  { name: "Instagram", d: "M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Zm5 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm5.5-1.5h.01" },
+  { name: "LinkedIn", d: "M4 9h3.5v11H4zM5.75 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM10 9h3.3v1.6c.5-.9 1.7-1.9 3.6-1.9 3.6 0 4.1 2.3 4.1 5.3v6h-3.5v-5.3c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V20H10z", fill: true },
+  { name: "Facebook", d: "M14 21v-7.5h2.6l.4-3H14V8.6c0-.9.3-1.5 1.5-1.5H17V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H8.2v3h2.6V21z", fill: true },
+  { name: "X", d: "M17.8 3h3l-6.6 7.5L22 21h-6.1l-4.8-6.2L5.6 21H2.6l7-8L2 3h6.2l4.3 5.7zm-1 16.2h1.7L7.3 4.7H5.5z", fill: true },
+  { name: "YouTube", d: "M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8ZM10 15V9l5.2 3z", fill: true },
 ];
 
 /* Each one is a section of /legal. Terms of use and a privacy policy
@@ -144,17 +145,7 @@ export function Footer() {
             <p className="mt-4 font-display text-[1.15rem] text-white/80">
               Connecting care for better health
             </p>
-            <ul className="mt-6 flex gap-2">
-              {socials.map((x) => (
-                <li key={x.name}>
-                  <a href={x.href} aria-label={x.name} className="grid h-9 w-9 place-items-center rounded-full bg-white/[0.07] text-white/70 transition hover:bg-white/15 hover:text-white">
-                    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill={x.fill ? "currentColor" : "none"} stroke={x.fill ? "none" : "currentColor"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <path d={x.d} />
-                    </svg>
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <SocialLinks socials={socials} />
           </div>
 
           {footerCols.map((c) => (

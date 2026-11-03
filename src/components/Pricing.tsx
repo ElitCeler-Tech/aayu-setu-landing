@@ -1,30 +1,32 @@
-/* Pricing, as it stands: free for patients, and a conversation for
-   everyone else. No numbers are shown because no plans have been set;
-   when the founder confirms them, they go in `price` below. */
+/* Pricing, as it stands: the free plan is live, and the Individual and
+   Family plans are coming. No prices are shown because none have been
+   set; each paid plan says Coming soon and asks people to get in touch.
+   When the founder confirms the plans, the price goes in `price` and the
+   real inclusions replace the points below. */
 
 const plans = [
   {
-    who: "Patients and families",
+    who: "Free",
     price: "Free",
-    note: "Download and start today",
+    note: "Everything you need to start",
     points: ["Every report in one place", "Health Score and trends", "Ayu AI answers", "Medicine and test reminders"],
     cta: ["Download the app", "#download"],
     featured: true,
   },
   {
-    who: "Doctors and clinics",
-    price: "Talk to us",
-    note: "Set up around your practice",
-    points: ["The doctor app", "The clinic console", "Appointments and prescriptions", "Billing in one view"],
-    cta: ["Register your interest", "/for-doctors#join"],
+    who: "Individual plan",
+    price: "Coming soon",
+    note: "For one person who wants more from their record",
+    points: ["Everything in Free", "More for your own health", "Plan details coming soon"],
+    cta: ["Contact us to know more", "/contact"],
     featured: false,
   },
   {
-    who: "Hospitals, labs and pharmacies",
-    price: "Custom",
-    note: "Built to your scale",
-    points: ["Reports straight to patients", "Consent based record sharing", "Integration support", "A named contact"],
-    cta: ["Contact us", "/contact"],
+    who: "Family and group plan",
+    price: "Coming soon",
+    note: "For parents, partners, children and groups",
+    points: ["Everything in Individual", "Records for the whole family together", "Plan details coming soon"],
+    cta: ["Contact us to know more", "/contact"],
     featured: false,
   },
 ];
@@ -36,7 +38,7 @@ export function Pricing() {
         <div className="text-center">
           <p className="eyebrow text-amber">Pricing</p>
           <h2 className="mt-4 font-display text-[clamp(2.4rem,5vw,3.75rem)] leading-[1.02] text-ink text-balance">
-            Free for patients, <em className="text-amber">simple for partners</em>
+            Start free, <em className="text-amber">more plans coming soon</em>
           </h2>
         </div>
 
@@ -47,7 +49,9 @@ export function Pricing() {
               className={`flex h-full flex-col rounded-3xl border p-7 ${p.featured ? "border-navy bg-navy text-white" : "border-line bg-white text-ink"}`}
             >
               <p className={`eyebrow ${p.featured ? "text-amber-light" : "text-amber"}`}>{p.who}</p>
-              <p className="mt-5 font-display text-[2.6rem] leading-none">{p.price}</p>
+              <p className="mt-5 flex items-center gap-2.5 font-display text-[2.6rem] leading-none">
+                {p.price}
+              </p>
               <p className={`mt-2 text-[0.86rem] ${p.featured ? "text-white/60" : "text-slate"}`}>{p.note}</p>
               <ul className={`mt-6 space-y-2.5 border-t pt-6 ${p.featured ? "border-white/10" : "border-line"}`}>
                 {p.points.map((x) => (
@@ -60,18 +64,25 @@ export function Pricing() {
                 ))}
               </ul>
               <div className="mt-auto pt-8">
-              <a
-                href={p.cta[1]}
-                className={`block rounded-full px-6 py-3.5 text-center text-[0.9rem] font-semibold transition ${
-                  p.featured ? "bg-cta text-white hover:bg-brand-deep" : "border border-line-strong text-navy hover:border-navy"
-                }`}
-              >
-                {p.cta[0]}
-              </a>
+                <a
+                  href={p.cta[1]}
+                  className={`block rounded-full px-6 py-3.5 text-center text-[0.9rem] font-semibold transition ${
+                    p.featured ? "bg-cta text-white hover:bg-brand-deep" : "border border-line-strong text-navy hover:border-navy"
+                  }`}
+                >
+                  {p.cta[0]}
+                </a>
               </div>
             </div>
           ))}
         </div>
+
+        <p className="mt-10 text-center text-[0.92rem] text-slate">
+          Doctors, clinics, hospitals, labs and pharmacies:{" "}
+          <a href="/contact" className="font-semibold text-navy underline decoration-line-strong underline-offset-4 transition hover:decoration-navy">
+            contact us to know more &rarr;
+          </a>
+        </p>
       </div>
     </section>
   );
