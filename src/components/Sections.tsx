@@ -226,7 +226,7 @@ export function Download() {
       <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
         <div className="overflow-hidden rounded-3xl bg-navy px-6 py-12 text-center sm:px-14">
           <h2 className="mx-auto max-w-2xl font-display text-[clamp(1.8rem,4vw,2.4rem)] leading-tight text-white text-balance">
-            Start with the reports already in your drawer
+            Start by scanning the reports already in your drawer
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-[0.95rem] leading-relaxed text-white/70">
             Free for patients, on Android and iPhone. Doctors and clinics have

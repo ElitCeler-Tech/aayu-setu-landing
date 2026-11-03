@@ -105,10 +105,10 @@ function Tracks() {
           <span key={i} className="hi-pop h-5 flex-1 rounded-[4px]" style={{ background: d ? green : "rgba(255,255,255,0.12)", animationDelay: `${i * 0.06}s` }} />
         ))}
       </div>
-      <p className="mt-4 font-mono text-[0.6rem] uppercase tracking-[0.1em] text-white/50">Health · triglycerides, mg/dL</p>
+      <p className="mt-4 font-mono text-[0.6rem] uppercase tracking-[0.1em] text-white/50">Health · fasting blood sugar, mg/dL</p>
       <svg viewBox="0 0 300 70" className="mt-1 h-[4.4rem] w-full" aria-hidden="true">
         <path className="hi-draw" pathLength={100} d="M6 14 L100 26 L200 42 L294 54" fill="none" stroke={green} strokeWidth="2.4" strokeLinecap="round" />
-        {[[6, 14, "210"], [100, 26, "194"], [200, 42, "181"], [294, 54, "168"]].map(([x, y, v]) => (
+        {[[6, 14, "142"], [100, 26, "134"], [200, 42, "127"], [294, 54, "118"]].map(([x, y, v]) => (
           <g key={String(v)}>
             <circle cx={Number(x)} cy={Number(y)} r="3.5" fill={green} />
             <text x={Math.min(Number(x), 280)} y={Number(y) + 15} fontSize="10" fill="rgba(255,255,255,0.7)" textAnchor="middle">{v}</text>
@@ -122,8 +122,8 @@ function Tracks() {
 /* Learn: an insight, drawn as the comparison it came from. */
 function Insight() {
   const rows = [
-    { k: "Evening walk weeks", v: 100, n: "−18" },
-    { k: "Morning walk weeks", v: 40, n: "−7" },
+    { k: "Evening walk weeks", v: 100, n: "−12" },
+    { k: "Morning walk weeks", v: 40, n: "−5" },
     { k: "No walk weeks", v: 6, n: "−1" },
   ];
   return (
@@ -210,16 +210,16 @@ const cards = [
   {
     title: "Learn",
     body: "Discover individual patterns and responses: which changes actually move your numbers.",
-    stat: "−18",
-    statLabel: "triglycerides, mg/dL, in weeks with evening walks",
+    stat: "−12",
+    statLabel: "fasting blood sugar, mg/dL, in weeks with evening walks",
     bg: "#1B2B4A",
     visual: <Insight />,
   },
   {
     title: "Adapt",
     body: "Refine the next recommendation toward what worked for you, and the cycle continues.",
-    stat: "210 → 168",
-    statLabel: "triglycerides since the loop began",
+    stat: "142 → 118",
+    statLabel: "fasting blood sugar since the loop began",
     bg: "#16233D",
     visual: <Refine />,
   },

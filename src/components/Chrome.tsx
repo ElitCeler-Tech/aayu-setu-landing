@@ -81,26 +81,49 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
   );
 }
 
+/* Explore is one link per audience. Patients, doctors and clinics have
+   pages of their own; hospitals, pharmacies, labs and alternative medicine
+   go to the contact form until theirs exist. */
 const footerCols = [
   {
-    h: "Product",
+    h: "Explore",
     links: [
-      ["How it works", "/#how"],
-      ["Health intelligence", "/#intelligence"],
-      ["Ayu AI", "/#ai"],
-      ["Who we serve", "/#who"],
-      ["Download", "/#download"],
+      ["For patients", "/#who"],
+      ["For doctors", "/for-doctors"],
+      ["For clinics", "/for-doctors"],
+      ["For hospitals", "/contact"],
+      ["For pharmacy", "/contact"],
+      ["For labs", "/contact"],
+      ["For alternative medicine", "/contact"],
     ],
   },
   {
     h: "Company",
     links: [
       ["About us", "/about"],
-      ["Privacy and safety", "/#trust"],
+      ["Pricing", "/#pricing"],
+      ["Privacy and security", "/security"],
+      ["Careers", "/careers"],
       ["FAQs", "/faq"],
-      ["Contact us", "/contact"],
     ],
   },
+  {
+    h: "Connect with us",
+    links: [
+      ["Contact us", "/contact"],
+      ["info@ayussetu.com", "mailto:info@ayussetu.com"],
+    ],
+  },
+];
+
+/* The profile links are not set yet: Ayussetu has no published social
+   accounts. Each one is `#` until the real handle is known. */
+const socials = [
+  { name: "Instagram", href: "#", d: "M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Zm5 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm5.5-1.5h.01" },
+  { name: "LinkedIn", href: "#", d: "M4 9h3.5v11H4zM5.75 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM10 9h3.3v1.6c.5-.9 1.7-1.9 3.6-1.9 3.6 0 4.1 2.3 4.1 5.3v6h-3.5v-5.3c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V20H10z", fill: true },
+  { name: "Facebook", href: "#", d: "M14 21v-7.5h2.6l.4-3H14V8.6c0-.9.3-1.5 1.5-1.5H17V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H8.2v3h2.6V21z", fill: true },
+  { name: "X", href: "#", d: "M17.8 3h3l-6.6 7.5L22 21h-6.1l-4.8-6.2L5.6 21H2.6l7-8L2 3h6.2l4.3 5.7zm-1 16.2h1.7L7.3 4.7H5.5z", fill: true },
+  { name: "YouTube", href: "#", d: "M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8ZM10 15V9l5.2 3z", fill: true },
 ];
 
 /* Each one is a section of /legal. Terms of use and a privacy policy
@@ -118,10 +141,20 @@ export function Footer() {
               <Mark size="h-[30px]" tone="dark" />
               <Image src="/wordmark-light.png" alt="Ayus Setu" width={181} height={17} style={{ height: "0.95rem", width: "auto" }} />
             </div>
-            <p className="mt-4 max-w-xs text-[0.86rem] leading-relaxed text-white/55">
-              An AI driven healthcare assistant. Records in one place, risk
-              understood early, prevention made possible.
+            <p className="mt-4 font-display text-[1.15rem] text-white/80">
+              Connecting care for better health
             </p>
+            <ul className="mt-6 flex gap-2">
+              {socials.map((x) => (
+                <li key={x.name}>
+                  <a href={x.href} aria-label={x.name} className="grid h-9 w-9 place-items-center rounded-full bg-white/[0.07] text-white/70 transition hover:bg-white/15 hover:text-white">
+                    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill={x.fill ? "currentColor" : "none"} stroke={x.fill ? "none" : "currentColor"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d={x.d} />
+                    </svg>
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {footerCols.map((c) => (
@@ -141,23 +174,6 @@ export function Footer() {
             </div>
           ))}
 
-          <div>
-            <h3 className="eyebrow text-white/40">
-              Reach us
-            </h3>
-            <ul className="mt-4 space-y-2.5 text-[0.86rem] text-white/70">
-              <li>
-                <a className="transition hover:text-white" href="mailto:info@ayussetu.com">
-                  info@ayussetu.com
-                </a>
-              </li>
-              <li>
-                <a className="transition hover:text-white" href="/contact">
-                  Send us a message
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
 
         {/* Kept together and named, so none of it reads as small print

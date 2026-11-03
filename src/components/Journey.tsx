@@ -161,18 +161,18 @@ function Actions() {
 function Progress() {
   return (
     <div className="flex h-[8.5rem] flex-col justify-center">
-      <p className="text-[0.78rem] font-semibold text-ink">Triglycerides since July</p>
+      <p className="text-[0.78rem] font-semibold text-ink">Fasting blood sugar since July</p>
       <div className="mt-3 flex items-baseline gap-3">
-        <span className="strike-in font-display text-[2.2rem] leading-none text-mute decoration-1">210</span>
+        <span className="strike-in font-display text-[2.2rem] leading-none text-mute decoration-1">142</span>
         <span className="text-[1.1rem] text-faint">&rarr;</span>
-        <span className="seq seq-4 seq-pop font-display text-[2.2rem] leading-none text-sage">168</span>
+        <span className="seq seq-4 seq-pop font-display text-[2.2rem] leading-none text-sage">118</span>
         <span className="text-[0.72rem] text-mute">mg/dL</span>
       </div>
       <svg viewBox="0 0 220 50" className="mt-4 h-12 w-full" aria-hidden="true">
         <path className="draw-line" pathLength={100} d="M4 10 L50 14 L96 22 L142 30 L188 36 L216 38" fill="none" stroke="#2E8A62" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         <circle className="seq seq-9 seq-pop" cx="216" cy="38" r="4" fill="#2E8A62" />
       </svg>
-      <p className="mt-1 text-[0.72rem] text-mute">Three reports since the evening walks began.</p>
+      <p className="mt-1 text-[0.72rem] text-mute">Weekly readings since the evening walks began.</p>
     </div>
   );
 }
@@ -235,7 +235,7 @@ const problemArt = [
   <PBig key="3" value="5.8" note="HbA1c on its own. Fine?" />,
   <PBig key="4" value="164" note="High? Normal?" />,
   <PGeneric key="5" />,
-  <PBig key="6" value={<>210 → <span className="hp-blink text-[#D9403D]">?</span></>} note="Did the walks help?" />,
+  <PBig key="6" value={<>142 → <span className="hp-blink text-[#D9403D]">?</span></>} note="Did the walks help?" />,
 ];
 
 const steps = [

@@ -3,15 +3,12 @@ import type { Metadata } from "next";
 import { Header, Footer } from "@/components/Chrome";
 import { People } from "@/components/People";
 import { PageHero } from "@/components/PageHero";
-import { Contact } from "@/components/Contact";
-import { GatherRecords } from "@/components/GatherRecords";
 import { Reveal } from "@/components/Motion";
-import { BeliefCards } from "@/components/BeliefCards";
 
 export const metadata: Metadata = {
   title: "About Ayussetu",
   description:
-    "Why Ayussetu exists, and the people building it.",
+    "Connecting care for better health: what the name means, our vision, mission and purpose, and the team.",
 };
 
 export default function About() {
@@ -21,36 +18,37 @@ export default function About() {
       <main>
         <PageHero
           eyebrow="About Ayussetu"
-          title="Health information people can"
-          accent="actually read"
-          lede="Personal health intelligence, built for India. One place for every record you hold, read together and explained in plain language."
+          title="Connecting care"
+          accent="for better health"
+          lede="Connecting people, physicians and health intelligence through every step of the health journey."
         />
 
-        {/* Why it exists: the records are scattered, and nobody reads
-            them together. The picture gathers them into one. */}
+        {/* The name, in two halves: Ayus, life and longevity; Setu, the
+            bridge. A thin bridge joins the two, the one the purpose
+            section below draws in full. */}
         <section className="border-b border-line bg-paper">
-          <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 sm:px-8 md:grid-cols-[0.9fr_1.1fr] md:gap-16 md:py-28">
+          <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-24">
             <Reveal>
-              <p className="eyebrow text-amber">Why we started</p>
-              <h2 className="mt-4 font-display text-[clamp(2.2rem,4.6vw,3.2rem)] leading-[1.04] text-ink text-balance">
-                Years of records, <em className="text-amber">never read together</em>
+              <p className="eyebrow text-amber">The meaning behind our name</p>
+              <h2 className="mt-4 max-w-2xl font-display text-[clamp(2.2rem,4.6vw,3.2rem)] leading-[1.04] text-ink text-balance">
+                Life, and the bridge <em className="text-amber">that carries it</em>
               </h2>
-              <p className="mt-5 text-[1rem] leading-relaxed text-slate">
-                Most families in India keep their health history across paper
-                files, WhatsApp photos, email attachments and lab portals. Each
-                report is read once, on the day, and then put away. The slow
-                changes that only show across years go unseen.
-              </p>
-              <p className="mt-4 text-[1rem] leading-relaxed text-slate">
-                It began with a pharmacist. Sandeep Konda spent twenty years in
-                pharmacy leadership, and while building iCancerCare he saw that
-                the record, rather than the visit, is what carries a
-                patient&rsquo;s care. Ayussetu is built on that idea.
-              </p>
             </Reveal>
-            <Reveal delay={120}>
-              <GatherRecords />
-            </Reveal>
+            <div className="relative mt-12 grid gap-5 md:grid-cols-2">
+              <span aria-hidden="true" className="absolute left-1/2 top-1/2 hidden h-px w-16 -translate-x-1/2 bg-gradient-to-r from-amber/30 via-amber to-amber/30 md:block" />
+              {[
+                { w: "Ayus", k: "Life and longevity", b: "The aspiration to live longer, healthier, more fulfilling lives." },
+                { w: "Setu", k: "Bridge and connection", b: "Connecting people, physicians, information and care." },
+              ].map((x, i) => (
+                <Reveal key={x.w} delay={i * 120}>
+                  <div className="h-full rounded-3xl border border-line bg-white p-8 md:p-10">
+                    <p className="font-display text-[clamp(2.6rem,5vw,3.6rem)] leading-none text-ink">{x.w}</p>
+                    <p className="eyebrow mt-5 text-amber-deep">{x.k}</p>
+                    <p className="mt-3 text-[1rem] leading-relaxed text-slate">{x.b}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -68,8 +66,8 @@ export default function About() {
                   A bridge from your records <em className="text-amber-light">to a healthier tomorrow</em>
                 </h2>
                 <p className="mx-auto mt-5 max-w-xl text-[1rem] leading-relaxed text-white/65">
-                  <span className="text-white">Ayus</span> means life. <span className="text-white">Setu</span> means
-                  bridge. Ayussetu connects the health history you already have to the care you need next.
+                  We don&rsquo;t just connect health data. <span className="text-white">We connect care</span>, to
+                  help people live better and longer.
                 </p>
               </div>
             </Reveal>
@@ -102,16 +100,18 @@ export default function About() {
                   {
                     k: "Our mission",
                     icon: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM12 12h.01",
-                    h: "Bring every person\u2019s health history into one place they own,",
-                    a: "and explain it in plain language.",
-                    p: ["Every record in one place", "Owned by you", "Explained simply"],
+                    h: "Bridging the gaps in healthcare,",
+                    a: "bringing people closer to better health.",
+                    b: "We connect people, physicians and health information to make healthcare more personal, proactive and continuous, turning insights into meaningful actions that help people live healthier lives.",
+                    p: ["Personal", "Proactive", "Continuous"],
                   },
                   {
                     k: "Our vision",
                     icon: "M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
-                    h: "An India where health risks are spotted early,",
-                    a: "while there is still time to act.",
-                    p: ["Risks seen sooner", "Care that comes in time", "Healthier families"],
+                    h: "Connecting care.",
+                    a: "Inspiring longer, healthier lives.",
+                    b: "A world where everyone has the opportunity to live a longer, healthier life, supported by connected, compassionate and personalised healthcare.",
+                    p: ["Connected", "Compassionate", "Personalised"],
                   },
                 ].map((m, i) => (
                   <Reveal key={m.k} delay={i * 120}>
@@ -128,6 +128,7 @@ export default function About() {
                       <p className="relative mt-7 font-display text-[clamp(1.6rem,2.8vw,2.15rem)] leading-[1.14] text-balance">
                         {m.h} <em className="text-amber-light">{m.a}</em>
                       </p>
+                      <p className="relative mt-4 text-[0.95rem] leading-relaxed text-white/65">{m.b}</p>
                       <ul className="relative mt-7 flex flex-wrap gap-2 border-t border-white/10 pt-6">
                         {m.p.map((x) => (
                           <li key={x} className="flex items-center gap-1.5 rounded-full border border-white/12 bg-white/[0.04] px-3 py-1.5 text-[0.78rem] text-white/80">
@@ -146,22 +147,7 @@ export default function About() {
           </div>
         </section>
 
-        {/* The three beliefs, each with a picture of it at work, taking
-            turns the way the home page cards do. */}
-        <section className="border-b border-line bg-mist">
-          <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
-            <div className="text-center">
-              <p className="eyebrow text-amber">What we hold to</p>
-              <h2 className="mt-4 font-display text-[clamp(2.2rem,4.6vw,3.2rem)] leading-[1.04] text-ink text-balance">
-                Three promises we <em className="text-amber">build on</em>
-              </h2>
-            </div>
-            <BeliefCards />
-          </div>
-        </section>
-
         <People intro={false} />
-        <Contact />
       </main>
       <Footer />
     </>
