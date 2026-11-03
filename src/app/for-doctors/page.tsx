@@ -139,7 +139,7 @@ export default function ForDoctors() {
           </div>
         </section>
 
-        <section className="border-b border-line bg-ink text-white">
+        <section id="clinics" className="scroll-mt-24 border-b border-line bg-ink text-white">
           <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
             <Reveal>
               <p className="eyebrow text-amber-light">

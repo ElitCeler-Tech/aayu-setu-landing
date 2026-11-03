@@ -14,6 +14,7 @@ export const SITE_INDEX: SiteEntry[] = [
   { label: "Ayu AI", href: "/#ai", hint: "Answers drawn from your own record" },
   { label: "For doctors and clinics", href: "/for-doctors", hint: "The doctor app and the clinic portal" },
   { label: "About us", href: "/about", hint: "Why Ayussetu exists, and the team" },
+  { label: "Healthcare partners", href: "/partners", hint: "Hospitals, labs, pharmacies, Ayurveda and wellness" },
   { label: "Privacy and security", href: "/security", hint: "How your health data is protected" },
   { label: "Pricing", href: "/#pricing", hint: "Free for patients" },
   { label: "Careers", href: "/careers", hint: "Join the team" },

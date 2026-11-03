@@ -38,7 +38,7 @@ export default function Careers() {
           eyebrow="Careers"
           title="Join our team to improve people's lives"
           accent="and make a difference"
-          lede="Ayussetu is building personal health intelligence for India. We are always glad to hear from people who care about that as much as we do."
+          lede="Ayussetu is building personal health intelligence for everyone. We are always glad to hear from people who care about that as much as we do."
         />
 
         <section className="border-b border-line bg-mist">

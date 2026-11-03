@@ -36,7 +36,7 @@ export default function Security() {
       <Header overlay />
       <main>
         <section id="hero" className="hero-room relative overflow-hidden text-white">
-          <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 pb-20 pt-36 sm:px-8 md:grid-cols-[1.1fr_0.9fr] md:pb-28 md:pt-40">
+          <div className="relative mx-auto grid max-w-6xl items-start gap-14 px-5 pb-20 pt-36 sm:px-8 md:grid-cols-[1.1fr_0.9fr] md:pb-28 md:pt-40">
             <div>
               <p className="eyebrow text-amber-light">Security and trust</p>
               <h1 className="mt-5 max-w-[16ch] font-display text-[clamp(2.6rem,6vw,4.4rem)] leading-[1] text-balance">
@@ -64,7 +64,11 @@ export default function Security() {
               </ul>
             </div>
 
-            <LockCard />
+            {/* Held level with the four points rather than floating in the
+                middle of the column, and kept in view while they are read. */}
+            <div className="md:sticky md:top-32 md:mt-[19rem]">
+              <LockCard />
+            </div>
           </div>
         </section>
 
