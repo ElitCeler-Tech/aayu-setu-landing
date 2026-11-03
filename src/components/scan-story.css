@@ -1,0 +1,95 @@
+/* The Download section's scene: a drawer of documents scanned one at a
+   time into the app. Ported from the approved design file; every rule is
+   scoped under .ss so its short class names cannot reach the rest of
+   the site. */
+/* ---------------- the stage ---------------- */
+.ss{position:relative;height:440px;width:512px;flex:none;margin-inline:auto;font-family:var(--font-sans);--navy:#1F3050;--ink:#121D33;--cta:#FF8B0B;--amber:#C25E00;--amberl:#FFB15C;--line:#E3E8EF;--slate:#4B566A;--mute:#7A8599;--sage:#2F8F6B;--sagew:#E3F4EC}
+
+/* cabinet: a two drawer unit, the top drawer pulled open */
+.ss .cab{position:absolute;left:0;bottom:6px;width:260px;height:230px}
+.ss .cab .body{position:absolute;left:14px;right:14px;top:58px;bottom:0;border-radius:10px;background:linear-gradient(180deg,#2B4268,#22385C);box-shadow:0 30px 50px -24px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.08)}
+.ss .cab .lower{position:absolute;left:24px;right:24px;bottom:12px;height:62px;border-radius:8px;background:linear-gradient(180deg,#34507A,#2A4470);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 2px 0 rgba(0,0,0,.25)}
+.ss .cab .lower::after,.ss .cab .front::after{content:"";position:absolute;left:50%;top:50%;width:64px;height:9px;margin:-4px 0 0 -32px;border-radius:5px;background:#16233D;box-shadow:inset 0 2px 3px rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.12)}
+.ss .cab .lower span,.ss .cab .front span{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:.56rem;font-weight:600;letter-spacing:.14em;color:rgba(255,255,255,.35)}
+/* the open drawer: its inside, the papers, then its front pulled toward us */
+.ss .cab .inside{position:absolute;left:4px;right:4px;top:30px;height:70px;border-radius:8px 8px 0 0;background:linear-gradient(180deg,#0E1830,#162540);box-shadow:inset 0 8px 18px rgba(0,0,0,.55)}
+.ss .cab .front{position:absolute;left:0;right:0;top:92px;height:70px;border-radius:9px;background:linear-gradient(180deg,#3A5884,#2D4874);box-shadow:0 18px 30px -14px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.15);z-index:3}
+.ss .files{position:absolute;left:18px;right:18px;top:0;height:100px;z-index:2}
+.ss .files i{position:absolute;bottom:0;width:132px;height:86px;border-radius:4px 4px 0 0;box-shadow:0 -2px 6px rgba(0,0,0,.25);transition:opacity .45s,transform .45s}
+.ss .files i::before{content:"";position:absolute;left:12px;right:30px;top:12px;height:4px;border-radius:2px;background:rgba(31,48,80,.18);box-shadow:0 9px 0 rgba(31,48,80,.12),0 18px 0 rgba(31,48,80,.12)}
+.ss .files i:nth-child(1){left:0;background:#EAF1FB;transform:rotate(-5deg)}
+.ss .files i:nth-child(2){left:30px;background:#F3EFE6;transform:rotate(-1deg)}
+.ss .files i:nth-child(3){left:58px;background:#FFF6EA;transform:rotate(3deg)}
+.ss .files i:nth-child(4){left:86px;background:#fff;transform:rotate(-2deg)}
+.ss .files i.gone{opacity:0;transform:translateY(34px)}
+
+/* the moving document */
+.ss .doc{text-align:left;position:absolute;left:56px;top:330px;width:154px;height:200px;background:#fff;border-radius:6px;padding:13px;box-shadow:0 24px 40px -18px rgba(0,0,0,.55);z-index:4;color:var(--navy);opacity:0;transition:transform .9s cubic-bezier(.2,.8,.2,1),opacity .35s,top .9s cubic-bezier(.2,.8,.2,1),left .9s cubic-bezier(.2,.8,.2,1)}
+.ss .doc .hd{display:flex;justify-content:space-between;align-items:center;font-size:7px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.ss .doc .hd i{width:16px;height:16px;border-radius:4px;background:#E3E8EF}
+.ss .doc .t{font-size:11px;font-weight:700;margin-top:10px}
+.ss .doc .d{font-size:8px;color:var(--mute);margin-top:2px}
+.ss .doc .body{margin-top:10px}
+.ss .doc .ln{height:4px;border-radius:2px;background:#E9ECF1;margin-top:6px}
+.ss .doc .rx{font-size:14px;font-weight:700;color:var(--amber);margin-top:8px}
+.ss .doc .item{display:flex;justify-content:space-between;font-size:8px;color:var(--slate);margin-top:6px}
+.ss .doc .item b{color:var(--navy)}
+.ss .doc .scan{margin-top:8px;height:62px;border-radius:5px;background:radial-gradient(circle at 50% 45%,#8A93A6 0,#4B566A 30%,#1D2638 62%,#111827 100%)}
+.ss .doc .sign{position:absolute;right:12px;bottom:12px;width:40px;height:14px;border-bottom:1px solid #C9D1DE}
+.ss .doc.out{opacity:1}
+.ss .doc.at-scan{left:72px;top:62px;transform:rotate(0deg) scale(1.08)}
+.ss .doc.into-app{left:322px;top:150px;transform:scale(.25);opacity:0;transition:transform .7s cubic-bezier(.5,0,.3,1),opacity .7s ease-in,top .7s cubic-bezier(.5,0,.3,1),left .7s cubic-bezier(.5,0,.3,1)}
+
+/* camera frame and scan line */
+.ss .frame{position:absolute;left:60px;top:48px;width:190px;height:240px;z-index:5;pointer-events:none;opacity:0;transform:scale(1.06);transition:opacity .3s,transform .3s}
+.ss .frame.on{opacity:1;transform:none}
+.ss .frame b{position:absolute;width:26px;height:26px;border:3px solid var(--cta)}
+.ss .frame b:nth-child(1){left:0;top:0;border-right:0;border-bottom:0;border-radius:10px 0 0 0}
+.ss .frame b:nth-child(2){right:0;top:0;border-left:0;border-bottom:0;border-radius:0 10px 0 0}
+.ss .frame b:nth-child(3){left:0;bottom:0;border-right:0;border-top:0;border-radius:0 0 0 10px}
+.ss .frame b:nth-child(4){right:0;bottom:0;border-left:0;border-top:0;border-radius:0 0 10px 0}
+.ss .frame .line{position:absolute;left:10px;right:10px;top:8px;height:3px;border-radius:2px;background:var(--cta);box-shadow:0 0 18px 4px rgba(255,139,11,.55);opacity:0}
+.ss .frame.on .line{animation:ss-sweep 1.1s ease-in-out 1 forwards}
+@keyframes ss-sweep{0%{top:8px;opacity:1}90%{opacity:1}100%{top:228px;opacity:0}}
+.ss .frame .chip{position:absolute;left:50%;top:-38px;transform:translateX(-50%);white-space:nowrap;border-radius:999px;background:var(--cta);padding:6px 12px;font-size:.72rem;font-weight:600;color:#fff}
+
+/* phone */
+.ss .phone{text-align:left;position:absolute;right:0;top:26px;width:212px;height:384px;border-radius:34px;background:#0B1426;padding:9px;box-shadow:0 40px 70px -30px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08)}
+.ss .screen{position:relative;height:100%;border-radius:26px;background:#fff;overflow:hidden;padding:30px 12px 12px}
+.ss .notch{position:absolute;left:50%;top:8px;width:60px;height:16px;margin-left:-30px;border-radius:10px;background:#0B1426}
+.ss .app-h{display:flex;align-items:center;gap:6px}
+.ss .app-h img{width:20px;height:20px;border-radius:6px}
+.ss .app-h b{font-size:.76rem;font-weight:700;color:var(--navy)}
+.ss .app-t{font-size:1rem;font-weight:700;color:var(--ink);margin-top:12px;letter-spacing:-.01em}
+.ss .app-s{font-size:.62rem;color:var(--mute);margin-top:2px}
+.ss .list{margin-top:10px;display:grid;gap:5px}
+.ss .row{min-width:0;display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:11px;padding:6px 7px;font-size:.64rem;color:var(--navy);opacity:0;transform:translateY(8px) scale(.96);transition:.45s cubic-bezier(.2,.8,.2,1)}
+.ss .row.in{opacity:1;transform:none}
+.ss .row .ic{flex:none;width:24px;height:24px;border-radius:7px;display:grid;place-items:center;background:#FFE7CC;color:var(--amber)}
+.ss .row .ic svg{width:13px;height:13px}
+.ss .row .tx{flex:1;min-width:0;font-weight:600;line-height:1.25}
+.ss .row .tx small{display:block;color:var(--mute);font-size:.54rem;font-weight:500}
+.ss .row .st{flex:none;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:#EEF1F5;transition:.3s}
+.ss .row .st::after{content:"";width:8px;height:8px;border-radius:50%;border:2px solid #C9D1DE;border-top-color:var(--cta);animation:ss-spin .7s linear infinite}
+@keyframes ss-spin{to{transform:rotate(360deg)}}
+.ss .row.saved .st{background:var(--sage)}
+.ss .row.saved .st::after{width:5px;height:9px;border:0;border-right:2px solid #fff;border-bottom:2px solid #fff;border-radius:0;transform:translateY(-1px) rotate(45deg);animation:none}
+.ss .done{margin-top:10px;display:flex;align-items:center;gap:8px;border-radius:12px;background:var(--sagew);color:var(--sage);padding:9px 10px;font-size:.64rem;font-weight:700;opacity:0;transform:translateY(10px);transition:.5s cubic-bezier(.2,.8,.2,1)}
+.ss .done.in{opacity:1;transform:none}
+.ss .done i{flex:none;width:18px;height:18px;border-radius:50%;background:var(--sage);display:grid;place-items:center}
+.ss .done span{display:block;font-weight:500;color:#3E7E64;font-size:.56rem;margin-top:1px}
+.ss .flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;border-radius:26px}
+.ss .flash.go{animation:ss-flash .45s ease-out}
+@keyframes ss-flash{0%{opacity:.85}100%{opacity:0}}
+
+
+@media (max-width:620px){ .ss{zoom:.66} }
+@media (max-width:420px){ .ss{zoom:.58} }
+@media (prefers-reduced-motion: reduce){ .ss *{transition:none!important;animation:none!important} }
+
+/* The three steps beside the scene, lit in time with it. */
+.scan-steps{display:flex;flex-wrap:wrap;gap:12px 18px;color:rgba(255,255,255,.6);font-size:.86rem}
+.scan-steps span{display:flex;align-items:center;gap:8px;transition:color .3s}
+.scan-steps b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.1);color:#FFB15C;font-size:.72rem;font-weight:700;transition:.3s}
+.scan-steps span.on{color:#fff}
+.scan-steps span.on b{background:#FF8B0B;color:#fff}

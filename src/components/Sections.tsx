@@ -3,6 +3,7 @@ import { Reveal } from "./Motion";
 import { StoreButtons } from "./StoreButtons";
 import { ScoreRing } from "./ScoreRing";
 import { AbhaStory } from "./AbhaStory";
+import { ScanStory } from "./ScanStory";
 
 /* ------------------------------- hero -------------------------------- */
 
@@ -224,17 +225,24 @@ export function Download() {
   return (
     <section id="download" className="border-b border-line bg-paper">
       <div className="mx-auto max-w-6xl px-5 py-18 sm:px-8 md:py-24">
-        <div className="overflow-hidden rounded-3xl bg-navy px-6 py-12 text-center sm:px-14">
-          <h2 className="mx-auto max-w-2xl font-display text-[clamp(1.8rem,4vw,2.4rem)] leading-tight text-white text-balance">
-            Start by scanning the reports already in your drawer
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-[0.95rem] leading-relaxed text-white/70">
-            Free for patients, on Android and iPhone. Doctors and clinics have
-            tools of their own.
-          </p>
-          <div className="mt-8 flex justify-center">
-            <StoreButtons size="lg" />
+        <div className="grid items-center gap-8 overflow-hidden rounded-3xl bg-[radial-gradient(60%_70%_at_85%_30%,rgba(255,139,11,0.16),transparent_60%),linear-gradient(135deg,#1F3050,#16233D)] px-6 py-12 text-center text-white sm:px-12 lg:grid-cols-[minmax(0,1fr)_512px] lg:gap-6 lg:py-14 lg:text-left">
+          <div>
+            <h2 className="font-display text-[clamp(2rem,3.6vw,2.8rem)] leading-[1.06] text-balance">
+              Start by scanning the reports <em className="text-amber-light">already in your drawer</em>
+            </h2>
+            <p className="mx-auto mt-4 max-w-md text-[0.98rem] leading-relaxed text-white/70 lg:mx-0">
+              Free for patients, on Android and iPhone. Doctors and clinics have tools of their own.
+            </p>
+            <div className="scan-steps mt-6 justify-center lg:justify-start">
+              <span data-scan-step="0"><b>1</b>Take it out</span>
+              <span data-scan-step="1"><b>2</b>Scan it</span>
+              <span data-scan-step="2"><b>3</b>Saved in the app</span>
+            </div>
+            <div className="mt-8 flex justify-center lg:justify-start">
+              <StoreButtons size="lg" />
+            </div>
           </div>
+          <ScanStory />
         </div>
       </div>
     </section>
