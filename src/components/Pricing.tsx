@@ -1,10 +1,16 @@
-/* Pricing, as it stands: the free plan is live, and the Individual and
-   Family plans are coming. No prices are shown because none have been
-   set; each paid plan says Coming soon and asks people to get in touch.
-   When the founder confirms the plans, the price goes in `price` and the
-   real inclusions replace the points below. */
+"use client";
 
-const plans = [
+import { useState } from "react";
+
+/* Pricing, as it stands, for two audiences behind a toggle. Patients:
+   the free plan is live, Individual and Family plans are coming. Doctors
+   and clinics: the doctor app is free to start, clinic and hospital plans
+   are on request. No prices are shown because none have been set; each
+   paid plan says Coming soon and asks people to get in touch. When the
+   founder confirms the plans, the price goes in `price` and the real
+   inclusions replace the points below. */
+
+const patientPlans = [
   {
     who: "Free",
     price: "Free",
@@ -31,7 +37,42 @@ const plans = [
   },
 ];
 
+const doctorPlans = [
+  {
+    who: "Doctor",
+    price: "Free",
+    note: "Free to install. Your registration number is all it takes",
+    points: ["The doctor app on Android and iPhone", "Appointments and video consultations", "Prescriptions signed with a finger", "Patient records, with their consent"],
+    cta: ["Register as a doctor", "/for-doctors#join"],
+    featured: true,
+  },
+  {
+    who: "Clinic plan",
+    price: "Coming soon",
+    note: "For clinics with a team of doctors and staff",
+    points: ["Everything in Doctor", "The clinic console in the browser", "Departments, staff and billing", "Plan details on request"],
+    cta: ["Request plans", "/contact"],
+    featured: false,
+  },
+  {
+    who: "Hospitals, labs and pharmacies",
+    price: "On request",
+    note: "Built around your scale",
+    points: ["Everything in Clinic", "Reports straight to patients", "Integration support", "Plan details on request"],
+    cta: ["Request plans", "/contact"],
+    featured: false,
+  },
+];
+
+const tabs = [
+  { k: "patients", label: "For patients", plans: patientPlans },
+  { k: "doctors", label: "For doctors and clinics", plans: doctorPlans },
+] as const;
+
 export function Pricing() {
+  const [tab, setTab] = useState<(typeof tabs)[number]["k"]>("patients");
+  const plans = tabs.find((t) => t.k === tab)!.plans;
+
   return (
     <section id="pricing" className="scroll-mt-24 border-b border-line bg-mist">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
@@ -40,13 +81,27 @@ export function Pricing() {
           <h2 className="mt-4 font-display text-[clamp(2.4rem,5vw,3.75rem)] leading-[1.02] text-ink text-balance">
             Start free, <em className="text-amber">more plans coming soon</em>
           </h2>
+          <div role="tablist" aria-label="Plans for" className="mt-8 inline-flex rounded-full border border-line bg-white p-1">
+            {tabs.map((t) => (
+              <button
+                key={t.k}
+                type="button"
+                role="tab"
+                aria-selected={tab === t.k}
+                onClick={() => setTab(t.k)}
+                className={`rounded-full px-5 py-2.5 text-[0.88rem] font-semibold transition ${tab === t.k ? "bg-navy text-white" : "text-slate hover:text-navy"}`}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-3">
+        <div key={tab} className="mt-12 grid gap-5 md:grid-cols-3">
           {plans.map((p) => (
             <div
               key={p.who}
-              className={`flex h-full flex-col rounded-3xl border p-7 ${p.featured ? "border-navy bg-navy text-white" : "border-line bg-white text-ink"}`}
+              className={`who-in flex h-full flex-col rounded-3xl border p-7 ${p.featured ? "border-navy bg-navy text-white" : "border-line bg-white text-ink"}`}
             >
               <p className={`eyebrow ${p.featured ? "text-amber-light" : "text-amber"}`}>{p.who}</p>
               <p className="mt-5 flex items-center gap-2.5 font-display text-[2.6rem] leading-none">
@@ -78,9 +133,9 @@ export function Pricing() {
         </div>
 
         <p className="mt-10 text-center text-[0.92rem] text-slate">
-          Doctors, clinics, hospitals, labs and pharmacies:{" "}
+          Want to know more about a plan?{" "}
           <a href="/contact" className="font-semibold text-navy underline decoration-line-strong underline-offset-4 transition hover:decoration-navy">
-            contact us to know more &rarr;
+            Contact us &rarr;
           </a>
         </p>
       </div>
