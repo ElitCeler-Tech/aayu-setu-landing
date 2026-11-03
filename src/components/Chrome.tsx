@@ -90,12 +90,8 @@ const footerCols = [
     h: "Explore",
     links: [
       ["For patients and families", "/#who"],
-      ["For doctors", "/for-doctors"],
-      ["For clinics", "/for-doctors#clinics"],
-      ["For hospitals", "/partners#hospitals"],
-      ["For labs and diagnostics", "/partners#labs"],
-      ["For pharmacies", "/partners#pharmacies"],
-      ["For Ayurveda and wellness", "/partners#wellness"],
+      ["For doctors and clinics", "/for-doctors"],
+      ["For healthcare partners", "/partners"],
     ],
   },
   {
