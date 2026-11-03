@@ -72,7 +72,7 @@ export default function Security() {
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 md:py-20">
             <div className="flex flex-col items-start gap-5 rounded-3xl border border-line bg-mist p-7 md:flex-row md:items-center md:justify-between md:p-9">
               <div>
-                <h2 className="font-display text-[1.7rem] leading-tight text-ink">Questions about your data?</h2>
+                <h2 className="text-[1.4rem] font-semibold leading-tight text-ink">Questions about your data?</h2>
                 <p className="mt-2 max-w-xl text-[0.92rem] leading-relaxed text-slate">
                   Ask us what we hold, how it is used, or how to delete it. A person will write back.
                 </p>

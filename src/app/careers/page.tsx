@@ -45,7 +45,7 @@ export default function Careers() {
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-24">
             <p className="eyebrow text-amber">Why Ayussetu</p>
             <h2 className="mt-4 max-w-xl font-display text-[clamp(2.2rem,4.6vw,3.2rem)] leading-[1.04] text-ink text-balance">
-              What it is like <em className="text-amber">to work here</em>
+              What it is like to work here
             </h2>
             <div className="mt-12 grid gap-5 md:grid-cols-3">
               {values.map((v) => (
@@ -55,7 +55,7 @@ export default function Careers() {
                       <path d={v.icon} />
                     </svg>
                   </span>
-                  <h3 className="mt-6 font-display text-[1.5rem] leading-tight text-ink">{v.t}</h3>
+                  <h3 className="mt-6 text-[1.15rem] font-semibold leading-snug text-ink">{v.t}</h3>
                   <p className="mt-2.5 text-[0.9rem] leading-relaxed text-slate">{v.b}</p>
                 </div>
               ))}
@@ -68,8 +68,8 @@ export default function Careers() {
             <div className="grid items-center gap-8 rounded-[2rem] bg-navy p-8 text-white md:grid-cols-[1.4fr_1fr] md:p-12">
               <div>
                 <p className="eyebrow text-amber-light">Open roles</p>
-                <h2 className="mt-4 font-display text-[clamp(1.9rem,3.6vw,2.6rem)] leading-[1.08] text-balance">
-                  No open roles right now, <em className="text-amber-light">but we would still like to hear from you</em>
+                <h2 className="mt-4 text-[clamp(1.5rem,2.8vw,2rem)] font-semibold leading-[1.2] tracking-tight text-balance">
+                  No open roles right now, but we would still like to hear from you
                 </h2>
                 <p className="mt-4 max-w-xl text-[0.98rem] leading-relaxed text-white/70">
                   Send your CV and a few lines about what you would like to work on. We keep every
