@@ -163,9 +163,9 @@ function Progress() {
     <div className="flex h-[8.5rem] flex-col justify-center">
       <p className="text-[0.78rem] font-semibold text-ink">Fasting blood sugar since July</p>
       <div className="mt-3 flex items-baseline gap-3">
-        <span className="strike-in font-display text-[2.2rem] leading-none text-mute decoration-1">142</span>
+        <span className="strike-in text-[2rem] font-semibold tabular-nums leading-none text-mute decoration-1">142</span>
         <span className="text-[1.1rem] text-faint">&rarr;</span>
-        <span className="seq seq-4 seq-pop font-display text-[2.2rem] leading-none text-sage">118</span>
+        <span className="seq seq-4 seq-pop text-[2rem] font-semibold tabular-nums leading-none text-sage">118</span>
         <span className="text-[0.72rem] text-mute">mg/dL</span>
       </div>
       <svg viewBox="0 0 220 50" className="mt-4 h-12 w-full" aria-hidden="true">
@@ -193,7 +193,7 @@ function PBig({ value, note }: { value: React.ReactNode; note: string }) {
   return (
     <div className="grid h-full place-items-center text-center">
       <div>
-        <span className="font-display text-[2.6rem] leading-none text-ink">{value}</span>
+        <span className="text-[2.3rem] font-semibold tabular-nums leading-none text-ink">{value}</span>
         <div className="hp-blink mt-1 text-[0.72rem] text-[#D9403D]">{note}</div>
       </div>
     </div>

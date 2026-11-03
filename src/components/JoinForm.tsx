@@ -90,7 +90,7 @@ export function JoinForm() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sage-wash">
                   <span className="h-3 w-3 rounded-full bg-sage" />
                 </div>
-                <h3 className="mt-4 font-display text-[1.3rem] text-navy">
+                <h3 className="mt-4 text-[1.2rem] font-semibold text-navy">
                   Thank you, it reached us
                 </h3>
                 <p className="mt-2 text-[0.9rem] leading-relaxed text-slate">

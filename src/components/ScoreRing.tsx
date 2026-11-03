@@ -122,7 +122,7 @@ export function ScoreRing() {
         </svg>
 
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="font-display text-[4.5rem] leading-none tabular-nums md:text-[7rem]">{shown}</span>
+          <span className="text-[4rem] font-semibold leading-none tracking-tight tabular-nums md:text-[6rem]">{shown}</span>
           <span className="eyebrow mt-1.5 text-white/55">Health Score</span>
         </div>
       </div>

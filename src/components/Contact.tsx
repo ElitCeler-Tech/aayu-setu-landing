@@ -236,8 +236,8 @@ function ThankYou({ sent, onAgain }: { sent: Sent; onAgain: () => void }) {
         </svg>
       </span>
 
-      <h3 {...rise(1)} className="who-in relative mt-5 font-display text-[clamp(1.7rem,3vw,2.1rem)] leading-[1.08] text-ink">
-        Thank you, {first}. <em className="text-amber">It reached us.</em>
+      <h3 {...rise(1)} className="who-in relative mt-5 text-[clamp(1.4rem,2.4vw,1.7rem)] font-semibold leading-tight tracking-tight text-ink">
+        Thank you, {first}. <span className="text-amber">It reached us.</span>
       </h3>
       <p {...rise(2)} className="who-in mt-2.5 text-[0.92rem] leading-relaxed text-slate">
         A person from our team will reply within two working days.

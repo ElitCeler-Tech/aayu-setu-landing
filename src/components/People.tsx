@@ -72,8 +72,8 @@ export function People({ intro = true }: { intro?: boolean }) {
               className="group flex aspect-[1/1.05] flex-col rounded-[1.15rem] border-[1.5px] border-dashed border-line-strong bg-paper p-7 transition hover:border-navy/40"
             >
               <span className="eyebrow text-mute">For doctors</span>
-              <span className="mt-auto font-display text-[2.1rem] leading-[1.05] text-ink">
-                Are you a <em className="text-amber">doctor?</em>
+              <span className="mt-auto text-[1.6rem] font-semibold leading-tight tracking-tight text-ink">
+                Are you a <span className="text-amber">doctor?</span>
               </span>
               <span className="mt-3 text-[0.88rem] leading-relaxed text-slate">
                 Consult, prescribe and follow your patients on Ayussetu. Tell us

@@ -83,12 +83,12 @@ export function FlowCard({
 
       {/* words: the problem, then the answer */}
       <div className="relative mt-2.5 min-h-[5.4rem]">
-        <p className={`absolute inset-x-0 top-0 font-display text-[1.28rem] leading-[1.12] text-slate transition-all duration-500 ${isProblem ? "opacity-100" : "-translate-y-2 opacity-0"}`}>
+        <p className={`absolute inset-x-0 top-0 text-[1.05rem] font-semibold leading-snug text-slate transition-all duration-500 ${isProblem ? "opacity-100" : "-translate-y-2 opacity-0"}`}>
           {problem}
         </p>
         <div className={`transition-all duration-500 ${answered ? "opacity-100" : "translate-y-2 opacity-0"}`}>
           {still && <p className="mb-1 text-[0.78rem] text-mute line-through decoration-[#D9403D]">{problem}</p>}
-          <h3 className="font-display text-[1.28rem] leading-[1.12] text-ink">{title}</h3>
+          <h3 className="text-[1.05rem] font-semibold leading-snug text-ink">{title}</h3>
           <p className="mt-1 text-[0.8rem] leading-relaxed text-slate">{body}</p>
         </div>
       </div>

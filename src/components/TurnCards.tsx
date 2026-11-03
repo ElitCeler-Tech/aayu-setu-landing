@@ -75,7 +75,7 @@ export function TurnCards({ cards, tone = "light" }: { cards: Card[]; tone?: Ton
                 <path d={c.icon} />
               </svg>
             </span>
-            <h3 className={`mt-6 font-display text-[1.5rem] leading-tight ${light ? "text-ink" : "text-white"}`}>{c.t}</h3>
+            <h3 className={`mt-6 text-[1.15rem] font-semibold leading-snug ${light ? "text-ink" : "text-white"}`}>{c.t}</h3>
             <p className={`mt-2.5 text-[0.88rem] leading-relaxed ${light ? "text-slate" : "text-white/60"}`}>{c.b}</p>
             <div key={on ? "on" : "off"} className="mt-auto pt-6">
               <c.Art on={on} tone={tone} />

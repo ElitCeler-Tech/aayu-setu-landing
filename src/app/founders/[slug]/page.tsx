@@ -164,7 +164,7 @@ export default async function Founder({
                       <Image src={o.photo} alt="" fill sizes="56px" className="object-cover object-top" />
                     </span>
                     <span>
-                      <span className="block font-display text-[1rem] text-navy">
+                      <span className="block text-[1rem] font-semibold text-navy">
                         {o.name}
                       </span>
                       <span className="block text-[0.8rem] text-mute">{o.role}</span>

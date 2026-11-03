@@ -173,7 +173,7 @@ export function WhoWeServe() {
                     <path d={w.icon} />
                   </svg>
                 </span>
-                <h3 className="mt-6 font-display text-[1.6rem] leading-tight text-ink">{w.t}</h3>
+                <h3 className="mt-6 text-[1.2rem] font-semibold leading-snug text-ink">{w.t}</h3>
                 <p className="mt-2.5 text-[0.88rem] leading-relaxed text-slate">{w.b}</p>
                 <div key={on ? "on" : "off"} className="mt-auto pt-6">
                   <w.Art on={on} />

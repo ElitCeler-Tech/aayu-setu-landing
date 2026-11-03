@@ -138,10 +138,9 @@ export function Footer() {
               <Mark size="h-[30px]" tone="dark" />
               <Image src="/wordmark-light.png" alt="Ayus Setu" width={181} height={17} style={{ height: "0.95rem", width: "auto" }} />
             </div>
-            <p className="mt-4 font-display text-[1.15rem] text-white/80">
+            <p className="mt-4 text-[0.95rem] text-white/75">
               Connecting care for better health
             </p>
-            <SocialLinks socials={socials} />
           </div>
 
           {footerCols.map((c) => (
@@ -158,6 +157,7 @@ export function Footer() {
                   </li>
                 ))}
               </ul>
+              {c.h === "Connect with us" && <SocialLinks socials={socials} />}
             </div>
           ))}
 
@@ -183,8 +183,9 @@ export function Footer() {
         <div className="mt-8 flex flex-col gap-3 border-t border-white/10 pt-6 text-[0.78rem] text-white/45 sm:flex-row sm:items-start sm:justify-between">
           <p>© {new Date().getFullYear()} Ayussetu. All rights reserved.</p>
           <p className="max-w-md sm:text-right">
-            AI powered insights to support preventive health actions. Not a
-            diagnostic or treatment tool.
+            AI powered insights to support preventive health actions.
+            <br />
+            Not a diagnostic or treatment tool.
           </p>
         </div>
       </div>

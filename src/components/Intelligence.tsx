@@ -255,9 +255,9 @@ export function Intelligence() {
               <div className="relative grid gap-8 p-7 md:min-h-[18.5rem] md:grid-cols-[1fr_1fr] md:items-center md:gap-12 md:p-10">
                 <div>
                   <p className="eyebrow text-amber-light">Stage {String(i + 1).padStart(2, "0")} of 05</p>
-                  <h3 className="mt-3 font-display text-[clamp(1.9rem,3.4vw,2.6rem)] leading-[1.05]">{c.title}</h3>
+                  <h3 className="mt-3 text-[clamp(1.5rem,2.6vw,2rem)] font-semibold leading-[1.15] tracking-tight">{c.title}</h3>
                   <p className="mt-3 max-w-md text-[0.94rem] leading-relaxed text-white/65">{c.body}</p>
-                  <p className="mt-6 font-display text-[3.4rem] leading-none">{c.stat}</p>
+                  <p className="mt-6 text-[3rem] font-semibold leading-none tracking-tight">{c.stat}</p>
                   <p className="mt-1.5 text-[0.78rem] text-white/50">{c.statLabel}</p>
                 </div>
                 <div className="flex items-center rounded-2xl border border-white/10 bg-white/[0.04] p-5 md:p-6">

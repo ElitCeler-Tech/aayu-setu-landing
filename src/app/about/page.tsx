@@ -42,7 +42,7 @@ export default function About() {
               ].map((x, i) => (
                 <Reveal key={x.w} delay={i * 120}>
                   <div className="h-full rounded-3xl border border-line bg-white p-8 md:p-10">
-                    <p className="font-display text-[clamp(2.6rem,5vw,3.6rem)] leading-none text-ink">{x.w}</p>
+                    <p className="text-[clamp(2.4rem,4.6vw,3.2rem)] font-semibold leading-none tracking-tight text-ink">{x.w}</p>
                     <p className="eyebrow mt-5 text-amber-deep">{x.k}</p>
                     <p className="mt-3 text-[1rem] leading-relaxed text-slate">{x.b}</p>
                   </div>
@@ -125,8 +125,8 @@ export default function About() {
                         </span>
                         <span className="eyebrow text-amber-light">{m.k}</span>
                       </div>
-                      <p className="relative mt-7 font-display text-[clamp(1.6rem,2.8vw,2.15rem)] leading-[1.14] text-balance">
-                        {m.h} <em className="text-amber-light">{m.a}</em>
+                      <p className="relative mt-7 text-[clamp(1.35rem,2.4vw,1.75rem)] font-semibold leading-[1.3] tracking-tight text-balance">
+                        {m.h} <span className="text-amber-light">{m.a}</span>
                       </p>
                       <p className="relative mt-4 text-[0.95rem] leading-relaxed text-white/65">{m.b}</p>
                       <ul className="relative mt-7 flex flex-wrap gap-2 border-t border-white/10 pt-6">
