@@ -5,20 +5,20 @@ import { useEffect, useState } from "react";
 /* One How it works card, where the problem turns into the answer in
    place: one card, one picture box, three beats on its own clock.
 
-   1. Problem (3s): a red The problem label, the problem in words, and the
+   1. Problem (5.5s): a red The problem label, the problem in words, and the
       problem's picture playing in the box.
    2. Turn (1s): an orange line wipes across the picture box from left
       to right, uncovering the answer's picture behind it; the label
       flips to Solution with Ayussetu and the words change over.
-   3. Answer (4s): the answer's picture plays, rebuilt from its start.
+   3. Answer (6.5s): the answer's picture plays, rebuilt from its start.
 
    Remounting a layer by key restarts its CSS animations, so each picture
    plays from the beginning when its beat begins. Reduced motion shows the
    answer, with the problem as a struck line above it. */
 
-const PROBLEM_MS = 3000;
+const PROBLEM_MS = 5500;
 const TURN_MS = 1000;
-const CYCLE_MS = 8000;
+const CYCLE_MS = 13000;
 
 type Phase = "still" | "problem" | "turn" | "solution";
 
