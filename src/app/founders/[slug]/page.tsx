@@ -68,10 +68,6 @@ export default async function Founder({
                 <h1 className="mt-3 font-display text-[clamp(2.4rem,5vw,3.6rem)] leading-[1.02] text-balance">
                   {m.name}
                 </h1>
-                <p className="mt-4 max-w-xl text-[1.02rem] leading-relaxed text-white/70">
-                  {m.lede}
-                </p>
-
                 <div className="mt-7 flex flex-wrap items-center gap-3">
                   {m.linkedin && (
                   <a
@@ -85,9 +81,6 @@ export default async function Founder({
                     </svg>
                     LinkedIn
                   </a>
-                  )}
-                  {m.location && (
-                    <span className="text-[0.84rem] text-white/55">{m.location}</span>
                   )}
                 </div>
               </div>

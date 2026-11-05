@@ -28,9 +28,9 @@ export function People({ intro = true }: { intro?: boolean }) {
             </p>
             <p className="mt-3">
               It began with a pharmacist. Sandeep Konda brings twenty years of
-              pharmacy leadership, and the idea he took from building
-              iCancerCare: that the record, rather than the visit, is what
-              carries a patient's care.
+              healthcare leadership in the United States, and a family medical
+              urgency that showed why health information has to be organized
+              and at hand when it matters most.
             </p>
             <a href="/about" className="mt-5 inline-block font-semibold text-navy underline decoration-line-strong underline-offset-[6px] transition hover:decoration-navy">
               Our vision &rarr;

@@ -35,20 +35,20 @@ const partners = [
   {
     id: "labs",
     who: "Labs and diagnostic centres",
-    t: "Results that patients can actually read",
-    b: "Send results straight to the patient's record, where each value is shown against its range in plain language and kept next to every past report.",
-    points: ["Results land where patients keep everything", "Each value set against its range", "Integration support from our team"],
+    t: "Lab orders and results in one place",
+    b: "Patients order tests and book appointments with your lab from the app, and every result goes straight to their record, next to every past report.",
+    points: ["Order labs and schedule appointments", "Personalized lab test recommendations", "Integration support from our team"],
     icon: "M9 3v6l-4.5 9.5A1.5 1.5 0 0 0 5.9 21h12.2a1.5 1.5 0 0 0 1.4-2.5L15 9V3M8 3h8M7 15h10",
     org: "Your lab",
-    doc: "Lipid profile",
+    doc: "Blood work",
     lines: [["Cholesterol", "214"], ["LDL", "138"]],
   },
   {
     id: "pharmacies",
     who: "Pharmacies",
     t: "Medicines that stay with the patient",
-    b: "Help patients keep an accurate list of what they take, with dose reminders in the app, so every doctor they see knows their current medicines.",
-    points: ["A medicine list that travels with the patient", "Dose reminders in the app", "Integration support from our team"],
+    b: "Receive digital prescriptions, remind patients when it is time to reorder, and deliver to their door, while their medicine list stays in the record every doctor sees.",
+    points: ["Digital prescriptions", "Medication reminders to order on time", "Delivery services"],
     icon: "M5.5 13.5 13.5 5.5a3.5 3.5 0 0 1 5 5l-8 8a3.5 3.5 0 0 1-5-5ZM9.5 9.5l5 5",
     org: "Your pharmacy",
     doc: "Medication report",
@@ -123,7 +123,7 @@ function Hub() {
           <span className="text-[0.72rem] font-semibold">Patient&rsquo;s record</span>
         </div>
         <div className="mt-2 space-y-1">
-          {["Discharge summary", "Lipid profile", "Medicines"].map((r) => (
+          {["Discharge summary", "Blood work", "Medicines"].map((r) => (
             <div key={r} className="flex items-center justify-between rounded-md bg-mist px-2 py-1 text-[0.6rem] text-navy">
               {r}
               <span className="grid h-3.5 w-3.5 place-items-center rounded-full bg-sage text-white">

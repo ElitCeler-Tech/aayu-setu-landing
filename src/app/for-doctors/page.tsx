@@ -49,12 +49,12 @@ export default function ForDoctors() {
             <div>
               <p className="eyebrow text-amber-light">For doctors and clinics</p>
               <h1 className="mt-5 max-w-[16ch] font-display text-[clamp(2.8rem,6vw,4.6rem)] leading-[0.98] text-balance">
-                Consult on Ayussetu, <em className="text-amber-light">keep the record</em>
+                Digital consultation <em className="text-amber-light">and care plans</em>
               </h1>
               <p className="mt-6 max-w-xl text-[1.05rem] leading-relaxed text-white/70">
-                Doctors work from an app. Clinics run from a console in the
-                browser. Both write into the same record the patient already
-                keeps, so a consultation ends in something that lasts.
+                Document consultations, create digital prescriptions and
+                medical reports, and set personalized care plans and follow up
+                instructions for patients, all from the app.
               </p>
               <div className="mt-9 flex flex-wrap items-center gap-4">
                 <a href="#join" className="rounded-full bg-brand px-7 py-4 text-[0.92rem] font-semibold text-white transition hover:bg-brand-deep">
@@ -146,12 +146,11 @@ export default function ForDoctors() {
                 The clinician portal
               </p>
               <h2 className="mt-3 max-w-xl font-display text-[clamp(1.95rem,4.2vw,2.8rem)] leading-tight text-balance">
-                A browser console for the people who run the place
+                Smart clinic and appointment management
               </h2>
               <p className="mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-white/60">
-                Doctors work from the app. The clinic works from a console: the
-                roster, the book, the patients and the money, in one view that
-                the front desk can use without being clinicians.
+                Manage appointments, physician and staff schedules and the
+                consultation workflow from one connected clinic portal.
               </p>
             </Reveal>
 
