@@ -100,6 +100,7 @@ const footerCols = [
       ["About us", "/about"],
       ["Pricing", "/#pricing"],
       ["Privacy and security", "/security"],
+      ["Blog", "/blog"],
       ["Careers", "/careers"],
       ["FAQs", "/faq"],
     ],
@@ -134,13 +135,17 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
         <div className="grid gap-12 md:grid-cols-[1.2fr_1fr_1fr_1.1fr]">
           <div>
-            <div className="flex items-center gap-2.5">
-              <Mark size="h-[30px]" tone="dark" />
-              <Image src="/wordmark-light.png" alt="Ayus Setu" width={181} height={17} style={{ height: "0.95rem", width: "auto" }} />
+            {/* A lockup: the tagline sits under the wordmark, set to the
+                same width (0.74rem with a touch of tracking matches it). */}
+            <div className="flex items-center gap-3">
+              <Mark size="h-[44px]" tone="dark" />
+              <div className="flex flex-col">
+                <Image src="/wordmark-light.png" alt="Ayus Setu" width={181} height={17} style={{ height: "1.1rem", width: "auto" }} />
+                <p className="mt-[7px] whitespace-nowrap text-[0.74rem] tracking-[0.02em] text-white/70">
+                  Connecting care for better health
+                </p>
+              </div>
             </div>
-            <p className="mt-4 text-[0.95rem] text-white/75">
-              Connecting care for better health
-            </p>
           </div>
 
           {footerCols.map((c) => (

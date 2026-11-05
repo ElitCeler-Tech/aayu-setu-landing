@@ -17,6 +17,7 @@ export const SITE_INDEX: SiteEntry[] = [
   { label: "Healthcare partners", href: "/partners", hint: "Hospitals, labs, pharmacies, Ayurveda and wellness" },
   { label: "Privacy and security", href: "/security", hint: "How your health data is protected" },
   { label: "Pricing", href: "/#pricing", hint: "Free for patients" },
+  { label: "Blog", href: "/blog", hint: "Health and wellness in plain words" },
   { label: "Careers", href: "/careers", hint: "Join the team" },
   { label: "ABHA and ABDM", href: "/#abha", hint: "One health ID, planned" },
   { label: "FAQs", href: "/faq", hint: "Questions people actually ask" },
