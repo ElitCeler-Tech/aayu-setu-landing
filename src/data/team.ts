@@ -42,7 +42,7 @@ export const team: Member[] = [
   {
     slug: "preeti-kotha",
     name: "Dr Preeti Kotha",
-    role: "Director of Pharmacy",
+    role: "Advisor",
     photo: "/team/preeti.png",
     linkedin: "https://www.linkedin.com/in/preeti-kotha-pharmd-app-75b95085/",
     lede: "A pharmacy leader and academic with 20 years of experience in clinical practice, pharmacy operations and patient care.",
