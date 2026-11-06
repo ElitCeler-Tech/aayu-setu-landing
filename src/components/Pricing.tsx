@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 /* Pricing, on the dark ground of the hero, for two audiences behind a
-   toggle. The free plan for each is ₹0 (patients see ₹499 struck through beside it); every other plan is on request,
+   toggle. The free plan for each is ₹0 (₹499 struck through beside it); every other plan is on request,
    with a Request plans button to the contact page. No prices or
    inclusions are invented: each paid plan says its details are shared on
    request until the founder confirms them.
@@ -88,6 +88,7 @@ const doctorPlans: Plan[] = [
   {
     who: "Doctor",
     price: "₹0",
+    was: "₹499",
     note: "Free to install. Your registration number is all it takes.",
     incl: 6,
     cta: ["Register as a doctor", "/for-doctors#join"],
