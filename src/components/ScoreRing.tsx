@@ -47,7 +47,7 @@ function useCount(target: number) {
     const from = v;
     const start = performance.now();
     const tick = (now: number) => {
-      const p = Math.min((now - start) / 900, 1);
+      const p = Math.min(Math.max((now - start) / 900, 0), 1);
       const e = 1 - Math.pow(1 - p, 3);
       setV(Math.round(from + (target - from) * e));
       if (p < 1) raf = requestAnimationFrame(tick);
