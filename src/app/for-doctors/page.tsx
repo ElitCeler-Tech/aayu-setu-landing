@@ -132,7 +132,7 @@ export default function ForDoctors() {
                   start.
                 </p>
                 <div className="sm:ml-auto">
-                  <StoreButtons />
+                  <StoreButtons app="doctor" />
                 </div>
               </div>
             </Reveal>
