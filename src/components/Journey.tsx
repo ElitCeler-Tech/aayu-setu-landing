@@ -262,8 +262,7 @@ export function Journey() {
           </p>
         </div>
 
-        {/* Six cards that stack as you scroll, the same way as Health
-            intelligence below. In each, the problem turns into the answer
+        {/* Six cards that stack as you scroll. In each, the problem turns into the answer
             in place. The padding under the list lets the finished pile
             hold on screen before the section moves on. */}
         <ol className="mt-12 pb-[18vh]">

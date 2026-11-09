@@ -1,7 +1,12 @@
-/* Health intelligence: five navy cards that stack as you scroll. Each
-   card sticks a little lower than the one before, so the next slides up
-   over it and the edges of the earlier ones stay showing; once all five
-   are stacked the pile holds for a moment before the page moves on.
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
+/* Health intelligence: the five stages of the Learning Loop as tabs over
+   one navy panel. The panel steps through the stages on its own (once the
+   section is on screen) and stops when someone picks a stage. It is not a
+   scroll stack on purpose: How it works, just above, already is one, and
+   two stacks in a row read as one long pile.
 
    Every card is the same shape (number and title on the left, a small
    picture on the right) and the copy comes from the list at the bottom,
@@ -225,10 +230,38 @@ const cards = [
   },
 ];
 
+const STEP_MS = 6500;
+
 export function Intelligence() {
+  const [active, setActive] = useState(0);
+  const [auto, setAuto] = useState(true);
+  const ref = useRef<HTMLElement>(null);
+  const [onScreen, setOnScreen] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setOnScreen(e.isIntersecting), { threshold: 0.35 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!auto || !onScreen) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = setTimeout(() => setActive((a) => (a + 1) % cards.length), STEP_MS);
+    return () => clearTimeout(t);
+  }, [active, auto, onScreen]);
+
+  const pick = (i: number) => {
+    setAuto(false);
+    setActive(i);
+  };
+  const c = cards[active];
+
   return (
-    <section id="intelligence" className="border-b border-line bg-mist">
-      <div className="mx-auto max-w-6xl px-5 pt-20 sm:px-8 md:pt-24">
+    <section ref={ref} id="intelligence" className="border-b border-line bg-mist">
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-24">
         <div className="max-w-2xl">
           <p className="eyebrow text-amber">Health intelligence</p>
           <h2 className="mt-4 font-display text-[clamp(2.4rem,5vw,3.75rem)] leading-[1.02] text-ink text-balance">
@@ -241,32 +274,71 @@ export function Intelligence() {
           <p className="mt-2 text-[0.76rem] text-mute">Example figures for illustration.</p>
         </div>
 
-        {/* The stack. Each card sticks 18px lower than the last; the
-            padding under the list lets the finished pile hold on screen
-            before the section scrolls away. */}
-        <ol className="mt-12 pb-[22vh]">
-          {cards.map((c, i) => (
-            <li
-              key={c.title}
-              className="sticky mb-6 overflow-hidden rounded-[1.75rem] text-white shadow-[0_-24px_50px_-30px_rgba(13,22,40,0.6)]"
-              style={{ top: `${96 + i * 18}px`, background: c.bg }}
-            >
-              <span className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-[radial-gradient(closest-side,rgba(255,139,11,0.28),transparent)]" />
-              <div className="relative grid gap-8 p-7 md:min-h-[18.5rem] md:grid-cols-[1fr_1fr] md:items-center md:gap-12 md:p-10">
-                <div>
-                  <p className="eyebrow text-amber-light">Stage {String(i + 1).padStart(2, "0")} of 05</p>
-                  <h3 className="mt-3 text-[clamp(1.5rem,2.6vw,2rem)] font-semibold leading-[1.15] tracking-tight">{c.title}</h3>
-                  <p className="mt-3 max-w-md text-[0.94rem] leading-relaxed text-white/65">{c.body}</p>
-                  <p className="mt-6 text-[3rem] font-semibold leading-none tracking-tight">{c.stat}</p>
-                  <p className="mt-1.5 text-[0.78rem] text-white/50">{c.statLabel}</p>
-                </div>
-                <div className="flex items-center rounded-2xl border border-white/10 bg-white/[0.04] p-5 md:p-6">
-                  {c.visual}
+        {/* The loop: one tab per stage. The bar under the active tab fills
+            while it is showing, so it is clear the panel moves on. */}
+        <div role="tablist" aria-label="Learning Loop stages" className="mt-10 grid grid-cols-5 gap-1 min-[380px]:gap-1.5 sm:gap-3">
+          {cards.map((x, i) => {
+            const on = i === active;
+            return (
+              <button
+                key={x.title}
+                role="tab"
+                aria-selected={on}
+                aria-controls="loop-panel"
+                onClick={() => pick(i)}
+                className={`group min-w-0 rounded-xl px-1 pb-2.5 pt-2.5 text-left transition sm:rounded-2xl sm:px-4 sm:pt-3.5 ${on ? "bg-white shadow-[0_14px_30px_-22px_rgba(18,29,51,0.55)] ring-1 ring-line" : "hover:bg-white/60"}`}
+              >
+                <span className={`block font-mono text-[0.6rem] tracking-[0.1em] sm:text-[0.66rem] ${on ? "text-amber" : "text-mute"}`}>{String(i + 1).padStart(2, "0")}</span>
+                <span className={`mt-0.5 block text-[0.58rem] font-semibold tracking-tight min-[380px]:text-[0.62rem] sm:truncate sm:text-[1rem] sm:tracking-normal ${on ? "text-ink" : "text-slate"}`}>{x.title}</span>
+                <span className="mt-2 block h-[3px] overflow-hidden rounded-full bg-line">
+                  <span
+                    key={on ? `${active}-${auto}-${onScreen}` : "off"}
+                    className="block h-full rounded-full bg-cta"
+                    style={
+                      on
+                        ? auto && onScreen
+                          ? { width: "100%", animation: `loop-fill ${STEP_MS}ms linear both` }
+                          : { width: "100%" }
+                        : { width: 0 }
+                    }
+                  />
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Every stage sits in the same grid cell, so the panel always
+            takes the height of the tallest one and the page below never
+            jumps as it moves on. Only the active stage shows; it remounts
+            when it becomes active, which restarts its picture. */}
+        <div id="loop-panel" role="tabpanel" aria-label={c.title} className="mt-4 grid">
+          {cards.map((x, i) => {
+            const on = i === active;
+            return (
+              <div
+                key={on ? `on${i}` : `off${i}`}
+                aria-hidden={!on}
+                className={`relative overflow-hidden rounded-[1.75rem] text-white shadow-[0_30px_60px_-36px_rgba(13,22,40,0.6)] [grid-area:1/1] ${on ? "loop-in" : "invisible"}`}
+                style={{ background: x.bg }}
+              >
+                <span className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-[radial-gradient(closest-side,rgba(255,139,11,0.28),transparent)]" />
+                <div className="relative grid h-full gap-8 p-7 md:min-h-[20rem] md:grid-cols-[1fr_1fr] md:items-center md:gap-12 md:p-10">
+                  <div>
+                    <p className="eyebrow text-amber-light">Stage {String(i + 1).padStart(2, "0")} of 05</p>
+                    <h3 className="mt-3 text-[clamp(1.5rem,2.6vw,2rem)] font-semibold leading-[1.15] tracking-tight">{x.title}</h3>
+                    <p className="mt-3 max-w-md text-[0.94rem] leading-relaxed text-white/65">{x.body}</p>
+                    <p className="mt-6 text-[3rem] font-semibold leading-none tracking-tight">{x.stat}</p>
+                    <p className="mt-1.5 text-[0.78rem] text-white/50">{x.statLabel}</p>
+                  </div>
+                  <div className="flex items-center rounded-2xl border border-white/10 bg-white/[0.04] p-5 md:p-6">
+                    {x.visual}
+                  </div>
                 </div>
               </div>
-            </li>
-          ))}
-        </ol>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
