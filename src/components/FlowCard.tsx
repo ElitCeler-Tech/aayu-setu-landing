@@ -1,9 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /* One How it works card, where the problem turns into the answer in
    place: one card, one picture box, three beats on its own clock.
+   The cards stack as you scroll (like Health intelligence), so each
+   card's clock starts only when it comes into view: you always meet
+   the problem first.
 
    1. Problem (5.5s): a red The problem label, the problem in words, and the
       problem's picture playing in the box.
@@ -40,19 +43,33 @@ export function FlowCard({
   const [phase, setPhase] = useState<Phase>("still");
   const [cycle, setCycle] = useState(0);
 
+  const ref = useRef<HTMLLIElement>(null);
+
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const el = ref.current;
+    if (!el) return;
     const timers: ReturnType<typeof setTimeout>[] = [];
+    let loop: ReturnType<typeof setInterval> | undefined;
     const run = () => {
       setCycle((c) => c + 1);
       setPhase("problem");
       timers.push(setTimeout(() => setPhase("turn"), PROBLEM_MS));
       timers.push(setTimeout(() => setPhase("solution"), PROBLEM_MS + TURN_MS));
     };
-    run();
-    const loop = setInterval(run, CYCLE_MS);
+    const seen = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting || loop) return;
+        run();
+        loop = setInterval(run, CYCLE_MS);
+        seen.disconnect();
+      },
+      { threshold: 0.45 },
+    );
+    seen.observe(el);
     return () => {
-      clearInterval(loop);
+      seen.disconnect();
+      if (loop) clearInterval(loop);
       timers.forEach(clearTimeout);
     };
   }, []);
@@ -65,7 +82,14 @@ export function FlowCard({
   const num = String(n).padStart(2, "0");
 
   return (
-    <li data-phase={phase} className="flex flex-col overflow-hidden rounded-[1.25rem] border border-line bg-white p-4 transition duration-300 hover:shadow-[0_30px_60px_-40px_rgba(18,29,51,0.45)]">
+    <li
+      ref={ref}
+      data-phase={phase}
+      className="sticky mb-6 overflow-hidden rounded-[1.75rem] border border-line bg-white shadow-[0_-24px_50px_-34px_rgba(18,29,51,0.45)]"
+      style={{ top: `${96 + (n - 1) * 18}px` }}
+    >
+      <div className="grid gap-6 p-6 md:min-h-[18.5rem] md:grid-cols-[1fr_1.1fr] md:items-center md:gap-12 md:p-10">
+      <div>
       {/* label: Today, then With Ayussetu */}
       <div className="flex items-center justify-between">
         <span className="relative h-5 flex-1">
@@ -78,32 +102,33 @@ export function FlowCard({
             Solution with Ayussetu
           </span>
         </span>
-        <span className="font-mono text-[0.72rem] text-faint">{num}</span>
+        <span className="font-mono text-[0.72rem] text-faint">{num} of 06</span>
       </div>
 
       {/* words: the problem, then the answer */}
-      <div className="relative mt-2.5 min-h-[5.4rem]">
-        <p className={`absolute inset-x-0 top-0 text-[1.05rem] font-semibold leading-snug text-slate transition-all duration-500 ${isProblem ? "opacity-100" : "-translate-y-2 opacity-0"}`}>
+      <div className="relative mt-4 min-h-[7.5rem]">
+        <p className={`absolute inset-x-0 top-0 text-[clamp(1.3rem,2.2vw,1.65rem)] font-semibold leading-snug tracking-tight text-slate transition-all duration-500 ${isProblem ? "opacity-100" : "-translate-y-2 opacity-0"}`}>
           {problem}
         </p>
         <div className={`transition-all duration-500 ${answered ? "opacity-100" : "translate-y-2 opacity-0"}`}>
           {still && <p className="mb-1 text-[0.78rem] text-mute line-through decoration-[#D9403D]">{problem}</p>}
-          <h3 className="text-[1.05rem] font-semibold leading-snug text-ink">{title}</h3>
-          <p className="mt-1 text-[0.8rem] leading-relaxed text-slate">{body}</p>
+          <h3 className="text-[clamp(1.3rem,2.2vw,1.65rem)] font-semibold leading-snug tracking-tight text-ink">{title}</h3>
+          <p className="mt-2 max-w-md text-[0.94rem] leading-relaxed text-slate">{body}</p>
         </div>
+      </div>
       </div>
 
       {/* picture: the problem's, wiped across into the answer's */}
-      <div className="relative mt-3 h-[9.75rem] overflow-hidden rounded-xl bg-mist ring-1 ring-line">
+      <div className="relative h-[11rem] overflow-hidden rounded-2xl bg-mist ring-1 ring-line md:h-[13rem]">
         <div key={isProblem ? `p${cycle}` : "p"} className={`absolute inset-0 p-2.5 transition-opacity duration-300 ${phase === "solution" || still ? "opacity-0" : "opacity-100"}`}>
-          <div className="relative h-full">{problemArt}</div>
+          <div className="relative mx-auto flex h-full max-w-[26rem] items-center"><div className="relative h-[8.5rem] w-full">{problemArt}</div></div>
         </div>
         <div
           className="absolute inset-0 bg-white p-2.5"
           style={{ clipPath: `inset(0 ${100 - wipe}% 0 0)`, transition: `clip-path ${wipeMs}ms ease-in-out` }}
         >
-          <div key={phase === "turn" ? `s${cycle}` : "s"} className="h-full">
-            {art}
+          <div key={phase === "turn" ? `s${cycle}` : "s"} className="mx-auto flex h-full max-w-[26rem] items-center">
+            <div className="w-full">{art}</div>
           </div>
         </div>
         {!still && (
@@ -113,6 +138,7 @@ export function FlowCard({
             style={{ left: `${wipe}%`, opacity: phase === "turn" ? 1 : 0, transition: `left ${wipeMs}ms ease-in-out, opacity 200ms` }}
           />
         )}
+      </div>
       </div>
     </li>
   );
