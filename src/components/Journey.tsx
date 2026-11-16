@@ -241,7 +241,7 @@ const problemArt = [
 
 const steps = [
   { p: "Reports scattered across paper, WhatsApp, email…", t: "Bring health records together", b: "Paper, WhatsApp, a photo on your phone, an email from the lab: all of it, in one place.", art: <Gather /> },
-  { p: "Old reports lost, so there is no history to look back on", t: "Kept year by year", b: "Every report is filed by date, so your history builds into something you can look back across.", art: <Yearly /> },
+  { p: "Old reports lost, so there is no history to look back on", t: "Kept year by year", b: "Reports are filed by date, creating a timeline you can look back on.", art: <Yearly /> },
   { p: "Each report read alone, so slow changes go unseen", t: "See trends over time", b: "One reading is a number. Five years of them is a direction you can see.", art: <Trend /> },
   { p: "Numbers with no meaning: is 164 bad, and for whom?", t: "Know what deserves attention", b: "What is out of range, what is drifting, and what is fine, at a glance.", art: <Attention /> },
   { p: "Advice written for everybody, so nobody follows it", t: "Take personalised actions", b: "Medicines, habits and retests, set around your own readings and routine.", art: <Actions /> },
