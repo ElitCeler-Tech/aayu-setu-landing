@@ -1,12 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-
-/* Health intelligence: the five stages of the Learning Loop as tabs over
-   one navy panel. The panel steps through the stages on its own (once the
-   section is on screen) and stops when someone picks a stage. It is not a
-   scroll stack on purpose: How it works, just above, already is one, and
-   two stacks in a row read as one long pile.
+/* Health intelligence: the five stages of the Learning Loop as a grid of
+   cards, in the card style How it works used before it became a stack.
 
    Every card is the same shape (number and title on the left, a small
    picture on the right) and the copy comes from the list at the bottom,
@@ -48,7 +43,7 @@ function Connect() {
         ))}
       </svg>
       {src.map((x) => (
-        <div key={x.k} className="absolute left-0 flex w-[37%] items-center gap-2 rounded-lg border border-white/10 bg-white/[0.07] px-2.5 py-1.5" style={{ top: x.y }}>
+        <div key={x.k} className="absolute left-0 flex w-[41%] items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.07] px-2 py-1.5" style={{ top: x.y }}>
           <Ic d={x.d} c="#FFB15C" s={14} />
           <span className="truncate text-[0.72rem] text-white/85">{x.k}</span>
         </div>
@@ -230,115 +225,49 @@ const cards = [
   },
 ];
 
-const STEP_MS = 6500;
-
 export function Intelligence() {
-  const [active, setActive] = useState(0);
-  const [auto, setAuto] = useState(true);
-  const ref = useRef<HTMLElement>(null);
-  const [onScreen, setOnScreen] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(([e]) => setOnScreen(e.isIntersecting), { threshold: 0.35 });
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!auto || !onScreen) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = setTimeout(() => setActive((a) => (a + 1) % cards.length), STEP_MS);
-    return () => clearTimeout(t);
-  }, [active, auto, onScreen]);
-
-  const pick = (i: number) => {
-    setAuto(false);
-    setActive(i);
-  };
-  const c = cards[active];
-
   return (
-    <section ref={ref} id="intelligence" className="border-b border-line bg-mist">
-      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-24">
-        <div className="max-w-2xl">
+    <section id="intelligence" className="border-b border-line bg-mist">
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
+        <div className="text-center">
           <p className="eyebrow text-amber">Health intelligence</p>
           <h2 className="mt-4 font-display text-[clamp(2.4rem,5vw,3.75rem)] leading-[1.02] text-ink text-balance">
             Your records, <em className="text-amber">read for you</em>
           </h2>
-          <p className="mt-4 text-[1rem] leading-relaxed text-slate">
+          <p className="mx-auto mt-4 max-w-xl text-[1rem] leading-relaxed text-slate">
             The AyusSetu Learning Loop: five stages that turn your reports
             into steps, and your results into better steps.
           </p>
           <p className="mt-2 text-[0.76rem] text-mute">Example figures for illustration.</p>
         </div>
 
-        {/* The loop: one tab per stage. The bar under the active tab fills
-            while it is showing, so it is clear the panel moves on. */}
-        <div role="tablist" aria-label="Learning Loop stages" className="mt-10 grid grid-cols-5 gap-1 min-[380px]:gap-1.5 sm:gap-3">
-          {cards.map((x, i) => {
-            const on = i === active;
-            return (
-              <button
-                key={x.title}
-                role="tab"
-                aria-selected={on}
-                aria-controls="loop-panel"
-                onClick={() => pick(i)}
-                className={`group min-w-0 rounded-xl px-1 pb-2.5 pt-2.5 text-left transition sm:rounded-2xl sm:px-4 sm:pt-3.5 ${on ? "bg-white shadow-[0_14px_30px_-22px_rgba(18,29,51,0.55)] ring-1 ring-line" : "hover:bg-white/60"}`}
-              >
-                <span className={`block font-mono text-[0.6rem] tracking-[0.1em] sm:text-[0.66rem] ${on ? "text-amber" : "text-mute"}`}>{String(i + 1).padStart(2, "0")}</span>
-                <span className={`mt-0.5 block text-[0.58rem] font-semibold tracking-tight min-[380px]:text-[0.62rem] sm:truncate sm:text-[1rem] sm:tracking-normal ${on ? "text-ink" : "text-slate"}`}>{x.title}</span>
-                <span className="mt-2 block h-[3px] overflow-hidden rounded-full bg-line">
-                  <span
-                    key={on ? `${active}-${auto}-${onScreen}` : "off"}
-                    className="block h-full rounded-full bg-cta"
-                    style={
-                      on
-                        ? auto && onScreen
-                          ? { width: "100%", animation: `loop-fill ${STEP_MS}ms linear both` }
-                          : { width: "100%" }
-                        : { width: 0 }
-                    }
-                  />
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Every stage sits in the same grid cell, so the panel always
-            takes the height of the tallest one and the page below never
-            jumps as it moves on. Only the active stage shows; it remounts
-            when it becomes active, which restarts its picture. */}
-        <div id="loop-panel" role="tabpanel" aria-label={c.title} className="mt-4 grid">
-          {cards.map((x, i) => {
-            const on = i === active;
-            return (
-              <div
-                key={on ? `on${i}` : `off${i}`}
-                aria-hidden={!on}
-                className={`relative overflow-hidden rounded-[1.75rem] text-white shadow-[0_30px_60px_-36px_rgba(13,22,40,0.6)] [grid-area:1/1] ${on ? "loop-in" : "invisible"}`}
-                style={{ background: x.bg }}
-              >
-                <span className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-[radial-gradient(closest-side,rgba(255,139,11,0.28),transparent)]" />
-                <div className="relative grid h-full gap-8 p-7 md:min-h-[20rem] md:grid-cols-[1fr_1fr] md:items-center md:gap-12 md:p-10">
-                  <div>
-                    <p className="eyebrow text-amber-light">Stage {String(i + 1).padStart(2, "0")} of 05</p>
-                    <h3 className="mt-3 text-[clamp(1.5rem,2.6vw,2rem)] font-semibold leading-[1.15] tracking-tight">{x.title}</h3>
-                    <p className="mt-3 max-w-md text-[0.94rem] leading-relaxed text-white/65">{x.body}</p>
-                    <p className="mt-6 text-[3rem] font-semibold leading-none tracking-tight">{x.stat}</p>
-                    <p className="mt-1.5 text-[0.78rem] text-white/50">{x.statLabel}</p>
-                  </div>
-                  <div className="flex items-center rounded-2xl border border-white/10 bg-white/[0.04] p-5 md:p-6">
-                    {x.visual}
-                  </div>
+        {/* Five cards in a grid, in the card style How it works used before
+            it became a stack: a white card, a small label and number, the
+            words, then a picture box underneath. The pictures are drawn for a
+            dark ground, so their box is navy. On wide screens the last two
+            cards sit centred under the first three. */}
+        <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
+          {cards.map((x, i) => (
+            <li
+              key={x.title}
+              className={`flex flex-col overflow-hidden rounded-[1.25rem] border border-line bg-white p-4 transition duration-300 hover:shadow-[0_30px_60px_-40px_rgba(18,29,51,0.45)] lg:col-span-2 ${i === 3 ? "lg:col-start-2" : ""}`}
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[0.62rem] uppercase tracking-[0.1em] text-amber">Stage {String(i + 1).padStart(2, "0")}</span>
+                <span className="font-mono text-[0.72rem] text-faint">{String(i + 1).padStart(2, "0")} of 05</span>
+              </div>
+              <h3 className="mt-2.5 text-[1.05rem] font-semibold leading-snug text-ink">{x.title}</h3>
+              <p className="mt-1 text-[0.8rem] leading-relaxed text-slate lg:min-h-[3.9rem]">{x.body}</p>
+              <p className="mt-3 text-[1.05rem] font-semibold leading-snug text-ink">{x.stat}</p>
+              <p className="text-[0.72rem] text-mute">{x.statLabel}</p>
+              <div className="relative flex flex-1 flex-col pt-3">
+                <div className="flex min-h-[13rem] flex-1 items-center rounded-xl px-4 py-5 text-white" style={{ background: x.bg }}>
+                  {x.visual}
                 </div>
               </div>
-            );
-          })}
-        </div>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );
