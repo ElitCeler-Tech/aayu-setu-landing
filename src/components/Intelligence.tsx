@@ -1,7 +1,7 @@
-"use client";
-
-/* Health intelligence: the five stages of the Learning Loop as a grid of
-   cards, in the card style How it works used before it became a stack.
+/* Health intelligence: five navy cards that stack as you scroll. Each
+   card sticks a little lower than the one before, so the next slides up
+   over it and the edges of the earlier ones stay showing; once all five
+   are stacked the pile holds for a moment before the page moves on.
 
    Every card is the same shape (number and title on the left, a small
    picture on the right) and the copy comes from the list at the bottom,
@@ -43,7 +43,7 @@ function Connect() {
         ))}
       </svg>
       {src.map((x) => (
-        <div key={x.k} className="absolute left-0 flex w-[41%] items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.07] px-2 py-1.5" style={{ top: x.y }}>
+        <div key={x.k} className="absolute left-0 flex w-[37%] items-center gap-2 rounded-lg border border-white/10 bg-white/[0.07] px-2.5 py-1.5" style={{ top: x.y }}>
           <Ic d={x.d} c="#FFB15C" s={14} />
           <span className="truncate text-[0.72rem] text-white/85">{x.k}</span>
         </div>
@@ -228,41 +228,40 @@ const cards = [
 export function Intelligence() {
   return (
     <section id="intelligence" className="border-b border-line bg-mist">
-      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
-        <div className="text-center">
+      <div className="mx-auto max-w-6xl px-5 pt-20 sm:px-8 md:pt-24">
+        <div className="max-w-2xl">
           <p className="eyebrow text-amber">Health intelligence</p>
           <h2 className="mt-4 font-display text-[clamp(2.4rem,5vw,3.75rem)] leading-[1.02] text-ink text-balance">
             Your records, <em className="text-amber">read for you</em>
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-[1rem] leading-relaxed text-slate">
+          <p className="mt-4 text-[1rem] leading-relaxed text-slate">
             The AyusSetu Learning Loop: five stages that turn your reports
             into steps, and your results into better steps.
           </p>
           <p className="mt-2 text-[0.76rem] text-mute">Example figures for illustration.</p>
         </div>
 
-        {/* Five cards in a grid, in the card style How it works used before
-            it became a stack: a white card, a small label and number, the
-            words, then a picture box underneath. The pictures are drawn for a
-            dark ground, so their box is navy. On wide screens the last two
-            cards sit centred under the first three. */}
-        <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
-          {cards.map((x, i) => (
+        {/* The stack. Each card sticks 18px lower than the last; the
+            padding under the list lets the finished pile hold on screen
+            before the section scrolls away. */}
+        <ol className="mt-12 pb-[22vh]">
+          {cards.map((c, i) => (
             <li
-              key={x.title}
-              className={`flex flex-col overflow-hidden rounded-[1.25rem] border border-line bg-white p-4 transition duration-300 hover:shadow-[0_30px_60px_-40px_rgba(18,29,51,0.45)] lg:col-span-2 ${i === 3 ? "lg:col-start-2" : ""}`}
+              key={c.title}
+              className="sticky mb-6 overflow-hidden rounded-[1.75rem] text-white shadow-[0_-24px_50px_-30px_rgba(13,22,40,0.6)]"
+              style={{ top: `${96 + i * 18}px`, background: c.bg }}
             >
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[0.62rem] uppercase tracking-[0.1em] text-amber">Stage {String(i + 1).padStart(2, "0")}</span>
-                <span className="font-mono text-[0.72rem] text-faint">{String(i + 1).padStart(2, "0")} of 05</span>
-              </div>
-              <h3 className="mt-2.5 text-[1.05rem] font-semibold leading-snug text-ink">{x.title}</h3>
-              <p className="mt-1 text-[0.8rem] leading-relaxed text-slate lg:min-h-[3.9rem]">{x.body}</p>
-              <p className="mt-3 text-[1.05rem] font-semibold leading-snug text-ink">{x.stat}</p>
-              <p className="text-[0.72rem] text-mute">{x.statLabel}</p>
-              <div className="relative flex flex-1 flex-col pt-3">
-                <div className="flex min-h-[13rem] flex-1 items-center rounded-xl px-4 py-5 text-white" style={{ background: x.bg }}>
-                  {x.visual}
+              <span className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-[radial-gradient(closest-side,rgba(255,139,11,0.28),transparent)]" />
+              <div className="relative grid gap-8 p-7 md:min-h-[18.5rem] md:grid-cols-[1fr_1fr] md:items-center md:gap-12 md:p-10">
+                <div>
+                  <p className="eyebrow text-amber-light">Stage {String(i + 1).padStart(2, "0")} of 05</p>
+                  <h3 className="mt-3 text-[clamp(1.5rem,2.6vw,2rem)] font-semibold leading-[1.15] tracking-tight">{c.title}</h3>
+                  <p className="mt-3 max-w-md text-[0.94rem] leading-relaxed text-white/65">{c.body}</p>
+                  <p className="mt-6 text-[3rem] font-semibold leading-none tracking-tight">{c.stat}</p>
+                  <p className="mt-1.5 text-[0.78rem] text-white/50">{c.statLabel}</p>
+                </div>
+                <div className="flex items-center rounded-2xl border border-white/10 bg-white/[0.04] p-5 md:p-6">
+                  {c.visual}
                 </div>
               </div>
             </li>
