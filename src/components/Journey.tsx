@@ -265,7 +265,7 @@ export function Journey() {
         {/* Six cards that stack as you scroll. In each, the problem turns into the answer
             in place. The padding under the list lets the finished pile
             hold on screen before the section moves on. */}
-        <ol className="mt-12 pb-[18vh]">
+        <ol className="mx-auto mt-12 max-w-5xl pb-[18vh]">
           {steps.map((s, i) => (
             <FlowCard key={s.t} n={i + 1} problem={s.p} problemArt={problemArt[i]} title={s.t} body={s.b} art={s.art} />
           ))}
